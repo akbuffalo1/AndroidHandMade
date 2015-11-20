@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        tools:text="Reference Number"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="10dp"
+        style="@style/WorkQueueItemTitle"
+        android:id="@+id/tvReferenceNumberTitle_LWQLICH"/>
+
+    <TextView
+        tools:text="Reference Number"
+        style="@style/WorkQueueItemValue"
+        android:layout_marginTop="10dp"
+        android:id="@+id/tvReferenceNumberValue_LWQLICH"
+        android:layout_alignBaseline="@+id/tvReferenceNumberTitle_LWQLICH"
+        android:layout_alignBottom="@+id/tvReferenceNumberTitle_LWQLICH"
+        android:layout_toEndOf="@+id/tvReferenceNumberTitle_LWQLICH" />
+
+    <TextView
+        tools:text="StatusTitle"
+        style="@style/WorkQueueItemTitle"
+        android:layout_below="@+id/tvReferenceNumberTitle_LWQLICH"
+        android:layout_alignStart="@id/tvReferenceNumberTitle_LWQLICH"
+        android:id="@+id/tvStatusTitle_LWQLICH"/>
+
+    <TextView
+        tools:text="StatusValue"
+        style="@style/WorkQueueItemValue"
+        android:id="@+id/tvStatusValue_LWQLICH"
+        android:layout_alignTop="@+id/tvStatusTitle_LWQLICH"
+        android:layout_toEndOf="@+id/tvStatusTitle_LWQLICH" />
+
+    <TextView
+        tools:text="WorkItemNameTitle"
+        style="@style/WorkQueueItemTitle"
+        android:id="@+id/tvWorkItemNameTitle_LWQLICH"
+        android:layout_below="@+id/tvStatusTitle_LWQLICH"
+        android:layout_alignStart="@+id/tvStatusTitle_LWQLICH" />
+
+    <TextView
+        tools:text="tvWorkItemNameValue"
+        style="@style/WorkQueueItemValue"
+        android:id="@+id/tvWorkItemNameValue_LWQLICH"
+        android:layout_alignBaseline="@+id/tvWorkItemNameTitle_LWQLICH"
+        android:layout_alignBottom="@+id/tvWorkItemNameTitle_LWQLICH"
+        android:layout_toEndOf="@+id/tvWorkItemNameTitle_LWQLICH" />
+
+    <TextView
+        tools:text="tvTaskTypeTitle"
+        style="@style/WorkQueueItemTitle"
+        android:layout_below="@+id/tvWorkItemNameTitle_LWQLICH"
+        android:layout_alignStart="@+id/tvWorkItemNameTitle_LWQLICH"
+        android:id="@+id/tvTaskTypeTitle_LWQLICH" />
+
+    <TextView
+        tools:text="tvTaskTypeValue"
+        style="@style/WorkQueueItemValue"
+        android:layout_alignTop="@+id/tvTaskTypeTitle_LWQLICH"
+        android:layout_toEndOf="@+id/tvTaskTypeTitle_LWQLICH"
+        android:id="@+id/tvTaskTypeValue_LWQLICH" />
+
+    <TextView
+        tools:text="tvOrgNameTitle"
+        style="@style/WorkQueueItemTitle"
+        android:layout_below="@+id/tvTaskTypeTitle_LWQLICH"
+        android:layout_alignStart="@+id/tvTaskTypeTitle_LWQLICH"
+        android:id="@+id/tvOrgNameTitle_LWQLICH" />
+
+    <TextView
+        tools:text="tvOrgNameValue"
+        style="@style/WorkQueueItemValue"
+        android:layout_alignTop="@+id/tvOrgNameTitle_LWQLICH"
+        android:layout_toEndOf="@+id/tvOrgNameTitle_LWQLICH"
+        android:id="@+id/tvOrgNameValue_LWQLICH" />
+
+    <TextView
+        tools:text="tvCreatedByTitle"
+        style="@style/WorkQueueItemTitle"
+        android:layout_below="@+id/tvOrgNameTitle_LWQLICH"
+        android:layout_alignStart="@+id/tvOrgNameTitle_LWQLICH"
+        android:id="@+id/tvCreatedByTitle_LWQLICH" />
+
+    <TextView
+        tools:text="tvCreatedByValue"
+        style="@style/WorkQueueItemValue"
+        android:layout_alignTop="@+id/tvCreatedByTitle_LWQLICH"
+        android:layout_toEndOf="@+id/tvCreatedByTitle_LWQLICH"
+        android:id="@+id/tvCreatedByValue_LWQLICH" />
+
+    <TextView
+        tools:text="tvCreatedAtTitle"
+        style="@style/WorkQueueItemTitle"
+        android:layout_below="@+id/tvCreatedByTitle_LWQLICH"
+        android:layout_alignStart="@+id/tvCreatedByTitle_LWQLICH"
+        android:id="@+id/tvCreatedAtTitle_LWQLICH" />
+
+    <TextView
+        tools:text="tvCreatedAtValue"
+        style="@style/WorkQueueItemValue"
+        android:layout_alignTop="@+id/tvCreatedAtTitle_LWQLICH"
+        android:layout_toEndOf="@+id/tvCreatedAtTitle_LWQLICH"
+        android:id="@+id/tvCreatedAtValue_LWQLICH" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:background="@android:color/darker_gray"
+        android:layout_below="@+id/tvCreatedAtTitle_LWQLICH"
+        android:layout_alignParentStart="true" />
+
+</RelativeLayout>

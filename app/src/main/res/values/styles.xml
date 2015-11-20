@@ -139,4 +139,21 @@
         <item name="android:textSize">12sp</item>
     </style>
 
+    <style name="WorkQueueItemTitle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:layout_marginBottom">5dp</item>
+        android:layout_marginStart="25dp"
+        <item name="android:width">170dp</item>
+        <item name="android:textColor">@android:color/darker_gray</item>
+    </style>
+
+    <style name="WorkQueueItemValue">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:width">170dp</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
 </resources>

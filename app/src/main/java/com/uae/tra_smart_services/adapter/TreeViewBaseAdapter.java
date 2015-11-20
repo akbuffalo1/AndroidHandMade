@@ -1,4 +1,6 @@
-package com.uae.tra_smart_services.entities.treview;
+package com.uae.tra_smart_services.adapter;
+
+import com.uae.tra_smart_services.entities.treview.TreeNode;
 
 import java.util.ArrayList;
 import java.util.List;

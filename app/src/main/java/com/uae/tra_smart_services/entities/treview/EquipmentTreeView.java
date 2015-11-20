@@ -2,6 +2,8 @@ package com.uae.tra_smart_services.entities.treview;
 
 import android.content.Context;
 
+import com.uae.tra_smart_services.adapter.TreeViewBaseAdapter;
+
 /**
  * Created by ak-buffalo on 13.11.15.
  */

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import static com.uae.tra_smart_services.entities.treview.TreeViewBaseAdapter.TreeEntity;
+import static com.uae.tra_smart_services.adapter.TreeViewBaseAdapter.TreeEntity;
 
 /**
  * Created by ak-buffalo on 13.11.15.

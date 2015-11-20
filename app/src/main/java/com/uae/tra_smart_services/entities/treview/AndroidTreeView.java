@@ -10,8 +10,6 @@ import android.view.animation.Transformation;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
-import com.uae.tra_smart_services.entities.treview.SimpleViewHolder;
-import com.uae.tra_smart_services.entities.treview.TreeNode;
 import com.unnamed.b.atv.R;
 import com.unnamed.b.atv.view.TwoDScrollView;
 
