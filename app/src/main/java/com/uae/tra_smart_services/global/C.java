@@ -99,8 +99,8 @@ public final class C {
     public @interface Language {
     }
 
-    public static final String ENGLISH = "en_AR";
-    public static final String ARABIC = "ar_AR";
+    public static final String ENGLISH = "en";
+    public static final String ARABIC = "ar";
     //endregion
 
     //region Http method const
