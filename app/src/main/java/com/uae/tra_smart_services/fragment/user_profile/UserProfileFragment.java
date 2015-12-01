@@ -157,6 +157,7 @@ public final class UserProfileFragment extends BaseFragment implements OnClickLi
                     @Override
                     public void onLoadingDismissed() {
                         getFragmentManager().popBackStack();
+                        getFragmentManager().popBackStack();
                     }
                 });
             }
