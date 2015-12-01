@@ -205,6 +205,13 @@ public abstract class BaseFragment extends Fragment implements Loader.Dismiss, L
         }
     }
 
+    protected final boolean loaderOverlayIsDone() {
+        if (loader != null) {
+            return loader.isDone();
+        }
+        return false;
+    }
+
     @Override
     public void onLoadingDismissed() {
         if (getFragmentManager().findFragmentByTag(LoaderFragment.TAG) != null) {

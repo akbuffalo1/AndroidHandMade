@@ -24,6 +24,8 @@ public interface Loader {
 
     boolean isInLoading();
 
+    boolean isDone();
+
     interface Dismiss {
         void onLoadingDismissed();
     }
