@@ -119,7 +119,7 @@ public class ServiceInfoFragment extends BaseFragment implements View.OnClickLis
             }
         });
         getSpiceManager().execute(mServiceInfoRequest, KEY_SERVICE_INFO_REQUEST,
-                DurationInMillis.ALWAYS_EXPIRED, mInfoRequestListener);
+                DurationInMillis.ALWAYS_RETURNED, mInfoRequestListener);
     }
 
     @Override
@@ -165,8 +165,10 @@ public class ServiceInfoFragment extends BaseFragment implements View.OnClickLis
     @Override
     public void onStart() {
         super.onStart();
-        getSpiceManager().getFromCache(ServiceInfoResponse.class, KEY_SERVICE_INFO_REQUEST,
-                DurationInMillis.ALWAYS_RETURNED, mInfoRequestListener);
+        if (!mIsInfoLoaded) {
+            getSpiceManager().getFromCache(ServiceInfoResponse.class, KEY_SERVICE_INFO_REQUEST,
+                    DurationInMillis.ALWAYS_EXPIRED, mInfoRequestListener);
+        }
     }
 
     @Override
