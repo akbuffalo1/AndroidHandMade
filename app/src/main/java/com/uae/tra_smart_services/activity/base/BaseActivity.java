@@ -82,7 +82,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseFrag
     public final void setApplicationLanguage() {
         mLanguage = PreferenceManager
                 .getDefaultSharedPreferences(this)
-                .getString(BaseCustomSwitcher.Type.LANGUAGE.toString(), (Locale.getDefault().getLanguage() == ARABIC) ? ARABIC : ENGLISH );
+                .getString(BaseCustomSwitcher.Type.LANGUAGE.toString(), (Locale.getDefault().getLanguage().equals(ARABIC)) ? ARABIC : ENGLISH );
 
         if (mLanguage.equals(ENGLISH)) {
             initDefaultFont("fonts/Lato-Regular.ttf");
