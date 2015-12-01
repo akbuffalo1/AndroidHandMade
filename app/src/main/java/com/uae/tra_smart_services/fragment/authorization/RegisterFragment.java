@@ -224,7 +224,7 @@ public class RegisterFragment extends BaseAuthorizationFragment implements View.
         registerModel.emiratesId = etEmiratesId.getText().toString();
 
         if (mFilterPool.check(registerModel)) {
-            loaderDialogShow(getString(R.string.str_registering), this);
+            loaderOverlayShow(getString(R.string.str_registering), this, false);
             getSpiceManager().execute(mRegisterRequest = new RegisterRequest(registerModel),
                     KEY_REGISTER_REQUEST, DurationInMillis.ALWAYS_EXPIRED, mRequestListener);
         }
@@ -240,15 +240,19 @@ public class RegisterFragment extends BaseAuthorizationFragment implements View.
     private class RequestListener implements PendingRequestListener<Response> {
 
         @Override
-        public void onRequestNotFound() {
-
-        }
+        public void onRequestNotFound() { /* Not implemented */ }
 
         @Override
         public void onRequestSuccess(Response result) {
             Log.d(getClass().getSimpleName(), "Success. isAdded: " + isAdded());
             if (isAdded()) {
-                loaderDialogDismiss();
+                loaderOverlayDismissWithAction(new Loader.Dismiss() {
+                    @Override
+                    public void onLoadingDismissed() {
+                        getFragmentManager().popBackStack();
+                        getFragmentManager().popBackStack();
+                    }
+                });
                 if (result != null && actionsListener != null) {
                     actionsListener.onRegisterSuccess();
                 }

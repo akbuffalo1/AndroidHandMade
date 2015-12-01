@@ -201,7 +201,6 @@ public final class FavoritesFragment extends BaseFragment
     public void onClick(View v) {
         if (v.getId() == R.id.hvPlusBtn) {
             onAddServiceClick();
-
         }
     }
 

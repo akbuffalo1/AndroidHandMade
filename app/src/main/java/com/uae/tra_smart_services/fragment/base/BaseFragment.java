@@ -163,7 +163,7 @@ public abstract class BaseFragment extends Fragment implements Loader.Dismiss, L
         getFragmentManager()
                 .beginTransaction()
                 .addToBackStack(null)
-                .add(R.id.rlGlobalContainer_AH, (Fragment) (loader = LoaderFragment.newInstance(_title, _callBack, _showRating)), LoaderFragment.TAG)
+                .add(getGlobalContainerResource(), (Fragment) (loader = LoaderFragment.newInstance(_title, _callBack, _showRating)), LoaderFragment.TAG)
                 .commit();
     }
 
@@ -171,7 +171,7 @@ public abstract class BaseFragment extends Fragment implements Loader.Dismiss, L
         getFragmentManager()
                 .beginTransaction()
                 .addToBackStack(null)
-                .add(R.id.rlGlobalContainer_AH, (Fragment) (loader = CustomLoaderFragment.newInstance(_title, _callBack, _showRating)), LoaderFragment.TAG)
+                .add(getGlobalContainerResource(), (Fragment) (loader = CustomLoaderFragment.newInstance(_title, _callBack, _showRating)), LoaderFragment.TAG)
                 .commit();
     }
 
@@ -242,6 +242,11 @@ public abstract class BaseFragment extends Fragment implements Loader.Dismiss, L
 
     @LayoutRes
     protected abstract int getLayoutResource();
+
+    @IdRes
+    protected int getGlobalContainerResource(){
+        return R.id.rlGlobalContainer_AH;
+    }
 
     protected final <F extends Fragment> F findFragmentById(final @IdRes int _id) {
         return (F) getFragmentManager().findFragmentById(_id);

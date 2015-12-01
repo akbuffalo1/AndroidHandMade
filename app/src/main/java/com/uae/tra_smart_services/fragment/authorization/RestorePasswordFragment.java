@@ -93,7 +93,7 @@ public class RestorePasswordFragment extends BaseAuthorizationFragment
         mRestorePasswordRequestModel = new RestorePasswordRequestModel(etEmail.getText().toString());
 
         if (mFilterPool.check(mRestorePasswordRequestModel)) {
-            loaderDialogShow(getString(R.string.str_restoring), this);
+            loaderOverlayShow(getString(R.string.str_restoring), this, false);
             getSpiceManager()
                     .execute(
                             mRestorePasswordRequest = new RestorePasswordRequest(mRestorePasswordRequestModel),
@@ -118,13 +118,19 @@ public class RestorePasswordFragment extends BaseAuthorizationFragment
     private class RestorePasswordRequestListener implements PendingRequestListener<Response> {
 
         @Override
-        public void onRequestNotFound() { /* Not implemented */}
+        public void onRequestNotFound() { /* Not implemented */ }
 
         @Override
         public void onRequestSuccess(Response result) {
             onRestorePassMessageId = (int) Math.random();
             if (isAdded()) {
-                loaderDialogDismiss();
+                loaderOverlayDismissWithAction(new Loader.Dismiss() {
+                    @Override
+                    public void onLoadingDismissed() {
+                        getFragmentManager().popBackStack();
+                        getFragmentManager().popBackStack();
+                    }
+                });
                 showMessage(onRestorePassMessageId, R.string.str_success, R.string.str_restore_pass_mail);
             }
         }
@@ -133,7 +139,13 @@ public class RestorePasswordFragment extends BaseAuthorizationFragment
         public void onRequestFailure(SpiceException spiceException) {
             onRestorePassMessageId = (int) Math.random();
             if (isAdded()) {
-                loaderDialogDismiss();
+                loaderOverlayDismissWithAction(new Loader.Dismiss() {
+                    @Override
+                    public void onLoadingDismissed() {
+                        getFragmentManager().popBackStack();
+                        getFragmentManager().popBackStack();
+                    }
+                });
             }
             processError(spiceException);
         }
