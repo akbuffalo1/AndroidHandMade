@@ -4,7 +4,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.util.Log;
-import android.util.Patterns;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
@@ -26,7 +25,6 @@ import com.uae.tra_smart_services.interfaces.Loader;
 import com.uae.tra_smart_services.interfaces.LoaderMarker;
 import com.uae.tra_smart_services.rest.model.request.ComplainServiceProviderModel;
 import com.uae.tra_smart_services.rest.robo_requests.ComplainAboutServiceRequest;
-import com.uae.tra_smart_services.util.TRAPatterns;
 
 import retrofit.client.Response;
 
@@ -126,16 +124,16 @@ public final class ComplainAboutServiceFragment extends BaseComplainFragment
             return false;
         }
 
-        if (phone.length() < TRAPatterns.MIN_PHONE_NUMBER_LENGTH) {
-            Toast.makeText(getActivity(), R.string.phone_number_is_too_short, C.TOAST_LENGTH).show();
-            return false;
-        }
-
-        boolean numberInvalid = !Patterns.PHONE.matcher(phone).matches();
-        if (numberInvalid) {
-            Toast.makeText(getActivity(), R.string.fragment_complain_no_reference_number, C.TOAST_LENGTH).show();
-            return false;
-        }
+//        if (phone.length() < TRAPatterns.MIN_PHONE_NUMBER_LENGTH) {
+//            Toast.makeText(getActivity(), R.string.phone_number_is_too_short, C.TOAST_LENGTH).show();
+//            return false;
+//        }
+//
+//        boolean numberInvalid = !Patterns.PHONE.matcher(phone).matches();
+//        if (numberInvalid) {
+//            Toast.makeText(getActivity(), R.string.fragment_complain_no_reference_number, C.TOAST_LENGTH).show();
+//            return false;
+//        }
         return true;
     }
 
