@@ -19,6 +19,7 @@
 .idea/modules.xml
 .idea/scopes/scope_settings.xml
 /viewpadeindicator/build
+/scanner/build
 .idea/vcs.xml
 *.iml
 .idea/gradle.xml
