@@ -35,6 +35,9 @@ public class LoaderFragment extends BaseFragment implements View.OnClickListener
     /** Listeners */
     protected static Loader.Cancelled mOnLoadingListener;
     protected static LoaderFragment.CallBacks mRatingCallbacks;
+    private boolean isDone;
+    private LoaderView.State mAnimationState = LoaderView.State.INITIALL;
+    private boolean shouldContinueLoading;
 
     public static LoaderFragment newInstance(String _msg, LoaderMarker _listener, boolean _showRating) {
         Bundle args = new Bundle();
@@ -110,12 +113,12 @@ public class LoaderFragment extends BaseFragment implements View.OnClickListener
 
     @Override
     public void startLoading(String _msg) {
+        isDone = false;
         lvLoader.startProcessing();
         tvLoaderTitleText.setText(getArguments().getString(MSG));
-        tvBackOrCancelBtn.setTag(LoaderView.State.PROCESSING);
+        tvBackOrCancelBtn.setTag(mAnimationState = LoaderView.State.PROCESSING);
     }
 
-    boolean shouldContinueLoading;
     @Override
     public void continueLoading() {
         shouldContinueLoading = true;
@@ -123,13 +126,14 @@ public class LoaderFragment extends BaseFragment implements View.OnClickListener
 
     @Override
     public void successLoading(String _msg) {
-        lvLoader.startFilling(LoaderView.State.SUCCESS);
+        lvLoader.startFilling(mAnimationState = LoaderView.State.SUCCESS);
         tvLoaderTitleText.setText(_msg);
         tvBackOrCancelBtn.setText(R.string.str_back_to_dashboard);
         tvBackOrCancelBtn.setTag(LoaderView.State.SUCCESS);
         if(getArguments().getBoolean(SHOW_RATING)){
             srvRating.setVisibility(View.VISIBLE);
         }
+        isDone = true;
     }
 
     @Override
@@ -148,24 +152,45 @@ public class LoaderFragment extends BaseFragment implements View.OnClickListener
     }
 
     @Override
+    public boolean isDone() {
+        return isDone;
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putSerializable(STATE, mAnimationState);
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public void onViewStateRestored(Bundle savedInstanceState) {
+        if(savedInstanceState != null){
+            lvLoader.showState((LoaderView.State) savedInstanceState.getSerializable(STATE));
+        }
+        super.onViewStateRestored(savedInstanceState);
+    }
+
+    @Override
     public void cancelLoading(String _msg) {
-        lvLoader.startFilling(LoaderView.State.CANCELLED);
+        lvLoader.startFilling(mAnimationState = LoaderView.State.CANCELLED);
         tvLoaderTitleText.setText(_msg);
         tvBackOrCancelBtn.setText(R.string.str_back_to_dashboard);
         tvBackOrCancelBtn.setTag(LoaderView.State.CANCELLED);
         if(getArguments().getBoolean(SHOW_RATING)){
             srvRating.setVisibility(View.VISIBLE);
         }
+        isDone = true;
     }
 
     @Override
     public void failedLoading(String _msg, boolean _hasToShowRating) {
-        lvLoader.startFilling(LoaderView.State.FAILURE);
+        lvLoader.startFilling(mAnimationState = LoaderView.State.FAILURE);
         tvLoaderTitleText.setText(_msg);
         tvBackOrCancelBtn.setText(R.string.str_back_to_dashboard);
         tvBackOrCancelBtn.setTag(LoaderView.State.FAILURE);
         if(getArguments().getBoolean(SHOW_RATING) && _hasToShowRating)
             srvRating.setVisibility(View.VISIBLE);
+        isDone = true;
     }
 
     private int defineBGColor(View _view){

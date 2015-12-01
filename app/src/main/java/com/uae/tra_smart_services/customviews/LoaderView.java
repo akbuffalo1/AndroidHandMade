@@ -293,6 +293,11 @@ public class LoaderView extends View implements Animator.AnimatorListener {
         animatorSuccessOrFailed.start();
     }
 
+    public void showState(State _state){
+        mAnimationState = _state;
+        invalidate();
+    }
+
     private float phaseStart;
     /** It will be called by animator to draw the start of loading animation */
     public void setPhaseStart(float _phaseStart) {

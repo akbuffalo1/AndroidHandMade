@@ -336,7 +336,9 @@ public class HexagonHomeFragment extends BaseFragment implements OnServiceSelect
     @Override
     public void onSaveInstanceState(Bundle _outState) {
         super.onSaveInstanceState(_outState);
-        mFadeScrollListener.onSaveInstanceState(_outState);
+        if (mFadeScrollListener != null) {
+            mFadeScrollListener.onSaveInstanceState(_outState);
+        }
     }
 
     @Override

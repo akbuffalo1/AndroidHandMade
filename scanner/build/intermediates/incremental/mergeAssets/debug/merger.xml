@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger version="3"><dataSet config="main"><source path="/home/and/Projects/UAE_TRA_Android/scanner/src/main/assets"/></dataSet><dataSet config="debug"><source path="/home/and/Projects/UAE_TRA_Android/scanner/src/debug/assets"/></dataSet></merger>

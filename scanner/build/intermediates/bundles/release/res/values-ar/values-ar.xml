@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- From: file:/home/and/Projects/UAE_TRA_Android/scanner/src/main/res/values-ar/strings.xml -->
+    <eat-comment/>
+    <string name="scanner_scan_imei">Scan IMEI</string>
+</resources>
