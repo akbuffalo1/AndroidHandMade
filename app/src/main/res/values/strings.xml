@@ -109,6 +109,7 @@
     <string name="str_restoring">Restoring...</string>
     <string name="str_loading">Loading...</string>
     <string name="str_authenticating">Authenticating...</string>
+    <string name="str_logout">Logging out...</string>
     <string name="str_restore_pass_mail">We\'ll send an email</string>
     <string name="str_report_has_been_sent">Report has been successfully sent. Thank you.</string>
     <string name="str_data_has_been_sent">Signal level has been successfully reported. Thank you.</string>

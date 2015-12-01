@@ -21,6 +21,7 @@ import com.uae.tra_smart_services.customviews.HexagonView;
 import com.uae.tra_smart_services.customviews.HexagonView.ScaleType;
 import com.uae.tra_smart_services.entities.HexagonViewTarget;
 import com.uae.tra_smart_services.fragment.base.BaseFragment;
+import com.uae.tra_smart_services.interfaces.Loader;
 import com.uae.tra_smart_services.rest.model.request.LogoutRequestModel;
 import com.uae.tra_smart_services.rest.model.response.UserProfileResponseModel;
 import com.uae.tra_smart_services.rest.robo_requests.LogoutRequest;
@@ -139,7 +140,7 @@ public final class UserProfileFragment extends BaseFragment implements OnClickLi
 
     private void logout() {
         mLogoutRequest = new LogoutRequest(new LogoutRequestModel());
-        loaderDialogShow();
+        loaderOverlayShow(getString(R.string.str_logout), null, false);
         getSpiceManager().execute(mLogoutRequest, KEY_LOGOUT_REQUEST, DurationInMillis.ALWAYS_EXPIRED, mLogoutRequestListener);
     }
 
@@ -152,8 +153,12 @@ public final class UserProfileFragment extends BaseFragment implements OnClickLi
             PreferenceManager.setLoggedIn(getActivity(), false);
 
             if (isAdded()) {
-                loaderDialogDismiss();
-                getFragmentManager().popBackStackImmediate();
+                loaderOverlayDismissWithAction(new Loader.Dismiss() {
+                    @Override
+                    public void onLoadingDismissed() {
+                        getFragmentManager().popBackStack();
+                    }
+                });
             }
         }
 
@@ -161,7 +166,6 @@ public final class UserProfileFragment extends BaseFragment implements OnClickLi
         public void onRequestFailure(final SpiceException _spiceException) {
             processError(_spiceException);
         }
-
     };
 
     public final void updateUserProfileData(final UserProfileResponseModel _userProfile) {
