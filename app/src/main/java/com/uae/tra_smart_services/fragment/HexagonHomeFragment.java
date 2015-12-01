@@ -41,6 +41,7 @@ import com.uae.tra_smart_services.rest.robo_requests.DynamicServiceListRequest;
 import com.uae.tra_smart_services.rest.robo_requests.UserProfileRequest;
 import com.uae.tra_smart_services.util.EndlessScrollListener;
 import com.uae.tra_smart_services.util.EndlessScrollListener.OnLoadMoreListener;
+import com.uae.tra_smart_services.util.FadeScrollListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -79,6 +80,7 @@ public class HexagonHomeFragment extends BaseFragment implements OnServiceSelect
     private OnHeaderStaticServiceSelectedListener mHeaderStaticServiceSelectedListener;
     private OnOpenUserProfileClickListener mProfileClickListener;
     private EndlessScrollListener mEndlessScrollListener;
+    private FadeScrollListener mFadeScrollListener;
 
     private UserProfileRequest mUserProfileRequest;
     private DynamicServiceListRequest mDynamicServiceListRequest;
@@ -248,7 +250,9 @@ public class HexagonHomeFragment extends BaseFragment implements OnServiceSelect
         mLayoutManager = new StaggeredGridLayoutManager(4, 1);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-//        initEndlessListener();
+        mFadeScrollListener = new FadeScrollListener(mLayoutManager, savedInstanceState);
+        mRecyclerView.addOnScrollListener(mFadeScrollListener);
+        mRecyclerView.addOnChildAttachStateChangeListener(mFadeScrollListener);
     }
 
     private void initEndlessListener() {
@@ -327,6 +331,12 @@ public class HexagonHomeFragment extends BaseFragment implements OnServiceSelect
         mDynamicServiceListRequest = new DynamicServiceListRequest();
         getSpiceManager().execute(mDynamicServiceListRequest, KEY_DYNAMIC_LIST_REQUEST, DurationInMillis.ALWAYS_EXPIRED,
                 mDynamicServicesListListener);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle _outState) {
+        super.onSaveInstanceState(_outState);
+        mFadeScrollListener.onSaveInstanceState(_outState);
     }
 
     @Override
@@ -417,6 +427,7 @@ public class HexagonHomeFragment extends BaseFragment implements OnServiceSelect
 
     public interface OnServiceSelectListener {
         void onServiceSelect(final Service _service, Parcelable _data);
+
         void onServiceSelect(final DynamicServiceInfoResponseModel _service, Parcelable _data);
     }
 
