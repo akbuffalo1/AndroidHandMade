@@ -51,7 +51,7 @@ import retrofit.client.Response;
  * Created by ak-buffalo on 19.08.15.
  */
 public final class InfoHubFragment extends BaseFragment
-        implements OnLoadMoreListener, OnQueryTextListener, OnActionExpandListener, View.OnClickListener, HexagonSwipeRefreshLayout.Listener, ViewTreeObserver.OnGlobalLayoutListener {
+        implements OnLoadMoreListener, OnQueryTextListener, OnActionExpandListener, View.OnClickListener, HexagonSwipeRefreshLayout.Listener/*, ViewTreeObserver.OnGlobalLayoutListener*/ {
 
     private static final String KEY_TRANSACTIONS_REQUEST = "TRANSACTIONS_REQUEST";
     private static final int DEFAULT_PAGE_SIZE_TRANSACTIONS = 10;
@@ -114,7 +114,8 @@ public final class InfoHubFragment extends BaseFragment
         @Override
         public void endLoading() {
             loadedCount++;
-            if(loadedCount == 2){
+            if(loadedCount >= 2){
+                loadedCount = 0;
                 loaderOverlayDismissWithAction(new Loader.Dismiss() {
                     @Override
                     public void onLoadingDismissed() {
@@ -145,7 +146,8 @@ public final class InfoHubFragment extends BaseFragment
         @Override
         public void endLoading() {
             loadedCount++;
-            if(loadedCount == 2){
+            if(loadedCount >= 2){
+                loadedCount = 0;
                 loaderOverlayDismissWithAction(new Loader.Dismiss() {
                     @Override
                     public void onLoadingDismissed() {
@@ -163,6 +165,12 @@ public final class InfoHubFragment extends BaseFragment
     }
 
     @Override
+    public void onResume() {
+        startFirstLoad();
+        super.onResume();
+    }
+
+    /*@Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         getRootView().getViewTreeObserver().addOnGlobalLayoutListener(this);
@@ -172,7 +180,7 @@ public final class InfoHubFragment extends BaseFragment
     public void onGlobalLayout() {
         startFirstLoad();
         getRootView().getViewTreeObserver().removeOnGlobalLayoutListener(this);
-    }
+    }*/
 
     @Override
     protected final void initViews() {
