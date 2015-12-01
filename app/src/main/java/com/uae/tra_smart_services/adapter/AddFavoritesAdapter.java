@@ -40,7 +40,7 @@ public class AddFavoritesAdapter extends Adapter<ViewHolder> implements Filterab
     private SearchFilter mSearchFilter;
 
     private OnItemClickListener mItemClickListener;
-    private CharSequence mConstraint;
+    private CharSequence mConstraint = "";
 
     public AddFavoritesAdapter(final Context _context) {
         this(_context, new ArrayList<Service>());
