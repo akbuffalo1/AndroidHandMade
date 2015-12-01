@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- From: file:/home/and/Projects/UAE_TRA_Android/scanner/src/main/res/values/colors.xml -->
+    <eat-comment/>
+    <color name="viewfinder_border">#ffafed44</color>
+    <color name="viewfinder_gray_border">#aaffffff</color>
+    <color name="viewfinder_laser">#ffcc0000</color>
+    <color name="viewfinder_mask">#60000000</color>
+    <color name="viewfinder_text_color">#bfff</color>
+    <!-- From: file:/home/and/Projects/UAE_TRA_Android/scanner/src/main/res/values/dimens.xml -->
+    <eat-comment/>
+    <dimen name="viewfinder_border_length">32dp</dimen>
+    <dimen name="viewfinder_border_width">6dp</dimen>
+    <dimen name="viewfinder_text_margin_bottom">8dp</dimen>
+    <dimen name="viewfinder_text_size">20sp</dimen>
+    <!-- From: file:/home/and/Projects/UAE_TRA_Android/scanner/src/main/res/values/strings.xml -->
+    <eat-comment/>
+    <string name="scanner_scan_imei">Scan IMEI</string>
+</resources>
