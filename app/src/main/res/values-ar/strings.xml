@@ -396,5 +396,6 @@
     <string name="attachment_manager_storage_permission_explanation">Storage access is required to create photo.</string>
     <string name="fragment_poor_coverage_location_permission_explanation">Location access is required to detect your location.</string>
     <string name="attachment_permission_denied">Permission request was denied.</string>
+    <string name="activity_splash_loading">LOADING UPDATES…</string>
 
 </resources>

@@ -16,7 +16,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_centerHorizontal="true"
-        app:hexagonBackground="@drawable/hexagon_selector"
         app:hexagonBorderSize="1dp"
         app:hexagonSideSize="35dp"
         app:hexagonBorderColor="#c8c7c6"/>
