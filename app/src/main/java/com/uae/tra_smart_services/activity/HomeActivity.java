@@ -52,6 +52,7 @@ import com.uae.tra_smart_services.fragment.ServiceInfoFragment.OnOpenServiceInfo
 import com.uae.tra_smart_services.fragment.SettingsFragment;
 import com.uae.tra_smart_services.fragment.SettingsFragment.OnOpenAboutTraClickListener;
 import com.uae.tra_smart_services.fragment.SuggestionFragment;
+import com.uae.tra_smart_services.fragment.TransactionsDetails;
 import com.uae.tra_smart_services.fragment.base.BaseFragment;
 import com.uae.tra_smart_services.fragment.hexagon_fragment.InnovationsFragment;
 import com.uae.tra_smart_services.fragment.hexagon_fragment.NotificationsFragment;
@@ -59,6 +60,7 @@ import com.uae.tra_smart_services.fragment.hexagon_fragment.SearchFragment;
 import com.uae.tra_smart_services.fragment.spam.ReportSmsSpamFragment;
 import com.uae.tra_smart_services.fragment.spam.ReportSpamFragment;
 import com.uae.tra_smart_services.fragment.spam.ReportSpamFragment.OnReportSpamServiceSelectListener;
+import com.uae.tra_smart_services.fragment.InfoHubFragment.OnTransactionPressedListener;
 import com.uae.tra_smart_services.fragment.spam.ReportSpamFragment.SpamOption;
 import com.uae.tra_smart_services.fragment.spam.ReportWebSpamFragment;
 import com.uae.tra_smart_services.fragment.spam.SpamHistoryFragment;
@@ -81,6 +83,7 @@ import com.uae.tra_smart_services.interfaces.ToolbarTitleManager;
 import com.uae.tra_smart_services.rest.model.response.DomainAvailabilityCheckResponseModel;
 import com.uae.tra_smart_services.rest.model.response.DomainInfoCheckResponseModel;
 import com.uae.tra_smart_services.rest.model.response.DynamicServiceInfoResponseModel;
+import com.uae.tra_smart_services.rest.model.response.GetTransactionResponseModel;
 import com.uae.tra_smart_services.rest.model.response.SearchDeviceResponseModel;
 import com.uae.tra_smart_services.rest.model.response.UserProfileResponseModel;
 import com.uae.tra_smart_services.util.PersistentCookieStore;
@@ -100,7 +103,7 @@ public class HomeActivity extends BaseFragmentActivity implements //region INTER
         OnOpenUserProfileClickListener, OnUserProfileClickListener, OnHeaderStaticServiceSelectedListener,
         OnOpenAboutTraClickListener, OnReportSpamServiceSelectListener, OnAddToSpamClickListener,
         OnActivateTutorialListener, OnDeviceVerifiedListener, OnTuorialClosedListener,
-        OnUserProfileDataChangeListener, OnOpenServiceInfoDetailsListener {
+        OnUserProfileDataChangeListener, OnOpenServiceInfoDetailsListener, OnTransactionPressedListener {
     //endregion
 
     private static final String KEY_CHECKED_TAB_ID = "CHECKED_TAB_ID";
@@ -608,5 +611,10 @@ public class HomeActivity extends BaseFragmentActivity implements //region INTER
         if (fragment == null || !fragment.onBackPressed()) {
             super.onBackPressed();
         }
+    }
+
+    @Override
+    public void onTransactionPressed(int[] _icon_color, GetTransactionResponseModel _model) {
+        replaceFragmentWithBackStack(TransactionsDetails.newInstance(_icon_color, _model));
     }
 }

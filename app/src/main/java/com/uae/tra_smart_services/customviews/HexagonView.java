@@ -10,6 +10,7 @@ import android.graphics.Rect;
 import android.graphics.Region;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.ColorInt;
+import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.IntDef;
 import android.support.v4.content.ContextCompat;
@@ -74,7 +75,7 @@ public final class HexagonView extends View {
             setHexagonSide(a.getDimensionPixelSize(R.styleable.HexagonView_hexagonSideSize, DEFAULT_HEXAGON_RADIUS));
             mBorderWidth = a.getDimensionPixelSize(R.styleable.HexagonView_hexagonBorderSize, 0);
             mTextSize = a.getDimensionPixelSize(R.styleable.HexagonView_hexagonTextSize, DEFAULT_TEXT_SIZE);
-            mBorderColor = a.getColor(R.styleable.HexagonView_hexagonBorderColor, 0xFFC8C7C6);
+            mBorderColor = a.getColor(R.styleable.HexagonView_hexagonBorderColor, 0xFFA8A7C6);
             mTextColor = a.getColor(R.styleable.HexagonView_hexagonTextColor, mBorderColor);
             mSrcTintColor = a.getColor(R.styleable.HexagonView_hexagonSrcTintColor, Color.TRANSPARENT);
             mBackgroundDrawable = a.getDrawable(R.styleable.HexagonView_hexagonBackground);
@@ -115,6 +116,11 @@ public final class HexagonView extends View {
             DrawableCompat.setTint(wrappedDrawable.mutate(), mSrcTintColor);
             mSrcDrawable = wrappedDrawable;
         }
+    }
+
+    public void setBorderColor(@ColorRes final int _borderColor){
+        mBorderPathPaint.setColor(ContextCompat.getColor(getContext(),_borderColor));
+        invalidate();
     }
 
     public final void setHexagonSide(final int _hexagonSideSize) {
@@ -330,5 +336,4 @@ public final class HexagonView extends View {
         float y = (_canvas.getHeight() + mTextRect.height()) / 2f - mTextRect.bottom;
         _canvas.drawText(mText, _canvas.getWidth() / 2, y, mTextPaint);
     }
-
 }

@@ -1,5 +1,6 @@
 package com.uae.tra_smart_services.fragment;
 
+import android.app.Activity;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -164,6 +165,12 @@ public final class InfoHubFragment extends BaseFragment
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
     }
+    private OnTransactionPressedListener mItemPressedListener;
+    @Override
+    public void onAttach(Activity _activity) {
+        mItemPressedListener = (OnTransactionPressedListener) _activity;
+        super.onAttach(_activity);
+    }
 
     @Override
     public void onResume() {
@@ -197,7 +204,7 @@ public final class InfoHubFragment extends BaseFragment
     private void initTransactionsList() {
         mTransactionsLayoutManager = new LinearLayoutManager(getActivity());
         mTransactionsList.setLayoutManager(mTransactionsLayoutManager);
-        mTransactionsListAdapter = new TransactionsAdapter(getActivity(), mTransactionsOperationStateManager);
+        mTransactionsListAdapter = new TransactionsAdapter(getActivity(), mTransactionsOperationStateManager, mItemPressedListener);
         mTransactionsList.setAdapter(mTransactionsListAdapter);
     }
 
@@ -364,6 +371,10 @@ public final class InfoHubFragment extends BaseFragment
             processError(spiceException);
             mTransactionsOperationStateManager.endLoading();
         }
+    }
+
+    public interface OnTransactionPressedListener {
+        void onTransactionPressed(int[] icon_color, GetTransactionResponseModel _model);
     }
 
     @Override

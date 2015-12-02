@@ -15,6 +15,7 @@ import java.util.List;
  * Created by mobimaks on 10.08.2015.
  */
 public enum Service {
+
     COMPLAIN_ABOUT_PROVIDER {
         @Override
         @StringRes
@@ -255,6 +256,7 @@ public enum Service {
             return C.COVERAGE;
         }
     };
+
 //    , INTERNET_SPEEDTEST {
 //        @Override
 //        protected boolean isStaticMainScreenService() {
@@ -283,6 +285,11 @@ public enum Service {
     @ServiceName
     @Nullable
     public String getServiceName() {
+        return null;
+    }
+
+    @Nullable
+    public String getTransactionName(){
         return null;
     }
 
@@ -329,5 +336,14 @@ public enum Service {
             }
         }
         return services;
+    }
+
+    public static Service getServiceTypeByString(String _serviceStr){
+        for(Service service : UNIQUE_SERVICES){
+            if(_serviceStr != null && _serviceStr.equals(service.getTransactionName())){
+                return service;
+            }
+        }
+        return null;
     }
 }

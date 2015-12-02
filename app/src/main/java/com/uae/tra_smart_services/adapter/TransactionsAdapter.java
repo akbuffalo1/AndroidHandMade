@@ -2,6 +2,7 @@ package com.uae.tra_smart_services.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.support.annotation.UiThread;
 import android.support.annotation.WorkerThread;
 import android.support.v7.widget.RecyclerView;
@@ -15,12 +16,16 @@ import android.widget.Space;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
 import com.uae.tra_smart_services.R;
 import com.uae.tra_smart_services.adapter.TransactionsAdapter.ViewHolder;
 import com.uae.tra_smart_services.customviews.HexagonView;
 import com.uae.tra_smart_services.customviews.LoaderView;
+import com.uae.tra_smart_services.entities.HexagonViewTarget;
 import com.uae.tra_smart_services.entities.NetworkErrorHandler;
+import com.uae.tra_smart_services.fragment.InfoHubFragment;
 import com.uae.tra_smart_services.global.C;
+import com.uae.tra_smart_services.global.Service;
 import com.uae.tra_smart_services.global.SpannableWrapper;
 import com.uae.tra_smart_services.interfaces.OperationStateManager;
 import com.uae.tra_smart_services.rest.RestClient;
@@ -45,13 +50,15 @@ public class TransactionsAdapter extends Adapter<ViewHolder> implements Filterab
     private boolean mIsInSearchMode;
     private boolean mIsAllSearchResultDownloaded;
     private CharSequence mConstraint = "";
+    private InfoHubFragment.OnTransactionPressedListener mItemPressedListener;
 
-    public TransactionsAdapter(final Activity _activity, final OperationStateManager _operationStateManager) {
+    public TransactionsAdapter(final Activity _activity, final OperationStateManager _operationStateManager, InfoHubFragment.OnTransactionPressedListener _itemPressedListener) {
         mActivity = _activity;
         mOperationStateManager = _operationStateManager;
         mIsShowingLoaderForData = true;
         mDataSet = new GetTransactionResponseModel.List();
         mShowingData = new GetTransactionResponseModel.List();
+        mItemPressedListener = _itemPressedListener;
     }
 
     public void startLoading() {
@@ -112,7 +119,7 @@ public class TransactionsAdapter extends Adapter<ViewHolder> implements Filterab
         } else {
             mOperationStateManager.showData();
         }
-        mFilter = null;
+        mFilter.reset();
         mConstraint = "";
         mIsInSearchMode = false;
         mShowingData.clear();
@@ -171,6 +178,10 @@ public class TransactionsAdapter extends Adapter<ViewHolder> implements Filterab
 
         private TransactionFilter() {
             mTRAServicesAPI = RestClient.getInstance().getTRAServicesAPI();
+            mSearchResultPageNum = 1;
+        }
+
+        public void reset(){
             mSearchResultPageNum = 1;
         }
 
@@ -245,7 +256,6 @@ public class TransactionsAdapter extends Adapter<ViewHolder> implements Filterab
             notifyDataSetChanged();
             mConstraint = _constraint;
         }
-
     }
 
     protected class ViewHolder extends RecyclerView.ViewHolder {
@@ -273,10 +283,12 @@ public class TransactionsAdapter extends Adapter<ViewHolder> implements Filterab
                     ViewGroup.LayoutParams.WRAP_CONTENT));
         }
 
-        public void setData(int _position, GetTransactionResponseModel _model) {
+        public void setData(int _position, final GetTransactionResponseModel _model) {
             if (!isProgress) {
                 sStartOffset.setVisibility(_position % 2 == 0 ? View.GONE : View.VISIBLE);
-//            Picasso.with(mActivity).load(_model.getIconUrl()).into(new HexagonViewTarget(hexagonView));
+                final int[] icon_color = C.TRANSACTION_STATUS.get(_model.statusCode);
+                hexagonView.setBorderColor(icon_color[1]);
+                hexagonView.setHexagonSrcDrawable(icon_color[0]);
                 if(mConstraint.length() != 0){
                     title.setText(SpannableWrapper.makeSelectedTextBold(mConstraint, _model.title));
                     description.setText(SpannableWrapper.makeSelectedTextBold(mConstraint, _model.description));
@@ -286,6 +298,12 @@ public class TransactionsAdapter extends Adapter<ViewHolder> implements Filterab
                     description.setText(_model.description);
                     date.setText(_model.modifiedDatetime);
                 }
+                itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mItemPressedListener.onTransactionPressed(icon_color, _model);
+                    }
+                });
             }
         }
     }

@@ -415,6 +415,7 @@
     <string name="hexagon_button_block_website">Block Websites</string>
     <string name="hexagon_button_sms_spam">SMS Spam</string>
     <string name="activity_splash_loading">LOADING UPDATES…</string>
+    <string name="edit">Edit</string>
     <string name="fragment_contact_us">Contact Us</string>
 
 </resources>

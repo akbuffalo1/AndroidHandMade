@@ -1,5 +1,8 @@
 package com.uae.tra_smart_services.rest.model.response;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 
 import java.util.ArrayList;
@@ -7,7 +10,7 @@ import java.util.ArrayList;
 /**
  * Created by Vitaliy on 05/10/2015.
  */
-public class GetTransactionResponseModel {
+public class GetTransactionResponseModel implements Parcelable {
     @Expose
     public String title;
 
@@ -37,4 +40,47 @@ public class GetTransactionResponseModel {
 
     public static class List extends ArrayList<GetTransactionResponseModel> {
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.title);
+        dest.writeString(this.type);
+        dest.writeString(this.traSubmitDatetime);
+        dest.writeString(this.modifiedDatetime);
+        dest.writeString(this.stateCode);
+        dest.writeString(this.statusCode);
+        dest.writeString(this.traStatus);
+        dest.writeString(this.serviceStage);
+        dest.writeString(this.description);
+    }
+
+    public GetTransactionResponseModel() {
+    }
+
+    protected GetTransactionResponseModel(Parcel in) {
+        this.title = in.readString();
+        this.type = in.readString();
+        this.traSubmitDatetime = in.readString();
+        this.modifiedDatetime = in.readString();
+        this.stateCode = in.readString();
+        this.statusCode = in.readString();
+        this.traStatus = in.readString();
+        this.serviceStage = in.readString();
+        this.description = in.readString();
+    }
+
+    public static final Parcelable.Creator<GetTransactionResponseModel> CREATOR = new Parcelable.Creator<GetTransactionResponseModel>() {
+        public GetTransactionResponseModel createFromParcel(Parcel source) {
+            return new GetTransactionResponseModel(source);
+        }
+
+        public GetTransactionResponseModel[] newArray(int size) {
+            return new GetTransactionResponseModel[size];
+        }
+    };
 }

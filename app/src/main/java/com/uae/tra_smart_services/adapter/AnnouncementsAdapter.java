@@ -47,7 +47,7 @@ public class AnnouncementsAdapter extends Adapter<ViewHolder> implements Filtera
     private final OperationStateManager mOperationStateManager;
     private final List<GetAnnouncementsResponseModel.Announcement> mDataSet, mShowingData;
 
-    private TransactionFilter mFilter;
+    private AnnouncementsFilter mFilter;
     private boolean mIsShowingLoaderForData;
     private boolean mIsInSearchMode;
     private boolean mIsAllSearchResultDownloaded;
@@ -107,7 +107,7 @@ public class AnnouncementsAdapter extends Adapter<ViewHolder> implements Filtera
     @Override
     public Filter getFilter() {
         initSearchParams();
-        mFilter = new TransactionFilter();
+        mFilter = new AnnouncementsFilter();
         return mFilter;
     }
 
@@ -118,6 +118,9 @@ public class AnnouncementsAdapter extends Adapter<ViewHolder> implements Filtera
     }
 
     public final void loadMoreSearchResults() {
+        if(mFilter == null){
+            mFilter = new AnnouncementsFilter();
+        }
         mFilter.loadMoreSearchResults();
     }
 
@@ -127,7 +130,7 @@ public class AnnouncementsAdapter extends Adapter<ViewHolder> implements Filtera
         } else {
             mOperationStateManager.showData();
         }
-        mFilter = null;
+        mFilter.reset();
         mConstraint = "";
         mIsInSearchMode = false;
         mShowingData.clear();
@@ -178,7 +181,7 @@ public class AnnouncementsAdapter extends Adapter<ViewHolder> implements Filtera
         return mShowingData.size() + (!mIsPreview ? progressBarCount : 0);
     }
 
-    private final class TransactionFilter extends Filter {
+    private final class AnnouncementsFilter extends Filter {
 
         private static final int DEFAULT_PAGE_SIZE = 10;
         private final TRAServicesAPI mTRAServicesAPI;
@@ -187,8 +190,12 @@ public class AnnouncementsAdapter extends Adapter<ViewHolder> implements Filtera
         private RetrofitError mRetrofitError;
         private boolean mIsCurrentlyLoading;
 
-        private TransactionFilter() {
+        private AnnouncementsFilter() {
             mTRAServicesAPI = RestClient.getInstance().getTRAServicesAPI();
+            mSearchResultPageNum = 1;
+        }
+
+        public void reset(){
             mSearchResultPageNum = 1;
         }
 
