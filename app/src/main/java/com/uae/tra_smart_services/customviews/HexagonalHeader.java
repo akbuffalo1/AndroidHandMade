@@ -14,6 +14,7 @@ import android.graphics.Region;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.support.annotation.FloatRange;
 import android.support.annotation.IntDef;
 import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
@@ -149,7 +150,7 @@ public class HexagonalHeader extends View implements Target {
         mButtonClickListener = _buttonClickListener;
     }
 
-    public final void setAnimationProgress(final float _progress) {
+    public final void setAnimationProgress(@FloatRange(from = 0, to = 1) final float _progress) {
         mAnimationProgress = _progress;
 //        Log.d("RecyclerView_test", String.valueOf(_progress));
         calculateSecondRowHexagonPath();
@@ -830,7 +831,6 @@ public class HexagonalHeader extends View implements Target {
     }
 
 
-
     @Override
     public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
         mScaleType = SCALE_TYPE_CENTER_CROP;
@@ -855,6 +855,7 @@ public class HexagonalHeader extends View implements Target {
 
     public interface OnButtonClickListener {
         void onAvatarButtonClick();
+
         void onHexagonButtonClick(@HexagonButton final int _hexagonButton);
     }
 }

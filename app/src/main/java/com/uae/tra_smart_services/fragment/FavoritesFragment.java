@@ -71,8 +71,6 @@ public final class FavoritesFragment extends BaseFragment
     @Override
     protected void initViews() {
         super.initViews();
-//        ivBackground = findView(R.id.ivBackground_FF);
-//        ivBackground.setImageResource(ImageUtils.isBlackAndWhiteMode(getActivity()) ? R.drawable.res_bg_2_gray : R.drawable.res_bg_2);
         rlEmptyContainer = findView(R.id.rlEmptyContainer_FF);
         hvAddService = findView(R.id.hvPlusBtn);
         hvAddService.setHexagonSrcDrawable(ImageUtils.getFilteredDrawableByTheme(getActivity(), R.drawable.ic_plus, R.attr.themeMainColor));

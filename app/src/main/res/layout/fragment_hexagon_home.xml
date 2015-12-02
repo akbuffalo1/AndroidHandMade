@@ -13,6 +13,13 @@
         android:scaleType="centerCrop"
         android:src="?mainBackground"/>
 
+    <ImageView
+        android:id="@+id/ivHexagons_FHH"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/background_home_hexagons"/>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">

@@ -19,7 +19,7 @@
         <item name="dragDeleteColor">#f00</item>
         <item name="toolbarStyle">@style/ToolbarStyle</item>
         <item name="userProfileBackground">@drawable/img_bg</item>
-        <item name="mainBackground">@drawable/res_bg_2</item>
+        <item name="mainBackground">@drawable/background_home</item>
         <item name="favoritesBackground">@drawable/favorites_bg</item>
         <item name="reportSpam">@drawable/res_bg_img</item>
         <item name="spamHistory">@drawable/res_bg_img_pol</item>
@@ -119,7 +119,7 @@
 
     <style name="AppThemeBlackAndWhite" parent="BaseAppTheme">
         <item name="colorPrimary">@android:color/black</item>
-        <item name="mainBackground">@drawable/res_bg_2_gray</item>
+        <item name="mainBackground">@drawable/background_home_gray</item>
         <item name="favoritesBackground">@drawable/favorites_bg_gray</item>
         <item name="serviceInfoBackground">@color/hex_translucent_black</item>
         <item name="toolbarBackground">@color/hex_toolbar_black</item>

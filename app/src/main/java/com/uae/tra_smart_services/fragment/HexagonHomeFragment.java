@@ -8,7 +8,9 @@ import android.os.Parcelable;
 import android.support.v4.view.animation.FastOutSlowInInterpolator;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.util.TypedValue;
 import android.view.ViewTreeObserver;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.octo.android.robospice.persistence.DurationInMillis;
@@ -65,11 +67,14 @@ public class HexagonHomeFragment extends BaseFragment implements OnServiceSelect
     private static final String KEY_IF_PENDING_REQUEST = "IF_PENDING_REQUEST";
     private static final String KEY_DYNAMIC_LIST_REQUEST = "DYNAMIC_LIST_REQUEST";
 
+    private final static float MAX_IMAGE_OFFSET = 30; //dp
+
     public final String RECYCLER_TAG = "RecyclerView_test";
 
     private HexagonalButtonsLayout mHexagonalButtonsLayout;
     private RecyclerView mRecyclerView;
     private HexagonalHeader mHexagonalHeader;
+    private ImageView ivHexagonBackground;
 
     private ServicesRecyclerViewAdapter mAdapter;
     private StaggeredGridLayoutManager mLayoutManager;
@@ -119,6 +124,7 @@ public class HexagonHomeFragment extends BaseFragment implements OnServiceSelect
         mRecyclerView = findView(R.id.rvServices_FHH);
         mHexagonalButtonsLayout = findView(R.id.hblHexagonalButtons_FHH);
         mHexagonalHeader = findView(R.id.hhHeader_FHH);
+        ivHexagonBackground = findView(R.id.ivHexagons_FHH);
         mAnimationProgress = 0f;
     }
 
@@ -166,6 +172,10 @@ public class HexagonHomeFragment extends BaseFragment implements OnServiceSelect
 
                     mHexagonalHeader.setAnimationProgress(mAnimationProgress);
                     mHexagonalButtonsLayout.setAnimationProgress(mAnimationProgress);
+
+                    float hexagonOffset = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, MAX_IMAGE_OFFSET * mAnimationProgress, getResources().getDisplayMetrics());
+                    ivHexagonBackground.setTranslationY(hexagonOffset);
+
                 }
             }
         });
@@ -188,6 +198,16 @@ public class HexagonHomeFragment extends BaseFragment implements OnServiceSelect
             }
         });
         mHexagonalHeader.setOnButtonClickListener(this);
+
+        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+
+            private int mScrollPosition;
+
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+        });
     }
 
     private void endAnimation() {
