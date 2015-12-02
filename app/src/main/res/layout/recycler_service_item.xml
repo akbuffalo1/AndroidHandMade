@@ -18,7 +18,7 @@
         android:layout_centerHorizontal="true"
         app:hexagonBorderSize="1dp"
         app:hexagonSideSize="35dp"
-        app:hexagonBorderColor="#c8c7c6"/>
+        app:hexagonBorderColor="@color/hex_color_border_gray"/>
 
     <TextView
         android:id="@+id/textView"

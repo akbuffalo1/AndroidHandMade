@@ -79,7 +79,7 @@ public enum Service {
         @Override
         @DrawableRes
         public final int getDrawableRes() {
-            return R.drawable.ic_glb;
+            return R.drawable.ic_global;
         }
 
         @Nullable
@@ -103,7 +103,7 @@ public enum Service {
         @Override
         @DrawableRes
         public final int getDrawableRes() {
-            return R.drawable.ic_glb;
+            return R.drawable.ic_global;
         }
 
         @Override
@@ -126,7 +126,7 @@ public enum Service {
         @Override
         @DrawableRes
         public final int getDrawableRes() {
-            return R.drawable.ic_glb;
+            return R.drawable.ic_global;
         }
 
         @Override
@@ -274,7 +274,7 @@ public enum Service {
 
     @DrawableRes
     public int getDrawableRes() {
-        return R.drawable.ic_glb;
+        return R.drawable.ic_global;
     }
 
     @StringRes

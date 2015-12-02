@@ -35,9 +35,7 @@ public class HexagonViewTarget extends ViewTarget<HexagonView, Drawable> impleme
     public HexagonViewTarget(final HexagonView _view, final @ScaleType int _scaleType, final boolean _isGlideTarget) {
         super(_view);
         mScaleType = _scaleType;
-        if (!_isGlideTarget) {
-            _view.setTag(this);
-        }
+        _view.setTag(_isGlideTarget ? null : this);
     }
 
     @Override
