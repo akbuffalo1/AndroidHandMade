@@ -178,7 +178,7 @@ public class ReportWebSpamFragment extends BaseServiceFragment implements OnClic
 
     @Override
     protected int getTitle() {
-        return R.string.fragment_report_spam_web_title;
+        return R.string.hexagon_button_block_website;
     }
 
     @Override

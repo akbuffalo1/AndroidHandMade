@@ -47,10 +47,10 @@ import java.util.List;
 
 import retrofit.client.Response;
 
-import static com.uae.tra_smart_services.customviews.HexagonalButtonsLayout.StaticService.DOMAIN_CHECK_FRAGMENT;
+import static com.uae.tra_smart_services.customviews.HexagonalButtonsLayout.StaticService.BLOCK_WEBSITE;
 import static com.uae.tra_smart_services.customviews.HexagonalButtonsLayout.StaticService.POOR_COVERAGE_SERVICE;
-import static com.uae.tra_smart_services.customviews.HexagonalButtonsLayout.StaticService.SMS_SPAM_SERVICE;
-import static com.uae.tra_smart_services.customviews.HexagonalButtonsLayout.StaticService.VERIFICATION_SERVICE;
+import static com.uae.tra_smart_services.customviews.HexagonalButtonsLayout.StaticService.SMS_SPAM;
+import static com.uae.tra_smart_services.customviews.HexagonalButtonsLayout.StaticService.VERIFY_DEVICE;
 import static com.uae.tra_smart_services.global.HeaderStaticService.INNOVATIONS;
 import static com.uae.tra_smart_services.global.HeaderStaticService.NOTIFICATION;
 import static com.uae.tra_smart_services.global.HeaderStaticService.SEARCH;
@@ -272,14 +272,14 @@ public class HexagonHomeFragment extends BaseFragment implements OnServiceSelect
 
     @Override
     public final void serviceSelected(final int _id) {
-        if (VERIFICATION_SERVICE.isEquals(_id)) {
-            mStaticServiceSelectListener.onStaticServiceSelect(VERIFICATION_SERVICE);
-        } else if (SMS_SPAM_SERVICE.isEquals(_id)) {
-            mStaticServiceSelectListener.onStaticServiceSelect(SMS_SPAM_SERVICE);
+        if (BLOCK_WEBSITE.isEquals(_id)) {
+            mStaticServiceSelectListener.onStaticServiceSelect(BLOCK_WEBSITE);
         } else if (POOR_COVERAGE_SERVICE.isEquals(_id)) {
             mStaticServiceSelectListener.onStaticServiceSelect(POOR_COVERAGE_SERVICE);
-        } else if (DOMAIN_CHECK_FRAGMENT.isEquals(_id)) {
-            mStaticServiceSelectListener.onStaticServiceSelect(DOMAIN_CHECK_FRAGMENT);
+        } else if (VERIFY_DEVICE.isEquals(_id)) {
+            mStaticServiceSelectListener.onStaticServiceSelect(VERIFY_DEVICE);
+        } else if (SMS_SPAM.isEquals(_id)) {
+            mStaticServiceSelectListener.onStaticServiceSelect(SMS_SPAM);
         }
     }
 

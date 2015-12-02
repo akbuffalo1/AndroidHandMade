@@ -12,7 +12,6 @@ import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.AttrRes;
 import android.support.annotation.NonNull;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.MotionEventCompat;
 import android.text.Layout;
 import android.text.StaticLayout;
@@ -207,10 +206,10 @@ public class HexagonalButtonsLayout extends View {
     private void initDrawables() {
         mDrawables = new ArrayList<>();
 
+        mDrawables.add(ImageUtils.getFilteredDrawableByTheme(getContext(), R.drawable.ic_earth, R.attr.themeMainColor));
+        mDrawables.add(ImageUtils.getFilteredDrawableByTheme(getContext(), R.drawable.ic_coverage, R.attr.themeMainColor));
         mDrawables.add(ImageUtils.getFilteredDrawableByTheme(getContext(), R.drawable.ic_verif, R.attr.themeMainColor));
         mDrawables.add(ImageUtils.getFilteredDrawableByTheme(getContext(), R.drawable.ic_spam, R.attr.themeMainColor));
-        mDrawables.add(ImageUtils.getFilteredDrawableByTheme(getContext(), R.drawable.ic_coverage, R.attr.themeMainColor));
-        mDrawables.add(ImageUtils.getFilteredDrawableByTheme(getContext(), R.drawable.ic_earth, R.attr.themeMainColor));
 
         mMaxDrawableHeight = getMaxDrawableHeight(mDrawables);
     }
@@ -414,13 +413,13 @@ public class HexagonalButtonsLayout extends View {
     }
 
     private void drawText(final Canvas _canvas, final int _textColor) {
-        drawTextLayout(_canvas, mCenters.get(0), getResources().getString(R.string.hexagon_button_verification), _textColor);
+        drawTextLayout(_canvas, mCenters.get(0), getResources().getString(R.string.hexagon_button_block_website), _textColor);
 
-        drawTextLayout(_canvas, mCenters.get(1), getResources().getString(R.string.hexagon_button_spam), _textColor);
+        drawTextLayout(_canvas, mCenters.get(1), getResources().getString(R.string.hexagon_button_coverage), _textColor);
 
-        drawTextLayout(_canvas, mCenters.get(2), getResources().getString(R.string.hexagon_button_coverage), _textColor);
+        drawTextLayout(_canvas, mCenters.get(2), getResources().getString(R.string.hexagon_button_verification), _textColor);
 
-        drawTextLayout(_canvas, mCenters.get(3), getResources().getString(R.string.str_domain_check), _textColor);
+        drawTextLayout(_canvas, mCenters.get(3), getResources().getString(R.string.hexagon_button_sms_spam), _textColor);
     }
 
     private void drawTextLayout(final Canvas _canvas, final PointF _center, final String _text,
@@ -509,10 +508,10 @@ public class HexagonalButtonsLayout extends View {
     }
 
     public enum StaticService {
-        VERIFICATION_SERVICE(0),
-        SMS_SPAM_SERVICE(1),
-        POOR_COVERAGE_SERVICE(2),
-        DOMAIN_CHECK_FRAGMENT(3);
+        BLOCK_WEBSITE(0),
+        POOR_COVERAGE_SERVICE(1),
+        VERIFY_DEVICE(2),
+        SMS_SPAM(3);
 
         private final Integer value;
 
