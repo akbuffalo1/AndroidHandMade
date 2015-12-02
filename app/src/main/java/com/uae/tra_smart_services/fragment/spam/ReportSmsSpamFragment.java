@@ -143,7 +143,7 @@ public class ReportSmsSpamFragment extends BaseServiceFragment implements OnClic
     @Nullable
     @Override
     protected Service getServiceType() {
-        return null;
+        return Service.REPORT_SPAM;
     }
 
     @Override
@@ -180,4 +180,6 @@ public class ReportSmsSpamFragment extends BaseServiceFragment implements OnClic
     protected int getLayoutResource() {
         return R.layout.fragment_report_sms_spam;
     }
+
+
 }

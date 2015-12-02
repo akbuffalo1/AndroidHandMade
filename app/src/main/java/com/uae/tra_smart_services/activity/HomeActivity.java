@@ -217,7 +217,7 @@ public class HomeActivity extends BaseFragmentActivity implements //region INTER
             case SUGGESTION:
                 openFragmentIfAuthorized(SuggestionFragment.newInstance(), _service, _useBackStack);
                 break;
-            case HELP_SALIM:
+            case BLOCK_WEBSITE:
                 openFragmentIfAuthorized(ReportWebSpamFragment.newInstance(), _service, _useBackStack);
                 break;
             case APPROVED_DEVICES:
@@ -333,7 +333,7 @@ public class HomeActivity extends BaseFragmentActivity implements //region INTER
     public void onStaticServiceSelect(HexagonalButtonsLayout.StaticService _service) {
         switch (_service) {
             case BLOCK_WEBSITE:
-                openFragmentIfAuthorized(ReportWebSpamFragment.newInstance(), Service.HELP_SALIM);
+                openFragmentIfAuthorized(ReportWebSpamFragment.newInstance(), Service.BLOCK_WEBSITE);
                 break;
             case POOR_COVERAGE_SERVICE:
                 replaceFragmentWithBackStack(PoorCoverageFragment.newInstance());

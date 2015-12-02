@@ -345,7 +345,7 @@
     <string name="fragment_info_hub_no_pending_transactions">There are no pending transactions.</string>
     <string name="fragment_info_hub_no_pending_announcements">There are no announcements.</string>
 
-    <string name="service_report_spam">Report Spam Service</string>
+    <string name="service_report_spam">SMS Spam</string>
 
     <string name="str_rate">Rate Service</string>
 

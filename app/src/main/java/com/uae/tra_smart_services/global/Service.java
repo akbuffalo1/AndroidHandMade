@@ -170,7 +170,7 @@ public enum Service {
             return C.MOBILE_BRAND;
         }
     },
-    HELP_SALIM {
+    BLOCK_WEBSITE {
         @Override
         @StringRes
         public int getTitleRes() {
@@ -178,8 +178,14 @@ public enum Service {
         }
 
         @Override
-        protected boolean isMainScreenService() {
-            return false;
+        protected boolean isStaticMainScreenService() {
+            return true;
+        }
+
+        @Nullable
+        @Override
+        public String getServiceName() {
+            return C.SPAM_REPORT;
         }
     },
     MOBILE_VERIFICATION {

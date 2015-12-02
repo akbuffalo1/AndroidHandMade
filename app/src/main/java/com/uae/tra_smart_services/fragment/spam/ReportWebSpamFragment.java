@@ -149,7 +149,7 @@ public class ReportWebSpamFragment extends BaseServiceFragment implements OnClic
     @Nullable
     @Override
     protected Service getServiceType() {
-        return null;
+        return Service.BLOCK_WEBSITE;
     }
 
     @Override
