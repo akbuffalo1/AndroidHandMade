@@ -89,9 +89,11 @@ public class AnnouncementsAdapter extends Adapter<ViewHolder> implements Filtera
     }
 
     public void addAll(final List<GetAnnouncementsResponseModel.Announcement> _announcementsResponses) {
+        mDataSet.clear();
         mDataSet.addAll(_announcementsResponses);
         if (!mIsInSearchMode) {
             int oldSize = mShowingData.size();
+            mShowingData.clear();
             mShowingData.addAll(_announcementsResponses);
             notifyItemRangeInserted(oldSize, _announcementsResponses.size());
         }

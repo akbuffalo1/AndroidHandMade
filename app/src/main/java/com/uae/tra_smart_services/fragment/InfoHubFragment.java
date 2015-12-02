@@ -170,18 +170,6 @@ public final class InfoHubFragment extends BaseFragment
         super.onResume();
     }
 
-    /*@Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        getRootView().getViewTreeObserver().addOnGlobalLayoutListener(this);
-    }
-
-    @Override
-    public void onGlobalLayout() {
-        startFirstLoad();
-        getRootView().getViewTreeObserver().removeOnGlobalLayoutListener(this);
-    }*/
-
     @Override
     protected final void initViews() {
         super.initViews();
