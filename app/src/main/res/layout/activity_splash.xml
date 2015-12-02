@@ -1,4 +1,4 @@
-<android.support.percent.PercentFrameLayout
+<android.support.percent.PercentRelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -14,13 +14,34 @@
 
     <ImageView
         android:layout_width="wrap_content"
-        app:layout_marginTopPercent="15%"
+        app:layout_marginTopPercent="10%"
         android:scaleType="centerInside"
-        android:layout_gravity="center_horizontal"
+        android:id="@+id/ivLogo_AS"
+        android:layout_centerHorizontal="true"
         android:layout_height="wrap_content"
         app:layout_widthPercent="80%"
         android:src="@drawable/splash_logo"
         tools:ignore="ContentDescription"/>
+    
+    <ProgressBar
+        android:layout_width="match_parent"
+        android:id="@+id/pbLoadingProgress_AS"
+        tools:progress="67"
+        android:progressDrawable="?progressBarDrawable"
+        app:layout_marginBottomPercent="2%"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_height="10dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:text="@string/activity_splash_loading"
+        android:layout_above="@id/pbLoadingProgress_AS"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:textSize="14sp"
+        android:layout_marginBottom="14dp"
+        android:layout_height="wrap_content"/>
 
 
-</android.support.percent.PercentFrameLayout>
+</android.support.percent.PercentRelativeLayout>

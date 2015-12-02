@@ -398,5 +398,6 @@
     <string name="attachment_permission_denied">Permission request was denied.</string>
     <string name="hexagon_button_block_website">Block Websites</string>
     <string name="hexagon_button_sms_spam">SMS Spam</string>
+    <string name="activity_splash_loading">LOADING UPDATES…</string>
 
 </resources>

@@ -140,7 +140,7 @@ public class LoginFragment extends BaseAuthorizationFragment
         model.login = etUserName.getText().toString();
         model.pass = etPassword.getText().toString();
 
-        loaderDialogShow(getString(R.string.str_authenticating), this);
+        loaderOverlayShow(getString(R.string.str_authenticating), this, false);
 
         getSpiceManager().execute(mRequest = new LoginRequest(model), KEY_LOGIN_REQUEST, DurationInMillis.ALWAYS_EXPIRED, mRequestLoginListener);
     }
@@ -155,9 +155,7 @@ public class LoginFragment extends BaseAuthorizationFragment
     private class RequestResponseListener implements PendingRequestListener<Response> {
 
         @Override
-        public void onRequestNotFound() {
-            Log.d(getClass().getSimpleName(), "Request Not Found. isAdded: " + isAdded());
-        }
+        public void onRequestNotFound() { /* Not implemented */ }
 
         @Override
         public void onRequestSuccess(Response result) {
@@ -165,7 +163,13 @@ public class LoginFragment extends BaseAuthorizationFragment
             PreferenceManager.setLoggedIn(getActivity(), true);
 
             if (isAdded()) {
-                loaderDialogDismiss();
+                loaderOverlayDismissWithAction(new Loader.Dismiss() {
+                    @Override
+                    public void onLoadingDismissed() {
+                        getFragmentManager().popBackStack();
+                        getFragmentManager().popBackStack();
+                    }
+                });
                 if (result != null && actionsListener != null) {
                     actionsListener.onLogInSuccess();
                 }

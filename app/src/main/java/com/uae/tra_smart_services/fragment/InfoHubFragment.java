@@ -44,6 +44,7 @@ import com.uae.tra_smart_services.util.EndlessScrollListener;
 import com.uae.tra_smart_services.util.EndlessScrollListener.OnLoadMoreListener;
 
 import java.util.Arrays;
+import java.util.Locale;
 
 import retrofit.client.Response;
 
@@ -51,7 +52,7 @@ import retrofit.client.Response;
  * Created by ak-buffalo on 19.08.15.
  */
 public final class InfoHubFragment extends BaseFragment
-        implements OnLoadMoreListener, OnQueryTextListener, OnActionExpandListener, View.OnClickListener, HexagonSwipeRefreshLayout.Listener, ViewTreeObserver.OnGlobalLayoutListener {
+        implements OnLoadMoreListener, OnQueryTextListener, OnActionExpandListener, View.OnClickListener, HexagonSwipeRefreshLayout.Listener/*, ViewTreeObserver.OnGlobalLayoutListener*/ {
 
     private static final String KEY_TRANSACTIONS_REQUEST = "TRANSACTIONS_REQUEST";
     private static final int DEFAULT_PAGE_SIZE_TRANSACTIONS = 10;
@@ -114,7 +115,8 @@ public final class InfoHubFragment extends BaseFragment
         @Override
         public void endLoading() {
             loadedCount++;
-            if(loadedCount == 2){
+            if(loadedCount >= 2){
+                loadedCount = 0;
                 loaderOverlayDismissWithAction(new Loader.Dismiss() {
                     @Override
                     public void onLoadingDismissed() {
@@ -145,7 +147,8 @@ public final class InfoHubFragment extends BaseFragment
         @Override
         public void endLoading() {
             loadedCount++;
-            if(loadedCount == 2){
+            if(loadedCount >= 2){
+                loadedCount = 0;
                 loaderOverlayDismissWithAction(new Loader.Dismiss() {
                     @Override
                     public void onLoadingDismissed() {
@@ -163,15 +166,9 @@ public final class InfoHubFragment extends BaseFragment
     }
 
     @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        getRootView().getViewTreeObserver().addOnGlobalLayoutListener(this);
-    }
-
-    @Override
-    public void onGlobalLayout() {
+    public void onResume() {
         startFirstLoad();
-        getRootView().getViewTreeObserver().removeOnGlobalLayoutListener(this);
+        super.onResume();
     }
 
     @Override
@@ -257,7 +254,7 @@ public final class InfoHubFragment extends BaseFragment
 
     private void loadAnnouncementsPage(final int _page) {
         mIsAnnouncementsInLoading.trueV();
-        GetAnnouncementsRequest announcementsRequest = new GetAnnouncementsRequest(QueryAdapter.pageToOffset(_page, 3));
+        GetAnnouncementsRequest announcementsRequest = new GetAnnouncementsRequest(QueryAdapter.pageToOffset(_page, 3), Locale.getDefault().getLanguage().toUpperCase());
         getSpiceManager().execute(announcementsRequest, mAnnouncementsResponseListener);
     }
 

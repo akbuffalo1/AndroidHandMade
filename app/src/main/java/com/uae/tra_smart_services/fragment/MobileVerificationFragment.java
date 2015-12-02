@@ -286,7 +286,9 @@ public class MobileVerificationFragment extends BaseServiceFragment
 
         @Override
         public void onRequestNotFound() {
-            loaderOverlayCancelled(getString(R.string.str_something_went_wrong));
+            if(loaderOverlayIsDone()){
+                loaderOverlayCancelled(getString(R.string.str_something_went_wrong));
+            }
         }
 
         @Override

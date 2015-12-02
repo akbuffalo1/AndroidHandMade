@@ -13,7 +13,9 @@ import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
 import com.uae.tra_smart_services.R;
 import com.uae.tra_smart_services.customviews.HexagonView;
+import com.uae.tra_smart_services.customviews.LoaderView;
 import com.uae.tra_smart_services.fragment.base.BaseFragment;
+import com.uae.tra_smart_services.interfaces.Loader;
 import com.uae.tra_smart_services.interfaces.Loader.Cancelled;
 import com.uae.tra_smart_services.rest.model.response.ServiceInfoResponse;
 import com.uae.tra_smart_services.rest.model.response.UserProfileResponseModel;
@@ -108,9 +110,16 @@ public class ServiceInfoFragment extends BaseFragment implements View.OnClickLis
     private void loadServiceInfo() {
         mInfoRequestListener = new ServiceInfoRequestListener();
         mServiceInfoRequest = new ServiceInfoRequest(mServiceName, getResources().getConfiguration().locale.toString());
-        loaderDialogShow(getString(R.string.str_loading), mInfoRequestListener);
+        loaderOverlayShow(getString(R.string.str_loading), mInfoRequestListener, false);
+        loaderOverlayButtonBehavior(new Loader.BackButton() {
+            @Override
+            public void onBackButtonPressed(LoaderView.State _currentState) {
+                getFragmentManager().popBackStack();
+                getFragmentManager().popBackStack();
+            }
+        });
         getSpiceManager().execute(mServiceInfoRequest, KEY_SERVICE_INFO_REQUEST,
-                DurationInMillis.ALWAYS_EXPIRED, mInfoRequestListener);
+                DurationInMillis.ALWAYS_RETURNED, mInfoRequestListener);
     }
 
     @Override
@@ -156,8 +165,10 @@ public class ServiceInfoFragment extends BaseFragment implements View.OnClickLis
     @Override
     public void onStart() {
         super.onStart();
-        getSpiceManager().getFromCache(ServiceInfoResponse.class, KEY_SERVICE_INFO_REQUEST,
-                DurationInMillis.ALWAYS_RETURNED, mInfoRequestListener);
+        if (!mIsInfoLoaded) {
+            getSpiceManager().getFromCache(ServiceInfoResponse.class, KEY_SERVICE_INFO_REQUEST,
+                    DurationInMillis.ALWAYS_EXPIRED, mInfoRequestListener);
+        }
     }
 
     @Override
@@ -175,7 +186,12 @@ public class ServiceInfoFragment extends BaseFragment implements View.OnClickLis
             if (isAdded() && result != null) {
                 mServiceInfo = result;
                 mIsInfoLoaded = true;
-                loaderDialogDismiss();
+                loaderOverlayDismissWithAction(new Loader.Dismiss() {
+                    @Override
+                    public void onLoadingDismissed() {
+                        getFragmentManager().popBackStack();
+                    }
+                });
             }
         }
 

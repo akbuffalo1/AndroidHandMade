@@ -157,13 +157,17 @@ public interface TRAServicesAPI {
                             @Query(PARAMETER_SEARCH) final String _query);
 
     @GET(GET_ANNOUNCEMENTS)
-    GetAnnouncementsResponseModel getAnnouncements(@Query(PARAMETER_OFFSET) final int _offset,
-                            @Query(PARAMETER_LIMIT) final int _limit);
+    GetAnnouncementsResponseModel getAnnouncements(
+                            @Query(PARAMETER_OFFSET) final int _offset,
+                            @Query(PARAMETER_LIMIT) final int _limit,
+                            @Query(PARAMETER_LANGUAGE) final String _lang);
 
     @GET(GET_ANNOUNCEMENTS)
-    GetAnnouncementsResponseModel searchAnnouncements(@Query(PARAMETER_OFFSET) final int _offset,
-                                                           @Query(PARAMETER_LIMIT) final int _limit,
-                                                           @Query(PARAMETER_SEARCH) final String _query);
+    GetAnnouncementsResponseModel searchAnnouncements(
+                            @Query(PARAMETER_OFFSET) final int _offset,
+                            @Query(PARAMETER_LIMIT) final int _limit,
+                            @Query(PARAMETER_SEARCH) final String _query,
+                            @Query(PARAMETER_LANGUAGE) final String _lang);
 
     @GET(SERVICE_INFO)
     ServiceInfoResponse getServiceInfo(@Query(PARAMETER_SERVICE_NAME) String _serviceName,

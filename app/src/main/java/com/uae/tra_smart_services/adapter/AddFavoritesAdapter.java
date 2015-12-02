@@ -22,6 +22,7 @@ import com.uae.tra_smart_services.R;
 import com.uae.tra_smart_services.adapter.AddFavoritesAdapter.ViewHolder;
 import com.uae.tra_smart_services.customviews.HexagonView;
 import com.uae.tra_smart_services.global.Service;
+import com.uae.tra_smart_services.global.SpannableWrapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +40,7 @@ public class AddFavoritesAdapter extends Adapter<ViewHolder> implements Filterab
     private SearchFilter mSearchFilter;
 
     private OnItemClickListener mItemClickListener;
+    private CharSequence mConstraint = "";
 
     public AddFavoritesAdapter(final Context _context) {
         this(_context, new ArrayList<Service>());
@@ -136,6 +138,7 @@ public class AddFavoritesAdapter extends Adapter<ViewHolder> implements Filterab
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
             List<Service> filteredData = (List<Service>) results.values;
+            mConstraint = constraint;
             showData(filteredData);
         }
     }
@@ -159,7 +162,11 @@ public class AddFavoritesAdapter extends Adapter<ViewHolder> implements Filterab
         public final void setData(final Service _item, final int _position) {
             vContainer.setBackgroundColor(_position % 2 == 0 ? Color.TRANSPARENT : mBackgroundColor);
             cbSelection.setChecked(mSelectedItems.get(mAllData.indexOf(mShowingData.get(_position))));
-            tvTitle.setText(_item.getTitleRes());
+            tvTitle.setText(
+                    (mConstraint.length() != 0)
+                            ? SpannableWrapper.makeSelectedTextBold(mConstraint, mContext.getString(_item.getTitleRes()))
+                            : mContext.getString(_item.getTitleRes())
+            );
             hvIcon.setHexagonSrcDrawable(_item.getDrawableRes());
         }
 

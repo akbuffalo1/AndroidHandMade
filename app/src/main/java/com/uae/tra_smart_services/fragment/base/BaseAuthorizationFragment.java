@@ -2,6 +2,8 @@ package com.uae.tra_smart_services.fragment.base;
 
 import android.app.Activity;
 
+import com.uae.tra_smart_services.R;
+
 /**
  * Created by ak-buffalo on 22.07.15.
  */
@@ -40,5 +42,10 @@ public abstract class BaseAuthorizationFragment extends BaseFragment{
         void onBackPressed();
 
         void onHomeScreenOpenWithoutAuth();
+    }
+
+    @Override
+    protected int getGlobalContainerResource() {
+        return R.id.rlGlobalContainer_AA;
     }
 }
