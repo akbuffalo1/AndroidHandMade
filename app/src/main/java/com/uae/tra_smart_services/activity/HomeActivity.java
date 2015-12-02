@@ -220,14 +220,14 @@ public class HomeActivity extends BaseFragmentActivity implements //region INTER
             case SUGGESTION:
                 openFragmentIfAuthorized(SuggestionFragment.newInstance(), _service, _useBackStack);
                 break;
-//            case HELP_SALIM:
-//                replaceFragment(HelpSalemFragment.newInstance(), _useBackStack);
-//                break;
+            case BLOCK_WEBSITE:
+                openFragmentIfAuthorized(ReportWebSpamFragment.newInstance(), _service, _useBackStack);
+                break;
             case APPROVED_DEVICES:
                 replaceFragment(ApprovedDevicesFragment.newInstance(), _useBackStack);
                 break;
             case REPORT_SPAM:
-                replaceFragment(ReportSpamFragment.newInstance(), _useBackStack);
+                openFragmentIfAuthorized(ReportSmsSpamFragment.newInstance(), _service, _useBackStack);
                 break;
             case MOBILE_VERIFICATION:
                 replaceFragment(MobileVerificationFragment.newInstance(), _useBackStack);
@@ -335,17 +335,17 @@ public class HomeActivity extends BaseFragmentActivity implements //region INTER
     @Override
     public void onStaticServiceSelect(HexagonalButtonsLayout.StaticService _service) {
         switch (_service) {
-            case VERIFICATION_SERVICE:
-                replaceFragmentWithBackStack(MobileVerificationFragment.newInstance());
-                break;
-            case SMS_SPAM_SERVICE:
-                replaceFragmentWithBackStack(ReportSpamFragment.newInstance());
+            case BLOCK_WEBSITE:
+                openFragmentIfAuthorized(ReportWebSpamFragment.newInstance(), Service.BLOCK_WEBSITE);
                 break;
             case POOR_COVERAGE_SERVICE:
                 replaceFragmentWithBackStack(PoorCoverageFragment.newInstance());
                 break;
-            case DOMAIN_CHECK_FRAGMENT:
-                replaceFragmentWithBackStack(DomainCheckerFragment.newInstance());
+            case VERIFY_DEVICE:
+                replaceFragmentWithBackStack(MobileVerificationFragment.newInstance());
+                break;
+            case SMS_SPAM:
+                openFragmentIfAuthorized(ReportSmsSpamFragment.newInstance(), Service.REPORT_SPAM);
                 break;
         }
     }

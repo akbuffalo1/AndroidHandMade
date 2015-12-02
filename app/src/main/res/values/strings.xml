@@ -171,7 +171,7 @@
     <string name="favourite_service_info">Service Info</string>
     <string name="favourite_remove">Remove</string>
     <string name="federal_authority">Federal Authority</string>
-    <string name="hexagon_button_verification">Verification</string>
+    <string name="hexagon_button_verification">Verify Device</string>
     <string name="hexagon_button_spam">Spam Report</string>
     <string name="hexagon_button_coverage">Coverage</string>
     <string name="hexagon_button_internet">Internet</string>
@@ -345,7 +345,7 @@
     <string name="fragment_info_hub_no_pending_transactions">There are no pending transactions.</string>
     <string name="fragment_info_hub_no_pending_announcements">There are no announcements.</string>
 
-    <string name="service_report_spam">Report Spam Service</string>
+    <string name="service_report_spam">SMS Spam</string>
 
     <string name="str_rate">Rate Service</string>
 
@@ -412,7 +412,10 @@
     <string name="str_my_imei">MY IMEI</string>
     <string name="str_where_to_find_imei">Where to find the IMEI code on your device?</string>
     <string name="title_activity_maps">Map</string>
+    <string name="hexagon_button_block_website">Block Websites</string>
+    <string name="hexagon_button_sms_spam">SMS Spam</string>
     <string name="activity_splash_loading">LOADING UPDATES…</string>
     <string name="edit">Edit</string>
+    <string name="fragment_contact_us">Contact Us</string>
 
 </resources>

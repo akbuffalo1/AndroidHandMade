@@ -29,7 +29,7 @@
             android:paddingLeft="15dp"
             android:paddingRight="15dp">
 
-            <LinearLayout
+            <RelativeLayout
                 android:id="@+id/llSignInFields"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -52,17 +52,25 @@
                     android:textSize="18sp"
                     tools:text="tra.gov.ae"/>
 
-                <View style="@style/AuthorizationFieldsSeparator"/>
+                <TextView
+                    android:layout_alignTop="@id/etDomainAvail_FDCH"
+                    style="@style/StarLabelStyle"/>
+
+                <View
+                    style="@style/AuthorizationFieldsSeparator"
+                    android:id="@+id/vDomainAvailDivider_FDCH"
+                    android:layout_below="@id/etDomainAvail_FDCH"/>
 
                 <TextView
                     android:layout_width="wrap_content"
+                    android:layout_below="@id/vDomainAvailDivider_FDCH"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
                     android:layout_marginTop="8dp"
                     android:text="@string/fragment_domain_checker_hint"
                     android:textSize="14sp"/>
 
-            </LinearLayout>
+            </RelativeLayout>
 
             <RelativeLayout
                 android:id="@+id/llSignInActions"

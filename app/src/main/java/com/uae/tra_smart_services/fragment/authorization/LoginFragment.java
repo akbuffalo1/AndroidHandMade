@@ -68,8 +68,8 @@ public class LoginFragment extends BaseAuthorizationFragment
             btnLogIn.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
-                    etUserName.setText("w");
-                    etPassword.setText("w");
+                    etUserName.setText("foouser");
+                    etPassword.setText("qwerty123");
                     doLogIn();
                     return true;
                 }
