@@ -79,9 +79,11 @@ public class TransactionsAdapter extends Adapter<ViewHolder> implements Filterab
     }
 
     public void addAll(final List<GetTransactionResponseModel> _transactionResponses) {
+        mDataSet.clear();
         mDataSet.addAll(_transactionResponses);
         if (!mIsInSearchMode) {
             int oldSize = mShowingData.size();
+            mShowingData.clear();
             mShowingData.addAll(_transactionResponses);
             notifyItemRangeInserted(oldSize, _transactionResponses.size());
         }

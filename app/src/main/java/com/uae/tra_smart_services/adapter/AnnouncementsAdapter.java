@@ -32,6 +32,7 @@ import com.uae.tra_smart_services.rest.model.response.GetAnnouncementsResponseMo
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import retrofit.RetrofitError;
 /**
@@ -89,9 +90,11 @@ public class AnnouncementsAdapter extends Adapter<ViewHolder> implements Filtera
     }
 
     public void addAll(final List<GetAnnouncementsResponseModel.Announcement> _announcementsResponses) {
+        mDataSet.clear();
         mDataSet.addAll(_announcementsResponses);
         if (!mIsInSearchMode) {
             int oldSize = mShowingData.size();
+            mShowingData.clear();
             mShowingData.addAll(_announcementsResponses);
             notifyItemRangeInserted(oldSize, _announcementsResponses.size());
         }
@@ -207,7 +210,7 @@ public class AnnouncementsAdapter extends Adapter<ViewHolder> implements Filtera
             final List<GetAnnouncementsResponseModel.Announcement> filteredList;
             final FilterResults filterResults = new FilterResults();
             try {
-                filteredList = mTRAServicesAPI.searchAnnouncements(mSearchResultPageNum, DEFAULT_PAGE_SIZE, mSearchQuery).announcements;
+                filteredList = mTRAServicesAPI.searchAnnouncements(mSearchResultPageNum, DEFAULT_PAGE_SIZE, mSearchQuery, Locale.getDefault().getLanguage().toUpperCase()).announcements;
                 if (filteredList.isEmpty()) {
                     mIsAllSearchResultDownloaded = true;
                 }
