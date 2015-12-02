@@ -1,54 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<LinearLayout
+    android:layout_width="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingTop="?attr/actionBarSize"
+    tools:paddingTop="0dp"
+    android:background="@android:color/white"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:overScrollMode="never">
+    android:orientation="vertical">
 
-    <LinearLayout
+    <android.support.design.widget.TabLayout
         android:layout_width="match_parent"
-        android:paddingTop="?attr/actionBarSize"
-        tools:paddingTop="0dp"
+        app:tabIndicatorColor="#dfff"
+        app:tabBackground="?toolbarBackground"
+        app:tabTextAppearance="@style/TabTextAppearance"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:id="@+id/tlTabs_FAT"/>
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="255dp"
-            android:src="@drawable/shape_info_hub_details_header_image_gradient">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:id="@+id/flContainer_FAT"
+        android:layout_height="match_parent"/>
 
-            <ImageView
-                android:id="@+id/tvHeaderImage_FAT"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="centerInside"
-                android:src="@drawable/logo"/>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/shape_info_hub_details_header_image_gradient"/>
-
-        </FrameLayout>
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="16dp">
-
-            <WebView
-                android:id="@+id/wvText_FAT"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textSize="16sp"
-                tools:text="@string/fragment_about_tra_html"/>
-
-        </FrameLayout>
-
-
-    </LinearLayout>
-
-
-</ScrollView>
+</LinearLayout>

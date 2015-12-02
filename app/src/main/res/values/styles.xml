@@ -148,4 +148,8 @@
         <item name="android:layout_height">wrap_content</item>
     </style>
 
+    <style name="TabTextAppearance" parent="@style/TextAppearance.Design.Tab">
+        <item name="android:textColor">@color/hex_color_light_gray</item>
+    </style>
+
 </resources>

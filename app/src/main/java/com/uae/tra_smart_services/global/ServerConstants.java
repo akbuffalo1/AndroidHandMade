@@ -80,6 +80,8 @@ public final class ServerConstants {
     public static final String POST_INNOVATION = "/innovation";
     public static final String SERVICE_INFO = "/service/about";
     public static final String DYNAMIC_SERVICE_LIST = "/service";
+    public static final String UPLOAD_ATTACHMENT = "/attachment";
+    public static final String CONTACT_US = "/contact";
 
     //!!!!!!!!!!!! API PARAMETERS !!!!!!!!!!!!!!!!!!
     public static final String PARAMETER_CHECK_URL = "checkUrl";

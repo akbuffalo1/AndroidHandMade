@@ -23,8 +23,8 @@ public class SplashActivity extends BaseActivity {
 //    private static final int SPLASH_DELAY = 100000;
 
     public static final String PROGRESS_PROPERTY = "progress";
-    private static final int MIN_DURATION = 20;//00; //ms
-    private static final int MAX_DURATION = 35;//00; //ms
+    private static final int MIN_DURATION = 2000; //ms
+    private static final int MAX_DURATION = 3500; //ms
 
     private ProgressBar pbLoadingProgress;
 

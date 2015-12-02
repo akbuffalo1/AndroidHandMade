@@ -7,9 +7,9 @@ import com.octo.android.robospice.retry.RetryPolicy;
 /**
  * Created by mobimaks on 14.08.2015.
  */
-public abstract class BaseRequest<T, R> extends RetrofitSpiceRequest<T, R> {
+public abstract class BaseRequest<Response, RestInterface> extends RetrofitSpiceRequest<Response, RestInterface> {
 
-    public BaseRequest(Class<T> clazz, Class<R> retrofitInterfaceClass) {
+    public BaseRequest(Class<Response> clazz, Class<RestInterface> retrofitInterfaceClass) {
         super(clazz, retrofitInterfaceClass);
         setRetryPolicy(new DefaultRetryPolicy());
     }
