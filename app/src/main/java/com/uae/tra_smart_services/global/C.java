@@ -4,8 +4,12 @@ import android.support.annotation.IntDef;
 import android.support.annotation.StringDef;
 import android.widget.Toast;
 
+import com.uae.tra_smart_services.R;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by mobimaks on 13.08.2015.
@@ -118,6 +122,21 @@ public final class C {
     public @interface SpiceManager {
         int TRA_SERVICES_API = 0;
         int DYNAMIC_SERVICES_API = 1;
+    }
+    //endregion
+
+    //region Transactions statuses const
+    public static Map<String, int[]> TRANSACTION_STATUS = new HashMap<>();
+    static {
+        TRANSACTION_STATUS.put("Referred To Licensee", new int[]{R.drawable.ic_form, R.color.hex_primary_green});
+        TRANSACTION_STATUS.put("Implemented", new int[]{R.drawable.ic_form, R.color.hex_primary_green});
+        TRANSACTION_STATUS.put("Approved", new int[]{R.drawable.ic_form, R.color.hex_primary_green});
+        TRANSACTION_STATUS.put("Waiting to be Reviewed", new int[]{R.drawable.ic_form, R.color.hex_primary_green});
+
+        TRANSACTION_STATUS.put("On Hold", new int[]{R.drawable.ic_download, R.color.hex_primary_orange});
+        TRANSACTION_STATUS.put("Researching", new int[]{R.drawable.ic_download, R.color.hex_primary_orange});
+
+        TRANSACTION_STATUS.put("Waiting for Details", new int[]{R.drawable.ic_domain, R.color.hex_primary_red});
     }
     //endregion
 

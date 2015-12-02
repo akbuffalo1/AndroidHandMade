@@ -49,7 +49,7 @@ public abstract class SpannableWrapper {
     public static final SpannableStringBuilder makeSelectedTextBold(CharSequence _constraint, String _originalText){
         SpannableStringBuilder spannedText = new SpannableStringBuilder(_originalText);
         int startFrom = _originalText.toLowerCase().indexOf(((String) _constraint).toLowerCase());
-        if(startFrom >= 0 && _originalText.length() > startFrom + _constraint.length()){
+        if(startFrom >= 0 && _originalText.length() >= startFrom + _constraint.length()){
             final StyleSpan bss = new StyleSpan(android.graphics.Typeface.BOLD);
             spannedText.setSpan(bss, startFrom, startFrom + _constraint.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         }

@@ -195,9 +195,7 @@ public class InfoHubAnnouncementsFragment extends BaseFragment
     }
 
     @Override
-    public void endLoading() {
-
-    }
+    public void endLoading() { /* Not implemented */ }
 
     @Override
     protected int getTitle() {

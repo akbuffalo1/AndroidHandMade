@@ -413,5 +413,6 @@
     <string name="str_where_to_find_imei">Where to find the IMEI code on your device?</string>
     <string name="title_activity_maps">Map</string>
     <string name="activity_splash_loading">LOADING UPDATES…</string>
+    <string name="edit">Edit</string>
 
 </resources>
