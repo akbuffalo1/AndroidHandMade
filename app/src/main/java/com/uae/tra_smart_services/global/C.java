@@ -128,6 +128,7 @@ public final class C {
     //region Transactions statuses const
     public static Map<String, int[]> TRANSACTION_STATUS = new HashMap<>();
     static {
+        TRANSACTION_STATUS.put("In Progress", new int[]{R.drawable.ic_form, R.color.hex_primary_green});
         TRANSACTION_STATUS.put("Referred To Licensee", new int[]{R.drawable.ic_form, R.color.hex_primary_green});
         TRANSACTION_STATUS.put("Implemented", new int[]{R.drawable.ic_form, R.color.hex_primary_green});
         TRANSACTION_STATUS.put("Approved", new int[]{R.drawable.ic_form, R.color.hex_primary_green});
