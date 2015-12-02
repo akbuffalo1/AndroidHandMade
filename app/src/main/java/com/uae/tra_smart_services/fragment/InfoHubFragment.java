@@ -44,6 +44,7 @@ import com.uae.tra_smart_services.util.EndlessScrollListener;
 import com.uae.tra_smart_services.util.EndlessScrollListener.OnLoadMoreListener;
 
 import java.util.Arrays;
+import java.util.Locale;
 
 import retrofit.client.Response;
 
@@ -253,7 +254,7 @@ public final class InfoHubFragment extends BaseFragment
 
     private void loadAnnouncementsPage(final int _page) {
         mIsAnnouncementsInLoading.trueV();
-        GetAnnouncementsRequest announcementsRequest = new GetAnnouncementsRequest(QueryAdapter.pageToOffset(_page, 3));
+        GetAnnouncementsRequest announcementsRequest = new GetAnnouncementsRequest(QueryAdapter.pageToOffset(_page, 3), Locale.getDefault().getLanguage().toUpperCase());
         getSpiceManager().execute(announcementsRequest, mAnnouncementsResponseListener);
     }
 

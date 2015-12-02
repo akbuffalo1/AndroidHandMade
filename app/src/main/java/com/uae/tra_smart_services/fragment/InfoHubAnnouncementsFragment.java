@@ -26,6 +26,8 @@ import com.uae.tra_smart_services.rest.request_listeners.AnnouncementsResponseLi
 import com.uae.tra_smart_services.rest.robo_requests.GetAnnouncementsRequest;
 import com.uae.tra_smart_services.util.EndlessScrollListener;
 
+import java.util.Locale;
+
 /**
  * Created by ak-buffalo on 18.08.15.
  */
@@ -130,7 +132,7 @@ public class InfoHubAnnouncementsFragment extends BaseFragment
 
     private void loadAnnouncementsPage(final int _page) {
         mIsAnnouncementsInLoading.trueV();
-        GetAnnouncementsRequest announcementsRequest = new GetAnnouncementsRequest(QueryAdapter.pageToOffset(_page, DEFAULT_OFFSET_ANNOUNCEMENTS));
+        GetAnnouncementsRequest announcementsRequest = new GetAnnouncementsRequest(QueryAdapter.pageToOffset(_page, DEFAULT_OFFSET_ANNOUNCEMENTS), Locale.getDefault().getLanguage().toUpperCase());
         getSpiceManager().execute(announcementsRequest, mAnnouncementsResponseListener);
     }
 
