@@ -43,7 +43,7 @@ public final class AnnouncementsResponseListener implements RequestListener<GetA
             if (mIsAllAnnouncementsDownloaded = result.announcements.isEmpty()) {
                 handleNoResult();
             } else {
-                mModel.addAll(result.announcements);
+                if(mModel != null) mModel.addAll(result.announcements);
                 mOperationStateManager.showData();
                 mAnnouncementsListAdapter.addAll(result.announcements);
             }
