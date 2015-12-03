@@ -93,9 +93,9 @@ public class ComplainAboutTraFragment extends BaseComplainFragment
     }
 
     @Override
-    public void onViewStateRestored(Bundle savedInstanceState) {
-        super.onViewStateRestored(savedInstanceState);
-        if((mModel = getArguments().getParcelable(DATA_KEY)) != null){
+    public void onResume() {
+        super.onResume();
+        if(getArguments() != null && (mModel = getArguments().getParcelable(DATA_KEY)) != null){
             etComplainTitle.setText(mModel.title);
             etDescription.setText(mModel.description);
         }

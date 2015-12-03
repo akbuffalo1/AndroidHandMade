@@ -78,9 +78,9 @@ public class ReportSmsSpamFragment extends BaseServiceFragment implements OnClic
     }
 
     @Override
-    public void onViewStateRestored(Bundle savedInstanceState) {
-        super.onViewStateRestored(savedInstanceState);
-        if ((_model = getArguments().getParcelable(DATA)) != null) {
+    public void onResume() {
+        super.onResume();
+        if (getArguments() != null && (_model = getArguments().getParcelable(DATA)) != null) {
             etNumberOfSpammer.setText(getAllAfter(_model.title, REGEXP_TITLE_CUT));
             etDescription.setText(_model.description);
         }
