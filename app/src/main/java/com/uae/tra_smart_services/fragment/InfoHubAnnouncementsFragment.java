@@ -100,7 +100,7 @@ public class InfoHubAnnouncementsFragment extends BaseFragment
     @Override
     protected void initListeners() {
         super.initListeners();
-        mAnnouncementsResponseListener = new AnnouncementsResponseListener(this, this, mListAdapter, mIsAnnouncementsInLoading, mIsAllAnnouncementsDownloaded, 1);
+        mAnnouncementsResponseListener = new AnnouncementsResponseListener(this, this, mListAdapter, mIsAnnouncementsInLoading, mIsAllAnnouncementsDownloaded, 1, null);
         mListAdapter.setOnItemClickListener(this);
         mList.addOnScrollListener(new EndlessScrollListener(mLayoutManager, this));
         tvNoResult.setOnClickListener(this);

@@ -8,6 +8,8 @@ import com.uae.tra_smart_services.fragment.base.BaseFragment;
 import com.uae.tra_smart_services.interfaces.OperationStateManager;
 import com.uae.tra_smart_services.rest.model.response.GetAnnouncementsResponseModel;
 
+import java.util.ArrayList;
+
 /**
  * Created by and on 23.10.15.
  */
@@ -17,17 +19,19 @@ public final class AnnouncementsResponseListener implements RequestListener<GetA
     private OperationStateManager mOperationStateManager;
     private AnnouncementsAdapter mAnnouncementsListAdapter;
     private InfoHubAnnouncementsFragment.BooleanHolder mIsAnnouncementsInLoading;
+    ArrayList<GetAnnouncementsResponseModel.Announcement> mModel;
     private boolean mIsAllAnnouncementsDownloaded;
     private int mAnnouncementsPageNum;
 
     public AnnouncementsResponseListener(BaseFragment _fragment, OperationStateManager _manager,AnnouncementsAdapter _announcementsListAdapter,
-                            InfoHubAnnouncementsFragment.BooleanHolder _isAnnouncementsInLoading, boolean _isAllAnnouncementsDownloaded, int _announcementsPageNum) {
+                            InfoHubAnnouncementsFragment.BooleanHolder _isAnnouncementsInLoading, boolean _isAllAnnouncementsDownloaded, int _announcementsPageNum, ArrayList<GetAnnouncementsResponseModel.Announcement> _model) {
         mFragment = _fragment;
         mOperationStateManager = _manager;
         mAnnouncementsListAdapter = _announcementsListAdapter;
         mIsAnnouncementsInLoading = _isAnnouncementsInLoading;
         mIsAllAnnouncementsDownloaded = _isAllAnnouncementsDownloaded;
         mAnnouncementsPageNum = _announcementsPageNum;
+        mModel = _model;
     }
 
     @Override
@@ -37,6 +41,7 @@ public final class AnnouncementsResponseListener implements RequestListener<GetA
             if (mIsAllAnnouncementsDownloaded = result.announcements.isEmpty()) {
                 handleNoResult();
             } else {
+                mModel = (ArrayList<GetAnnouncementsResponseModel.Announcement>) result.announcements;
                 mOperationStateManager.showData();
                 mAnnouncementsListAdapter.addAll(result.announcements);
             }

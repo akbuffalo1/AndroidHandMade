@@ -208,7 +208,7 @@ public final class InfoHubFragment extends BaseFragment
         mAnnouncementsResponseListener =
                 new AnnouncementsResponseListener(
                         this, mAnnouncementsOperationStateManager, mAnnouncementsListAdapter,
-                        mIsAnnouncementsInLoading, false, mTransactionPageNum);
+                        mIsAnnouncementsInLoading, false, mTransactionPageNum, mAnnouncementsModel);
         mEndlessScrollListener = new EndlessScrollListener(mTransactionsLayoutManager, this);
         mTransactionsList.addOnScrollListener(mEndlessScrollListener);
         tvNoTransactions.setOnClickListener(this);
