@@ -17,19 +17,19 @@ import com.uae.tra_smart_services.rest.model.response.GetTransactionResponseMode
  * Created by and on 02.12.15.
  */
 
-public class TransactionsDetails extends BaseFragment implements View.OnClickListener {
+public class TransactionDetailFragment extends BaseFragment implements View.OnClickListener {
     private static final String MODEL = "model";
     private static final String ICON_COLOR = "ic_col";
     private static final String TITLE = "title";
     private static final String DESCRIPTION = "description";
 
-    public static TransactionsDetails newInstance(int[] _icon_color, GetTransactionResponseModel _model) {
+    public static TransactionDetailFragment newInstance(int[] _icon_color, GetTransactionResponseModel _model) {
         Bundle args = new Bundle();
         args.putParcelable(MODEL, _model);
         args.putIntArray(ICON_COLOR, _icon_color);
         args.putString(TITLE, _model.title);
         args.putString(DESCRIPTION, _model.description);
-        TransactionsDetails fragment = new TransactionsDetails();
+        TransactionDetailFragment fragment = new TransactionDetailFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -67,7 +67,6 @@ public class TransactionsDetails extends BaseFragment implements View.OnClickLis
                         getArguments().getString(DESCRIPTION) +" "+
                         getArguments().getString(DESCRIPTION));
         btnEdit = findView(R.id.btnEdit_FTD);
-        btnEdit.setVisibility(View.GONE);
     }
 
     @Override
@@ -99,8 +98,7 @@ public class TransactionsDetails extends BaseFragment implements View.OnClickLis
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.btnEdit_FTD){
-            Toast.makeText(getActivity(), "Not implemented yet", Toast.LENGTH_SHORT).show();
-//            mOnServiceSelectListener.onServiceSelect(Service.getServiceTypeByString(mModel.type), mModel);
+            mOnServiceSelectListener.onServiceSelect(Service.getServiceTypeByString(mModel.type), mModel);
         }
     }
 }

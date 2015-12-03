@@ -229,6 +229,11 @@ public final class InfoHubFragment extends BaseFragment
         startFirstLoad();
     }
 
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+    }
+
     private void startFirstLoad() {
         if(isAdded()){
             loaderOverlayCustomShow(getString(R.string.str_loading), null, false);
@@ -356,16 +361,20 @@ public final class InfoHubFragment extends BaseFragment
             } else {
                 mTransactionsListAdapter.stopLoading();
             }
-            mTransactionsOperationStateManager.endLoading();
+            if(isAdded()) {
+                mTransactionsOperationStateManager.endLoading();
+            }
         }
 
         @Override
         public final void onRequestFailure(SpiceException spiceException) {
             mIsTransactionsInLoading = false;
             mTransactionPageNum--;
-            handleNoResult();
-            processError(spiceException);
-            mTransactionsOperationStateManager.endLoading();
+                handleNoResult();
+                processError(spiceException);
+            if(isAdded()){
+                mTransactionsOperationStateManager.endLoading();
+            }
         }
     }
 

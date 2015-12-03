@@ -2,6 +2,7 @@ package com.uae.tra_smart_services.fragment;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
@@ -24,6 +25,7 @@ import com.uae.tra_smart_services.global.Service;
 import com.uae.tra_smart_services.interfaces.Loader;
 import com.uae.tra_smart_services.interfaces.LoaderMarker;
 import com.uae.tra_smart_services.rest.model.request.ComplainTRAServiceModel;
+import com.uae.tra_smart_services.rest.model.response.GetTransactionResponseModel;
 import com.uae.tra_smart_services.rest.robo_requests.ComplainAboutTRAServiceRequest;
 
 import retrofit.client.Response;
@@ -35,15 +37,25 @@ public class ComplainAboutTraFragment extends BaseComplainFragment
         implements OnClickListener, AlertDialogFragment.OnOkListener {
 
     protected static final String KEY_COMPLAIN_REQUEST = "COMPLAIN_ABOUT_TRA_REQUEST";
+    protected static final String DATA_KEY = "data_key";
 
     private ThemedImageView tivAddAttachment;
     private EditText etComplainTitle, etDescription;
 
     private ComplainAboutTRAServiceRequest request;
     private RequestResponseListener mRequestListener;
+    private GetTransactionResponseModel mModel;
 
     public static ComplainAboutTraFragment newInstance() {
         return new ComplainAboutTraFragment();
+    }
+
+    public static ComplainAboutTraFragment newInstance(Parcelable data) {
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(DATA_KEY, data);
+        ComplainAboutTraFragment fragment = new ComplainAboutTraFragment();
+        fragment.setArguments(bundle);
+        return fragment;
     }
 
     @Override
@@ -58,7 +70,6 @@ public class ComplainAboutTraFragment extends BaseComplainFragment
     protected void initViews() {
         super.initViews();
         tivAddAttachment = findView(R.id.tivAddAttachment_FCAT);
-
         etComplainTitle = findView(R.id.etComplainTitle_FCAT);
         setCapitalizeTextWatcher(etComplainTitle);
         etDescription = findView(R.id.etDescription_FCAT);
@@ -79,6 +90,15 @@ public class ComplainAboutTraFragment extends BaseComplainFragment
         super.onStart();
         getSpiceManager().getFromCache(Response.class, getRequestKey(), DurationInMillis.ALWAYS_RETURNED, mRequestListener);
 //        getSpiceManager().addListenerIfPending(Response.class, getRequestKey(), mRequestListener);
+    }
+
+    @Override
+    public void onViewStateRestored(Bundle savedInstanceState) {
+        super.onViewStateRestored(savedInstanceState);
+        if((mModel = getArguments().getParcelable(DATA_KEY)) != null){
+            etComplainTitle.setText(mModel.title);
+            etDescription.setText(mModel.description);
+        }
     }
 
     protected String getRequestKey() {

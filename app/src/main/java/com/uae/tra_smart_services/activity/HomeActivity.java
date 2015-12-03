@@ -52,7 +52,7 @@ import com.uae.tra_smart_services.fragment.ServiceInfoFragment.OnOpenServiceInfo
 import com.uae.tra_smart_services.fragment.SettingsFragment;
 import com.uae.tra_smart_services.fragment.SettingsFragment.OnOpenAboutTraClickListener;
 import com.uae.tra_smart_services.fragment.SuggestionFragment;
-import com.uae.tra_smart_services.fragment.TransactionsDetails;
+import com.uae.tra_smart_services.fragment.TransactionDetailFragment;
 import com.uae.tra_smart_services.fragment.base.BaseFragment;
 import com.uae.tra_smart_services.fragment.hexagon_fragment.InnovationsFragment;
 import com.uae.tra_smart_services.fragment.hexagon_fragment.NotificationsFragment;
@@ -215,7 +215,7 @@ public class HomeActivity extends BaseFragmentActivity implements //region INTER
                 openFragmentIfAuthorized(EnquiriesFragment.newInstance(), _service, _useBackStack);
                 break;
             case COMPLAINT_ABOUT_TRA:
-                openFragmentIfAuthorized(ComplainAboutTraFragment.newInstance(), _service, _useBackStack);
+                openFragmentIfAuthorized(_data != null ? ComplainAboutTraFragment.newInstance(_data) : ComplainAboutTraFragment.newInstance(), _service, _useBackStack);
                 break;
             case SUGGESTION:
                 openFragmentIfAuthorized(SuggestionFragment.newInstance(), _service, _useBackStack);
@@ -235,6 +235,10 @@ public class HomeActivity extends BaseFragmentActivity implements //region INTER
             case POOR_COVERAGE:
                 replaceFragment(PoorCoverageFragment.newInstance(), _useBackStack);
                 break;
+            case SMS_SPAM:
+                replaceFragment(_data != null ? ReportSmsSpamFragment.newInstance(_data) : ReportSmsSpamFragment.newInstance(), _useBackStack);
+                break;
+
 //            case INTERNET_SPEEDTEST:
 //                replaceFragment(SpeedTestFragment.newInstance(), _useBackStack);
 //                break;
@@ -267,7 +271,6 @@ public class HomeActivity extends BaseFragmentActivity implements //region INTER
     @Override
     protected void onActivityResult(final int _requestCode, final int _resultCode, final Intent _data) {
         super.onActivityResult(_requestCode, _resultCode, _data);
-
         switch (_requestCode) {
             case C.REQUEST_CODE_LOGIN:
                 handleLoginResult(_resultCode, _data);
@@ -615,6 +618,6 @@ public class HomeActivity extends BaseFragmentActivity implements //region INTER
 
     @Override
     public void onTransactionPressed(int[] _icon_color, GetTransactionResponseModel _model) {
-        replaceFragmentWithBackStack(TransactionsDetails.newInstance(_icon_color, _model));
+        replaceFragmentWithBackStack(TransactionDetailFragment.newInstance(_icon_color, _model));
     }
 }

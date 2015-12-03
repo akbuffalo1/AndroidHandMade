@@ -274,7 +274,6 @@ public class AnnouncementsAdapter extends Adapter<ViewHolder> implements Filtera
     }
 
     protected class ViewHolder extends RecyclerView.ViewHolder {
-        private View container;
         private HexagonView hexagonView;
         private TextView title, description, date;
         private LoaderView progressBar;
@@ -283,7 +282,6 @@ public class AnnouncementsAdapter extends Adapter<ViewHolder> implements Filtera
 
         public ViewHolder(View itemView) {
             super(itemView);
-            container = itemView;
             if(mIsPreview){
                 sStartOffset = (Space) itemView.findViewById(R.id.sStartOffset_LIIHS);
                 hexagonView = (HexagonView) itemView.findViewById(R.id.hvIcon_LIIHS);
@@ -312,8 +310,6 @@ public class AnnouncementsAdapter extends Adapter<ViewHolder> implements Filtera
         public void setData(int _position, final GetAnnouncementsResponseModel.Announcement _model) {
             if (!isProgress) {
                 sStartOffset.setVisibility(_position % 2 == 0 ? View.GONE : View.VISIBLE);
-                hexagonView.postScaleType(HexagonView.ScaleType.INSIDE_CROP);
-                hexagonView.setHexagonSrcDrawable(R.drawable.ic_form);
                 Picasso.with(mActivity).load(_model.image).into(new HexagonViewTarget(hexagonView));
                 if(mConstraint.length() != 0){
                     title.setText(SpannableWrapper.makeSelectedTextBold(mConstraint, Html.fromHtml(_model.title).toString()));
@@ -324,7 +320,7 @@ public class AnnouncementsAdapter extends Adapter<ViewHolder> implements Filtera
                     description.setText(_model.description);
                     date.setText(_model.createdAt);
                 }
-                container.setOnClickListener(new View.OnClickListener() {
+                itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View _view) {
                         onItemClickListener.onItemSelected(_model);
