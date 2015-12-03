@@ -2,22 +2,17 @@ package com.uae.tra_smart_services.fragment;
 
 import android.app.Activity;
 import android.graphics.Color;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.MenuItemCompat.OnActionExpandListener;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.SearchView.OnQueryTextListener;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewTreeObserver;
 import android.widget.TextView;
 
 import com.octo.android.robospice.persistence.exception.SpiceException;
@@ -27,13 +22,11 @@ import com.uae.tra_smart_services.adapter.AnnouncementsAdapter;
 import com.uae.tra_smart_services.adapter.TransactionsAdapter;
 import com.uae.tra_smart_services.customviews.HexagonSwipeRefreshLayout;
 import com.uae.tra_smart_services.customviews.LoaderView;
-import com.uae.tra_smart_services.fragment.base.BaseFragment;
 import com.uae.tra_smart_services.fragment.InfoHubAnnouncementsFragment.BooleanHolder;
+import com.uae.tra_smart_services.fragment.base.BaseFragment;
 import com.uae.tra_smart_services.global.C;
 import com.uae.tra_smart_services.global.QueryAdapter;
-import com.uae.tra_smart_services.global.Service;
 import com.uae.tra_smart_services.interfaces.Loader;
-import com.uae.tra_smart_services.interfaces.LoaderMarker;
 import com.uae.tra_smart_services.interfaces.OnInfoHubItemClickListener;
 import com.uae.tra_smart_services.interfaces.OperationStateManager;
 import com.uae.tra_smart_services.rest.model.response.GetAnnouncementsResponseModel;
@@ -44,10 +37,9 @@ import com.uae.tra_smart_services.rest.robo_requests.GetTransactionsRequest;
 import com.uae.tra_smart_services.util.EndlessScrollListener;
 import com.uae.tra_smart_services.util.EndlessScrollListener.OnLoadMoreListener;
 
-import java.util.Arrays;
 import java.util.Locale;
 
-import retrofit.client.Response;
+import hugo.weaving.DebugLog;
 
 /**
  * Created by ak-buffalo on 19.08.15.
@@ -76,6 +68,7 @@ public final class InfoHubFragment extends BaseFragment
     private TransactionsResponseListener mTransactionsListener;
     private AnnouncementsResponseListener mAnnouncementsResponseListener;
     private EndlessScrollListener mEndlessScrollListener;
+    private OnTransactionPressedListener mItemPressedListener;
     private boolean mIsTransactionsInLoading;
     private BooleanHolder mIsAnnouncementsInLoading = new BooleanHolder();
     private HexagonSwipeRefreshLayout mHexagonSwipeRefreshLayout;
@@ -165,17 +158,11 @@ public final class InfoHubFragment extends BaseFragment
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
     }
-    private OnTransactionPressedListener mItemPressedListener;
-    @Override
-    public void onAttach(Activity _activity) {
-        mItemPressedListener = (OnTransactionPressedListener) _activity;
-        super.onAttach(_activity);
-    }
 
     @Override
-    public void onResume() {
-        startFirstLoad();
-        super.onResume();
+    public void onAttach(Activity _activity) {
+        super.onAttach(_activity);
+        mItemPressedListener = (OnTransactionPressedListener) _activity;
     }
 
     @Override
@@ -236,19 +223,10 @@ public final class InfoHubFragment extends BaseFragment
     }
 
     @Override
-    public void onClick(View _view) {
-        switch (_view.getId()) {
-            case R.id.tvSeeMorebAnn_FIH:
-                    getFragmentManager()
-                            .beginTransaction()
-                            .addToBackStack(null)
-                            .replace(R.id.flContainer_AH, InfoHubAnnouncementsFragment.newInstance())
-                            .commit();
-                break;
-            case R.id.tvNoTransactions_FIH:
-                    onRefresh(mSearchPhrase);
-                break;
-        }
+    @DebugLog
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        startFirstLoad();
     }
 
     private void startFirstLoad() {
@@ -283,6 +261,22 @@ public final class InfoHubFragment extends BaseFragment
         MenuItemCompat.setOnActionExpandListener(searchItem, this);
         svSearchTransaction = (SearchView) MenuItemCompat.getActionView(searchItem);
         svSearchTransaction.setOnQueryTextListener(this);
+    }
+
+    @Override
+    public void onClick(View _view) {
+        switch (_view.getId()) {
+            case R.id.tvSeeMorebAnn_FIH:
+                getFragmentManager()
+                        .beginTransaction()
+                        .addToBackStack(null)
+                        .replace(R.id.flContainer_AH, InfoHubAnnouncementsFragment.newInstance())
+                        .commit();
+                break;
+            case R.id.tvNoTransactions_FIH:
+                onRefresh(mSearchPhrase);
+                break;
+        }
     }
 
     @Override
@@ -340,18 +334,20 @@ public final class InfoHubFragment extends BaseFragment
         @Override
         public final void onRequestSuccess(GetTransactionResponseModel.List result) {
             mIsTransactionsInLoading = false;
-            if (isAdded() && result != null) {
-                mIsAllTransactionDownloaded = result.isEmpty();
-                if (mIsAllTransactionDownloaded) {
-                    handleNoResult();
+            if (isAdded()) {
+                if (result != null) {
+                    mIsAllTransactionDownloaded = result.isEmpty();
+                    if (mIsAllTransactionDownloaded) {
+                        handleNoResult();
+                    } else {
+                        mTransactionsOperationStateManager.showData();
+                        mTransactionsListAdapter.addAll(result);
+                    }
                 } else {
-                    mTransactionsOperationStateManager.showData();
-                    mTransactionsListAdapter.addAll(result);
+                    mTransactionPageNum--;
                 }
-            } else {
-                mTransactionPageNum--;
+                mTransactionsOperationStateManager.endLoading();
             }
-            mTransactionsOperationStateManager.endLoading();
         }
 
         private void handleNoResult() {
