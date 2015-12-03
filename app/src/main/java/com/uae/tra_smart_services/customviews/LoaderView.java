@@ -273,8 +273,10 @@ public class LoaderView extends View implements Animator.AnimatorListener {
     public void stopProcessing(){
         setAlpha(0);
         mAnimationState = State.INITIALL;
-        animatorStart.cancel();
-        animatorEnd.cancel();
+        if(isInitLoading){
+            animatorStart.cancel();
+            animatorEnd.cancel();
+        }
     }
 
     public void startFilling(final State _currentState){
