@@ -1,5 +1,7 @@
 package com.uae.tra_smart_services.rest.request_listeners;
 
+import android.os.Parcelable;
+
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
 import com.uae.tra_smart_services.adapter.AnnouncementsAdapter;
@@ -19,12 +21,12 @@ public final class AnnouncementsResponseListener implements RequestListener<GetA
     private OperationStateManager mOperationStateManager;
     private AnnouncementsAdapter mAnnouncementsListAdapter;
     private InfoHubAnnouncementsFragment.BooleanHolder mIsAnnouncementsInLoading;
-    ArrayList<GetAnnouncementsResponseModel.Announcement> mModel;
+    ArrayList<Parcelable> mModel;
     private boolean mIsAllAnnouncementsDownloaded;
     private int mAnnouncementsPageNum;
 
     public AnnouncementsResponseListener(BaseFragment _fragment, OperationStateManager _manager,AnnouncementsAdapter _announcementsListAdapter,
-                            InfoHubAnnouncementsFragment.BooleanHolder _isAnnouncementsInLoading, boolean _isAllAnnouncementsDownloaded, int _announcementsPageNum, ArrayList<GetAnnouncementsResponseModel.Announcement> _model) {
+                            InfoHubAnnouncementsFragment.BooleanHolder _isAnnouncementsInLoading, boolean _isAllAnnouncementsDownloaded, int _announcementsPageNum, ArrayList<Parcelable> _model) {
         mFragment = _fragment;
         mOperationStateManager = _manager;
         mAnnouncementsListAdapter = _announcementsListAdapter;
@@ -41,7 +43,7 @@ public final class AnnouncementsResponseListener implements RequestListener<GetA
             if (mIsAllAnnouncementsDownloaded = result.announcements.isEmpty()) {
                 handleNoResult();
             } else {
-                if(mModel == null) mModel = (ArrayList<GetAnnouncementsResponseModel.Announcement>) result.announcements;
+                mModel.addAll(result.announcements);
                 mOperationStateManager.showData();
                 mAnnouncementsListAdapter.addAll(result.announcements);
             }

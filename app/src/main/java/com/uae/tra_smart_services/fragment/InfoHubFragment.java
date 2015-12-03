@@ -3,6 +3,7 @@ package com.uae.tra_smart_services.fragment;
 import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.MenuItemCompat.OnActionExpandListener;
 import android.support.v7.widget.LinearLayoutManager;
@@ -78,8 +79,8 @@ public final class InfoHubFragment extends BaseFragment
     private int loadedCount = 0;
     private String mSearchPhrase = "";
 
-    private ArrayList<GetTransactionResponseModel> mTransactionsModel;
-    private ArrayList<GetAnnouncementsResponseModel.Announcement> mAnnouncementsModel;
+    private ArrayList<Parcelable> mTransactionsModel = new ArrayList<>();
+    private ArrayList<Parcelable> mAnnouncementsModel = new ArrayList<>();
 
     public static InfoHubFragment newInstance() {
         return new InfoHubFragment();
@@ -327,14 +328,14 @@ public final class InfoHubFragment extends BaseFragment
     public void onActivityCreated(final Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         if (savedInstanceState != null) {
-            mTransactionsModel = savedInstanceState.getParcelableArrayList(KEY_TRANSACTIONS_MODEL);
-            mAnnouncementsModel = savedInstanceState.getParcelableArrayList(KEY_ANNOUNCEMENTS_MODEL);
+            mTransactionsModel.addAll(savedInstanceState.getParcelableArrayList(KEY_TRANSACTIONS_MODEL));
+            mAnnouncementsModel.addAll(savedInstanceState.getParcelableArrayList(KEY_ANNOUNCEMENTS_MODEL));
         }
-        if((mTransactionsModel == null || mTransactionsModel.size() == 0) && (mAnnouncementsModel == null || mAnnouncementsModel.size() == 0)){
+        if(mTransactionsModel.size() == 0 && mAnnouncementsModel.size() == 0){
             startFirstLoad();
-        } else if (mTransactionsModel == null || mTransactionsModel.size() == 0) {
+        } else if (mTransactionsModel.size() == 0) {
             loadTransactionPage(mTransactionPageNum = 1);
-        } else if (mAnnouncementsModel == null || mAnnouncementsModel.size() == 0){
+        } else if (mAnnouncementsModel.size() == 0){
             loadAnnouncementsPage(1);
         }
     }
@@ -357,7 +358,7 @@ public final class InfoHubFragment extends BaseFragment
             mIsTransactionsInLoading = false;
             if (isAdded()) {
                 if (result != null) {
-                    if(mTransactionsModel == null) mTransactionsModel = result;
+                    mTransactionsModel.addAll(result);
                     mIsAllTransactionDownloaded = result.isEmpty();
                     if (mIsAllTransactionDownloaded) {
                         handleNoResult();
