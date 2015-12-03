@@ -39,6 +39,7 @@ import com.uae.tra_smart_services.util.EndlessScrollListener;
 import com.uae.tra_smart_services.util.EndlessScrollListener.OnLoadMoreListener;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Locale;
 
 /**
@@ -79,8 +80,8 @@ public final class InfoHubFragment extends BaseFragment
     private int loadedCount = 0;
     private String mSearchPhrase = "";
 
-    private ArrayList<Parcelable> mTransactionsModel = new ArrayList<>();
-    private ArrayList<Parcelable> mAnnouncementsModel = new ArrayList<>();
+    private ArrayList<GetTransactionResponseModel> mTransactionsModel = new ArrayList<>();
+    private ArrayList<GetAnnouncementsResponseModel.Announcement> mAnnouncementsModel = new ArrayList<>();
 
     public static InfoHubFragment newInstance() {
         return new InfoHubFragment();
@@ -213,6 +214,7 @@ public final class InfoHubFragment extends BaseFragment
         mEndlessScrollListener = new EndlessScrollListener(mTransactionsLayoutManager, this);
         mTransactionsList.addOnScrollListener(mEndlessScrollListener);
         tvNoTransactions.setOnClickListener(this);
+        tvNoAnnouncements.setOnClickListener(this);
         mHexagonSwipeRefreshLayout.registerListener(this);
         tvSeeMoreAnnouncements.setOnClickListener(this);
         mAnnouncementsListAdapter.setOnItemClickListener(new OnInfoHubItemClickListener<GetAnnouncementsResponseModel.Announcement>() {
@@ -274,7 +276,14 @@ public final class InfoHubFragment extends BaseFragment
                         .commit();
                 break;
             case R.id.tvNoTransactions_FIH:
-                onRefresh(mSearchPhrase);
+                if (mTransactionsListAdapter.isIsInSearchMode() && !mSearchPhrase.isEmpty()) {
+                    onRefresh(mSearchPhrase);
+                } else {
+                    loadTransactionPage(mTransactionPageNum = 1);
+                }
+                break;
+            case R.id.tvNoAnnouncements_FIH:
+                loadAnnouncementsPage(1);
                 break;
         }
     }
@@ -332,15 +341,25 @@ public final class InfoHubFragment extends BaseFragment
     public void onActivityCreated(final Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         if (savedInstanceState != null) {
-            mTransactionsModel.addAll(savedInstanceState.getParcelableArrayList(KEY_TRANSACTIONS_MODEL));
-            mAnnouncementsModel.addAll(savedInstanceState.getParcelableArrayList(KEY_ANNOUNCEMENTS_MODEL));
+            mTransactionsModel = savedInstanceState.getParcelableArrayList(KEY_TRANSACTIONS_MODEL);
+            mAnnouncementsModel = savedInstanceState.getParcelableArrayList(KEY_ANNOUNCEMENTS_MODEL);
         }
         if(mTransactionsModel.size() == 0 && mAnnouncementsModel.size() == 0){
             startFirstLoad();
+            return;
         } else if (mTransactionsModel.size() == 0) {
             loadTransactionPage(mTransactionPageNum = 1);
+            mAnnouncementsListAdapter.addAll(mAnnouncementsModel);
+            mAnnouncementsOperationStateManager.showData();
         } else if (mAnnouncementsModel.size() == 0){
             loadAnnouncementsPage(1);
+            mTransactionsListAdapter.addAll(mTransactionsModel);
+            mTransactionsOperationStateManager.showData();
+        } else {
+            mAnnouncementsListAdapter.addAll(mAnnouncementsModel);
+            mAnnouncementsOperationStateManager.showData();
+            mTransactionsListAdapter.addAll(mTransactionsModel);
+            mTransactionsOperationStateManager.showData();
         }
     }
 
@@ -362,7 +381,7 @@ public final class InfoHubFragment extends BaseFragment
             mIsTransactionsInLoading = false;
             if (isAdded()) {
                 if (result != null) {
-                    mTransactionsModel.addAll(result);
+                    if(mTransactionsModel != null) mTransactionsModel.addAll(result);
                     mIsAllTransactionDownloaded = result.isEmpty();
                     if (mIsAllTransactionDownloaded) {
                         handleNoResult();
