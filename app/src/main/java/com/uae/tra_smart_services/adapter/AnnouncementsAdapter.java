@@ -60,7 +60,6 @@ public class AnnouncementsAdapter extends Adapter<ViewHolder> implements Filtera
     private boolean mIsShowingLoaderForData;
     private boolean mIsInSearchMode;
     private boolean mIsAllSearchResultDownloaded;
-    private boolean mIsPreview;
     private CharSequence mConstraint = "";
 
     private OnInfoHubItemClickListener onItemClickListener;
