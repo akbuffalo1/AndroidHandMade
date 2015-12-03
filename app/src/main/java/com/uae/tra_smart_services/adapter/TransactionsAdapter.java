@@ -140,6 +140,10 @@ public class TransactionsAdapter extends Adapter<ViewHolder> implements Filterab
         }
     }
 
+    public boolean isIsInSearchMode(){
+        return mIsInSearchMode;
+    }
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         switch (viewType) {

@@ -21,12 +21,12 @@ public final class AnnouncementsResponseListener implements RequestListener<GetA
     private OperationStateManager mOperationStateManager;
     private AnnouncementsAdapter mAnnouncementsListAdapter;
     private InfoHubAnnouncementsFragment.BooleanHolder mIsAnnouncementsInLoading;
-    ArrayList<Parcelable> mModel;
+    ArrayList<GetAnnouncementsResponseModel.Announcement> mModel;
     private boolean mIsAllAnnouncementsDownloaded;
     private int mAnnouncementsPageNum;
 
     public AnnouncementsResponseListener(BaseFragment _fragment, OperationStateManager _manager,AnnouncementsAdapter _announcementsListAdapter,
-                            InfoHubAnnouncementsFragment.BooleanHolder _isAnnouncementsInLoading, boolean _isAllAnnouncementsDownloaded, int _announcementsPageNum, ArrayList<Parcelable> _model) {
+                            InfoHubAnnouncementsFragment.BooleanHolder _isAnnouncementsInLoading, boolean _isAllAnnouncementsDownloaded, int _announcementsPageNum, ArrayList<GetAnnouncementsResponseModel.Announcement> _model) {
         mFragment = _fragment;
         mOperationStateManager = _manager;
         mAnnouncementsListAdapter = _announcementsListAdapter;
