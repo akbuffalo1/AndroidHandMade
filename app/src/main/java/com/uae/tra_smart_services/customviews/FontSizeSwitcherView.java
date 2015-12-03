@@ -15,11 +15,14 @@ import com.uae.tra_smart_services.baseentities.BaseCustomSwitcher;
 
 import java.util.Map;
 
+import static com.uae.tra_smart_services.global.C.LARGE_FONT_SCALE;
+import static com.uae.tra_smart_services.global.C.MEDIUM_FONT_SCALE;
+import static com.uae.tra_smart_services.global.C.SMALL_FONT_SCALE;
+
 /**
  * Created by ak-buffalo on 23.07.15.
  */
 public class FontSizeSwitcherView extends BaseCustomSwitcher implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
-
 
     protected float mScaleMin, mScaleMax, mFontScale, mFontScaleNew;
 
@@ -49,8 +52,8 @@ public class FontSizeSwitcherView extends BaseCustomSwitcher implements View.OnC
                 context.getTheme().obtainStyledAttributes(attrs, R.styleable.FontSizeSwitcherView, 0, 0);
         mFontScale = getResources().getConfiguration().fontScale;
         try {
-            mScaleMin = typedArrayData.getFloat(R.styleable.FontSizeSwitcherView_scaleMin, 0.5f);
-            mScaleMax = typedArrayData.getFloat(R.styleable.FontSizeSwitcherView_scaleMax, 1.5f);
+            mScaleMin = typedArrayData.getFloat(R.styleable.FontSizeSwitcherView_scaleMin, SMALL_FONT_SCALE);
+            mScaleMax = typedArrayData.getFloat(R.styleable.FontSizeSwitcherView_scaleMax, LARGE_FONT_SCALE);
         } finally {
             typedArrayData.recycle();
         }
@@ -70,7 +73,7 @@ public class FontSizeSwitcherView extends BaseCustomSwitcher implements View.OnC
         scaleSeekbarMap.put(mScaleMin, makeSmaller);
 
         makeMedium = findView(R.id.tvMakeMedium_SA);
-        scaleSeekbarMap.put(1f, makeMedium);
+        scaleSeekbarMap.put(MEDIUM_FONT_SCALE, makeMedium);
 
         makeBigger = findView(R.id.tvMakeBigger_SA);
         scaleSeekbarMap.put(mScaleMax, makeBigger);

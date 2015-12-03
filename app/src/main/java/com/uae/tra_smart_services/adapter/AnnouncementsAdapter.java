@@ -29,12 +29,19 @@ import com.uae.tra_smart_services.interfaces.OperationStateManager;
 import com.uae.tra_smart_services.rest.RestClient;
 import com.uae.tra_smart_services.rest.TRAServicesAPI;
 import com.uae.tra_smart_services.rest.model.response.GetAnnouncementsResponseModel;
+import com.uae.tra_smart_services.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
 import retrofit.RetrofitError;
+
+import static com.uae.tra_smart_services.global.C.ARABIC;
+import static com.uae.tra_smart_services.global.C.AR_SCALE_COEFFICIENT;
+import static com.uae.tra_smart_services.global.C.LARGE_FONT_SCALE;
+import static com.uae.tra_smart_services.global.C.MEDIUM_FONT_SCALE;
+
 /**
  * Created by ak-buffalo on 23.10.15.
  */
@@ -46,12 +53,13 @@ public class AnnouncementsAdapter extends Adapter<ViewHolder> implements Filtera
     private final Activity mActivity;
     private final OperationStateManager mOperationStateManager;
     private final List<GetAnnouncementsResponseModel.Announcement> mDataSet, mShowingData;
+    private final boolean mIsPreview;
+    private final int mLinesCount;
 
     private AnnouncementsFilter mFilter;
     private boolean mIsShowingLoaderForData;
     private boolean mIsInSearchMode;
     private boolean mIsAllSearchResultDownloaded;
-    private boolean mIsPreview;
     private CharSequence mConstraint = "";
 
     private OnInfoHubItemClickListener onItemClickListener;
@@ -63,6 +71,17 @@ public class AnnouncementsAdapter extends Adapter<ViewHolder> implements Filtera
         mDataSet = new ArrayList<>();
         mShowingData = new ArrayList<>();
         mIsPreview = isPreview;
+        mLinesCount = isLargeText() ? 2 : 3;
+    }
+
+    private boolean isLargeText() {
+        final String language = Locale.getDefault().getLanguage();
+        final float fontScale = mActivity.getResources().getConfiguration().fontScale;
+        if (language.equals(ARABIC)) {
+            return fontScale >= MEDIUM_FONT_SCALE * AR_SCALE_COEFFICIENT;
+        } else {
+            return fontScale == LARGE_FONT_SCALE;
+        }
     }
 
     public void startLoading() {
@@ -89,12 +108,18 @@ public class AnnouncementsAdapter extends Adapter<ViewHolder> implements Filtera
         return mDataSet.isEmpty();
     }
 
-    public void addAll(final List<GetAnnouncementsResponseModel.Announcement> _announcementsResponses) {
+    public void clearData(){
         mDataSet.clear();
+        mShowingData.clear();
+        notifyDataSetChanged();
+    }
+
+    public void addAll(final List<GetAnnouncementsResponseModel.Announcement> _announcementsResponses) {
+//        mDataSet.clear();
         mDataSet.addAll(_announcementsResponses);
         if (!mIsInSearchMode) {
             int oldSize = mShowingData.size();
-            mShowingData.clear();
+//            mShowingData.clear();
             mShowingData.addAll(_announcementsResponses);
             notifyItemRangeInserted(oldSize, _announcementsResponses.size());
         }
@@ -118,7 +143,7 @@ public class AnnouncementsAdapter extends Adapter<ViewHolder> implements Filtera
     }
 
     public final void loadMoreSearchResults() {
-        if(mFilter == null){
+        if (mFilter == null) {
             mFilter = new AnnouncementsFilter();
         }
         mFilter.loadMoreSearchResults();
@@ -149,12 +174,12 @@ public class AnnouncementsAdapter extends Adapter<ViewHolder> implements Filtera
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        if(viewType == VIEW_TYPE_LOADER){
+        if (viewType == VIEW_TYPE_LOADER) {
             LoaderView loaderView = (LoaderView) LayoutInflater.from(parent.getContext()).inflate(R.layout.loader_view, null, true);
             return new ViewHolder(loaderView, true);
         } else {
             final View view;
-            if (mIsPreview){
+            if (mIsPreview) {
                 view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_info_hub_second, parent, false);
             } else {
                 view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_info_hub, parent, false);
@@ -195,7 +220,7 @@ public class AnnouncementsAdapter extends Adapter<ViewHolder> implements Filtera
             mSearchResultPageNum = 1;
         }
 
-        public void reset(){
+        public void reset() {
             mSearchResultPageNum = 1;
         }
 
@@ -284,11 +309,12 @@ public class AnnouncementsAdapter extends Adapter<ViewHolder> implements Filtera
         public ViewHolder(View itemView) {
             super(itemView);
             container = itemView;
-            if(mIsPreview){
+            if (mIsPreview) {
                 sStartOffset = (Space) itemView.findViewById(R.id.sStartOffset_LIIHS);
                 hexagonView = (HexagonView) itemView.findViewById(R.id.hvIcon_LIIHS);
                 title = (TextView) itemView.findViewById(R.id.hvTitle_LIIHS);
                 description = (TextView) itemView.findViewById(R.id.hvDescr_LIIHS);
+                description.setMaxLines(mLinesCount);
                 date = (TextView) itemView.findViewById(R.id.hvDate_LIIHS);
             } else {
                 sStartOffset = (Space) itemView.findViewById(R.id.sStartOffset_LIIH);
@@ -304,8 +330,8 @@ public class AnnouncementsAdapter extends Adapter<ViewHolder> implements Filtera
             isProgress = _isProgress;
             progressBar = (LoaderView) view;
             progressBar.setLayoutParams(new ViewGroup.LayoutParams(
-                    ViewGroup.LayoutParams.MATCH_PARENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT)
+                            ViewGroup.LayoutParams.MATCH_PARENT,
+                            ViewGroup.LayoutParams.WRAP_CONTENT)
             );
         }
 
@@ -315,13 +341,13 @@ public class AnnouncementsAdapter extends Adapter<ViewHolder> implements Filtera
                 hexagonView.postScaleType(HexagonView.ScaleType.INSIDE_CROP);
                 hexagonView.setHexagonSrcDrawable(R.drawable.ic_form);
                 Picasso.with(mActivity).load(_model.image).into(new HexagonViewTarget(hexagonView));
-                if(mConstraint.length() != 0){
-                    title.setText(SpannableWrapper.makeSelectedTextBold(mConstraint, Html.fromHtml(_model.title).toString()));
-                    description.setText(SpannableWrapper.makeSelectedTextBold(mConstraint, _model.description));
+                if (mConstraint.length() != 0) {
+                    title.setText(SpannableWrapper.makeSelectedTextBold(mConstraint, Html.fromHtml(StringUtils.trim(_model.title)).toString()));
+                    description.setText(SpannableWrapper.makeSelectedTextBold(mConstraint, StringUtils.trim(_model.description)));
                     date.setText(SpannableWrapper.makeSelectedTextBold(mConstraint, _model.createdAt));
                 } else {
-                    title.setText(Html.fromHtml(_model.title).toString());
-                    description.setText(_model.description);
+                    title.setText(Html.fromHtml(StringUtils.trim(_model.title)).toString());
+                    description.setText(StringUtils.trim(_model.description));
                     date.setText(_model.createdAt);
                 }
                 container.setOnClickListener(new View.OnClickListener() {

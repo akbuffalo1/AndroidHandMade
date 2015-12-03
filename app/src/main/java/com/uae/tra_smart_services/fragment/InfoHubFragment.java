@@ -109,7 +109,7 @@ public final class InfoHubFragment extends BaseFragment
         @Override
         public void endLoading() {
             loadedCount++;
-            if(loadedCount >= 2){
+            if (loadedCount >= 2) {
                 loadedCount = 0;
                 loaderOverlayDismissWithAction(new Loader.Dismiss() {
                     @Override
@@ -141,7 +141,7 @@ public final class InfoHubFragment extends BaseFragment
         @Override
         public void endLoading() {
             loadedCount++;
-            if(loadedCount >= 2){
+            if (loadedCount >= 2) {
                 loadedCount = 0;
                 loaderOverlayDismissWithAction(new Loader.Dismiss() {
                     @Override
@@ -181,7 +181,7 @@ public final class InfoHubFragment extends BaseFragment
     }
 
     private void initAnnouncementsListPreview() {
-        mAnnouncementsListPreview.setHasFixedSize(true);
+//        mAnnouncementsListPreview.setHasFixedSize(true);
         mAnnouncementsLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         mAnnouncementsListPreview.setLayoutManager(mAnnouncementsLayoutManager);
         mAnnouncementsListAdapter = new AnnouncementsAdapter(getActivity(), mAnnouncementsOperationStateManager, true);
@@ -230,7 +230,7 @@ public final class InfoHubFragment extends BaseFragment
     }
 
     private void startFirstLoad() {
-        if(isAdded()){
+        if (isAdded()) {
             loaderOverlayCustomShow(getString(R.string.str_loading), null, false);
             loadTransactionPage(mTransactionPageNum = 1);
             loadAnnouncementsPage(1);
@@ -280,7 +280,9 @@ public final class InfoHubFragment extends BaseFragment
     }
 
     @Override
-    public boolean onQueryTextChange(String newText) { return true; }
+    public boolean onQueryTextChange(String newText) {
+        return true;
+    }
 
     @Override
     public boolean onQueryTextSubmit(String query) {
@@ -294,7 +296,9 @@ public final class InfoHubFragment extends BaseFragment
     }
 
     @Override
-    public boolean onMenuItemActionExpand(MenuItem item) { return true; }
+    public boolean onMenuItemActionExpand(MenuItem item) {
+        return true;
+    }
 
     @Override
     public boolean onMenuItemActionCollapse(MenuItem item) {
@@ -341,6 +345,9 @@ public final class InfoHubFragment extends BaseFragment
                         handleNoResult();
                     } else {
                         mTransactionsOperationStateManager.showData();
+                        if (mTransactionPageNum == 1) {
+                            mTransactionsListAdapter.clearData();
+                        }
                         mTransactionsListAdapter.addAll(result);
                     }
                 } else {

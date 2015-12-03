@@ -107,6 +107,12 @@ public final class C {
     public static final String ARABIC = "ar";
     //endregion
 
+    public static final float AR_SCALE_COEFFICIENT = 0.85f;
+    public static final float SMALL_FONT_SCALE = 0.5f;
+    public static final float MEDIUM_FONT_SCALE = 1f;
+    public static final float LARGE_FONT_SCALE = 1.5f;
+
+
     //region Http method const
     @StringDef({HttpMethod.GET, HttpMethod.POST})
     @Retention(RetentionPolicy.SOURCE)

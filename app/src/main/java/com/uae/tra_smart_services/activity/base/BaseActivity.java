@@ -22,7 +22,9 @@ import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 import static com.uae.tra_smart_services.global.C.ARABIC;
+import static com.uae.tra_smart_services.global.C.AR_SCALE_COEFFICIENT;
 import static com.uae.tra_smart_services.global.C.ENGLISH;
+import static com.uae.tra_smart_services.global.C.MEDIUM_FONT_SCALE;
 
 /**
  * Created by Mikazme on 22/07/2015.
@@ -73,16 +75,16 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseFrag
     public void setApplicationFontSize() {
         mFontSize = PreferenceManager
                 .getDefaultSharedPreferences(this)
-                .getFloat(BaseCustomSwitcher.Type.FONT.toString(), 1f);
+                .getFloat(BaseCustomSwitcher.Type.FONT.toString(), MEDIUM_FONT_SCALE);
         Configuration config = getResources().getConfiguration();
-        config.fontScale = (!mLanguage.equals(ARABIC)) ? mFontSize : (float) (mFontSize * 0.85);
+        config.fontScale = (mLanguage.equals(ARABIC)) ? (mFontSize * AR_SCALE_COEFFICIENT) : mFontSize;
         getResources().updateConfiguration(config, null);
     }
 
     public final void setApplicationLanguage() {
         mLanguage = PreferenceManager
                 .getDefaultSharedPreferences(this)
-                .getString(BaseCustomSwitcher.Type.LANGUAGE.toString(), (Locale.getDefault().getLanguage().equals(ARABIC)) ? ARABIC : ENGLISH );
+                .getString(BaseCustomSwitcher.Type.LANGUAGE.toString(), (Locale.getDefault().getLanguage().equals(ARABIC)) ? ARABIC : ENGLISH);
 
         if (mLanguage.equals(ENGLISH)) {
             initDefaultFont("fonts/Lato-Regular.ttf");

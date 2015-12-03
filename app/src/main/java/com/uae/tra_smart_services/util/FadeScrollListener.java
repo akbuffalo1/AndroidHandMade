@@ -59,7 +59,7 @@ public class FadeScrollListener extends OnScrollListener implements SaveStateObj
             }
 
             final int start = getFirstCompletelyVisibleItemPosition();
-            final int end = getLastVisibleItemPosition();
+            final int end = mLayoutManager.getItemCount() - 1;//getLastVisibleItemPosition();
             for (int i = start; i <= end; i++) {
                 View view = mLayoutManager.findViewByPosition(i);
                 if (view != null) {

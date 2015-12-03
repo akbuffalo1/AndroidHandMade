@@ -1,5 +1,7 @@
 package com.uae.tra_smart_services.util;
 
+import android.support.annotation.Nullable;
+
 /**
  * Created by Vitaliy on 08/10/2015.
  */
@@ -18,5 +20,10 @@ public final class StringUtils {
         }
 
         return true;
+    }
+
+    @Nullable
+    public static String trim(@Nullable final String string){
+        return string == null ? null : string.trim();
     }
 }

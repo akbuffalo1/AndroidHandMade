@@ -1,8 +1,6 @@
 package com.uae.tra_smart_services.adapter;
 
 import android.app.Activity;
-import android.content.Context;
-import android.graphics.Color;
 import android.support.annotation.UiThread;
 import android.support.annotation.WorkerThread;
 import android.support.v7.widget.RecyclerView;
@@ -16,16 +14,13 @@ import android.widget.Space;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.squareup.picasso.Picasso;
 import com.uae.tra_smart_services.R;
 import com.uae.tra_smart_services.adapter.TransactionsAdapter.ViewHolder;
 import com.uae.tra_smart_services.customviews.HexagonView;
 import com.uae.tra_smart_services.customviews.LoaderView;
-import com.uae.tra_smart_services.entities.HexagonViewTarget;
 import com.uae.tra_smart_services.entities.NetworkErrorHandler;
 import com.uae.tra_smart_services.fragment.InfoHubFragment;
 import com.uae.tra_smart_services.global.C;
-import com.uae.tra_smart_services.global.Service;
 import com.uae.tra_smart_services.global.SpannableWrapper;
 import com.uae.tra_smart_services.interfaces.OperationStateManager;
 import com.uae.tra_smart_services.rest.RestClient;
@@ -85,12 +80,18 @@ public class TransactionsAdapter extends Adapter<ViewHolder> implements Filterab
         return mDataSet.isEmpty();
     }
 
-    public void addAll(final List<GetTransactionResponseModel> _transactionResponses) {
+    public void clearData(){
         mDataSet.clear();
+        mShowingData.clear();
+        notifyDataSetChanged();
+    }
+
+    public void addAll(final List<GetTransactionResponseModel> _transactionResponses) {
+//        mDataSet.clear();
         mDataSet.addAll(_transactionResponses);
         if (!mIsInSearchMode) {
             int oldSize = mShowingData.size();
-            mShowingData.clear();
+//            mShowingData.clear();
             mShowingData.addAll(_transactionResponses);
             notifyItemRangeInserted(oldSize, _transactionResponses.size());
         }
