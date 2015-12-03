@@ -37,9 +37,8 @@ import com.uae.tra_smart_services.rest.robo_requests.GetTransactionsRequest;
 import com.uae.tra_smart_services.util.EndlessScrollListener;
 import com.uae.tra_smart_services.util.EndlessScrollListener.OnLoadMoreListener;
 
+import java.util.ArrayList;
 import java.util.Locale;
-
-import hugo.weaving.DebugLog;
 
 /**
  * Created by ak-buffalo on 19.08.15.
@@ -49,6 +48,9 @@ public final class InfoHubFragment extends BaseFragment
 
     private static final String KEY_TRANSACTIONS_REQUEST = "TRANSACTIONS_REQUEST";
     private static final int DEFAULT_PAGE_SIZE_TRANSACTIONS = 10;
+
+    private static final String KEY_TRANSACTIONS_MODEL = "TRANSACTIONS_MODEL";
+    private static final String KEY_ANNOUNCEMENTS_MODEL = "ANNOUNCEMENTS_MODEL";
 
     private int mTransactionPageNum;
     private boolean mIsSearching;
@@ -75,6 +77,9 @@ public final class InfoHubFragment extends BaseFragment
     private GetTransactionsRequest transactionsRequest;
     private int loadedCount = 0;
     private String mSearchPhrase = "";
+
+    private ArrayList<GetTransactionResponseModel> mTransactionsModel;
+    private ArrayList<GetAnnouncementsResponseModel.Announcement> mAnnouncementsModel;
 
     public static InfoHubFragment newInstance() {
         return new InfoHubFragment();
@@ -136,6 +141,7 @@ public final class InfoHubFragment extends BaseFragment
         @Override
         public final void showEmptyView() {
             mHexagonSwipeRefreshLayout.onLoadingFinished(false);
+            tvSeeMoreAnnouncements.setVisibility(View.GONE);
         }
 
         @Override
@@ -220,18 +226,6 @@ public final class InfoHubFragment extends BaseFragment
                         .commit();
             }
         });
-    }
-
-    @Override
-    @DebugLog
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        startFirstLoad();
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
     }
 
     private void startFirstLoad() {
@@ -330,17 +324,40 @@ public final class InfoHubFragment extends BaseFragment
     }
 
     @Override
+    public void onActivityCreated(final Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        if (savedInstanceState != null) {
+            mTransactionsModel = savedInstanceState.getParcelableArrayList(KEY_TRANSACTIONS_MODEL);
+            mAnnouncementsModel = savedInstanceState.getParcelableArrayList(KEY_ANNOUNCEMENTS_MODEL);
+        }
+        if((mTransactionsModel == null || mTransactionsModel.size() == 0) && (mAnnouncementsModel == null || mAnnouncementsModel.size() == 0)){
+            startFirstLoad();
+        } else if (mTransactionsModel == null || mTransactionsModel.size() == 0) {
+            loadTransactionPage(mTransactionPageNum = 1);
+        } else if (mAnnouncementsModel == null || mAnnouncementsModel.size() == 0){
+            loadAnnouncementsPage(1);
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putParcelableArrayList(KEY_TRANSACTIONS_MODEL, mTransactionsModel);
+        outState.putParcelableArrayList(KEY_ANNOUNCEMENTS_MODEL, mAnnouncementsModel);
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
     public void onRefresh(String _contrains) {
         onQueryTextSubmit(_contrains);
     }
 
     private final class TransactionsResponseListener implements RequestListener<GetTransactionResponseModel.List> {
-
         @Override
         public final void onRequestSuccess(GetTransactionResponseModel.List result) {
             mIsTransactionsInLoading = false;
             if (isAdded()) {
                 if (result != null) {
+                    mTransactionsModel = result;
                     mIsAllTransactionDownloaded = result.isEmpty();
                     if (mIsAllTransactionDownloaded) {
                         handleNoResult();
