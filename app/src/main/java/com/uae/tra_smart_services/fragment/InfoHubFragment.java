@@ -357,7 +357,7 @@ public final class InfoHubFragment extends BaseFragment
             mIsTransactionsInLoading = false;
             if (isAdded()) {
                 if (result != null) {
-                    mTransactionsModel = result;
+                    if(mTransactionsModel == null) mTransactionsModel = result;
                     mIsAllTransactionDownloaded = result.isEmpty();
                     if (mIsAllTransactionDownloaded) {
                         handleNoResult();

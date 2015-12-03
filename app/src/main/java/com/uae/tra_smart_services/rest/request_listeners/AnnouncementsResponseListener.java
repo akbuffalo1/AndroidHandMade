@@ -41,7 +41,7 @@ public final class AnnouncementsResponseListener implements RequestListener<GetA
             if (mIsAllAnnouncementsDownloaded = result.announcements.isEmpty()) {
                 handleNoResult();
             } else {
-                mModel = (ArrayList<GetAnnouncementsResponseModel.Announcement>) result.announcements;
+                if(mModel == null) mModel = (ArrayList<GetAnnouncementsResponseModel.Announcement>) result.announcements;
                 mOperationStateManager.showData();
                 mAnnouncementsListAdapter.addAll(result.announcements);
             }
