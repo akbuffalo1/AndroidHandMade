@@ -13,8 +13,6 @@ import android.view.ViewTreeObserver;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.octo.android.robospice.persistence.exception.SpiceException;
-import com.octo.android.robospice.request.listener.RequestListener;
 import com.uae.tra_smart_services.R;
 import com.uae.tra_smart_services.adapter.AnnouncementsAdapter;
 import com.uae.tra_smart_services.customviews.HexagonSwipeRefreshLayout;
@@ -24,6 +22,7 @@ import com.uae.tra_smart_services.global.QueryAdapter;
 import com.uae.tra_smart_services.interfaces.OnInfoHubItemClickListener;
 import com.uae.tra_smart_services.interfaces.OperationStateManager;
 import com.uae.tra_smart_services.rest.model.response.GetAnnouncementsResponseModel;
+import com.uae.tra_smart_services.rest.request_listeners.AnnouncementsResponseListener;
 import com.uae.tra_smart_services.rest.robo_requests.GetAnnouncementsRequest;
 import com.uae.tra_smart_services.util.EndlessScrollListener;
 
@@ -101,7 +100,7 @@ public class InfoHubAnnouncementsFragment extends BaseFragment
     @Override
     protected void initListeners() {
         super.initListeners();
-        mAnnouncementsResponseListener = new AnnouncementsResponseListener();//this, this, mListAdapter, mIsAnnouncementsInLoading, mIsAllAnnouncementsDownloaded, 1);
+        mAnnouncementsResponseListener = new AnnouncementsResponseListener(this, this, mListAdapter, mIsAnnouncementsInLoading, mIsAllAnnouncementsDownloaded, 1, null);
         mListAdapter.setOnItemClickListener(this);
         mList.addOnScrollListener(new EndlessScrollListener(mLayoutManager, this));
         tvNoResult.setOnClickListener(this);
@@ -224,48 +223,6 @@ public class InfoHubAnnouncementsFragment extends BaseFragment
     @Override
     public void onRefresh(String _contrains) {
         onQueryTextSubmit(_contrains);
-    }
-
-    private final class AnnouncementsResponseListener implements RequestListener<GetAnnouncementsResponseModel> {
-
-        @Override
-        public final void onRequestSuccess(GetAnnouncementsResponseModel result) {
-            mIsAnnouncementsInLoading.falseV();
-            if (isAdded()) {
-                if (result != null) {
-                    if (mIsAllAnnouncementsDownloaded = result.announcements.isEmpty()) {
-                        handleNoResult();
-                    } else {
-                        showData();
-                        if (mAnnouncementsPageNum == 1) {
-                            mListAdapter.clearData();
-                        }
-                        mListAdapter.addAll(result.announcements);
-                    }
-                } else {
-                    mAnnouncementsPageNum--;
-                }
-                endLoading();
-            }
-        }
-
-        @Override
-        public final void onRequestFailure(SpiceException spiceException) {
-            mIsAnnouncementsInLoading.falseV();
-            mAnnouncementsPageNum--;
-            handleNoResult();
-            processError(spiceException);
-            endLoading();
-        }
-
-        private void handleNoResult() {
-            if (mListAdapter.isEmpty()) {
-                showEmptyView();
-            } else {
-                mListAdapter.stopLoading();
-            }
-            endLoading();
-        }
     }
 
     public static class BooleanHolder {

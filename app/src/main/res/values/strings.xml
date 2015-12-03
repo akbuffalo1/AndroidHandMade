@@ -417,5 +417,6 @@
     <string name="activity_splash_loading">LOADING UPDATES…</string>
     <string name="edit">Edit</string>
     <string name="fragment_contact_us">Contact Us</string>
+    <string name="service">Service</string>
 
 </resources>

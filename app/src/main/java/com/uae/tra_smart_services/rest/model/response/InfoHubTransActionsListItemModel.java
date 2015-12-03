@@ -6,6 +6,7 @@ import android.os.Parcelable;
 /**
  * Created by ak-buffalo on 20.08.15.
  */
+@Deprecated
 public class InfoHubTransActionsListItemModel extends InfoHubListItemModel<InfoHubTransActionsListItemModel> implements Parcelable {
 
     public InfoHubTransActionsListItemModel() {

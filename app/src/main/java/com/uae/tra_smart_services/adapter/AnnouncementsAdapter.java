@@ -60,6 +60,7 @@ public class AnnouncementsAdapter extends Adapter<ViewHolder> implements Filtera
     private boolean mIsShowingLoaderForData;
     private boolean mIsInSearchMode;
     private boolean mIsAllSearchResultDownloaded;
+    private boolean mIsPreview;
     private CharSequence mConstraint = "";
 
     private OnInfoHubItemClickListener onItemClickListener;
@@ -299,7 +300,6 @@ public class AnnouncementsAdapter extends Adapter<ViewHolder> implements Filtera
     }
 
     protected class ViewHolder extends RecyclerView.ViewHolder {
-        private View container;
         private HexagonView hexagonView;
         private TextView title, description, date;
         private LoaderView progressBar;
@@ -308,8 +308,7 @@ public class AnnouncementsAdapter extends Adapter<ViewHolder> implements Filtera
 
         public ViewHolder(View itemView) {
             super(itemView);
-            container = itemView;
-            if (mIsPreview) {
+            if(mIsPreview){
                 sStartOffset = (Space) itemView.findViewById(R.id.sStartOffset_LIIHS);
                 hexagonView = (HexagonView) itemView.findViewById(R.id.hvIcon_LIIHS);
                 title = (TextView) itemView.findViewById(R.id.hvTitle_LIIHS);
@@ -350,7 +349,7 @@ public class AnnouncementsAdapter extends Adapter<ViewHolder> implements Filtera
                     description.setText(StringUtils.trim(_model.description));
                     date.setText(_model.createdAt);
                 }
-                container.setOnClickListener(new View.OnClickListener() {
+                itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View _view) {
                         onItemClickListener.onItemSelected(_model);

@@ -51,6 +51,10 @@ public enum Service {
         public String getServiceName() {
             return C.COMPLAIN_ABOUT_TRA;
         }
+
+        @Nullable
+        @Override
+        public String getTransactionName() { return "Complaint about TRA"; }
     },
     SUGGESTION {
         @Override
@@ -255,6 +259,16 @@ public enum Service {
         public String getServiceName() {
             return C.COVERAGE;
         }
+    },
+    SMS_SPAM {
+        @Override
+        protected boolean isStaticMainScreenService() {
+            return true;
+        }
+
+        @Nullable
+        @Override
+        public String getTransactionName() { return "SMS Spam"; }
     };
 
 //    , INTERNET_SPEEDTEST {
@@ -280,7 +294,9 @@ public enum Service {
     }
 
     @StringRes
-    public abstract int getTitleRes();
+    public int getTitleRes(){
+        return R.string.service_suggestion;
+    }
 
     @ServiceName
     @Nullable
@@ -339,6 +355,7 @@ public enum Service {
     }
 
     public static Service getServiceTypeByString(String _serviceStr){
+        initUniqueServicesList();
         for(Service service : UNIQUE_SERVICES){
             if(_serviceStr != null && _serviceStr.equals(service.getTransactionName())){
                 return service;

@@ -1,6 +1,7 @@
 package com.uae.tra_smart_services.fragment.spam;
 
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -22,9 +23,13 @@ import com.uae.tra_smart_services.interfaces.Loader;
 import com.uae.tra_smart_services.interfaces.Loader.Cancelled;
 import com.uae.tra_smart_services.interfaces.LoaderMarker;
 import com.uae.tra_smart_services.rest.model.request.SmsReportRequestModel;
+import com.uae.tra_smart_services.rest.model.response.GetTransactionResponseModel;
 import com.uae.tra_smart_services.rest.model.response.SmsSpamResponseModel;
 import com.uae.tra_smart_services.rest.robo_requests.SmsReportRequest;
 import com.uae.tra_smart_services.util.SmsUtils;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by mobimaks on 24.09.2015.
@@ -32,6 +37,8 @@ import com.uae.tra_smart_services.util.SmsUtils;
 public class ReportSmsSpamFragment extends BaseServiceFragment implements OnClickListener, Cancelled {
 
     private static final String KEY_REPORT_SMS_SPAM_REQUEST = "REPORT_SMS_SPAM_REQUEST";
+    private static final String REGEXP_TITLE_CUT = "SMS Spam from "+"(.*)";
+    private static final String DATA = "data";
 
     private Spinner sProviderSpinner;
     private EditText etNumberOfSpammer, etDescription;
@@ -39,9 +46,18 @@ public class ReportSmsSpamFragment extends BaseServiceFragment implements OnClic
 
     private SpamServiceProviderAdapter mProviderAdapter;
     private SmsReportRequest mSmsReportRequest;
+    private GetTransactionResponseModel _model;
 
     public static ReportSmsSpamFragment newInstance() {
         return new ReportSmsSpamFragment();
+    }
+
+    public static ReportSmsSpamFragment newInstance(Parcelable _inputData) {
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(DATA, _inputData);
+        ReportSmsSpamFragment fragment = new ReportSmsSpamFragment();
+        fragment.setArguments(bundle);
+        return fragment;
     }
 
     @Override
@@ -59,6 +75,24 @@ public class ReportSmsSpamFragment extends BaseServiceFragment implements OnClic
         setCapitalizeTextWatcher(etDescription);
 //        btnClose = findView(R.id.btnClose_FRSS);
         btnSubmit = findView(R.id.btnSubmit_FRSS);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (getArguments() != null && (_model = getArguments().getParcelable(DATA)) != null) {
+            etNumberOfSpammer.setText(getAllAfter(_model.title, REGEXP_TITLE_CUT));
+            etDescription.setText(_model.description);
+        }
+    }
+
+    private static final String getAllAfter(String _original, String _pattrens){
+        Pattern p = Pattern.compile(_pattrens);
+        Matcher m = p.matcher(_original);
+        if ( m.find() ) {
+            return m.group(1);
+        }
+        return _original;
     }
 
     @Override
@@ -92,7 +126,7 @@ public class ReportSmsSpamFragment extends BaseServiceFragment implements OnClic
 
     private void validateAndSendData() {
         if (validateData()) {
-            loaderOverlayShow(getString(R.string.str_sending),  (LoaderMarker) this);
+            loaderOverlayShow(getString(R.string.str_sending), this);
             loaderOverlayButtonBehavior(new Loader.BackButton() {
                 @Override
                 public void onBackButtonPressed(LoaderView.State _currentState) {
@@ -180,6 +214,4 @@ public class ReportSmsSpamFragment extends BaseServiceFragment implements OnClic
     protected int getLayoutResource() {
         return R.layout.fragment_report_sms_spam;
     }
-
-
 }
