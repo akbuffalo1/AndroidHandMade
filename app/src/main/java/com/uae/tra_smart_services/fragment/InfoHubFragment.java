@@ -340,7 +340,7 @@ public final class InfoHubFragment extends BaseFragment
         if (mIsSearching) {
             mTransactionsListAdapter.loadMoreSearchResults();
         } else if (!mIsAllTransactionDownloaded && !mIsTransactionsInLoading) {
-            loadTransactionPage(++mTransactionPageNum, true);
+            loadTransactionPage(++mTransactionPageNum, false);
         }
     }
 
@@ -418,20 +418,15 @@ public final class InfoHubFragment extends BaseFragment
             } else {
                 mTransactionsListAdapter.stopLoading();
             }
-            if(isAdded()) {
-                mTransactionsOperationStateManager.endLoading();
-            }
         }
 
         @Override
         public final void onRequestFailure(SpiceException spiceException) {
+            mTransactionsOperationStateManager.endLoading();
             mIsTransactionsInLoading = false;
             mTransactionPageNum--;
-                handleNoResult();
-                processError(spiceException);
-            if(isAdded()){
-                mTransactionsOperationStateManager.endLoading();
-            }
+            handleNoResult();
+            processError(spiceException);
         }
     }
 
