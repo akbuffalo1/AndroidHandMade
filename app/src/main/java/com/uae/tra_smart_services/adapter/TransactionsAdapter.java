@@ -19,7 +19,6 @@ import com.uae.tra_smart_services.adapter.TransactionsAdapter.ViewHolder;
 import com.uae.tra_smart_services.customviews.HexagonView;
 import com.uae.tra_smart_services.customviews.LoaderView;
 import com.uae.tra_smart_services.entities.NetworkErrorHandler;
-import com.uae.tra_smart_services.fragment.InfoHubFragment;
 import com.uae.tra_smart_services.global.C;
 import com.uae.tra_smart_services.global.SpannableWrapper;
 import com.uae.tra_smart_services.interfaces.OperationStateManager;
@@ -45,9 +44,9 @@ public class TransactionsAdapter extends Adapter<ViewHolder> implements Filterab
     private boolean mIsInSearchMode;
     private boolean mIsAllSearchResultDownloaded;
     private CharSequence mConstraint = "";
-    private InfoHubFragment.OnTransactionPressedListener mItemPressedListener;
+    private OnTransactionPressedListener mItemPressedListener;
 
-    public TransactionsAdapter(final Activity _activity, final OperationStateManager _operationStateManager, InfoHubFragment.OnTransactionPressedListener _itemPressedListener) {
+    public TransactionsAdapter(final Activity _activity, final OperationStateManager _operationStateManager, OnTransactionPressedListener _itemPressedListener) {
         mActivity = _activity;
         mOperationStateManager = _operationStateManager;
         mIsShowingLoaderForData = true;
@@ -124,7 +123,9 @@ public class TransactionsAdapter extends Adapter<ViewHolder> implements Filterab
         } else {
             mOperationStateManager.showData();
         }
-        mFilter.reset();
+        if (mFilter != null) {
+            mFilter.reset();
+        }
         mConstraint = "";
         mIsInSearchMode = false;
         mShowingData.clear();
@@ -316,5 +317,9 @@ public class TransactionsAdapter extends Adapter<ViewHolder> implements Filterab
                 });
             }
         }
+    }
+
+    public interface OnTransactionPressedListener {
+        void onTransactionPressed(int[] icon_color, GetTransactionResponseModel _model);
     }
 }

@@ -3,7 +3,6 @@ package com.uae.tra_smart_services.fragment;
 import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.MenuItemCompat.OnActionExpandListener;
 import android.support.v7.widget.LinearLayoutManager;
@@ -21,6 +20,7 @@ import com.octo.android.robospice.request.listener.RequestListener;
 import com.uae.tra_smart_services.R;
 import com.uae.tra_smart_services.adapter.AnnouncementsAdapter;
 import com.uae.tra_smart_services.adapter.TransactionsAdapter;
+import com.uae.tra_smart_services.adapter.TransactionsAdapter.OnTransactionPressedListener;
 import com.uae.tra_smart_services.customviews.HexagonSwipeRefreshLayout;
 import com.uae.tra_smart_services.customviews.LoaderView;
 import com.uae.tra_smart_services.fragment.InfoHubAnnouncementsFragment.BooleanHolder;
@@ -39,14 +39,13 @@ import com.uae.tra_smart_services.util.EndlessScrollListener;
 import com.uae.tra_smart_services.util.EndlessScrollListener.OnLoadMoreListener;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Locale;
 
 /**
  * Created by ak-buffalo on 19.08.15.
  */
 public final class InfoHubFragment extends BaseFragment
-        implements OnLoadMoreListener, OnQueryTextListener, OnActionExpandListener, View.OnClickListener, HexagonSwipeRefreshLayout.Listener/*, ViewTreeObserver.OnGlobalLayoutListener*/ {
+        implements OnLoadMoreListener, OnQueryTextListener, OnActionExpandListener, View.OnClickListener, HexagonSwipeRefreshLayout.Listener, OnTransactionPressedListener/*, ViewTreeObserver.OnGlobalLayoutListener*/ {
 
     private static final String KEY_TRANSACTIONS_REQUEST = "TRANSACTIONS_REQUEST";
     private static final int DEFAULT_PAGE_SIZE_TRANSACTIONS = 10;
@@ -199,7 +198,7 @@ public final class InfoHubFragment extends BaseFragment
     private void initTransactionsList() {
         mTransactionsLayoutManager = new LinearLayoutManager(getActivity());
         mTransactionsList.setLayoutManager(mTransactionsLayoutManager);
-        mTransactionsListAdapter = new TransactionsAdapter(getActivity(), mTransactionsOperationStateManager, mItemPressedListener);
+        mTransactionsListAdapter = new TransactionsAdapter(getActivity(), mTransactionsOperationStateManager, this);
         mTransactionsList.setAdapter(mTransactionsListAdapter);
     }
 
@@ -344,14 +343,14 @@ public final class InfoHubFragment extends BaseFragment
             mTransactionsModel = savedInstanceState.getParcelableArrayList(KEY_TRANSACTIONS_MODEL);
             mAnnouncementsModel = savedInstanceState.getParcelableArrayList(KEY_ANNOUNCEMENTS_MODEL);
         }
-        if(mTransactionsModel.size() == 0 && mAnnouncementsModel.size() == 0){
+        if (mTransactionsModel.size() == 0 && mAnnouncementsModel.size() == 0) {
             startFirstLoad();
             return;
         } else if (mTransactionsModel.size() == 0) {
             loadTransactionPage(mTransactionPageNum = 1);
             mAnnouncementsListAdapter.addAll(mAnnouncementsModel);
             mAnnouncementsOperationStateManager.showData();
-        } else if (mAnnouncementsModel.size() == 0){
+        } else if (mAnnouncementsModel.size() == 0) {
             loadAnnouncementsPage(1);
             mTransactionsListAdapter.addAll(mTransactionsModel);
             mTransactionsOperationStateManager.showData();
@@ -375,13 +374,21 @@ public final class InfoHubFragment extends BaseFragment
         onQueryTextSubmit(_contrains);
     }
 
+    @Override
+    public void onTransactionPressed(int[] icon_color, GetTransactionResponseModel _model) {
+        mIsSearching = false;
+        if (mItemPressedListener != null) {
+            mItemPressedListener.onTransactionPressed(icon_color, _model);
+        }
+    }
+
     private final class TransactionsResponseListener implements RequestListener<GetTransactionResponseModel.List> {
         @Override
         public final void onRequestSuccess(GetTransactionResponseModel.List result) {
             mIsTransactionsInLoading = false;
             if (isAdded()) {
                 if (result != null) {
-                    if(mTransactionsModel != null) mTransactionsModel.addAll(result);
+                    if (mTransactionsModel != null) mTransactionsModel.addAll(result);
                     mIsAllTransactionDownloaded = result.isEmpty();
                     if (mIsAllTransactionDownloaded) {
                         handleNoResult();
@@ -405,7 +412,7 @@ public final class InfoHubFragment extends BaseFragment
             } else {
                 mTransactionsListAdapter.stopLoading();
             }
-            if(isAdded()) {
+            if (isAdded()) {
                 mTransactionsOperationStateManager.endLoading();
             }
         }
@@ -414,16 +421,12 @@ public final class InfoHubFragment extends BaseFragment
         public final void onRequestFailure(SpiceException spiceException) {
             mIsTransactionsInLoading = false;
             mTransactionPageNum--;
-                handleNoResult();
-                processError(spiceException);
-            if(isAdded()){
+            handleNoResult();
+            processError(spiceException);
+            if (isAdded()) {
                 mTransactionsOperationStateManager.endLoading();
             }
         }
-    }
-
-    public interface OnTransactionPressedListener {
-        void onTransactionPressed(int[] icon_color, GetTransactionResponseModel _model);
     }
 
     @Override

@@ -155,7 +155,9 @@ public class AnnouncementsAdapter extends Adapter<ViewHolder> implements Filtera
         } else {
             mOperationStateManager.showData();
         }
-        mFilter.reset();
+        if (mFilter != null) {
+            mFilter.reset();
+        }
         mConstraint = "";
         mIsInSearchMode = false;
         mShowingData.clear();

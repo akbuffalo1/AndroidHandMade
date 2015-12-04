@@ -145,7 +145,11 @@ public class AboutTraFragment extends BaseFragment implements OnTabSelectedListe
         public void onRequestFailure(SpiceException spiceException) {
             getSpiceManager().removeDataFromCache(List.class, KEY_CONTACT_US);
             if (isAdded()) {
-                loaderOverlayFailed(getString(R.string.str_request_failed), false);//TODO: test
+                Tab tab = tlTabs.getTabAt(ABOUT_US_TAB);
+                if (tab != null) {
+                    tab.select();
+                }
+                loaderOverlayFailed(getString(R.string.str_request_failed), false);
             }
         }
 
