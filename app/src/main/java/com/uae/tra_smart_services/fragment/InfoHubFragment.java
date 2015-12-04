@@ -95,6 +95,7 @@ public final class InfoHubFragment extends BaseFragment
             lvAnnouncementsLoader.startProcessing();
             mAnnouncementsListPreview.setVisibility(View.INVISIBLE);
             tvNoAnnouncements.setVisibility(View.INVISIBLE);
+            tvSeeMoreAnnouncements.setVisibility(View.GONE);
         }
 
         @Override
@@ -103,6 +104,7 @@ public final class InfoHubFragment extends BaseFragment
             lvAnnouncementsLoader.setVisibility(View.INVISIBLE);
             mAnnouncementsListPreview.setVisibility(View.VISIBLE);
             tvNoAnnouncements.setVisibility(View.INVISIBLE);
+            tvSeeMoreAnnouncements.setVisibility(View.VISIBLE);
         }
 
         @Override
@@ -111,6 +113,7 @@ public final class InfoHubFragment extends BaseFragment
             lvAnnouncementsLoader.setVisibility(View.INVISIBLE);
             mAnnouncementsListPreview.setVisibility(View.INVISIBLE);
             tvNoAnnouncements.setVisibility(View.VISIBLE);
+            tvSeeMoreAnnouncements.setVisibility(View.GONE);
         }
 
         @Override
