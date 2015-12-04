@@ -3,8 +3,10 @@ package com.uae.tra_smart_services.fragment.spam;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -21,9 +23,7 @@ import com.uae.tra_smart_services.global.C;
 import com.uae.tra_smart_services.global.Service;
 import com.uae.tra_smart_services.interfaces.Loader;
 import com.uae.tra_smart_services.interfaces.Loader.Cancelled;
-import com.uae.tra_smart_services.interfaces.LoaderMarker;
 import com.uae.tra_smart_services.rest.model.request.SmsReportRequestModel;
-import com.uae.tra_smart_services.rest.model.response.GetTransactionResponseModel;
 import com.uae.tra_smart_services.rest.model.response.SmsSpamResponseModel;
 import com.uae.tra_smart_services.rest.robo_requests.SmsReportRequest;
 import com.uae.tra_smart_services.util.SmsUtils;
@@ -38,7 +38,6 @@ public class ReportSmsSpamFragment extends BaseServiceFragment implements OnClic
 
     private static final String KEY_REPORT_SMS_SPAM_REQUEST = "REPORT_SMS_SPAM_REQUEST";
     private static final String REGEXP_TITLE_CUT = "SMS Spam from "+"(.*)";
-    private static final String DATA = "data";
 
     private Spinner sProviderSpinner;
     private EditText etNumberOfSpammer, etDescription;
@@ -46,7 +45,6 @@ public class ReportSmsSpamFragment extends BaseServiceFragment implements OnClic
 
     private SpamServiceProviderAdapter mProviderAdapter;
     private SmsReportRequest mSmsReportRequest;
-    private GetTransactionResponseModel _model;
 
     public static ReportSmsSpamFragment newInstance() {
         return new ReportSmsSpamFragment();
@@ -54,16 +52,19 @@ public class ReportSmsSpamFragment extends BaseServiceFragment implements OnClic
 
     public static ReportSmsSpamFragment newInstance(Parcelable _inputData) {
         Bundle bundle = new Bundle();
-        bundle.putParcelable(DATA, _inputData);
+        bundle.putParcelable(KEY_DATA, _inputData);
         ReportSmsSpamFragment fragment = new ReportSmsSpamFragment();
         fragment.setArguments(bundle);
         return fragment;
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        setHasOptionsMenu(true);
-        super.onCreate(savedInstanceState);
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        if (getArguments() != null && (mModel = getArguments().getParcelable(KEY_DATA)) != null) {
+            etNumberOfSpammer.setText(getAllAfter(mModel.title, REGEXP_TITLE_CUT));
+            etDescription.setText(mModel.description);
+        }
     }
 
     @Override
@@ -75,15 +76,6 @@ public class ReportSmsSpamFragment extends BaseServiceFragment implements OnClic
         setCapitalizeTextWatcher(etDescription);
 //        btnClose = findView(R.id.btnClose_FRSS);
         btnSubmit = findView(R.id.btnSubmit_FRSS);
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        if (getArguments() != null && (_model = getArguments().getParcelable(DATA)) != null) {
-            etNumberOfSpammer.setText(getAllAfter(_model.title, REGEXP_TITLE_CUT));
-            etDescription.setText(_model.description);
-        }
     }
 
     private static final String getAllAfter(String _original, String _pattrens){

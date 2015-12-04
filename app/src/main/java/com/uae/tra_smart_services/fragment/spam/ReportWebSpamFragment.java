@@ -1,6 +1,7 @@
 package com.uae.tra_smart_services.fragment.spam;
 
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.util.Patterns;
 import android.view.View;
@@ -16,6 +17,7 @@ import com.uae.tra_smart_services.R;
 import com.uae.tra_smart_services.customviews.LoaderView;
 import com.uae.tra_smart_services.entities.CustomFilterPool;
 import com.uae.tra_smart_services.entities.Filter;
+import com.uae.tra_smart_services.fragment.base.BaseFragment;
 import com.uae.tra_smart_services.fragment.base.BaseServiceFragment;
 import com.uae.tra_smart_services.global.C;
 import com.uae.tra_smart_services.global.Service;
@@ -44,10 +46,21 @@ public class ReportWebSpamFragment extends BaseServiceFragment implements OnClic
         return new ReportWebSpamFragment();
     }
 
+    public static ReportWebSpamFragment newInstance(Parcelable _inputData) {
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(KEY_DATA, _inputData);
+        ReportWebSpamFragment fragment = new ReportWebSpamFragment();
+        fragment.setArguments(bundle);
+        return fragment;
+    }
+
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        setHasOptionsMenu(true);
-        super.onCreate(savedInstanceState);
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        if(getArguments() != null && (mModel = getArguments().getParcelable(KEY_DATA)) != null){
+            etUrl.setText(mModel.title);
+            etDescription.setText(mModel.description);
+        }
     }
 
     @Override

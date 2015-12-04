@@ -37,14 +37,12 @@ public class ComplainAboutTraFragment extends BaseComplainFragment
         implements OnClickListener, AlertDialogFragment.OnOkListener {
 
     protected static final String KEY_COMPLAIN_REQUEST = "COMPLAIN_ABOUT_TRA_REQUEST";
-    protected static final String DATA_KEY = "data_key";
 
     private ThemedImageView tivAddAttachment;
-    private EditText etComplainTitle, etDescription;
+    protected EditText etComplainTitle, etDescription;
 
     private ComplainAboutTRAServiceRequest request;
     private RequestResponseListener mRequestListener;
-    private GetTransactionResponseModel mModel;
 
     public static ComplainAboutTraFragment newInstance() {
         return new ComplainAboutTraFragment();
@@ -52,7 +50,7 @@ public class ComplainAboutTraFragment extends BaseComplainFragment
 
     public static ComplainAboutTraFragment newInstance(Parcelable data) {
         Bundle bundle = new Bundle();
-        bundle.putParcelable(DATA_KEY, data);
+        bundle.putParcelable(KEY_DATA, data);
         ComplainAboutTraFragment fragment = new ComplainAboutTraFragment();
         fragment.setArguments(bundle);
         return fragment;
@@ -63,6 +61,15 @@ public class ComplainAboutTraFragment extends BaseComplainFragment
         super.onCreate(savedInstanceState);
         if (!TRAApplication.isLoggedIn()) {
             getFragmentManager().popBackStack();
+        }
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        if(getArguments() != null && (mModel = getArguments().getParcelable(KEY_DATA)) != null){
+            etComplainTitle.setText(mModel.title);
+            etDescription.setText(mModel.description);
         }
     }
 
@@ -90,15 +97,6 @@ public class ComplainAboutTraFragment extends BaseComplainFragment
         super.onStart();
         getSpiceManager().getFromCache(Response.class, getRequestKey(), DurationInMillis.ALWAYS_RETURNED, mRequestListener);
 //        getSpiceManager().addListenerIfPending(Response.class, getRequestKey(), mRequestListener);
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        if(getArguments() != null && (mModel = getArguments().getParcelable(DATA_KEY)) != null){
-            etComplainTitle.setText(mModel.title);
-            etDescription.setText(mModel.description);
-        }
     }
 
     protected String getRequestKey() {

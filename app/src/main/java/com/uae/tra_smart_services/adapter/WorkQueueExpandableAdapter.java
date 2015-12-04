@@ -123,11 +123,12 @@ public class WorkQueueExpandableAdapter extends ExpandableRecyclerAdapter<WorkQu
     public static class NetModelToExpRecyclerViewModelAdapter implements Comparator<String> {
         public List<ParentObject> mParentObjects;
         public WorkQueueDataModel datamodel;
+        Map<String, List<Map<String, String>>> unique = new HashMap<>();
 
         public NetModelToExpRecyclerViewModelAdapter(WorkQueueDataModel _datamodel){
             datamodel = _datamodel;
         }
-        Map<String, List<Map<String, String>>> unique = new HashMap<>();
+
         public void prepareData(){
             header: for(final Map<String, String> content : datamodel.dataContent){
                 Set<String> keys = unique.keySet();

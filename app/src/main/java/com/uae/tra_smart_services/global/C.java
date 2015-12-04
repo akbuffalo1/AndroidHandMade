@@ -133,6 +133,9 @@ public final class C {
 
     //region Transactions statuses const
     public static Map<String, int[]> TRANSACTION_STATUS = new HashMap<>();
+
+    public static final String WAITING_FOR_DETAILS = "Waiting for Details";
+
     static {
         TRANSACTION_STATUS.put(null, new int[]{R.drawable.ic_form, R.color.hex_primary_green});
 
@@ -145,7 +148,7 @@ public final class C {
         TRANSACTION_STATUS.put("On Hold", new int[]{R.drawable.ic_download, R.color.hex_primary_orange});
         TRANSACTION_STATUS.put("Researching", new int[]{R.drawable.ic_download, R.color.hex_primary_orange});
 
-        TRANSACTION_STATUS.put("Waiting for Details", new int[]{R.drawable.ic_domain, R.color.hex_primary_red});
+        TRANSACTION_STATUS.put(WAITING_FOR_DETAILS, new int[]{R.drawable.ic_domain, R.color.hex_primary_red});
     }
     //endregion
 

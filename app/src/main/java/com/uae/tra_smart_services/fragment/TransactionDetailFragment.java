@@ -10,6 +10,7 @@ import android.widget.Toast;
 import com.uae.tra_smart_services.R;
 import com.uae.tra_smart_services.customviews.HexagonView;
 import com.uae.tra_smart_services.fragment.base.BaseFragment;
+import com.uae.tra_smart_services.global.C;
 import com.uae.tra_smart_services.global.Service;
 import com.uae.tra_smart_services.rest.model.response.GetTransactionResponseModel;
 
@@ -67,12 +68,13 @@ public class TransactionDetailFragment extends BaseFragment implements View.OnCl
                         getArguments().getString(DESCRIPTION) +" "+
                         getArguments().getString(DESCRIPTION));
         btnEdit = findView(R.id.btnEdit_FTD);
+//        btnEdit.setVisibility(mModel.statusCode.equals(C.WAITING_FOR_DETAILS) ? View.VISIBLE : View.GONE);
     }
 
     @Override
-    protected void initData() {
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         mModel = getArguments().getParcelable(MODEL);
-        super.initData();
     }
 
     @Override
