@@ -3,6 +3,7 @@ package com.uae.tra_smart_services.fragment;
 import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.MenuItemCompat.OnActionExpandListener;
 import android.support.v7.widget.LinearLayoutManager;
@@ -94,6 +95,7 @@ public final class InfoHubFragment extends BaseFragment
             lvAnnouncementsLoader.startProcessing();
             mAnnouncementsListPreview.setVisibility(View.INVISIBLE);
             tvNoAnnouncements.setVisibility(View.INVISIBLE);
+            tvSeeMoreAnnouncements.setVisibility(View.GONE);
         }
 
         @Override
@@ -102,6 +104,7 @@ public final class InfoHubFragment extends BaseFragment
             lvAnnouncementsLoader.setVisibility(View.INVISIBLE);
             mAnnouncementsListPreview.setVisibility(View.VISIBLE);
             tvNoAnnouncements.setVisibility(View.INVISIBLE);
+            tvSeeMoreAnnouncements.setVisibility(View.VISIBLE);
         }
 
         @Override
@@ -110,6 +113,7 @@ public final class InfoHubFragment extends BaseFragment
             lvAnnouncementsLoader.setVisibility(View.INVISIBLE);
             mAnnouncementsListPreview.setVisibility(View.INVISIBLE);
             tvNoAnnouncements.setVisibility(View.VISIBLE);
+            tvSeeMoreAnnouncements.setVisibility(View.GONE);
         }
 
         @Override
@@ -120,7 +124,9 @@ public final class InfoHubFragment extends BaseFragment
                 loaderOverlayDismissWithAction(new Loader.Dismiss() {
                     @Override
                     public void onLoadingDismissed() {
-                        getFragmentManager().popBackStack();
+                        if (isAdded()) {
+                            getFragmentManager().popBackStack();
+                        }
                     }
                 });
             }
@@ -153,7 +159,9 @@ public final class InfoHubFragment extends BaseFragment
                 loaderOverlayDismissWithAction(new Loader.Dismiss() {
                     @Override
                     public void onLoadingDismissed() {
-                        getFragmentManager().popBackStack();
+                        if (isAdded()) {
+                            getFragmentManager().popBackStack();
+                        }
                     }
                 });
             }
@@ -233,20 +241,26 @@ public final class InfoHubFragment extends BaseFragment
     private void startFirstLoad() {
         if (isAdded()) {
             loaderOverlayCustomShow(getString(R.string.str_loading), null, false);
-            loadTransactionPage(mTransactionPageNum = 1);
-            loadAnnouncementsPage(1);
+            loadTransactionPage(mTransactionPageNum = 1, false);
+            loadAnnouncementsPage(1, false);
         }
     }
 
-    private void loadAnnouncementsPage(final int _page) {
+    private void loadAnnouncementsPage(final int _page, boolean _showLoader) {
         mIsAnnouncementsInLoading.trueV();
         GetAnnouncementsRequest announcementsRequest = new GetAnnouncementsRequest(QueryAdapter.pageToOffset(_page, 3), Locale.getDefault().getLanguage().toUpperCase());
+        if(_showLoader){
+            mAnnouncementsOperationStateManager.showProgress();
+        }
         getSpiceManager().execute(announcementsRequest, mAnnouncementsResponseListener);
     }
 
-    private void loadTransactionPage(final int _page) {
+    private void loadTransactionPage(final int _page, boolean _showLoader) {
         mIsTransactionsInLoading = true;
         transactionsRequest = new GetTransactionsRequest(_page, DEFAULT_PAGE_SIZE_TRANSACTIONS);
+        if(_showLoader){
+            mTransactionsOperationStateManager.showProgress();
+        }
         getSpiceManager().execute(transactionsRequest, mTransactionsListener);
     }
 
@@ -278,11 +292,11 @@ public final class InfoHubFragment extends BaseFragment
                 if (mTransactionsListAdapter.isIsInSearchMode() && !mSearchPhrase.isEmpty()) {
                     onRefresh(mSearchPhrase);
                 } else {
-                    loadTransactionPage(mTransactionPageNum = 1);
+                    loadTransactionPage(mTransactionPageNum = 1, true);
                 }
                 break;
             case R.id.tvNoAnnouncements_FIH:
-                loadAnnouncementsPage(1);
+                loadAnnouncementsPage(1, true);
                 break;
         }
     }
@@ -326,14 +340,14 @@ public final class InfoHubFragment extends BaseFragment
         if (mIsSearching) {
             mTransactionsListAdapter.loadMoreSearchResults();
         } else if (!mIsAllTransactionDownloaded && !mIsTransactionsInLoading) {
-            loadTransactionPage(++mTransactionPageNum);
+            loadTransactionPage(++mTransactionPageNum, false);
         }
     }
 
     @Override
     public void onRefresh() {
         mHexagonSwipeRefreshLayout.onLoadingStart();
-        loadTransactionPage(mTransactionPageNum = 1);
+        loadTransactionPage(mTransactionPageNum = 1, true);
     }
 
     @Override
@@ -347,11 +361,11 @@ public final class InfoHubFragment extends BaseFragment
             startFirstLoad();
             return;
         } else if (mTransactionsModel.size() == 0) {
-            loadTransactionPage(mTransactionPageNum = 1);
+            loadTransactionPage(mTransactionPageNum = 1, true);
             mAnnouncementsListAdapter.addAll(mAnnouncementsModel);
             mAnnouncementsOperationStateManager.showData();
-        } else if (mAnnouncementsModel.size() == 0) {
-            loadAnnouncementsPage(1);
+        } else if (mAnnouncementsModel.size() == 0){
+            loadAnnouncementsPage(1, true);
             mTransactionsListAdapter.addAll(mTransactionsModel);
             mTransactionsOperationStateManager.showData();
         } else {
@@ -412,13 +426,11 @@ public final class InfoHubFragment extends BaseFragment
             } else {
                 mTransactionsListAdapter.stopLoading();
             }
-            if (isAdded()) {
-                mTransactionsOperationStateManager.endLoading();
-            }
         }
 
         @Override
         public final void onRequestFailure(SpiceException spiceException) {
+            mTransactionsOperationStateManager.endLoading();
             mIsTransactionsInLoading = false;
             mTransactionPageNum--;
             handleNoResult();

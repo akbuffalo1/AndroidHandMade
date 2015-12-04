@@ -17,6 +17,7 @@ import com.uae.tra_smart_services.global.Service;
 import com.uae.tra_smart_services.interfaces.Loader.Cancelled;
 import com.uae.tra_smart_services.interfaces.OpenServiceInfo;
 import com.uae.tra_smart_services.rest.model.request.RatingServiceRequestModel;
+import com.uae.tra_smart_services.rest.model.response.GetTransactionResponseModel;
 import com.uae.tra_smart_services.rest.model.response.RatingServiceResponseModel;
 import com.uae.tra_smart_services.rest.robo_requests.RatingServiceRequest;
 
@@ -25,7 +26,10 @@ import com.uae.tra_smart_services.rest.robo_requests.RatingServiceRequest;
  */
 public abstract class BaseServiceFragment extends BaseFragment implements Cancelled, CallBacks {
 
+    protected static final String KEY_DATA = "data";
+
     private OpenServiceInfo mOpenServiceInfoListener;
+    protected GetTransactionResponseModel mModel;
 
     @CallSuper
     @Override

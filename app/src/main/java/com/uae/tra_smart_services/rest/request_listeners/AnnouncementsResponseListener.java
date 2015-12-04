@@ -39,18 +39,20 @@ public final class AnnouncementsResponseListener implements RequestListener<GetA
     @Override
     public final void onRequestSuccess(GetAnnouncementsResponseModel result) {
         mIsAnnouncementsInLoading.falseV();
-        if (mFragment.isAdded() && result != null) {
-            if (mIsAllAnnouncementsDownloaded = result.announcements.isEmpty()) {
-                handleNoResult();
+        if(mFragment.isAdded()){
+            if (result != null) {
+                if (mIsAllAnnouncementsDownloaded = result.announcements.isEmpty()) {
+                    handleNoResult();
+                } else {
+                    if(mModel != null) mModel.addAll(result.announcements);
+                    mOperationStateManager.showData();
+                    mAnnouncementsListAdapter.addAll(result.announcements);
+                }
             } else {
-                if(mModel != null) mModel.addAll(result.announcements);
-                mOperationStateManager.showData();
-                mAnnouncementsListAdapter.addAll(result.announcements);
+                mAnnouncementsPageNum--;
             }
-        } else {
-            mAnnouncementsPageNum--;
+            mOperationStateManager.endLoading();
         }
-        mOperationStateManager.endLoading();
     }
 
     @Override
@@ -59,7 +61,6 @@ public final class AnnouncementsResponseListener implements RequestListener<GetA
         mAnnouncementsPageNum--;
         handleNoResult();
         mFragment.processError(spiceException);
-        mOperationStateManager.endLoading();
     }
 
     private void handleNoResult() {

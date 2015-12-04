@@ -221,7 +221,7 @@ public class HomeActivity extends BaseFragmentActivity implements //region INTER
                 openFragmentIfAuthorized(SuggestionFragment.newInstance(), _service, _useBackStack);
                 break;
             case BLOCK_WEBSITE:
-                openFragmentIfAuthorized(ReportWebSpamFragment.newInstance(), _service, _useBackStack);
+                openFragmentIfAuthorized(_data != null ? ReportWebSpamFragment.newInstance(_data) : ReportWebSpamFragment.newInstance(), _service, _useBackStack);
                 break;
             case APPROVED_DEVICES:
                 replaceFragment(ApprovedDevicesFragment.newInstance(), _useBackStack);
@@ -321,7 +321,7 @@ public class HomeActivity extends BaseFragmentActivity implements //region INTER
                 replaceFragment(SpamHistoryFragment.newInstance(), _useBackStack);
                 break;
             case ENQUIRIES:
-                replaceFragment(EnquiriesFragment.newInstance(), _useBackStack);
+                replaceFragment(_data != null ? EnquiriesFragment.newInstance(_data) : EnquiriesFragment.newInstance(), _useBackStack);
                 break;
             case INFO_HUB:
                 replaceFragment(InfoHubFragment.newInstance(), _useBackStack);

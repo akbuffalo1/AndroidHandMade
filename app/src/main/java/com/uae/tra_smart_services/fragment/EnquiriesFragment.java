@@ -1,7 +1,9 @@
 package com.uae.tra_smart_services.fragment;
 
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
+import android.view.View;
 import android.widget.EditText;
 
 import com.octo.android.robospice.persistence.DurationInMillis;
@@ -26,6 +28,14 @@ public class EnquiriesFragment extends ComplainAboutTraFragment {
 
     public static EnquiriesFragment newInstance() {
         return new EnquiriesFragment();
+    }
+
+    public static EnquiriesFragment newInstance(Parcelable data) {
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(KEY_DATA, data);
+        EnquiriesFragment fragment = new EnquiriesFragment();
+        fragment.setArguments(bundle);
+        return fragment;
     }
 
     @Override
@@ -61,6 +71,15 @@ public class EnquiriesFragment extends ComplainAboutTraFragment {
         etTitle = findView(R.id.etComplainTitle_FCAT);
         etTitle.setHint(getString(R.string.str_enquires_title));
         setCapitalizeTextWatcher(etTitle);
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        if(getArguments() != null && (mModel = getArguments().getParcelable(KEY_DATA)) != null){
+            etTitle.setText(mModel.title);
+            etDescription.setText(mModel.description);
+        }
     }
 
     @Override

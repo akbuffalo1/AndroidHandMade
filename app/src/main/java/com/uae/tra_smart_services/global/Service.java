@@ -156,6 +156,12 @@ public enum Service {
         public String getServiceName() {
             return C.ENQUIRIES;
         }
+
+        @Nullable
+        @Override
+        public String getTransactionName() {
+            return "Inquiry";
+        }
     },
     APPROVED_DEVICES {
         @Override
@@ -191,6 +197,12 @@ public enum Service {
         @Override
         public String getServiceName() {
             return C.SPAM_REPORT;
+        }
+
+        @Nullable
+        @Override
+        public String getTransactionName() {
+            return "Web Report";
         }
     },
     MOBILE_VERIFICATION {
