@@ -1,15 +1,6 @@
-<merge xmlns:android="http://schemas.android.com/apk/res/android"
-       xmlns:app="http://schemas.android.com/apk/res-auto">
-
-    <TextView
-        android:id="@+id/textView2"
-        android:gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:text="@string/rating_view_title"
-        android:textColor="@color/hex_text_color_white"
-        android:textSize="16sp"/>
+<merge
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
         android:id="@+id/rgDomainCheckServiceRating_FDCH"
@@ -56,7 +47,25 @@
             android:tag="3"
             app:hexagonSrcTintColor="?rating_good_color"
             android:layout_marginStart="20dp"/>
-
     </LinearLayout>
+
+    <EditText
+        style="@style/MyEditTextTheme"
+        android:id="@+id/etRateDesctiption_LSR"
+        android:hint="@string/description"
+        android:textColorHint="@color/hex_text_color_white"
+        android:textColor="@color/hex_text_color_white"
+        android:width="65dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="10dp"
+        android:layout_width="300dp"
+        android:background="@null"
+        android:layout_height="wrap_content" />
+
+    <View
+        android:background="@color/hex_text_color_white"
+        style="@style/AuthorizationFieldsSeparator" />
 
 </merge>

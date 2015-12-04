@@ -3,6 +3,8 @@ package com.uae.tra_smart_services.fragment;
 import android.os.Bundle;
 import android.support.annotation.ColorRes;
 import android.support.annotation.StringRes;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.widget.TextView;
 
 import com.uae.tra_smart_services.R;
@@ -31,7 +33,14 @@ public final class DomainIsAvailableFragment extends BaseFragment{
     @Override
     public final void onCreate(final Bundle _savedInstanceState) {
         super.onCreate(_savedInstanceState);
+        setHasOptionsMenu(true);
         mAvailabilityCheckResponse = getArguments().getParcelable(KEY_DOMAIN_AVAILABILITY_MODEL);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_rate, menu);
+        super.onCreateOptionsMenu(menu, inflater);
     }
 
     @Override

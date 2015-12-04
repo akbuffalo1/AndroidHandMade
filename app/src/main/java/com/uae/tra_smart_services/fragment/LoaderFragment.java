@@ -6,7 +6,9 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewTreeObserver;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.uae.tra_smart_services.R;
@@ -15,7 +17,6 @@ import com.uae.tra_smart_services.customviews.ServiceRatingView;
 import com.uae.tra_smart_services.fragment.base.BaseFragment;
 import com.uae.tra_smart_services.interfaces.Loader;
 import com.uae.tra_smart_services.interfaces.LoaderMarker;
-import com.uae.tra_smart_services.util.ImageUtils;
 
 /**
  * Created by ak-buffalo on 21.09.15.
@@ -29,6 +30,8 @@ public class LoaderFragment extends BaseFragment implements View.OnClickListener
     /** Views */
     protected LoaderView lvLoader;
     protected ServiceRatingView srvRating;
+    protected ScrollView svScrollContainer;
+    protected LinearLayout llServiceRatingContainer;
     protected TextView tvBackOrCancelBtn, tvLoaderTitleText;
     protected RelativeLayout rlFragmentContainer;
     protected BackButton afterBackButton;
@@ -61,15 +64,17 @@ public class LoaderFragment extends BaseFragment implements View.OnClickListener
     protected void initViews() {
         super.initViews();
         rlFragmentContainer = findView(R.id.rlFragmentContainer_FL);
-        int bgColor = defineBGColor(rlFragmentContainer);
-        if(ImageUtils.isBlackAndWhiteMode(getActivity())){
-            ImageUtils.getFilteredDrawable(getActivity(), rlFragmentContainer.getBackground());
-            bgColor = Color.parseColor("#505050");
-        }
+//        int bgColor = defineBGColor(rlFragmentContainer);
+//        if(ImageUtils.isBlackAndWhiteMode(getActivity())){
+//            ImageUtils.getFilteredDrawable(getActivity(), rlFragmentContainer.getBackground());
+//            bgColor = Color.parseColor("#505050");
+//        }
         lvLoader = findView(R.id.lvLoaderView);
-        lvLoader.init(bgColor);
+//        lvLoader.init(bgColor);
         tvLoaderTitleText = findView(R.id.tvLoaderTitleText);
         srvRating = findView(R.id.srvRating_FL);
+        llServiceRatingContainer = findView(R.id.llServiceRatingContainer_FL);
+        svScrollContainer = findView(R.id.svScrollContainer_FL);
         srvRating.init(this);
         tvBackOrCancelBtn = findView(R.id.tvLoaderBackButton);
     }
@@ -130,9 +135,27 @@ public class LoaderFragment extends BaseFragment implements View.OnClickListener
         tvLoaderTitleText.setText(_msg);
         tvBackOrCancelBtn.setText(R.string.str_back_to_dashboard);
         tvBackOrCancelBtn.setTag(LoaderView.State.SUCCESS);
-        if(getArguments().getBoolean(SHOW_RATING)){
-            srvRating.setVisibility(View.VISIBLE);
-        }
+        setRatingVisibleIfNeed(true);
+        isDone = true;
+    }
+
+    @Override
+    public void cancelLoading(String _msg) {
+        lvLoader.startFilling(mAnimationState = LoaderView.State.CANCELLED);
+        tvLoaderTitleText.setText(_msg);
+        tvBackOrCancelBtn.setText(R.string.str_back_to_dashboard);
+        tvBackOrCancelBtn.setTag(LoaderView.State.CANCELLED);
+        setRatingVisibleIfNeed(true);
+        isDone = true;
+    }
+
+    @Override
+    public void failedLoading(String _msg, boolean _hasToShowRating) {
+        lvLoader.startFilling(mAnimationState = LoaderView.State.FAILURE);
+        tvLoaderTitleText.setText(_msg);
+        tvBackOrCancelBtn.setText(R.string.str_back_to_dashboard);
+        tvBackOrCancelBtn.setTag(LoaderView.State.FAILURE);
+        setRatingVisibleIfNeed(_hasToShowRating);
         isDone = true;
     }
 
@@ -144,6 +167,18 @@ public class LoaderFragment extends BaseFragment implements View.OnClickListener
     @Override
     public void setButtonPressedBehavior(BackButton _afterBackButton) {
         afterBackButton = _afterBackButton;
+    }
+
+    private void setRatingVisibleIfNeed(boolean _afterFailed){
+        if(getArguments().getBoolean(SHOW_RATING) && _afterFailed){
+            llServiceRatingContainer.setVisibility(View.VISIBLE);
+            svScrollContainer.post(new Runnable() {
+                @Override
+                public void run() {
+                    svScrollContainer.fullScroll(ScrollView.FOCUS_DOWN);
+                }
+            });
+        }
     }
 
     @Override
@@ -170,31 +205,8 @@ public class LoaderFragment extends BaseFragment implements View.OnClickListener
         super.onViewStateRestored(savedInstanceState);
     }
 
-    @Override
-    public void cancelLoading(String _msg) {
-        lvLoader.startFilling(mAnimationState = LoaderView.State.CANCELLED);
-        tvLoaderTitleText.setText(_msg);
-        tvBackOrCancelBtn.setText(R.string.str_back_to_dashboard);
-        tvBackOrCancelBtn.setTag(LoaderView.State.CANCELLED);
-        if(getArguments().getBoolean(SHOW_RATING)){
-            srvRating.setVisibility(View.VISIBLE);
-        }
-        isDone = true;
-    }
-
-    @Override
-    public void failedLoading(String _msg, boolean _hasToShowRating) {
-        lvLoader.startFilling(mAnimationState = LoaderView.State.FAILURE);
-        tvLoaderTitleText.setText(_msg);
-        tvBackOrCancelBtn.setText(R.string.str_back_to_dashboard);
-        tvBackOrCancelBtn.setTag(LoaderView.State.FAILURE);
-        if(getArguments().getBoolean(SHOW_RATING) && _hasToShowRating)
-            srvRating.setVisibility(View.VISIBLE);
-        isDone = true;
-    }
-
     private int defineBGColor(View _view){
-        Bitmap bitmap = ((BitmapDrawable)_view.getBackground()).getBitmap();
+        Bitmap bitmap = ((BitmapDrawable) _view.getBackground()).getBitmap();
         int pixel = bitmap.getPixel(bitmap.getWidth() / 2, bitmap.getHeight() / 2);
 
         return Color.rgb(Color.red(pixel), Color.green(pixel), Color.blue(pixel));

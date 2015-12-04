@@ -418,5 +418,6 @@
     <string name="edit">Edit</string>
     <string name="fragment_contact_us">Contact Us</string>
     <string name="service">Service</string>
+    <string name="send">SEND</string>
 
 </resources>

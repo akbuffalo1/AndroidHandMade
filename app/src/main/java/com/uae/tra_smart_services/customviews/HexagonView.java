@@ -31,7 +31,7 @@ import static com.uae.tra_smart_services.customviews.HexagonView.ScaleType.INSID
 /**
  * Created by mobimaks on 02.08.2015.
  */
-public final class HexagonView extends View {
+public class HexagonView extends View {
 
     private final int DEFAULT_TEXT_SIZE = Math.round(14 * getResources().getDisplayMetrics().density);
     private final int DEFAULT_HEXAGON_RADIUS = Math.round(30 * getResources().getDisplayMetrics().density);

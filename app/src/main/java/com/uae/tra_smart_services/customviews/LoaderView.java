@@ -132,6 +132,7 @@ public class LoaderView extends View implements Animator.AnimatorListener {
         mFillArePaint.setStyle(Paint.Style.FILL);
 
         mSuccessOrFailPaint.setAntiAlias(true);
+        mSuccessOrFailPaint.setColor(mSuccessBorderColor);
         mSuccessOrFailPaint.setStrokeWidth(mSuccessBorderSize);
         mSuccessOrFailPaint.setStyle(Paint.Style.STROKE);
     }

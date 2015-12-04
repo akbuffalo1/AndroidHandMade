@@ -5,6 +5,8 @@ import android.content.AsyncTaskLoader;
 import android.content.Context;
 import android.content.Loader;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.widget.TextView;
 
 import com.uae.tra_smart_services.R;
@@ -34,6 +36,18 @@ public class DomainInfoFragment extends BaseFragment implements AlertDialogFragm
         args.putParcelable(C.DOMAIN_INFO, _domainInfo);
         fragment.setArguments(args);
         return fragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_rate, menu);
+        super.onCreateOptionsMenu(menu, inflater);
     }
 
     @Override

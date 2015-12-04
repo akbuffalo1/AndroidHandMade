@@ -27,7 +27,7 @@ public class ServiceRatingView extends LinearLayout implements OnClickListener {
         super(context, attrs);
         iniLayout();
         initViews();
-        initListeners();
+//        initListeners();
     }
 
     public void init(CallBacks _callBacks) {
@@ -59,7 +59,7 @@ public class ServiceRatingView extends LinearLayout implements OnClickListener {
 
     @Override
     public void onClick(View _view) {
-        if (mCallBacks != null)
+        if (_view.getId() == R.id.btnSendRating_LSR && mCallBacks != null)
             mCallBacks.onRate(Integer.valueOf(_view.getTag().toString()));
     }
 
