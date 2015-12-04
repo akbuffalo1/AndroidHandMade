@@ -75,6 +75,7 @@ public class TransactionDetailFragment extends BaseFragment implements View.OnCl
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mModel = getArguments().getParcelable(MODEL);
+        getToolbarTitleManager().setTitle(mModel.title);
     }
 
     @Override
