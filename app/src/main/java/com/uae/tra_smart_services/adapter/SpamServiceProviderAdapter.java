@@ -23,7 +23,7 @@ public class SpamServiceProviderAdapter extends ServiceProviderAdapter {
 
     @Override
     protected int getItemLayoutRes() {
-        return R.layout.spinner_item_spam_service_provider;
+        return R.layout.simple_arrow_spinner_item;
     }
 
     @Override

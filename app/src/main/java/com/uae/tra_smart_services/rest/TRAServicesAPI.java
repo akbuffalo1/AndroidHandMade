@@ -15,12 +15,12 @@ import com.uae.tra_smart_services.rest.model.request.RestorePasswordRequestModel
 import com.uae.tra_smart_services.rest.model.request.SmsBlockRequestModel;
 import com.uae.tra_smart_services.rest.model.request.SmsReportRequestModel;
 import com.uae.tra_smart_services.rest.model.request.UserNameModel;
+import com.uae.tra_smart_services.rest.model.response.ContactUsResponse;
 import com.uae.tra_smart_services.rest.model.response.DomainAvailabilityCheckResponseModel;
 import com.uae.tra_smart_services.rest.model.response.DomainInfoCheckResponseModel;
+import com.uae.tra_smart_services.rest.model.response.DynamicServiceInfoResponseModel;
 import com.uae.tra_smart_services.rest.model.response.GetAnnouncementsResponseModel;
 import com.uae.tra_smart_services.rest.model.response.GetTransactionResponseModel;
-import com.uae.tra_smart_services.rest.model.response.DynamicServiceInfoResponseModel;
-import com.uae.tra_smart_services.rest.model.response.GetTransactionResponseModel.List;
 import com.uae.tra_smart_services.rest.model.response.RatingServiceResponseModel;
 import com.uae.tra_smart_services.rest.model.response.SearchDeviceResponseModel;
 import com.uae.tra_smart_services.rest.model.response.ServiceInfoResponse;
@@ -42,9 +42,10 @@ import static com.uae.tra_smart_services.global.ServerConstants.CHECK_WHO_IS_URL
 import static com.uae.tra_smart_services.global.ServerConstants.COMPLAIN_ABOUT_SERVICE_PROVIDER_URL;
 import static com.uae.tra_smart_services.global.ServerConstants.COMPLAIN_ABOUT_TRA_SERVICE_URL;
 import static com.uae.tra_smart_services.global.ServerConstants.COMPLAIN_ENQUIRIES_SERVICE_URL;
+import static com.uae.tra_smart_services.global.ServerConstants.CONTACT_US;
 import static com.uae.tra_smart_services.global.ServerConstants.DYNAMIC_SERVICE_LIST;
-import static com.uae.tra_smart_services.global.ServerConstants.GET_TRANSACTIONS;
 import static com.uae.tra_smart_services.global.ServerConstants.GET_ANNOUNCEMENTS;
+import static com.uae.tra_smart_services.global.ServerConstants.GET_TRANSACTIONS;
 import static com.uae.tra_smart_services.global.ServerConstants.HELP_SALIM_URL;
 import static com.uae.tra_smart_services.global.ServerConstants.JSON_TYPE;
 import static com.uae.tra_smart_services.global.ServerConstants.LOGIN_URL;
@@ -178,5 +179,8 @@ public interface TRAServicesAPI {
 
     @GET(DYNAMIC_SERVICE_LIST + "/{" + PATH_HOLDER + "}")
     DynamicService getDynamicServiceDetails(@Path(PATH_HOLDER) String _id);
+
+    @GET(CONTACT_US)
+    ContactUsResponse.List getContactUsInfo();
 
 }

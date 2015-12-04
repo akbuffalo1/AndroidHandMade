@@ -399,6 +399,10 @@
     <string name="hexagon_button_block_website">Block Websites</string>
     <string name="hexagon_button_sms_spam">SMS Spam</string>
     <string name="activity_splash_loading">LOADING UPDATES…</string>
-    <string name="fragment_contact_us">Contact Us</string>
+
+    <string name="fragment_contact_us_address_label">ADDRESS</string>
+    <string name="fragment_contact_us_contact_info_label">CONTACT INFO</string>
+    <string name="fragment_contact_us_phone_label">Phone:</string>
+    <string name="fragment_contact_us_label">Mail:</string>
 
 </resources>

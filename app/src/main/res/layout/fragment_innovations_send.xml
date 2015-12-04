@@ -154,7 +154,7 @@
                     android:saveEnabled="false"
                     android:background="@android:color/transparent"
                     android:visibility="invisible"
-                    tools:listitem="@layout/spinner_item_spam_service_provider"/>
+                    tools:listitem="@layout/simple_arrow_spinner_item"/>
 
                 <TextView
                     android:id="@+id/tvInnovativeIdea_FIS"

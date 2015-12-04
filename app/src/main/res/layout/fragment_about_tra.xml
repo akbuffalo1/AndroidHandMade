@@ -13,7 +13,9 @@
     <android.support.design.widget.TabLayout
         android:layout_width="match_parent"
         app:tabIndicatorColor="#dfff"
-        app:tabBackground="?toolbarBackground"
+        app:tabGravity="fill"
+        android:background="?toolbarBackground"
+        app:tabMode="fixed"
         app:tabTextAppearance="@style/TabTextAppearance"
         android:layout_height="wrap_content"
         android:id="@+id/tlTabs_FAT"/>

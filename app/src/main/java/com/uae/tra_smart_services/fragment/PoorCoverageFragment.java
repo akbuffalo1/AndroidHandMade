@@ -13,6 +13,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.graphics.ColorUtils;
 import android.telephony.PhoneStateListener;
 import android.telephony.SignalStrength;
 import android.telephony.TelephonyManager;
@@ -22,7 +23,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.View.OnFocusChangeListener;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -59,7 +59,6 @@ import com.uae.tra_smart_services.R;
 import com.uae.tra_smart_services.customviews.LoaderView;
 import com.uae.tra_smart_services.dialog.AlertDialogFragment.OnOkListener;
 import com.uae.tra_smart_services.dialog.SingleChoiceDialog;
-import com.uae.tra_smart_services.dialog.SingleChoiceDialog.OnItemPickListener;
 import com.uae.tra_smart_services.entities.Permission;
 import com.uae.tra_smart_services.fragment.base.BaseServiceFragment;
 import com.uae.tra_smart_services.global.LocationType;
@@ -71,6 +70,7 @@ import com.uae.tra_smart_services.manager.PermissionManager.OnPermissionRequestS
 import com.uae.tra_smart_services.rest.model.request.PoorCoverageRequestModel;
 import com.uae.tra_smart_services.rest.robo_requests.GeoLocationRequest;
 import com.uae.tra_smart_services.rest.robo_requests.PoorCoverageRequest;
+import com.uae.tra_smart_services.util.ImageUtils;
 import com.uae.tra_smart_services.util.Logger;
 
 import java.text.DateFormat;
@@ -462,15 +462,20 @@ public class PoorCoverageFragment extends BaseServiceFragment implements //regio
     private void invalidateMapLocation() {
         if (mGoogleMap != null && mCurrentLocation != null) {
             mvMap.setVisibility(View.VISIBLE);
+
+            int colorRGB = ImageUtils.getThemeColor(getActivity());
+            float[] hslColor = new float[3];
+            ColorUtils.colorToHSL(colorRGB, hslColor);
+
             final LatLng latLng = new LatLng(mCurrentLocation.getLatitude(), mCurrentLocation.getLongitude());
             final CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 16);
-            mGoogleMap.moveCamera(cameraUpdate);
+            mGoogleMap.animateCamera(cameraUpdate);
 
             mGoogleMap.clear();
             mGoogleMap.addMarker(
                     new MarkerOptions()
                             .position(latLng)
-                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
+                            .icon(BitmapDescriptorFactory.defaultMarker(hslColor[0])));
             defineUserFriendlyAddress();
         }
     }

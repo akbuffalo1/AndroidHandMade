@@ -2,10 +2,11 @@ package com.uae.tra_smart_services.rest.model.response;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.Nullable;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.uae.tra_smart_services.rest.robo_requests.ContactUsRequest;
 
 import java.util.ArrayList;
 
@@ -28,7 +29,7 @@ public class ContactUsResponse implements Parcelable {
     public String email;
 
     @Expose
-    Location location;
+    public Location location;
 
     @Expose
     public String customerWorkingHours;
@@ -42,13 +43,21 @@ public class ContactUsResponse implements Parcelable {
     @Expose
     public String title;
 
+    @Nullable
+    public LatLng getLatLng() {
+        if (location != null && location.latitude != null && location.longitude != null) {
+            return new LatLng(location.latitude, location.longitude);
+        }
+        return null;
+    }
+
     public static final class Location implements Parcelable {
 
         @Expose
-        Double latitude;
+        public Double latitude;
 
         @Expose
-        Double longitude;
+        public Double longitude;
 
         @Override
         public int describeContents() {
@@ -123,6 +132,6 @@ public class ContactUsResponse implements Parcelable {
         }
     };
 
-    public static final class List extends ArrayList<ContactUsRequest> {
+    public static final class List extends ArrayList<ContactUsResponse> {
     }
 }

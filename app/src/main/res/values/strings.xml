@@ -419,4 +419,9 @@
     <string name="fragment_contact_us">Contact Us</string>
     <string name="service">Service</string>
 
+    <string name="fragment_contact_us_address_label">ADDRESS</string>
+    <string name="fragment_contact_us_contact_info_label">CONTACT INFO</string>
+    <string name="fragment_contact_us_phone_label">Phone:</string>
+    <string name="fragment_contact_us_label">Mail:</string>
+
 </resources>

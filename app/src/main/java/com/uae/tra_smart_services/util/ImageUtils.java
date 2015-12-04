@@ -3,7 +3,7 @@ package com.uae.tra_smart_services.util;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.res.Resources;
+import android.content.res.Resources.Theme;
 import android.graphics.Bitmap;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
@@ -12,13 +12,16 @@ import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.support.annotation.AttrRes;
+import android.support.annotation.ColorInt;
 import android.support.annotation.DrawableRes;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.util.Base64;
 import android.util.TypedValue;
 
+import com.uae.tra_smart_services.R;
 import com.uae.tra_smart_services.global.C;
 
 import java.io.ByteArrayOutputStream;
@@ -92,10 +95,7 @@ public final class ImageUtils {
         final Drawable drawable = ContextCompat.getDrawable(_context, drawableRes);
 
         if (!isBlackAndWhiteMode(_context)) {
-            final TypedValue typedValue = new TypedValue();
-            final Resources.Theme theme = _context.getTheme();
-            theme.resolveAttribute(_attr, typedValue, true);
-            final int drawableColor = typedValue.data;
+            final int drawableColor = getColorFromAttr(_context, _attr);
 
             Drawable wrappedDrawable = DrawableCompat.wrap(drawable.mutate());
             DrawableCompat.setTint(wrappedDrawable, drawableColor);
@@ -104,4 +104,18 @@ public final class ImageUtils {
             return getFilteredDrawable(_context, drawable);
         }
     }
+
+    @ColorInt
+    public static int getColorFromAttr(@NonNull final Context _context, @AttrRes int _attr) {
+        final TypedValue typedValue = new TypedValue();
+        final Theme theme = _context.getTheme();
+        theme.resolveAttribute(_attr, typedValue, true);
+        return typedValue.data;
+    }
+
+    @ColorInt
+    public static int getThemeColor(@NonNull final Context _context) {
+        return getColorFromAttr(_context, R.attr.themeMainColor);
+    }
+
 }
