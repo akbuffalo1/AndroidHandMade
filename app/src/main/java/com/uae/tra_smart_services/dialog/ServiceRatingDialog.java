@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 
 import com.uae.tra_smart_services.R;
+import com.uae.tra_smart_services.customviews.LoaderView;
 import com.uae.tra_smart_services.customviews.ServiceRatingView;
 
 import static android.app.AlertDialog.THEME_HOLO_LIGHT;
@@ -16,7 +17,7 @@ import static android.app.AlertDialog.THEME_HOLO_LIGHT;
 /**
  * Created by ak-buffalo on 02.10.15.
  */
-public class ServiceRatingDialog extends DialogFragment implements DialogInterface.OnClickListener, ServiceRatingView.CallBacks {
+public class ServiceRatingDialog extends DialogFragment implements DialogInterface.OnClickListener {
     private CallBacks mCallBacks;
     private ServiceRatingView ratingView;
 
@@ -38,14 +39,14 @@ public class ServiceRatingDialog extends DialogFragment implements DialogInterfa
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        ratingView = new ServiceRatingView(getActivity());
-        ratingView.init(this);
-
+        ratingView = new ServiceRatingView(getActivity(), );
+        ratingView.init(-1);
         AlertDialog.Builder alertBuilder =
                 new AlertDialog.Builder(getActivity(), THEME_HOLO_LIGHT)
                         .setView(ratingView, 20, 20, 20, 20);
 
         alertBuilder.setNegativeButton(getString(R.string.str_cancel), this);
+        alertBuilder.setPositiveButton(getString(R.string.str_ok), this);
 
         return alertBuilder.create();
     }
@@ -59,7 +60,12 @@ public class ServiceRatingDialog extends DialogFragment implements DialogInterfa
         if (mCallBacks != null) {
             switch (which){
                 case DialogInterface.BUTTON_NEGATIVE:
-                    mCallBacks.onCancelPressed();
+                    dismiss();
+                    break;
+                case DialogInterface.BUTTON_POSITIVE:
+                    Object[] rating = ratingView.getRating();
+                    mCallBacks.onRate((int) rating[0], (String) rating[1]);
+                    dismiss();
                     break;
             }
         }
@@ -71,14 +77,7 @@ public class ServiceRatingDialog extends DialogFragment implements DialogInterfa
         mCallBacks = null;
     }
 
-    @Override
-    public void onRate(int _rate) {
-        mCallBacks.onRate(_rate);
-        dismiss();
-    }
-
     public interface CallBacks{
-        void onCancelPressed();
-        void onRate(int _rate);
+        void onRate(int _rate, String _description);
     }
 }

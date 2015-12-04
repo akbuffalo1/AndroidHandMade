@@ -6,6 +6,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewTreeObserver;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
@@ -21,7 +22,7 @@ import com.uae.tra_smart_services.interfaces.LoaderMarker;
 /**
  * Created by ak-buffalo on 21.09.15.
  */
-public class LoaderFragment extends BaseFragment implements View.OnClickListener, Loader, ServiceRatingView.CallBacks {
+public class LoaderFragment extends BaseFragment implements View.OnClickListener, Loader {
     /** Constants */
     public static final String TAG = LoaderFragment.class.getName();
     public static final String STATE = "state";
@@ -35,6 +36,7 @@ public class LoaderFragment extends BaseFragment implements View.OnClickListener
     protected TextView tvBackOrCancelBtn, tvLoaderTitleText;
     protected RelativeLayout rlFragmentContainer;
     protected BackButton afterBackButton;
+    protected Button btnSendRating;
     /** Listeners */
     protected static Loader.Cancelled mOnLoadingListener;
     protected static LoaderFragment.CallBacks mRatingCallbacks;
@@ -64,19 +66,14 @@ public class LoaderFragment extends BaseFragment implements View.OnClickListener
     protected void initViews() {
         super.initViews();
         rlFragmentContainer = findView(R.id.rlFragmentContainer_FL);
-//        int bgColor = defineBGColor(rlFragmentContainer);
-//        if(ImageUtils.isBlackAndWhiteMode(getActivity())){
-//            ImageUtils.getFilteredDrawable(getActivity(), rlFragmentContainer.getBackground());
-//            bgColor = Color.parseColor("#505050");
-//        }
         lvLoader = findView(R.id.lvLoaderView);
-//        lvLoader.init(bgColor);
         tvLoaderTitleText = findView(R.id.tvLoaderTitleText);
         srvRating = findView(R.id.srvRating_FL);
+        srvRating.init(1);
         llServiceRatingContainer = findView(R.id.llServiceRatingContainer_FL);
         svScrollContainer = findView(R.id.svScrollContainer_FL);
-        srvRating.init(this);
         tvBackOrCancelBtn = findView(R.id.tvLoaderBackButton);
+        btnSendRating = findView(R.id.btnSendRating_LSR);
     }
 
     @Override
@@ -84,6 +81,7 @@ public class LoaderFragment extends BaseFragment implements View.OnClickListener
         super.initListeners();
         rlFragmentContainer.setOnClickListener(this);
         tvBackOrCancelBtn.setOnClickListener(this);
+        btnSendRating.setOnClickListener(this);
     }
 
     @Override
@@ -98,6 +96,10 @@ public class LoaderFragment extends BaseFragment implements View.OnClickListener
                     toolbarTitleManager.setToolbarVisibility(true);
                     getFragmentManager().popBackStackImmediate();
                 }
+                break;
+            case R.id.btnSendRating_LSR:
+                Object[] rating = srvRating.getRating();
+                mRatingCallbacks.onRate((int) rating[0], (String) rating[1], lvLoader.getCurrentState());
                 break;
         }
     }
@@ -205,25 +207,13 @@ public class LoaderFragment extends BaseFragment implements View.OnClickListener
         super.onViewStateRestored(savedInstanceState);
     }
 
-    private int defineBGColor(View _view){
-        Bitmap bitmap = ((BitmapDrawable) _view.getBackground()).getBitmap();
-        int pixel = bitmap.getPixel(bitmap.getWidth() / 2, bitmap.getHeight() / 2);
-
-        return Color.rgb(Color.red(pixel), Color.green(pixel), Color.blue(pixel));
-    }
-
-    @Override
-    public void onRate(int _rate) {
-        mRatingCallbacks.onRate(_rate, lvLoader.getCurrentState());
-    }
-
     @Override
     public boolean onBackPressed() {
         return false;
     }
 
     public interface CallBacks extends LoaderMarker {
-        void onRate(int _rate, LoaderView.State _state);
+        void onRate(int _rate, String _description, LoaderView.State _state);
     }
 
     @Override

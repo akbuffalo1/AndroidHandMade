@@ -13,6 +13,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -27,6 +28,7 @@ import com.uae.tra_smart_services.R;
 import com.uae.tra_smart_services.customviews.LoaderView;
 import com.uae.tra_smart_services.dialog.AlertDialogFragment;
 import com.uae.tra_smart_services.dialog.ProgressDialog;
+import com.uae.tra_smart_services.dialog.ServiceRatingDialog;
 import com.uae.tra_smart_services.entities.NetworkErrorHandler;
 import com.uae.tra_smart_services.fragment.CustomLoaderFragment;
 import com.uae.tra_smart_services.fragment.LoaderFragment;
@@ -91,6 +93,26 @@ public abstract class BaseFragment extends Fragment implements Loader.Dismiss, L
         super.onViewCreated(view, savedInstanceState);
         if (getTitle() != 0)
             toolbarTitleManager.setTitle(getTitle());
+    }
+
+    @CallSuper
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        hideKeyboard(getView());
+        switch (item.getItemId()) {
+            case R.id.action_rate:
+                hideKeyboard(getView());
+                showRatingDialog();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    protected void showRatingDialog(){
+        hideKeyboard(getView());
+        ServiceRatingDialog.newInstance(this)
+                .show(getFragmentManager());
     }
 
     @StringRes

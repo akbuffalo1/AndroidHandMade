@@ -33,9 +33,9 @@
         <item name="profileControllerResetColor">#717d84</item>
         <item name="profileControllerSaveColor">#3cbb4b</item>
         <item name="passwordVisibilityToggleBackground">@drawable/background_user_profile_password_toggle</item>
-        <item name="rating_bad_color"><!--@android:color/holo_red_dark-->@android:color/white</item>
-        <item name="rating_neut_color"><!--@android:color/darker_gray-->@android:color/white</item>
-        <item name="rating_good_color"><!--@android:color/holo_green_dark-->@android:color/white</item>
+        <item name="rating_bad_color">@android:color/holo_red_dark</item>
+        <item name="rating_neut_color">@android:color/darker_gray</item>
+        <item name="rating_good_color">@android:color/holo_green_dark</item>
     </style>
 
     <style name="AppThemeOrange" parent="BaseAppTheme">

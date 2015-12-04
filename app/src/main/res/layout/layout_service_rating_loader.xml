@@ -1,0 +1,71 @@
+<merge
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:id="@+id/rgDomainCheckServiceRating_FDCH"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.uae.tra_smart_services.customviews.CheckableHexagonView
+            android:layout_width="wrap_content"
+            android:id="@+id/hvDomainCheckRating_1_FDC"
+            android:layout_height="wrap_content"
+            app:hexagonSideSize="36dp"
+            app:hexagonBackground="@drawable/hexagon_translucent_selector"
+            app:hexagonSrc="@drawable/ic_btn_bad_line"
+            app:hexagonBorderColor="@android:color/white"
+            app:hexagonSrcTintColor="@android:color/white"
+            app:hexagonBorderSize="1dp"
+            android:tag="1"
+            android:layout_marginEnd="20dp"/>
+
+        <com.uae.tra_smart_services.customviews.CheckableHexagonView
+            android:layout_width="wrap_content"
+            android:id="@+id/hvDomainCheckRating_2_FDC"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            app:hexagonSideSize="36dp"
+            app:hexagonBackground="@drawable/hexagon_translucent_selector"
+            app:hexagonSrc="@drawable/ic_btn_neut_line"
+            app:hexagonBorderColor="@android:color/white"
+            app:hexagonSrcTintColor="@android:color/white"
+            app:hexagonBorderSize="1dp"
+            android:tag="2"
+            android:layout_marginEnd="20dp"/>
+
+        <com.uae.tra_smart_services.customviews.CheckableHexagonView
+            android:layout_width="wrap_content"
+            android:id="@+id/hvDomainCheckRating_3_FDC"
+            android:layout_height="wrap_content"
+            app:hexagonSideSize="36dp"
+            app:hexagonBackground="@drawable/hexagon_translucent_selector"
+            app:hexagonSrc="@drawable/ic_btn_good_line"
+            app:hexagonBorderColor="@android:color/white"
+            app:hexagonSrcTintColor="@android:color/white"
+            app:hexagonBorderSize="1dp"
+            android:tag="3"
+            android:layout_marginStart="20dp"/>
+    </LinearLayout>
+
+    <EditText
+        style="@style/MyEditTextTheme"
+        android:id="@+id/etFeedBack_LSR"
+        android:hint="@string/description"
+        android:textColorHint="@color/hex_text_color_white"
+        android:textColor="@color/hex_text_color_white"
+        android:width="65dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="10dp"
+        android:layout_width="300dp"
+        android:background="@null"
+        android:layout_height="wrap_content" />
+
+    <View
+        android:background="@color/hex_text_color_white"
+        style="@style/AuthorizationFieldsSeparator" />
+
+</merge>

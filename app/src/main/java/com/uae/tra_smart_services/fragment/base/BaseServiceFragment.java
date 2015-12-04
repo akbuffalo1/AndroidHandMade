@@ -12,6 +12,7 @@ import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
 import com.uae.tra_smart_services.R;
 import com.uae.tra_smart_services.customviews.LoaderView;
+import com.uae.tra_smart_services.customviews.ServiceRatingView;
 import com.uae.tra_smart_services.dialog.ServiceRatingDialog;
 import com.uae.tra_smart_services.fragment.LoaderFragment;
 import com.uae.tra_smart_services.global.Service;
@@ -65,17 +66,12 @@ public abstract class BaseServiceFragment extends BaseFragment
             case R.id.action_show_info:
                 openServiceInfoIfCan();
                 return true;
-            case R.id.action_rate:
-                openServiceRatingPopupIfCan();
-                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
-    private void openServiceRatingPopupIfCan() {
 
-    }
 
     private void openServiceInfoIfCan() {
         final Service service;
@@ -87,23 +83,18 @@ public abstract class BaseServiceFragment extends BaseFragment
     }
 
     @Override
-    public void onRate(int _rate, LoaderView.State _state){
+    public void onRate(int _rate, String _description, LoaderView.State _state){
         final String[] rateNames = getResources().getStringArray(R.array.rate_names);
         getFragmentManager().popBackStackImmediate();
         if(_state == LoaderView.State.SUCCESS || _state == LoaderView.State.FAILURE){
             getFragmentManager().popBackStackImmediate();
         }
-        sendRating(new RatingServiceRequestModel(getServiceName(), _rate, rateNames[_rate - 1]));
+        sendRating(new RatingServiceRequestModel(getServiceName(), _rate, _description != null ? _description : rateNames[_rate-1]));
     }
 
     @Override
-    public void onRate(int _rate) {
-
-    }
-
-    @Override
-    public void onCancelPressed() {
-
+    public void onRate(int _rate, String _description){
+        onRate(_rate, _description, null);
     }
 
     private void sendRating(RatingServiceRequestModel _model) {

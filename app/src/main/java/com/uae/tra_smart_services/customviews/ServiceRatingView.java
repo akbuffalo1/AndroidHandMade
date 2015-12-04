@@ -6,18 +6,18 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import com.uae.tra_smart_services.R;
-import com.uae.tra_smart_services.interfaces.LoaderMarker;
 
 /**
  * Created by ak-buffalo on 14.09.15.
  */
-public class ServiceRatingView extends LinearLayout implements OnClickListener {
+public class ServiceRatingView extends LinearLayout implements OnClickListener, View.OnLayoutChangeListener {
 
-    private HexagonView hvBad, hvNeut, hvGood;
-    private CallBacks mCallBacks;
+    private CheckableHexagonView hvBad, hvNeut, hvGood;
+    private EditText etFeedBack;
 
     public ServiceRatingView(Context context) {
         this(context, null);
@@ -25,30 +25,32 @@ public class ServiceRatingView extends LinearLayout implements OnClickListener {
 
     public ServiceRatingView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        iniLayout();
-        initViews();
+//        iniLayout();
+//        initViews();
+        addOnLayoutChangeListener(this);
 //        initListeners();
     }
-
-    public void init(CallBacks _callBacks) {
-        mCallBacks = _callBacks;
+    int mMode;
+    public void init(int _mode){
+        mMode = _mode;
     }
 
     private void iniLayout() {
         setOrientation(VERTICAL);
         setGravity(Gravity.CENTER);
-        setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
     }
 
     private void initViews() {
-        inflate(getContext(), R.layout.layout_service_rating, this);
+        inflate(getContext(), mMode > 0 ? R.layout.layout_service_rating_loader : R.layout.layout_service_rating_popup, this);
 
-        hvBad = (HexagonView) findViewById(R.id.hvDomainCheckRating_1_FDC);
+        hvBad = (CheckableHexagonView) findViewById(R.id.hvDomainCheckRating_1_FDC);
 //        hvBad.setImageDrawable(ImageUtils.getFilteredDrawable(getContext(), ContextCompat.getDrawable(getContext(), R.drawable.btn_bad_line)));
-        hvNeut = (HexagonView) findViewById(R.id.hvDomainCheckRating_2_FDC);
+        hvNeut = (CheckableHexagonView) findViewById(R.id.hvDomainCheckRating_2_FDC);
 //        hvNeut.setImageDrawable(ImageUtils.getFilteredDrawable(getContext(), ContextCompat.getDrawable(getContext(), R.drawable.btn_neut_line)));
-        hvGood = (HexagonView) findViewById(R.id.hvDomainCheckRating_3_FDC);
+        hvGood = (CheckableHexagonView) findViewById(R.id.hvDomainCheckRating_3_FDC);
 //        hvGood.setImageDrawable(ImageUtils.getFilteredDrawable(getContext(), ContextCompat.getDrawable(getContext(), R.drawable.btn_good_line)));
+        etFeedBack = (EditText) findViewById(R.id.etFeedBack_LSR);
     }
 
     private void initListeners() {
@@ -57,13 +59,26 @@ public class ServiceRatingView extends LinearLayout implements OnClickListener {
         hvGood.setOnClickListener(this);
     }
 
-    @Override
-    public void onClick(View _view) {
-        if (_view.getId() == R.id.btnSendRating_LSR && mCallBacks != null)
-            mCallBacks.onRate(Integer.valueOf(_view.getTag().toString()));
+    public Object[] getRating(){
+        return new Object[]{mRate, etFeedBack};
     }
 
-    public interface CallBacks extends LoaderMarker {
-        void onRate(int _rate);
+    private int mRate = 3;
+    @Override
+    public void onClick(View _view) {
+        switch (_view.getId()){
+            case R.id.hvDomainCheckRating_1_FDC:
+            case R.id.hvDomainCheckRating_2_FDC:
+            case R.id.hvDomainCheckRating_3_FDC:
+                mRate = Integer.valueOf(_view.getTag().toString());
+                break;
+        }
+    }
+
+    @Override
+    public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
+        iniLayout();
+        initViews();
+        removeOnLayoutChangeListener(this);
     }
 }

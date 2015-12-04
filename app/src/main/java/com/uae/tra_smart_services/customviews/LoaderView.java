@@ -283,7 +283,9 @@ public class LoaderView extends View implements Animator.AnimatorListener {
     public void startFilling(final State _currentState){
         mAnimationState = State.FILLING;
         mCurrentState = _currentState;
-        animatorFilling.start();
+        if (animatorFilling != null) {
+            animatorFilling.start();
+        }
     }
 
     private void startDrawSuccessFigure() {
