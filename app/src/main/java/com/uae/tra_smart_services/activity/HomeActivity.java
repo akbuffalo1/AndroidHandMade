@@ -209,10 +209,10 @@ public class HomeActivity extends BaseFragmentActivity implements //region INTER
                 replaceFragment(DomainIsAvailableFragment.newInstance((DomainAvailabilityCheckResponseModel) _data), _useBackStack);
                 break;
             case COMPLAIN_ABOUT_PROVIDER:
-                openFragmentIfAuthorized(ComplainAboutServiceFragment.newInstance(), _service, _useBackStack);
+                openFragmentIfAuthorized(_data != null ? ComplainAboutServiceFragment.newInstance(_data) : ComplainAboutServiceFragment.newInstance(), _service, _useBackStack);
                 break;
             case ENQUIRIES:
-                openFragmentIfAuthorized(EnquiriesFragment.newInstance(), _service, _useBackStack);
+                openFragmentIfAuthorized(_data != null ? EnquiriesFragment.newInstance(_data) : EnquiriesFragment.newInstance(), _service, _useBackStack);
                 break;
             case COMPLAINT_ABOUT_TRA:
                 openFragmentIfAuthorized(_data != null ? ComplainAboutTraFragment.newInstance(_data) : ComplainAboutTraFragment.newInstance(), _service, _useBackStack);

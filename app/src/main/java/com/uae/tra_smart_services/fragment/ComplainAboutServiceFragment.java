@@ -2,6 +2,7 @@ package com.uae.tra_smart_services.fragment;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
@@ -48,6 +49,14 @@ public final class ComplainAboutServiceFragment extends BaseComplainFragment
         return new ComplainAboutServiceFragment();
     }
 
+    public static ComplainAboutServiceFragment newInstance(Parcelable data) {
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(KEY_DATA, data);
+        ComplainAboutServiceFragment fragment = new ComplainAboutServiceFragment();
+        fragment.setArguments(bundle);
+        return fragment;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,6 +90,15 @@ public final class ComplainAboutServiceFragment extends BaseComplainFragment
         tivAddAttachment.setOnClickListener(this);
         etComplainTitle.setOnFocusChangeListener(this);
         etDescription.setOnFocusChangeListener(this);
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        if(getArguments() != null && (mModel = getArguments().getParcelable(KEY_DATA)) != null){
+            etComplainTitle.setText(mModel.title);
+            etDescription.setText(mModel.description);
+        }
     }
 
     @Override

@@ -33,6 +33,12 @@ public enum Service {
         public String getServiceName() {
             return C.COMPLAIN_ABOUT_SERVICE_PROVIDER;
         }
+
+        @Nullable
+        @Override
+        public String getTransactionName() {
+            return "Complaint about Service Provider";
+        }
     },
     COMPLAINT_ABOUT_TRA {
         @Override
