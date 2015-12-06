@@ -347,7 +347,6 @@ public final class InfoHubFragment extends BaseFragment
 
     @Override
     public void onRefresh() {
-        mHexagonSwipeRefreshLayout.onLoadingStart();
         loadTransactionPage(mTransactionPageNum = 1, true);
     }
 

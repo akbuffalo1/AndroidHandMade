@@ -261,6 +261,7 @@ public class LoaderView extends View implements Animator.AnimatorListener {
     }
 
     public void startProcessing(){
+        if(mAnimationState == State.PROCESSING)return;
         setAlpha(1);
         mAnimationState = State.PROCESSING;
         animatorStart.start();
@@ -269,11 +270,11 @@ public class LoaderView extends View implements Animator.AnimatorListener {
 
     public void stopProcessing(){
         setAlpha(0);
-        mAnimationState = State.INITIALL;
-        if(isInitLoading){
+        if(mAnimationState == State.PROCESSING/*animatorStart != null && animatorStart.isRunning() || animatorEnd != null && animatorEnd.isRunning()*/){
             animatorStart.cancel();
             animatorEnd.cancel();
         }
+        mAnimationState = State.INITIALL;
     }
 
     public void startFilling(final State _currentState){
