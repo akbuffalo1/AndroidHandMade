@@ -163,11 +163,13 @@ public class InfoHubAnnouncementsFragment extends BaseFragment
 
     @Override
     public boolean onMenuItemActionExpand(MenuItem item) {
+        mHexagonSwipeRefreshLayout.setEnabled(false);
         return true;
     }
 
     @Override
     public boolean onMenuItemActionCollapse(MenuItem item) {
+        mHexagonSwipeRefreshLayout.setEnabled(true);
         mIsSearching = false;
         tvNoResult.setText(R.string.fragment_info_hub_no_pending_transactions);
         mListAdapter.showAnnouncements();
