@@ -50,7 +50,7 @@
                     android:textColor="?attr/colorPrimary"
                     android:textColorHint="?attr/colorPrimary"
                     android:textSize="18sp"
-                    tools:text="tra.gov.ae"/>
+                    android:text="tra.gov.ae"/>
 
                 <TextView
                     android:layout_alignTop="@id/etDomainAvail_FDCH"

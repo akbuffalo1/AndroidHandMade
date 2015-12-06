@@ -347,7 +347,8 @@
 
     <string name="service_report_spam">SMS Spam</string>
 
-    <string name="str_rate">Rate Service</string>
+    <string name="rate_service">Rate Service</string>
+    <string name="rate">RATE</string>
 
     <string-array name="rate_names">
         <item>1</item>
@@ -424,5 +425,7 @@
     <string name="fragment_contact_us_contact_info_label">CONTACT INFO</string>
     <string name="fragment_contact_us_phone_label">Phone:</string>
     <string name="fragment_contact_us_label">Mail:</string>
+
+    <string name="choose_rating">Please, choose appropriate rating and feel feedback</string>
 
 </resources>

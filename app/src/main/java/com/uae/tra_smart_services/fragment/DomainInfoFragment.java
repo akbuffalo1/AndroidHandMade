@@ -5,14 +5,18 @@ import android.content.AsyncTaskLoader;
 import android.content.Context;
 import android.content.Loader;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.uae.tra_smart_services.R;
 import com.uae.tra_smart_services.dialog.AlertDialogFragment;
 import com.uae.tra_smart_services.fragment.base.BaseFragment;
+import com.uae.tra_smart_services.fragment.base.BaseServiceFragment;
 import com.uae.tra_smart_services.global.C;
+import com.uae.tra_smart_services.global.Service;
 import com.uae.tra_smart_services.rest.model.response.DomainInfoCheckResponseModel;
 
 import java.util.HashMap;
@@ -21,7 +25,7 @@ import java.util.Map;
 /**
  * Created by ak-buffalo on 14.08.15.
  */
-public class DomainInfoFragment extends BaseFragment implements AlertDialogFragment.OnOkListener, LoaderManager.LoaderCallbacks<Map<String, String>> {
+public class DomainInfoFragment extends BaseServiceFragment implements AlertDialogFragment.OnOkListener, LoaderManager.LoaderCallbacks<Map<String, String>> {
 
     private TextView tvDomainName_FDI;
     private TextView tvRegisterId_FDI;
@@ -48,6 +52,26 @@ public class DomainInfoFragment extends BaseFragment implements AlertDialogFragm
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_rate, menu);
         super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        MenuItem menuItem;
+        if((menuItem = menu.findItem(R.id.action_show_info)) != null){
+            menuItem.setVisible(false);
+        }
+        super.onPrepareOptionsMenu(menu);
+    }
+
+    @Nullable
+    @Override
+    protected Service getServiceType() {
+        return Service.DOMAIN_CHECK_INFO;
+    }
+
+    @Override
+    protected String getServiceName() {
+        return "Domain info";
     }
 
     @Override
@@ -101,6 +125,11 @@ public class DomainInfoFragment extends BaseFragment implements AlertDialogFragm
     @Override
     public void onLoaderReset(Loader loader) {
         loader.reset();
+    }
+
+    @Override
+    public void onLoadingCanceled() {
+        // Not implemented
     }
 
     private static class DomainDataParser extends AsyncTaskLoader<Map<String, String>> {

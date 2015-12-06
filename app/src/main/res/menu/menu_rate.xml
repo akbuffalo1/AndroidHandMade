@@ -6,7 +6,7 @@
         android:id="@+id/action_rate"
         android:icon="@drawable/btn_rate"
         android:orderInCategory="90"
-        android:title="@string/str_rate"
+        android:title="@string/rate_service"
         app:showAsAction="collapseActionView|always"/>
 
 </menu>

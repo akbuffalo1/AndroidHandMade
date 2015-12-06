@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.uae.tra_smart_services.R;
 import com.uae.tra_smart_services.customviews.LoaderView;
@@ -68,8 +69,8 @@ public class LoaderFragment extends BaseFragment implements View.OnClickListener
         rlFragmentContainer = findView(R.id.rlFragmentContainer_FL);
         lvLoader = findView(R.id.lvLoaderView);
         tvLoaderTitleText = findView(R.id.tvLoaderTitleText);
+        ServiceRatingView.MODE = 1;
         srvRating = findView(R.id.srvRating_FL);
-        srvRating.init(1);
         llServiceRatingContainer = findView(R.id.llServiceRatingContainer_FL);
         svScrollContainer = findView(R.id.svScrollContainer_FL);
         tvBackOrCancelBtn = findView(R.id.tvLoaderBackButton);
@@ -99,6 +100,10 @@ public class LoaderFragment extends BaseFragment implements View.OnClickListener
                 break;
             case R.id.btnSendRating_LSR:
                 Object[] rating = srvRating.getRating();
+                if ((int) rating[0] == 0){
+                    Toast.makeText((isAdded()) ? getActivity() : getRootView().getContext(), R.string.choose_rating, Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 mRatingCallbacks.onRate((int) rating[0], (String) rating[1], lvLoader.getCurrentState());
                 break;
         }

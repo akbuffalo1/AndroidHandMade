@@ -14,43 +14,37 @@ import com.uae.tra_smart_services.R;
 /**
  * Created by ak-buffalo on 14.09.15.
  */
-public class ServiceRatingView extends LinearLayout implements OnClickListener, View.OnLayoutChangeListener {
+public class ServiceRatingView extends LinearLayout implements OnClickListener {
 
-    private CheckableHexagonView hvBad, hvNeut, hvGood;
+    private CheckableHexagonView hvBad;
+    private CheckableHexagonView hvNeut, hvGood;
+    private int mRate = 0;
     private EditText etFeedBack;
+    public static int MODE = 1;
 
-    public ServiceRatingView(Context context) {
-        this(context, null);
-    }
+    public ServiceRatingView(Context context) { this(context, null); }
 
     public ServiceRatingView(Context context, AttributeSet attrs) {
         super(context, attrs);
-//        iniLayout();
-//        initViews();
-        addOnLayoutChangeListener(this);
-//        initListeners();
-    }
-    int mMode;
-    public void init(int _mode){
-        mMode = _mode;
+        iniLayout();
+        initViews();
+        initListeners();
     }
 
     private void iniLayout() {
         setOrientation(VERTICAL);
         setGravity(Gravity.CENTER);
-        setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
+        setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT));
     }
 
     private void initViews() {
-        inflate(getContext(), mMode > 0 ? R.layout.layout_service_rating_loader : R.layout.layout_service_rating_popup, this);
+        inflate(getContext(), MODE > 0 ? R.layout.layout_service_rating_loader : R.layout.layout_service_rating_popup, this);
 
         hvBad = (CheckableHexagonView) findViewById(R.id.hvDomainCheckRating_1_FDC);
-//        hvBad.setImageDrawable(ImageUtils.getFilteredDrawable(getContext(), ContextCompat.getDrawable(getContext(), R.drawable.btn_bad_line)));
         hvNeut = (CheckableHexagonView) findViewById(R.id.hvDomainCheckRating_2_FDC);
-//        hvNeut.setImageDrawable(ImageUtils.getFilteredDrawable(getContext(), ContextCompat.getDrawable(getContext(), R.drawable.btn_neut_line)));
         hvGood = (CheckableHexagonView) findViewById(R.id.hvDomainCheckRating_3_FDC);
-//        hvGood.setImageDrawable(ImageUtils.getFilteredDrawable(getContext(), ContextCompat.getDrawable(getContext(), R.drawable.btn_good_line)));
         etFeedBack = (EditText) findViewById(R.id.etFeedBack_LSR);
+        etFeedBack.clearFocus();
     }
 
     private void initListeners() {
@@ -60,10 +54,9 @@ public class ServiceRatingView extends LinearLayout implements OnClickListener, 
     }
 
     public Object[] getRating(){
-        return new Object[]{mRate, etFeedBack};
+        return new Object[]{mRate, etFeedBack.getText().toString()};
     }
 
-    private int mRate = 3;
     @Override
     public void onClick(View _view) {
         switch (_view.getId()){
@@ -73,12 +66,5 @@ public class ServiceRatingView extends LinearLayout implements OnClickListener, 
                 mRate = Integer.valueOf(_view.getTag().toString());
                 break;
         }
-    }
-
-    @Override
-    public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
-        iniLayout();
-        initViews();
-        removeOnLayoutChangeListener(this);
     }
 }

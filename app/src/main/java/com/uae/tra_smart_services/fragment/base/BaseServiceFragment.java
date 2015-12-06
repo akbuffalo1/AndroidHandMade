@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
@@ -71,8 +72,6 @@ public abstract class BaseServiceFragment extends BaseFragment
         }
     }
 
-
-
     private void openServiceInfoIfCan() {
         final Service service;
         final String serviceName;
@@ -84,17 +83,17 @@ public abstract class BaseServiceFragment extends BaseFragment
 
     @Override
     public void onRate(int _rate, String _description, LoaderView.State _state){
-        final String[] rateNames = getResources().getStringArray(R.array.rate_names);
-        getFragmentManager().popBackStackImmediate();
         if(_state == LoaderView.State.SUCCESS || _state == LoaderView.State.FAILURE){
             getFragmentManager().popBackStackImmediate();
         }
-        sendRating(new RatingServiceRequestModel(getServiceName(), _rate, _description != null ? _description : rateNames[_rate-1]));
+        onRate(_rate, _description);
     }
 
     @Override
     public void onRate(int _rate, String _description){
-        onRate(_rate, _description, null);
+        final String[] rateNames = getResources().getStringArray(R.array.rate_names);
+        getFragmentManager().popBackStackImmediate();
+        sendRating(new RatingServiceRequestModel(getServiceName(), _rate, _description != null ? _description : rateNames[_rate - 1]));
     }
 
     private void sendRating(RatingServiceRequestModel _model) {

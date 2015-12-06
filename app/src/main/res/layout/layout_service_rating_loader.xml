@@ -49,20 +49,26 @@
             android:layout_marginStart="20dp"/>
     </LinearLayout>
 
-    <EditText
-        style="@style/MyEditTextTheme"
-        android:id="@+id/etFeedBack_LSR"
-        android:hint="@string/description"
-        android:textColorHint="@color/hex_text_color_white"
-        android:textColor="@color/hex_text_color_white"
-        android:width="65dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginBottom="10dp"
-        android:layout_width="300dp"
-        android:background="@null"
-        android:layout_height="wrap_content" />
+    <!--<android.support.design.widget.TextInputLayout
+        android:id="@+id/input_layout_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">-->
+
+        <EditText
+            style="@style/MyEditTextTheme"
+            android:id="@+id/etFeedBack_LSR"
+            android:hint="@string/description"
+            android:textColorHint="@color/hex_text_color_white"
+            android:textColor="@color/hex_text_color_white"
+            android:width="65dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="10dp"
+            android:layout_width="300dp"
+            android:background="@null"
+            android:layout_height="wrap_content" />
+    <!--</android.support.design.widget.TextInputLayout>-->
 
     <View
         android:background="@color/hex_text_color_white"

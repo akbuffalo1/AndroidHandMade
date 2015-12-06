@@ -5,11 +5,15 @@ import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
+import android.view.Gravity;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.uae.tra_smart_services.R;
-import com.uae.tra_smart_services.customviews.LoaderView;
 import com.uae.tra_smart_services.customviews.ServiceRatingView;
 
 import static android.app.AlertDialog.THEME_HOLO_LIGHT;
@@ -18,6 +22,8 @@ import static android.app.AlertDialog.THEME_HOLO_LIGHT;
  * Created by ak-buffalo on 02.10.15.
  */
 public class ServiceRatingDialog extends DialogFragment implements DialogInterface.OnClickListener {
+    private static final String LOG_TAG = ServiceRatingDialog.class.getSimpleName();
+
     private CallBacks mCallBacks;
     private ServiceRatingView ratingView;
 
@@ -32,17 +38,28 @@ public class ServiceRatingDialog extends DialogFragment implements DialogInterfa
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         final Fragment targetFragment = getTargetFragment();
-        if (targetFragment instanceof CallBacks) {
+        try {
             mCallBacks = (CallBacks) targetFragment;
+        } catch (ClassCastException ex){
+            Log.e(LOG_TAG, "Must implement 'ServiceRatingDialog.CallBacks'.");
         }
     }
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        ratingView = new ServiceRatingView(getActivity(), );
-        ratingView.init(-1);
+        ServiceRatingView.MODE = -1;
+        ratingView = new ServiceRatingView(getActivity());
+
+        TextView title = new TextView(getActivity());
+        title.setText(R.string.rate);
+        title.setPadding(10, 10, 10, 10);
+        title.setGravity(Gravity.CENTER);
+        title.setTextColor(Color.DKGRAY);
+        title.setTextSize(20);
+
         AlertDialog.Builder alertBuilder =
                 new AlertDialog.Builder(getActivity(), THEME_HOLO_LIGHT)
+                        .setCustomTitle(title)
                         .setView(ratingView, 20, 20, 20, 20);
 
         alertBuilder.setNegativeButton(getString(R.string.str_cancel), this);
@@ -64,8 +81,14 @@ public class ServiceRatingDialog extends DialogFragment implements DialogInterfa
                     break;
                 case DialogInterface.BUTTON_POSITIVE:
                     Object[] rating = ratingView.getRating();
-                    mCallBacks.onRate((int) rating[0], (String) rating[1]);
-                    dismiss();
+                    if ((int) rating[0] == 0){
+                        Toast.makeText(getActivity(), R.string.choose_rating, Toast.LENGTH_SHORT).show();
+//                        return;
+                        break;
+                    } else {
+                        mCallBacks.onRate((int) rating[0], (String) rating[1]);
+                        dismiss();
+                    }
                     break;
             }
         }
