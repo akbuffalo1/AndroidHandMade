@@ -154,7 +154,6 @@ public class HexagonSwipeRefreshLayout extends RelativeLayout implements ViewTre
     @Override
     protected void onFinishInflate() {
         loaderView = (LoaderView) getChildAt(0);
-        loaderView.init(Color.parseColor("#ffffff"));
         noPendingTransactions = (TextView) getChildAt(1);
         listview = (RecyclerView) getChildAt(2);
         listview.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {

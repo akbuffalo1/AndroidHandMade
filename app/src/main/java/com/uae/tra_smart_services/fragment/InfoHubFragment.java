@@ -184,7 +184,6 @@ public final class InfoHubFragment extends BaseFragment
     protected final void initViews() {
         super.initViews();
         lvAnnouncementsLoader = findView(R.id.lvLoadingAnnoncements_FIH);
-        lvAnnouncementsLoader.init(Color.parseColor("#ffffff"));
         tvNoAnnouncements = findView(R.id.tvNoAnnouncements_FIH);
         tvNoTransactions = findView(R.id.tvNoTransactions_FIH);
         tvSeeMoreAnnouncements = findView(R.id.tvSeeMorebAnn_FIH);
