@@ -118,13 +118,13 @@ public class DomainCheckerFragment extends BaseServiceFragment
             switch (_view.getId()) {
                 case R.id.btnAvail_FDCH:
                     if (validateAeDomain()) {
-                        loaderOverlayShow(getString(R.string.str_checking), this, false);
+                        loaderOverlayShow(getString(R.string.str_checking), this, true);
                         checkAvailability(domain);
                     }
                     break;
                 case R.id.btnWhoIs_FDCH:
                     if (validateAeDomain()) {
-                        loaderOverlayShow(getString(R.string.str_checking), this, false);
+                        loaderOverlayShow(getString(R.string.str_checking), this, true);
                         checkWhoIs(domain);
                     }
                     break;
