@@ -3,7 +3,6 @@ package com.uae.tra_smart_services.customviews;
 import android.content.Context;
 import android.graphics.Color;
 import android.support.v4.view.ViewCompat;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v4.widget.ViewDragHelper;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,11 +10,9 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewTreeObserver;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.uae.tra_smart_services.R;
 import com.uae.tra_smart_services.interfaces.OuterLayoutState;
 
 /**
@@ -32,6 +29,7 @@ public class HexagonSwipeRefreshLayout extends RelativeLayout implements ViewTre
     private RecyclerView listview;
     private TextView noPendingTransactions;
     private HexagonSwipeRefreshLayout.Listener listener;
+    private boolean mEnabled = true;
 
     public HexagonSwipeRefreshLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -82,11 +80,20 @@ public class HexagonSwipeRefreshLayout extends RelativeLayout implements ViewTre
         }
     }
 
+    public void setEnabled(boolean _enabled){
+        mEnabled = _enabled;
+    }
+
+    public boolean isEnabled() {
+        return mEnabled;
+    }
+
     public void registerListener(Listener _listener){
         listener = _listener;
     }
 
     public class DragHelperCallback extends ViewDragHelper.Callback {
+
         @Override
         public void onViewDragStateChanged(int state) {
             if (state == mDraggingState || isOpen()) {
@@ -110,7 +117,7 @@ public class HexagonSwipeRefreshLayout extends RelativeLayout implements ViewTre
 
         @Override
         public boolean tryCaptureView(View view, int i) {
-            return (view == listview) ? !(afterLoading = false) : false;
+            return (view == listview && HexagonSwipeRefreshLayout.this.isEnabled()) ? !(afterLoading = false) : false;
         }
 
         @Override

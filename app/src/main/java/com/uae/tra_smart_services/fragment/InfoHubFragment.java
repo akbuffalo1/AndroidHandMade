@@ -319,11 +319,13 @@ public final class InfoHubFragment extends BaseFragment
 
     @Override
     public boolean onMenuItemActionExpand(MenuItem item) {
+        mHexagonSwipeRefreshLayout.setEnabled(false);
         return true;
     }
 
     @Override
     public boolean onMenuItemActionCollapse(MenuItem item) {
+        mHexagonSwipeRefreshLayout.setEnabled(true);
         mIsSearching = false;
         tvNoTransactions.setText(R.string.fragment_info_hub_no_pending_transactions);
         mTransactionsListAdapter.showTransactions();
