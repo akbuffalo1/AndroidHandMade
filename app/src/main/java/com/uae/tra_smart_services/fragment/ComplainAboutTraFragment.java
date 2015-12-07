@@ -25,7 +25,6 @@ import com.uae.tra_smart_services.global.Service;
 import com.uae.tra_smart_services.interfaces.Loader;
 import com.uae.tra_smart_services.interfaces.LoaderMarker;
 import com.uae.tra_smart_services.rest.model.request.ComplainTRAServiceModel;
-import com.uae.tra_smart_services.rest.model.response.GetTransactionResponseModel;
 import com.uae.tra_smart_services.rest.robo_requests.ComplainAboutTRAServiceRequest;
 
 import retrofit.client.Response;
@@ -164,7 +163,7 @@ public class ComplainAboutTraFragment extends BaseComplainFragment
 
     @Override
     protected String getServiceName() {
-        return "complain about TRA Service";
+        return C.RATE_NAME_COMPLAIN_ABOUT_TRA;//"complain about TRA Service";
     }
 
     private class RequestResponseListener implements PendingRequestListener<Response> {

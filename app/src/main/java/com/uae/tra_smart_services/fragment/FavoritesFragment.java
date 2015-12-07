@@ -228,7 +228,7 @@ public final class FavoritesFragment extends BaseFragment
     }
 
     private void openServiceInfoIfCan(final Service service) {
-        final String serviceName = service.getServiceName();
+        final String serviceName = service.getServiceInfoName();
         if (serviceName != null && mFavoritesEventListener != null) {
             mFavoritesEventListener.onOpenServiceInfo(serviceName);
         }

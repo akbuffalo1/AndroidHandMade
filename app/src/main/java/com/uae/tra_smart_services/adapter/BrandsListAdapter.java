@@ -16,7 +16,7 @@ import android.widget.Space;
 import com.uae.tra_smart_services.R;
 import com.uae.tra_smart_services.adapter.BrandsListAdapter.ViewHolder;
 import com.uae.tra_smart_services.customviews.HexagonView;
-import com.uae.tra_smart_services.fragment.ApprovedDevicesFragment.BrandItem;
+import com.uae.tra_smart_services.fragment.MobileBrandFragment.BrandItem;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -8,6 +8,7 @@ import com.octo.android.robospice.persistence.DurationInMillis;
 import com.uae.tra_smart_services.R;
 import com.uae.tra_smart_services.TRAApplication;
 import com.uae.tra_smart_services.customviews.LoaderView;
+import com.uae.tra_smart_services.global.C;
 import com.uae.tra_smart_services.global.Service;
 import com.uae.tra_smart_services.interfaces.Loader;
 import com.uae.tra_smart_services.interfaces.LoaderMarker;
@@ -69,6 +70,11 @@ public class SuggestionFragment extends ComplainAboutTraFragment {
     @Override
     protected String getRequestKey() {
         return KEY_SUGGESTION_REQUEST;
+    }
+
+    @Override
+    protected String getServiceName() {
+        return C.RATE_NAME_SUGGESTION;
     }
 
     @Override

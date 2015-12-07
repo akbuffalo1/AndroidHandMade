@@ -183,7 +183,7 @@ public final class ComplainAboutServiceFragment extends BaseComplainFragment
 
     @Override
     protected String getServiceName() {
-        return "complain about Service Provider";
+        return C.RATE_NAME_COMPLAIN_ABOUT_SERVICE_PROVIDER;//"complain about Service Provider";
     }
 
     private class RequestResponseListener implements PendingRequestListener<Response> {

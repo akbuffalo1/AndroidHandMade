@@ -19,6 +19,7 @@ import com.uae.tra_smart_services.R;
 import com.uae.tra_smart_services.adapter.BrandsListAdapter;
 import com.uae.tra_smart_services.adapter.BrandsListAdapter.OnBrandSelectListener;
 import com.uae.tra_smart_services.fragment.base.BaseServiceFragment;
+import com.uae.tra_smart_services.global.C;
 import com.uae.tra_smart_services.global.Service;
 import com.uae.tra_smart_services.interfaces.Loader;
 import com.uae.tra_smart_services.rest.model.response.SearchDeviceResponseModel;
@@ -30,7 +31,7 @@ import java.util.List;
 /**
  * Created by mobimaks on 11.08.2015.
  */
-public final class ApprovedDevicesFragment extends BaseServiceFragment implements OnQueryTextListener, OnBrandSelectListener {
+public final class MobileBrandFragment extends BaseServiceFragment implements OnQueryTextListener, OnBrandSelectListener {
 
     private static final String KEY_SEARCH_DEVICE_BY_BRAND_REQUEST = "SEARCH_DEVICE_BY_BRAND_REQUEST";
     private static final String KEY_SELECTED_BRAND_LOGO = "SELECTED_BRAND_LOGO";
@@ -47,8 +48,8 @@ public final class ApprovedDevicesFragment extends BaseServiceFragment implement
     @DrawableRes
     private int mSelectedBrandLogoRes;
 
-    public static ApprovedDevicesFragment newInstance() {
-        return new ApprovedDevicesFragment();
+    public static MobileBrandFragment newInstance() {
+        return new MobileBrandFragment();
     }
 
     @Override
@@ -119,7 +120,7 @@ public final class ApprovedDevicesFragment extends BaseServiceFragment implement
 
     @Override
     protected String getServiceName() {
-        return "Search Device By BrandName";
+        return C.RATE_NAME_MOBILE_BRAND;//"Search Device By BrandName";
     }
 
     @Override
@@ -221,7 +222,7 @@ public final class ApprovedDevicesFragment extends BaseServiceFragment implement
 
     @Override
     protected Service getServiceType() {
-        return Service.APPROVED_DEVICES;
+        return Service.MOBILE_BRAND;
     }
 
     @Override

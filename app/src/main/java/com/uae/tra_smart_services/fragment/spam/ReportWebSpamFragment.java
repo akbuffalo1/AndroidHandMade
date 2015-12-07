@@ -17,7 +17,6 @@ import com.uae.tra_smart_services.R;
 import com.uae.tra_smart_services.customviews.LoaderView;
 import com.uae.tra_smart_services.entities.CustomFilterPool;
 import com.uae.tra_smart_services.entities.Filter;
-import com.uae.tra_smart_services.fragment.base.BaseFragment;
 import com.uae.tra_smart_services.fragment.base.BaseServiceFragment;
 import com.uae.tra_smart_services.global.C;
 import com.uae.tra_smart_services.global.Service;
@@ -167,7 +166,7 @@ public class ReportWebSpamFragment extends BaseServiceFragment implements OnClic
 
     @Override
     protected String getServiceName() {
-        return "Web report";
+        return C.RATE_NAME_WEB_REPORT;//"Web report";
     }
 
     private final class HelpSalimRequestListener implements RequestListener<Response> {

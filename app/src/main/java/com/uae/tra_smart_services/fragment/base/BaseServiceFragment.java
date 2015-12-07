@@ -7,13 +7,11 @@ import android.support.annotation.Nullable;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
 import com.uae.tra_smart_services.R;
 import com.uae.tra_smart_services.customviews.LoaderView;
-import com.uae.tra_smart_services.customviews.ServiceRatingView;
 import com.uae.tra_smart_services.dialog.ServiceRatingDialog;
 import com.uae.tra_smart_services.fragment.LoaderFragment;
 import com.uae.tra_smart_services.global.Service;
@@ -75,7 +73,7 @@ public abstract class BaseServiceFragment extends BaseFragment
     private void openServiceInfoIfCan() {
         final Service service;
         final String serviceName;
-        if ((service = getServiceType()) != null && (serviceName = service.getServiceName()) != null
+        if ((service = getServiceType()) != null && (serviceName = service.getServiceInfoName()) != null
                 && mOpenServiceInfoListener != null) {
             mOpenServiceInfoListener.onOpenServiceInfo(serviceName);
         }

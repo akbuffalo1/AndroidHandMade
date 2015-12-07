@@ -25,8 +25,6 @@ import com.uae.tra_smart_services.entities.FragmentType;
 import com.uae.tra_smart_services.fragment.AboutTraFragment;
 import com.uae.tra_smart_services.fragment.AddServiceFragment;
 import com.uae.tra_smart_services.fragment.AddServiceFragment.OnFavoriteServicesSelectedListener;
-import com.uae.tra_smart_services.fragment.ApprovedDevicesFragment;
-import com.uae.tra_smart_services.fragment.ApprovedDevicesFragment.OnDeviceSelectListener;
 import com.uae.tra_smart_services.fragment.ComplainAboutServiceFragment;
 import com.uae.tra_smart_services.fragment.ComplainAboutTraFragment;
 import com.uae.tra_smart_services.fragment.DeviceApprovalFragment;
@@ -43,6 +41,8 @@ import com.uae.tra_smart_services.fragment.HexagonHomeFragment.OnOpenUserProfile
 import com.uae.tra_smart_services.fragment.HexagonHomeFragment.OnServiceSelectListener;
 import com.uae.tra_smart_services.fragment.HexagonHomeFragment.OnStaticServiceSelectListener;
 import com.uae.tra_smart_services.fragment.InfoHubFragment;
+import com.uae.tra_smart_services.fragment.MobileBrandFragment;
+import com.uae.tra_smart_services.fragment.MobileBrandFragment.OnDeviceSelectListener;
 import com.uae.tra_smart_services.fragment.MobileVerificationFragment;
 import com.uae.tra_smart_services.fragment.MobileVerificationFragment.OnDeviceVerifiedListener;
 import com.uae.tra_smart_services.fragment.MobileVerifiedInfoFragment;
@@ -223,8 +223,8 @@ public class HomeActivity extends BaseFragmentActivity implements //region INTER
             case BLOCK_WEBSITE:
                 openFragmentIfAuthorized(_data != null ? ReportWebSpamFragment.newInstance(_data) : ReportWebSpamFragment.newInstance(), _service, _useBackStack);
                 break;
-            case APPROVED_DEVICES:
-                replaceFragment(ApprovedDevicesFragment.newInstance(), _useBackStack);
+            case MOBILE_BRAND:
+                replaceFragment(MobileBrandFragment.newInstance(), _useBackStack);
                 break;
             case REPORT_SPAM:
                 openReportSmsSpamFragmentIfAuthorized(_service, _data, _useBackStack);

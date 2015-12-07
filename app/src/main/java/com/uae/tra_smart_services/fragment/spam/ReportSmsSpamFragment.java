@@ -3,10 +3,8 @@ package com.uae.tra_smart_services.fragment.spam;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -174,7 +172,7 @@ public class ReportSmsSpamFragment extends BaseServiceFragment implements OnClic
 
     @Override
     protected String getServiceName() {
-        return "SMS Spam Report";
+        return C.RATE_NAME_SPAM_REPORT;//"SMS Spam Report";
     }
 
     private final class SmsSpamReportResponseListener implements RequestListener<SmsSpamResponseModel> {

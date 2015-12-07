@@ -13,7 +13,6 @@ import android.widget.TextView;
 
 import com.uae.tra_smart_services.R;
 import com.uae.tra_smart_services.dialog.AlertDialogFragment;
-import com.uae.tra_smart_services.fragment.base.BaseFragment;
 import com.uae.tra_smart_services.fragment.base.BaseServiceFragment;
 import com.uae.tra_smart_services.global.C;
 import com.uae.tra_smart_services.global.Service;
@@ -71,7 +70,7 @@ public class DomainInfoFragment extends BaseServiceFragment implements AlertDial
 
     @Override
     protected String getServiceName() {
-        return "Domain info";
+        return C.RATE_NAME_DOMAIN_INFO;//"Domain info";
     }
 
     @Override

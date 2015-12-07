@@ -61,6 +61,7 @@ import com.uae.tra_smart_services.dialog.AlertDialogFragment.OnOkListener;
 import com.uae.tra_smart_services.dialog.SingleChoiceDialog;
 import com.uae.tra_smart_services.entities.Permission;
 import com.uae.tra_smart_services.fragment.base.BaseServiceFragment;
+import com.uae.tra_smart_services.global.C;
 import com.uae.tra_smart_services.global.LocationType;
 import com.uae.tra_smart_services.global.Service;
 import com.uae.tra_smart_services.interfaces.Loader;
@@ -658,7 +659,7 @@ public class PoorCoverageFragment extends BaseServiceFragment implements //regio
 
     @Override
     protected String getServiceName() {
-        return "complain Poor Coverage";
+        return C.RATE_NAME_COVERAGE;//"complain Poor Coverage";
     }
 
     @Nullable

@@ -336,7 +336,7 @@ public class MobileVerificationFragment extends BaseServiceFragment
 
     @Override
     protected String getServiceName() {
-        return "Search Device By Imei";
+        return C.RATE_NAME_VERIFICATION;//"Search Device By Imei";
     }
 
     @Override

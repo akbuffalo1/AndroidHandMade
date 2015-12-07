@@ -30,7 +30,7 @@ public enum Service {
         }
 
         @Override
-        public String getServiceName() {
+        public String getServiceInfoName() {
             return C.COMPLAIN_ABOUT_SERVICE_PROVIDER;
         }
 
@@ -54,7 +54,7 @@ public enum Service {
         }
 
         @Override
-        public String getServiceName() {
+        public String getServiceInfoName() {
             return C.COMPLAIN_ABOUT_TRA;
         }
 
@@ -78,7 +78,7 @@ public enum Service {
         }
 
         @Override
-        public String getServiceName() {
+        public String getServiceInfoName() {
             return C.SUGGESTION;
         }
     },
@@ -97,7 +97,7 @@ public enum Service {
 
         @Nullable
         @Override
-        public String getServiceName() {
+        public String getServiceInfoName() {
             return C.DOMAIN_CHECK;
         }
     },
@@ -161,7 +161,7 @@ public enum Service {
         }
 
         @Override
-        public String getServiceName() {
+        public String getServiceInfoName() {
             return C.ENQUIRIES;
         }
 
@@ -171,7 +171,7 @@ public enum Service {
             return C.INQUIRY;
         }
     },
-    APPROVED_DEVICES {
+    MOBILE_BRAND {
         @Override
         @StringRes
         public int getTitleRes() {
@@ -185,7 +185,7 @@ public enum Service {
         }
 
         @Override
-        public String getServiceName() {
+        public String getServiceInfoName() {
             return C.MOBILE_BRAND;
         }
     },
@@ -203,7 +203,7 @@ public enum Service {
 
         @Nullable
         @Override
-        public String getServiceName() {
+        public String getServiceInfoName() {
             return C.BLOCK_WEBSITE;
         }
 
@@ -231,7 +231,7 @@ public enum Service {
         }
 
         @Override
-        public String getServiceName() {
+        public String getServiceInfoName() {
             return C.VERIFICATION;
         }
     },
@@ -254,7 +254,7 @@ public enum Service {
 
         @Nullable
         @Override
-        public String getServiceName() {
+        public String getServiceInfoName() {
             return C.BLOCK_SMS_SPAM;
         }
 
@@ -282,7 +282,7 @@ public enum Service {
         }
 
         @Override
-        public String getServiceName() {
+        public String getServiceInfoName() {
             return C.COVERAGE;
         }
     };
@@ -316,7 +316,7 @@ public enum Service {
 
     @ServiceName
     @Nullable
-    public String getServiceName() {
+    public String getServiceInfoName() {
         return null;
     }
 

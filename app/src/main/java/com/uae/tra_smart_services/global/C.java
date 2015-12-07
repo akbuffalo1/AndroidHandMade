@@ -175,4 +175,18 @@ public final class C {
     public static final String SMS_SPAM = "SMS Spam";
     //endregion
 
+    //region Rate names
+    public static final String RATE_NAME_COVERAGE = "Coverage";
+    public static final String RATE_NAME_COMPLAIN_ABOUT_TRA = "Complain About TRA";
+    public static final String RATE_NAME_COMPLAIN_ABOUT_SERVICE_PROVIDER = "Complain About Service Provider";
+    public static final String RATE_NAME_SUGGESTION = "Suggestion";
+    public static final String RATE_NAME_ENQUIRIES = "Enquiries";
+    public static final String RATE_NAME_SPAM_REPORT = "Spam Report";
+    public static final String RATE_NAME_WEB_REPORT = "Web Report";
+    public static final String RATE_NAME_MOBILE_BRAND = "Mobile Brand";
+    public static final String RATE_NAME_VERIFICATION = "Verification";
+    public static final String RATE_NAME_DOMAIN_INFO = "Domain Check Whois";
+    public static final String RATE_NAME_DOMAIN_AVAILABILITY = "Domain Check Availability";
+    //endregion
+
 }
