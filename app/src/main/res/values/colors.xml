@@ -36,6 +36,7 @@
 
     <color name="hex_color_yellow">#fffffa00</color>
     <color name="hex_color_purple">#ffce00ff</color>
+    <color name="hex_color_green">#00a465</color>
 
     <!--[START]                     AuthorizationActivity                        [START]-->
     <color name="hex_authorization_background_color">#ffffffff</color>

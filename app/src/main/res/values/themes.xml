@@ -35,7 +35,7 @@
         <item name="passwordVisibilityToggleBackground">@drawable/background_user_profile_password_toggle</item>
         <item name="rating_bad_color">@android:color/holo_red_dark</item>
         <item name="rating_neut_color">@android:color/darker_gray</item>
-        <item name="rating_good_color">@color/hex_sendImeiCodeColor_green</item>
+        <item name="rating_good_color">@color/hex_color_green</item>
     </style>
 
     <style name="AppThemeOrange" parent="BaseAppTheme">
