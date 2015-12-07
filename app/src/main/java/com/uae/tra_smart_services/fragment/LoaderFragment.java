@@ -114,7 +114,7 @@ public class LoaderFragment extends BaseFragment implements View.OnClickListener
                 break;
             case R.id.btnSendRating_LSR:
                 Object[] rating = srvRating.getRating();
-                if ((int) rating[0] == 0){
+                if (rating == null){
                     Toast.makeText((isAdded()) ? getActivity() : getRootView().getContext(), R.string.choose_rating_error_message, Toast.LENGTH_SHORT).show();
                     return;
                 }

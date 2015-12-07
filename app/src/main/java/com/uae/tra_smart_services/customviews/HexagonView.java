@@ -215,6 +215,7 @@ public class HexagonView extends View {
             mBackgroundDrawable.setState(getDrawableState());
             stateChangeHandled = true;
         }
+
         if (mSrcDrawable != null) {
             mSrcDrawable.setState(getDrawableState());
             stateChangeHandled = true;
@@ -223,7 +224,6 @@ public class HexagonView extends View {
         if (stateChangeHandled) {
             invalidate();
         }
-
     }
 
     @Override
