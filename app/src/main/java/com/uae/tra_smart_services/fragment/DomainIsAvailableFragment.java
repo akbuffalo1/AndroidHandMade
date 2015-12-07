@@ -10,8 +10,8 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.uae.tra_smart_services.R;
-import com.uae.tra_smart_services.fragment.base.BaseFragment;
 import com.uae.tra_smart_services.fragment.base.BaseServiceFragment;
+import com.uae.tra_smart_services.global.C;
 import com.uae.tra_smart_services.global.ServerConstants;
 import com.uae.tra_smart_services.global.Service;
 import com.uae.tra_smart_services.rest.model.response.DomainAvailabilityCheckResponseModel;
@@ -87,7 +87,7 @@ public final class DomainIsAvailableFragment extends BaseServiceFragment {
 
     @Override
     protected String getServiceName() {
-        return "Domain availability";
+        return C.RATE_NAME_DOMAIN_CHECK_AVAILABILITY;//"Domain availability";
     }
 
     @Nullable

@@ -70,7 +70,7 @@ public class DomainInfoFragment extends BaseServiceFragment implements AlertDial
 
     @Override
     protected String getServiceName() {
-        return C.RATE_NAME_DOMAIN_INFO;//"Domain info";
+        return C.RATE_NAME_DOMAIN_CHECK_WHOIS;//"Domain info";
     }
 
     @Override

@@ -185,8 +185,8 @@ public final class C {
     public static final String RATE_NAME_WEB_REPORT = "Web Report";
     public static final String RATE_NAME_MOBILE_BRAND = "Mobile Brand";
     public static final String RATE_NAME_VERIFICATION = "Verification";
-    public static final String RATE_NAME_DOMAIN_INFO = "Domain Check Whois";
-    public static final String RATE_NAME_DOMAIN_AVAILABILITY = "Domain Check Availability";
+    public static final String RATE_NAME_DOMAIN_CHECK_WHOIS = "Domain Check Whois";
+    public static final String RATE_NAME_DOMAIN_CHECK_AVAILABILITY = "Domain Check Availability";
     //endregion
 
 }
