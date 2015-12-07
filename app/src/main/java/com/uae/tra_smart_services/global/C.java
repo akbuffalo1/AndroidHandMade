@@ -76,7 +76,9 @@ public final class C {
             SPAM_REPORT,
             MOBILE_BRAND,
             VERIFICATION,
-            DOMAIN_CHECK})
+            DOMAIN_CHECK,
+            BLOCK_WEBSITE,
+            BLOCK_SMS_SPAM})
     @Retention(RetentionPolicy.SOURCE)
     public @interface ServiceName {
     }
@@ -90,6 +92,9 @@ public final class C {
     public static final String MOBILE_BRAND = "mobile brand";
     public static final String VERIFICATION = "verification";
     public static final String DOMAIN_CHECK = "domain check";
+
+    public static final String BLOCK_WEBSITE = "web report";
+    public static final String BLOCK_SMS_SPAM = "sms report";
     //endregion
 
     public static final int MIN_USERNAME_LENGTH = 3;
