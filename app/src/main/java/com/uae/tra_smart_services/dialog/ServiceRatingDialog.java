@@ -79,13 +79,12 @@ public class ServiceRatingDialog extends DialogFragment implements DialogInterfa
                     break;
                 case DialogInterface.BUTTON_POSITIVE:
                     Object[] rating = ratingView.getRating();
-                    if ((int) rating[0] == 0){
+                    if (rating == null){
                         Toast.makeText(getActivity(), R.string.choose_rating_error_message, Toast.LENGTH_SHORT).show();
-                        break;
-                    } else {
-                        mCallBacks.onRate((int) rating[0], (String) rating[1]);
-                        dismiss();
+                        return;
                     }
+                    mCallBacks.onRate((int) rating[0], (String) rating[1]);
+                    dismiss();
                     break;
             }
         }

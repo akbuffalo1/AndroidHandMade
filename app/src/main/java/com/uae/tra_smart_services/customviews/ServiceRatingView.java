@@ -11,13 +11,14 @@ import android.widget.LinearLayout;
 
 import com.uae.tra_smart_services.R;
 
+import java.util.ArrayList;
+
 /**
  * Created by ak-buffalo on 14.09.15.
  */
 public class ServiceRatingView extends LinearLayout implements OnClickListener {
 
-    private CheckableHexagonView hvBad;
-    private CheckableHexagonView hvNeut, hvGood;
+    private ArrayList<CheckableHexagonView> ratingButtons = new ArrayList<>();
     private int mRate = 0;
     private EditText etFeedBack;
     public static int MODE = 1;
@@ -40,20 +41,25 @@ public class ServiceRatingView extends LinearLayout implements OnClickListener {
     private void initViews() {
         inflate(getContext(), MODE > 0 ? R.layout.layout_service_rating_loader : R.layout.layout_service_rating_popup, this);
 
-        hvBad = (CheckableHexagonView) findViewById(R.id.hvDomainCheckRating_1_FDC);
-        hvNeut = (CheckableHexagonView) findViewById(R.id.hvDomainCheckRating_2_FDC);
-        hvGood = (CheckableHexagonView) findViewById(R.id.hvDomainCheckRating_3_FDC);
+        ratingButtons.add((CheckableHexagonView) findViewById(R.id.hvDomainCheckRating_1_FDC));
+        ratingButtons.add((CheckableHexagonView) findViewById(R.id.hvDomainCheckRating_2_FDC));
+        ratingButtons.add((CheckableHexagonView) findViewById(R.id.hvDomainCheckRating_3_FDC));
         etFeedBack = (EditText) findViewById(R.id.etFeedBack_LSR);
     }
 
     private void initListeners() {
-        hvBad.setOnClickListener(this);
-        hvNeut.setOnClickListener(this);
-        hvGood.setOnClickListener(this);
+        for(CheckableHexagonView button : ratingButtons){
+            button.setOnClickListener(this);
+        }
     }
 
     public Object[] getRating(){
-        return new Object[]{mRate, etFeedBack.getText().toString()};
+        for(CheckableHexagonView button : ratingButtons){
+            if(button.isChecked()){
+                return new Object[]{button.getTag(), etFeedBack.getText().toString()};
+            }
+        }
+        return null;
     }
 
     @Override
@@ -62,7 +68,12 @@ public class ServiceRatingView extends LinearLayout implements OnClickListener {
             case R.id.hvDomainCheckRating_1_FDC:
             case R.id.hvDomainCheckRating_2_FDC:
             case R.id.hvDomainCheckRating_3_FDC:
-                mRate = Integer.valueOf(_view.getTag().toString());
+                for(CheckableHexagonView button : ratingButtons){
+                    button.setChecked(false);
+                    if(button.getId() == _view.getId()){
+                        button.setChecked(true);
+                    }
+                }
                 break;
         }
     }

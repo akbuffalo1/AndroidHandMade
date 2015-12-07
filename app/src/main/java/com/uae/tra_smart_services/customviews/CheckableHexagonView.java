@@ -18,16 +18,31 @@ public class CheckableHexagonView extends HexagonView implements Checkable {
         super(context, attrs);
     }
 
+    private static final int[] CheckedStateSet = {
+            android.R.attr.state_checked
+    };
+
+    @Override
+    protected int[] onCreateDrawableState(int extraSpace) {
+        final int[] drawableState = super.onCreateDrawableState(extraSpace + 1);
+        if (isChecked()) {
+            mergeDrawableStates(drawableState, CheckedStateSet);
+        }
+        return drawableState;
+    }
+
     @Override
     public void setChecked(boolean checked) {
         mChecked = checked;
         refreshDrawableState();
     }
 
+    @Override
     public boolean isChecked() {
         return mChecked;
     }
 
+    @Override
     public void toggle() {
         setChecked(!mChecked);
     }
