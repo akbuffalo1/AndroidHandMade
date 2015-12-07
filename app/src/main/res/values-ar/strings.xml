@@ -1,25 +1,17 @@
 <resources  xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">UAE TRA</string>
-    <string name="title_activity_splash"></string>
 
-    <string name="hello_world"></string>
-    <string name="action_settings">الإعدادات</string>
     <string name="title_activity_authorization">تسجيل الدخول</string>
 
     <!--                Authorization screens                -->
-    <string name="login_title">تسجيل الدخول</string>
     <string name="register_title">إنشاء حساب</string>
     <string name="forgot_password_title">نسيت كلمة المرور</string>
     <string name="error_fill_all_fields">يرجى ملئ جميع الحقول</string>
 
-    <!--            Username field               -->
-    <string name="str_username">اسم المستخدم</string>
     <!--            Email field               -->
     <string name="str_email">البريد الإلكتروني</string>
     <!--            Language field               -->
     <string name="str_language">اللغة</string>
-    <!--            Gender field               -->
-    <string name="str_gender">النوع</string>
     <!--            Font size field               -->
     <string name="str_fontsize">حجم الخط</string>
     <!--            Theme options field               -->
@@ -38,15 +30,10 @@
     <string name="str_forgot_password">نسيت كلمة المرور</string>
     <!--            Sign in button               -->
     <string name="str_login">تسجيل الدخول</string>
-    <!--            Sign in button               -->
-    <string name="str_skip">تجاوز</string>
     <!--            Register button               -->
     <string name="str_register">تسجيل</string>
     <!--            Restore button               -->
     <string name="str_restore">استعادة</string>
-    <string name="str_restore_password">استعادة كلمة المرور</string>
-    <!--            Register now button               -->
-    <string name="str_register_now">سجل الآن</string>
     <!--            Logout button               -->
     <string name="str_logout">تسجيل الخروج</string>
 
@@ -61,7 +48,6 @@
     <string name="str_favorites">المفضلة</string>
     <string name="str_inquiries">استفسارات</string>
     <string name="str_settings">إعدادات</string>
-    <string name="fragment_service_list_title">خدمات الهيئة</string>
     <string name="complain">شكوى</string>
     <string name="approved_devices">الأجهزة المعتمدة</string>
     <string name="device_approval">الأجهزة المعتمدة</string>
@@ -87,7 +73,6 @@
     <string name="str_sms_block_number">حجب رقم</string>
     <string name="str_sms_service_list">خدمات الرسائل</string>
 
-    <string name="str_user_name"></string>
     <string name="str_insert_domain_name_here">اسم نطاق (مثلاً tra.gov.ae)</string>
 
     <!--               Status codes and messages                -->
@@ -100,7 +85,6 @@
     <string name="str_ok">موافق</string>
     <string name="str_cancel">إلغاء</string>
     <string name="str_one_empty_space"> </string>
-    <string name="str_empty"></string>
     <string name="str_domain_available">النطاق متوفر</string>
     <string name="str_domain_not_available">النطاق غير متوفر</string>
     <string name="str_domain_availability">توفر النطاق</string>
@@ -404,5 +388,16 @@
     <string name="fragment_contact_us_contact_info_label">CONTACT INFO</string>
     <string name="fragment_contact_us_phone_label">Phone:</string>
     <string name="fragment_contact_us_label">Mail:</string>
+    <string name="fragment_transaction_details_edit_btn">Edit</string>
+    <string name="choose_rating_error_message">Please, choose appropriate rating and fill feedback</string>
+    <string name="fragment_contact_us">Contact Us</string>
+    <string name="fragment_info_hub_no_pending_announcements">There are no announcements.</string>
+    <string name="fragment_info_hub_no_pending_transactions">There are no pending transactions.</string>
+    <string name="fragment_mobile_verification_no_radio_module">There is no registered radio module.</string>
+    <string name="rate_service">Rate Service</string>
+    <string name="rate_service_title">RATE</string>
+    <string name="rating_view_title">Choose Rating</string>
+    <string name="loader_view_send_btn">SEND</string>
+    <string name="str_my_imei">MY IMEI</string>
 
 </resources>

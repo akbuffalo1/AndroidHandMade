@@ -107,7 +107,7 @@
                 android:paddingEnd="55dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/edit"
+                android:text="@string/fragment_transaction_details_edit_btn"
                 android:layout_below="@+id/tvComplainInformation_FTD"
                 android:layout_centerHorizontal="true" />
         </RelativeLayout>

@@ -28,6 +28,8 @@ public class SplashActivity extends BaseActivity {
 
     private ProgressBar pbLoadingProgress;
 
+    private boolean mIsPaused, mIsFinishLoading;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,12 +48,8 @@ public class SplashActivity extends BaseActivity {
 
             @Override
             public void onAnimationEnd(Animator animation) {
-                // We are starting the Main activity
-                Intent i = new Intent(SplashActivity.this, HomeActivity.class);
-                startActivity(i);
-
-                // close this activity
-                finish();
+                mIsFinishLoading = true;
+                invalidateLoadingState();
             }
 
             @Override
@@ -84,6 +82,30 @@ public class SplashActivity extends BaseActivity {
 //                finish();
 //            }
 //        }, /*BuildConfig.DEBUG ? 0 :*/ SPLASH_DELAY);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mIsPaused = false;
+        invalidateLoadingState();
+    }
+
+    private void invalidateLoadingState() {
+        if (!mIsPaused && mIsFinishLoading) {
+            // We are starting the Main activity
+            Intent i = new Intent(SplashActivity.this, HomeActivity.class);
+            startActivity(i);
+
+            // close this activity
+            finish();
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mIsPaused = true;
     }
 
     @NonNull

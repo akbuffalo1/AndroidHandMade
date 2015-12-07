@@ -29,22 +29,13 @@ public class SearchFragment extends BaseFragment
     private EditText etSearch;
     private TextView tvNoSearchResult, tvHint;
     private RecyclerView rvSearchResultList;
+
     private static SearchResult INITIAL_DATA;
     private SearchRecyclerViewAdapter mAdapter;
     private OnServiceSelectListener mServiceSelectListener;
 
     public static SearchFragment newInstance() {
         return new SearchFragment();
-    }
-
-    @Override
-    protected int getTitle() {
-        return 0;
-    }
-
-    @Override
-    protected int getLayoutResource() {
-        return R.layout.fragment_search;
     }
 
     @Override
@@ -58,11 +49,8 @@ public class SearchFragment extends BaseFragment
     @Override
     protected void initData() {
         super.initData();
-        INITIAL_DATA = new SearchResult(){
-            {
-                initFromServicesList(Service.getUniqueServices(), getActivity());
-            }
-        };
+        INITIAL_DATA = new SearchResult();
+        INITIAL_DATA.initFromServicesList(Service.getUniqueServices(), getActivity());
     }
 
     @Override
@@ -109,11 +97,6 @@ public class SearchFragment extends BaseFragment
     }
 
     @Override
-    public boolean onTouch(View v, MotionEvent event) {
-        return true;
-    }
-
-    @Override
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {/**Not implemented method*/}
 
     @Override
@@ -147,5 +130,20 @@ public class SearchFragment extends BaseFragment
     @Override
     protected void setToolbarVisibility() {
         toolbarTitleManager.setToolbarVisibility(false);
+    }
+
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        return true;
+    }
+
+    @Override
+    protected int getTitle() {
+        return 0;
+    }
+
+    @Override
+    protected int getLayoutResource() {
+        return R.layout.fragment_search;
     }
 }

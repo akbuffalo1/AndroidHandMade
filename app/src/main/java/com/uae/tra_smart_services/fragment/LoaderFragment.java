@@ -115,7 +115,7 @@ public class LoaderFragment extends BaseFragment implements View.OnClickListener
             case R.id.btnSendRating_LSR:
                 Object[] rating = srvRating.getRating();
                 if ((int) rating[0] == 0){
-                    Toast.makeText((isAdded()) ? getActivity() : getRootView().getContext(), R.string.choose_rating, Toast.LENGTH_SHORT).show();
+                    Toast.makeText((isAdded()) ? getActivity() : getRootView().getContext(), R.string.choose_rating_error_message, Toast.LENGTH_SHORT).show();
                     return;
                 }
                 mRatingCallbacks.onRate((int) rating[0], (String) rating[1], lvLoader.getCurrentState());

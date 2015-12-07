@@ -82,7 +82,6 @@
     <string name="str_sms_block_number">Block Number</string>
     <string name="str_sms_service_list">SMS Service List</string>
 
-    <string name="str_user_name">Jhon</string>
     <string name="str_insert_domain_name_here">Insert Domain Name Here</string>
 
     <!--               Status codes and messages                -->
@@ -94,8 +93,8 @@
     <string name="str_invalid_number">Please enter a valid number</string>
     <string name="str_ok">OK</string>
     <string name="str_cancel">Cancel</string>
-    <string name="str_one_empty_space"> </string>
-    <string name="str_empty"></string>
+    <string name="str_one_empty_space" translatable="false"> </string>
+    <string name="str_empty" translatable="false"></string>
     <string name="str_domain_available">Domain is Available</string>
     <string name="str_domain_not_available">NOT AVAILABLE</string>
     <string name="str_domain_availability">Domain Availability</string>
@@ -132,10 +131,10 @@
     <string name="str_select_location_type">Select location type</string>
     <string name="str_camera_is_not_available">Camera isn\'t available</string>
 
-    <string name="str_dummy_info_hub_list_item_descr">
+    <string name="str_dummy_info_hub_list_item_descr" translatable="false">
         Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and...
     </string>
-    <string name="str_dummy_info_hub_list_item_full_descr">
+    <string name="str_dummy_info_hub_list_item_full_descr" translatable="false">
         Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
         \r\n\r
         Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
@@ -175,7 +174,6 @@
     <string name="hexagon_button_spam">Spam Report</string>
     <string name="hexagon_button_coverage">Coverage</string>
     <string name="hexagon_button_internet">Internet</string>
-    <string name="hexagon_button_domain_check">Domain Check</string>
     <string name="fragment_favorites_add_service_done">Done</string>
     <string name="fragment_favorites_add_service_search">Search</string>
     <string name="fragment_favorites_menu_add">Add service</string>
@@ -348,7 +346,7 @@
     <string name="service_report_spam">SMS Spam</string>
 
     <string name="rate_service">Rate Service</string>
-    <string name="rate">RATE</string>
+    <string name="rate_service_title">RATE</string>
 
     <string-array name="rate_names">
         <item>1</item>
@@ -407,26 +405,23 @@
     <string name="fragment_poor_coverage_location_permission_explanation">Location access is required to detect your location.</string>
     <string name="attachment_permission_denied">Permission request was denied.</string>
 
-    <string name="ic_keyboard_arrow_down">&#xe0c5;</string>
-    <string name="ic_keyboard_arrow_up">&#xe0c8;</string>
+    <string name="ic_keyboard_arrow_down" translatable="false">&#xe0c5;</string>
+    <string name="ic_keyboard_arrow_up" translatable="false">&#xe0c8;</string>
 
     <string name="str_my_imei">MY IMEI</string>
-    <string name="str_where_to_find_imei">Where to find the IMEI code on your device?</string>
-    <string name="title_activity_maps">Map</string>
     <string name="hexagon_button_block_website">Block Websites</string>
     <string name="hexagon_button_sms_spam">SMS Spam</string>
     <string name="activity_splash_loading">LOADING UPDATES…</string>
-    <string name="edit">Edit</string>
+    <string name="fragment_transaction_details_edit_btn">Edit</string>
     <string name="fragment_contact_us">Contact Us</string>
-    <string name="service">Service</string>
-    <string name="send">SEND</string>
+    <string name="loader_view_send_btn">SEND</string>
 
     <string name="fragment_contact_us_address_label">ADDRESS</string>
     <string name="fragment_contact_us_contact_info_label">CONTACT INFO</string>
     <string name="fragment_contact_us_phone_label">Phone:</string>
     <string name="fragment_contact_us_label">Mail:</string>
 
-    <string name="choose_rating">Please, choose appropriate rating and feel feedback</string>
+    <string name="choose_rating_error_message">Please, choose appropriate rating and fill feedback</string>
 
     <string name="btn_close">CLOSE</string>
     <string name="btn_send">SEND</string>

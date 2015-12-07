@@ -49,7 +49,7 @@ public class ServiceRatingDialog extends DialogFragment implements DialogInterfa
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         ratingView = new ServiceRatingView(getActivity());
         TextView title = new TextView(getActivity());
-        title.setText(R.string.rate);
+        title.setText(R.string.rate_service_title);
         title.setPadding(40, 30, 0, 20);
         title.setGravity(Gravity.LEFT);
         title.setTextColor(Color.DKGRAY);
@@ -78,16 +78,14 @@ public class ServiceRatingDialog extends DialogFragment implements DialogInterfa
                     dismiss();
                     break;
                 case DialogInterface.BUTTON_POSITIVE:
-                    dialog.cancel();
-//                    Object[] rating = ratingView.getRating();
-//                    if ((int) rating[0] == 0){
-//                        Toast.makeText(getActivity(), R.string.choose_rating, Toast.LENGTH_SHORT).show();
-////                        return;
-//                        break;
-//                    } else {
-//                        mCallBacks.onRate((int) rating[0], (String) rating[1]);
-//                        dismiss();
-//                    }
+                    Object[] rating = ratingView.getRating();
+                    if ((int) rating[0] == 0){
+                        Toast.makeText(getActivity(), R.string.choose_rating_error_message, Toast.LENGTH_SHORT).show();
+                        break;
+                    } else {
+                        mCallBacks.onRate((int) rating[0], (String) rating[1]);
+                        dismiss();
+                    }
                     break;
             }
         }

@@ -90,7 +90,7 @@
 
                 <Button
                     android:id="@+id/btnSendRating_LSR"
-                    android:text="@string/send"
+                    android:text="@string/loader_view_send_btn"
                     android:layout_gravity="center"
                     android:paddingStart="60dp"
                     android:paddingEnd="60dp"
