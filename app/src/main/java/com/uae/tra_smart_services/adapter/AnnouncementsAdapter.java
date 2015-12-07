@@ -28,6 +28,7 @@ import com.uae.tra_smart_services.interfaces.OperationStateManager;
 import com.uae.tra_smart_services.rest.RestClient;
 import com.uae.tra_smart_services.rest.TRAServicesAPI;
 import com.uae.tra_smart_services.rest.model.response.GetAnnouncementsResponseModel;
+import com.uae.tra_smart_services.util.ImageUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,6 +54,7 @@ public class AnnouncementsAdapter extends Adapter<ViewHolder> implements Filtera
     private final List<GetAnnouncementsResponseModel.Announcement> mDataSet, mShowingData;
     private final boolean mIsPreview;
     private final int mLinesCount;
+    private final boolean mIsBlackAndWhiteMode;
 
     private AnnouncementsFilter mFilter;
     private boolean mIsShowingLoaderForData;
@@ -70,6 +72,7 @@ public class AnnouncementsAdapter extends Adapter<ViewHolder> implements Filtera
         mShowingData = new ArrayList<>();
         mIsPreview = isPreview;
         mLinesCount = isLargeText() ? 2 : 3;
+        mIsBlackAndWhiteMode = ImageUtils.isBlackAndWhiteMode(mActivity);
     }
 
     private boolean isLargeText() {
@@ -337,6 +340,9 @@ public class AnnouncementsAdapter extends Adapter<ViewHolder> implements Filtera
             if (!isProgress) {
                 sStartOffset.setVisibility(_position % 2 == 0 ? View.GONE : View.VISIBLE);
                 hexagonView.postScaleType(HexagonView.ScaleType.INSIDE_CROP);
+                if (mIsBlackAndWhiteMode) {
+                    hexagonView.setSrcTintColorRes(R.color.hex_color_dark_gray);
+                }
                 hexagonView.setHexagonSrcDrawable(R.drawable.ic_form);
                 Picasso.with(mActivity).load(_model.image).into(new HexagonViewTarget(hexagonView));
                 if (mConstraint.length() != 0) {
