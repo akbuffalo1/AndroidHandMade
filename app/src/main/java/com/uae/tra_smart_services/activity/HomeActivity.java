@@ -53,7 +53,7 @@ import com.uae.tra_smart_services.fragment.ServiceInfoFragment.OnOpenServiceInfo
 import com.uae.tra_smart_services.fragment.SettingsFragment;
 import com.uae.tra_smart_services.fragment.SettingsFragment.OnOpenAboutTraClickListener;
 import com.uae.tra_smart_services.fragment.SuggestionFragment;
-import com.uae.tra_smart_services.fragment.TransactionDetailFragment;
+import com.uae.tra_smart_services.fragment.TransactionDetailsFragment;
 import com.uae.tra_smart_services.fragment.base.BaseFragment;
 import com.uae.tra_smart_services.fragment.hexagon_fragment.InnovationsFragment;
 import com.uae.tra_smart_services.fragment.hexagon_fragment.NotificationsFragment;
@@ -618,6 +618,6 @@ public class HomeActivity extends BaseFragmentActivity implements //region INTER
 
     @Override
     public void onTransactionPressed(int[] _icon_color, GetTransactionResponseModel _model) {
-        replaceFragmentWithBackStack(TransactionDetailFragment.newInstance(_icon_color, _model));
+        replaceFragmentWithBackStack(TransactionDetailsFragment.newInstance(_icon_color, _model));
     }
 }

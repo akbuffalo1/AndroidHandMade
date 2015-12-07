@@ -15,22 +15,22 @@ import com.uae.tra_smart_services.fragment.base.BaseFragment;
 import com.uae.tra_smart_services.global.C;
 import com.uae.tra_smart_services.global.Service;
 import com.uae.tra_smart_services.rest.model.response.GetTransactionResponseModel;
+import com.uae.tra_smart_services.util.ImageUtils;
 
 import static com.uae.tra_smart_services.global.C.TRANSACTION_STATUS_COLOR_INDEX;
 import static com.uae.tra_smart_services.global.C.TRANSACTION_STATUS_ICON_INDEX;
-import static com.uae.tra_smart_services.global.C.WAITING_FOR_DETAILS;
 
 /**
  * Created by and on 02.12.15.
  */
 
-public class TransactionDetailFragment extends BaseFragment implements OnClickListener {
+public class TransactionDetailsFragment extends BaseFragment implements OnClickListener {
 
     private static final String KEY_TRANSACTION = "TRANSACTION";
     private static final String KEY_ICON_COLOR = "ICON_COLOR";
 
-    public static TransactionDetailFragment newInstance(int[] _icon_color, GetTransactionResponseModel _model) {
-        final TransactionDetailFragment fragment = new TransactionDetailFragment();
+    public static TransactionDetailsFragment newInstance(int[] _icon_color, GetTransactionResponseModel _model) {
+        final TransactionDetailsFragment fragment = new TransactionDetailsFragment();
         final Bundle args = new Bundle();
         args.putParcelable(KEY_TRANSACTION, _model);
         args.putIntArray(KEY_ICON_COLOR, _icon_color);
@@ -71,12 +71,25 @@ public class TransactionDetailFragment extends BaseFragment implements OnClickLi
         super.initViews();
         hexagonView = findView(R.id.hvIcon_FTD);
 
-        hexagonView.setBorderColor(mIconColor[TRANSACTION_STATUS_COLOR_INDEX]);
-        if (C.WEB_REPORT.equals(mTransaction.type)) {
+        final boolean isBlackAndWhiteMode = ImageUtils.isBlackAndWhiteMode(getActivity());
+
+        if (isBlackAndWhiteMode) {
+            hexagonView.setBorderColor(R.color.hex_color_dark_gray);
+        } else {
+            hexagonView.setBorderColor(mIconColor[TRANSACTION_STATUS_COLOR_INDEX]);
+        }
+
+        if (isBlackAndWhiteMode) {
+            hexagonView.setSrcTintColorRes(R.color.hex_color_dark_gray);
+        } else if (C.WEB_REPORT.equals(mTransaction.type)) {
             hexagonView.setSrcTintColorRes(mIconColor[TRANSACTION_STATUS_COLOR_INDEX]);
-            hexagonView.setHexagonSrcDrawable(Service.BLOCK_WEBSITE.getDrawableRes());
         } else {
             hexagonView.setSrcTintColor(Color.TRANSPARENT);
+        }
+
+        if (C.WEB_REPORT.equals(mTransaction.type)) {
+            hexagonView.setHexagonSrcDrawable(Service.BLOCK_WEBSITE.getDrawableRes());
+        } else {
             hexagonView.setHexagonSrcDrawable(mIconColor[TRANSACTION_STATUS_ICON_INDEX]);
         }
 
@@ -90,7 +103,7 @@ public class TransactionDetailFragment extends BaseFragment implements OnClickLi
         tvComplainInformation.setText(mTransaction.description);
 
         btnEdit = findView(R.id.btnEdit_FTD);
-        btnEdit.setVisibility(WAITING_FOR_DETAILS.equals(mTransaction.statusCode) ? View.VISIBLE : View.GONE);
+        btnEdit.setVisibility(/*WAITING_FOR_DETAILS.equals(mTransaction.statusCode) ? View.VISIBLE :*/ View.GONE);
     }
 
     @Override

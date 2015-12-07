@@ -31,6 +31,7 @@ import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 import com.uae.tra_smart_services.R;
 import com.uae.tra_smart_services.util.HexagonUtils;
+import com.uae.tra_smart_services.util.ImageUtils;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -834,7 +835,7 @@ public class HexagonalHeader extends View implements Target {
     @Override
     public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
         mScaleType = SCALE_TYPE_CENTER_CROP;
-        mAvatarPlaceholder = new BitmapDrawable(getResources(), bitmap);
+        mAvatarPlaceholder = ImageUtils.getFilteredDrawable(getContext(), new BitmapDrawable(getResources(), bitmap));
         invalidate();
     }
 

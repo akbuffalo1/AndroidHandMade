@@ -21,12 +21,12 @@ import com.uae.tra_smart_services.customviews.HexagonView;
 import com.uae.tra_smart_services.customviews.LoaderView;
 import com.uae.tra_smart_services.entities.NetworkErrorHandler;
 import com.uae.tra_smart_services.global.C;
-import com.uae.tra_smart_services.global.Service;
 import com.uae.tra_smart_services.global.SpannableWrapper;
 import com.uae.tra_smart_services.interfaces.OperationStateManager;
 import com.uae.tra_smart_services.rest.RestClient;
 import com.uae.tra_smart_services.rest.TRAServicesAPI;
 import com.uae.tra_smart_services.rest.model.response.GetTransactionResponseModel;
+import com.uae.tra_smart_services.util.ImageUtils;
 
 import java.util.List;
 
@@ -40,6 +40,7 @@ public class TransactionsAdapter extends Adapter<ViewHolder> implements Filterab
     private final Activity mActivity;
     private final OperationStateManager mOperationStateManager;
     private final GetTransactionResponseModel.List mDataSet, mShowingData;
+    private final boolean mIsBlackAndWhiteMode;
 
     private TransactionFilter mFilter;
     private boolean mIsShowingLoaderForData;
@@ -55,6 +56,7 @@ public class TransactionsAdapter extends Adapter<ViewHolder> implements Filterab
         mDataSet = new GetTransactionResponseModel.List();
         mShowingData = new GetTransactionResponseModel.List();
         mItemPressedListener = _itemPressedListener;
+        mIsBlackAndWhiteMode = ImageUtils.isBlackAndWhiteMode(mActivity);
     }
 
     public void startLoading() {
@@ -300,15 +302,22 @@ public class TransactionsAdapter extends Adapter<ViewHolder> implements Filterab
                 sStartOffset.setVisibility(_position % 2 == 0 ? View.GONE : View.VISIBLE);
                 //_position % 3 == 0 ? "Waiting for Details" : _position % 2 == 0 ? _model.statusCode : "On Hold"
                 final int[] icon_color = C.TRANSACTION_STATUS.get(_model.statusCode);
-                hexagonView.setBorderColor(icon_color[C.TRANSACTION_STATUS_COLOR_INDEX]);
 
-                if (C.WEB_REPORT.equals(_model.type)) {
+                if (mIsBlackAndWhiteMode) {
+                    hexagonView.setBorderColor(android.R.color.black);
+                } else {
+                    hexagonView.setBorderColor(icon_color[C.TRANSACTION_STATUS_COLOR_INDEX]);
+                }
+
+                if (mIsBlackAndWhiteMode) {
+                    hexagonView.setSrcTintColorRes(R.color.hex_color_dark_gray);
+                } else if (C.WEB_REPORT.equals(_model.type)) {
                     hexagonView.setSrcTintColorRes(icon_color[C.TRANSACTION_STATUS_COLOR_INDEX]);
-                    hexagonView.setHexagonSrcDrawable(Service.BLOCK_WEBSITE.getDrawableRes());
                 } else {
                     hexagonView.setSrcTintColor(Color.TRANSPARENT);
-                    hexagonView.setHexagonSrcDrawable(icon_color[C.TRANSACTION_STATUS_ICON_INDEX]);
                 }
+
+                hexagonView.setHexagonSrcDrawable(icon_color[C.TRANSACTION_STATUS_ICON_INDEX]);
                 if (mConstraint.length() != 0) {
                     title.setText(SpannableWrapper.makeSelectedTextBold(mConstraint, _model.title));
                     description.setText(SpannableWrapper.makeSelectedTextBold(mConstraint, _model.description));
