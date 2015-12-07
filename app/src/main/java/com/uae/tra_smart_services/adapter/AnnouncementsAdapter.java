@@ -5,7 +5,6 @@ import android.support.annotation.UiThread;
 import android.support.annotation.WorkerThread;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.Adapter;
-import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,7 +28,6 @@ import com.uae.tra_smart_services.interfaces.OperationStateManager;
 import com.uae.tra_smart_services.rest.RestClient;
 import com.uae.tra_smart_services.rest.TRAServicesAPI;
 import com.uae.tra_smart_services.rest.model.response.GetAnnouncementsResponseModel;
-import com.uae.tra_smart_services.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -108,7 +106,7 @@ public class AnnouncementsAdapter extends Adapter<ViewHolder> implements Filtera
         return mDataSet.isEmpty();
     }
 
-    public void clearData(){
+    public void clearData() {
         mDataSet.clear();
         mShowingData.clear();
         notifyDataSetChanged();
@@ -309,7 +307,7 @@ public class AnnouncementsAdapter extends Adapter<ViewHolder> implements Filtera
 
         public ViewHolder(View itemView) {
             super(itemView);
-            if(mIsPreview){
+            if (mIsPreview) {
                 sStartOffset = (Space) itemView.findViewById(R.id.sStartOffset_LIIHS);
                 hexagonView = (HexagonView) itemView.findViewById(R.id.hvIcon_LIIHS);
                 title = (TextView) itemView.findViewById(R.id.hvTitle_LIIHS);
@@ -342,12 +340,12 @@ public class AnnouncementsAdapter extends Adapter<ViewHolder> implements Filtera
                 hexagonView.setHexagonSrcDrawable(R.drawable.ic_form);
                 Picasso.with(mActivity).load(_model.image).into(new HexagonViewTarget(hexagonView));
                 if (mConstraint.length() != 0) {
-                    title.setText(SpannableWrapper.makeSelectedTextBold(mConstraint, Html.fromHtml(StringUtils.trim(_model.title)).toString()));
-                    description.setText(SpannableWrapper.makeSelectedTextBold(mConstraint, StringUtils.trim(_model.description)));
+                    title.setText(SpannableWrapper.makeSelectedTextBold(mConstraint, _model.title).toString());
+                    description.setText(SpannableWrapper.makeSelectedTextBold(mConstraint, _model.description));
                     date.setText(SpannableWrapper.makeSelectedTextBold(mConstraint, _model.createdAt));
                 } else {
-                    title.setText(Html.fromHtml(StringUtils.trim(_model.title)).toString());
-                    description.setText(StringUtils.trim(_model.description));
+                    title.setText(_model.title);
+                    description.setText(_model.description);
                     date.setText(_model.createdAt);
                 }
                 itemView.setOnClickListener(new View.OnClickListener() {
