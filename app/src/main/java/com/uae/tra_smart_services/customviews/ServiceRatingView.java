@@ -6,6 +6,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.Checkable;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
@@ -56,7 +57,7 @@ public class ServiceRatingView extends LinearLayout implements OnClickListener {
     public Object[] getRating(){
         for(CheckableHexagonView button : ratingButtons){
             if(button.isChecked()){
-                return new Object[]{button.getTag(), etFeedBack.getText().toString()};
+                return new Object[]{Integer.valueOf((String) button.getTag()), etFeedBack.getText().toString()};
             }
         }
         return null;

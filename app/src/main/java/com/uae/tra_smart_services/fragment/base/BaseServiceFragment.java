@@ -93,7 +93,7 @@ public abstract class BaseServiceFragment extends BaseFragment
     public void onRate(int _rate, String _description){
         final String[] rateNames = getResources().getStringArray(R.array.rate_names);
         getFragmentManager().popBackStackImmediate();
-        sendRating(new RatingServiceRequestModel(getServiceName(), _rate, _description != null ? _description : rateNames[_rate - 1]));
+        sendRating(new RatingServiceRequestModel(getServiceName(), _rate, !_description.isEmpty() ? _description : rateNames[_rate - 1]));
     }
 
     private void sendRating(RatingServiceRequestModel _model) {

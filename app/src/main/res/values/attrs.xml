@@ -107,4 +107,6 @@
 
     <attr name="progressBarDrawable" format="reference"/>
 
+    <attr name="rating_button_background_selector" format="reference"/>
+
 </resources>

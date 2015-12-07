@@ -13,6 +13,7 @@
             android:id="@+id/hvDomainCheckRating_1_FDC"
             android:layout_height="wrap_content"
             app:hexagonSideSize="36dp"
+            android:clickable="true"
             app:hexagonBackground="@drawable/hexagon_translucent_selector"
             app:hexagonSrc="@drawable/ic_btn_bad_line"
             app:hexagonBorderColor="@android:color/white"
@@ -27,6 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             app:hexagonSideSize="36dp"
+            android:clickable="true"
             app:hexagonBackground="@drawable/hexagon_translucent_selector"
             app:hexagonSrc="@drawable/ic_btn_neut_line"
             app:hexagonBorderColor="@android:color/white"
@@ -40,6 +42,7 @@
             android:id="@+id/hvDomainCheckRating_3_FDC"
             android:layout_height="wrap_content"
             app:hexagonSideSize="36dp"
+            android:clickable="true"
             app:hexagonBackground="@drawable/hexagon_translucent_selector"
             app:hexagonSrc="@drawable/ic_btn_good_line"
             app:hexagonBorderColor="@android:color/white"
@@ -57,16 +60,15 @@
             android:textColor="@color/hex_text_color_white"
             android:width="65dp"
             android:layout_marginTop="25dp"
-            android:layout_marginStart="25dp"
-            android:layout_marginEnd="25dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
             android:layout_marginBottom="10dp"
             android:layout_width="300dp"
             android:background="@null"
             android:layout_height="wrap_content" />
 
     <View
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
+
         android:background="@color/hex_text_color_white"
         style="@style/AuthorizationFieldsSeparator" />
 
