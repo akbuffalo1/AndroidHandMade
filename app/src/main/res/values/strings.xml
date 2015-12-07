@@ -421,7 +421,7 @@
     <string name="fragment_contact_us_phone_label">Phone:</string>
     <string name="fragment_contact_us_label">Mail:</string>
 
-    <string name="choose_rating_error_message">Please, choose appropriate rating and fill feedback</string>
+    <string name="choose_rating_error_message">Please, choose appropriate rating.</string>
 
     <string name="btn_close">CLOSE</string>
     <string name="btn_send">SEND</string>
