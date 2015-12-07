@@ -109,13 +109,6 @@
 
             </RelativeLayout>
 
-            <com.uae.tra_smart_services.customviews.ServiceRatingView
-                android:id="@+id/llDomainServiceRatingView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                tools:visibility="invisible"/>
-
         </LinearLayout>
     </ScrollView>
 </FrameLayout>

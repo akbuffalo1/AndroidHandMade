@@ -428,4 +428,7 @@
 
     <string name="choose_rating">Please, choose appropriate rating and feel feedback</string>
 
+    <string name="btn_close">CLOSE</string>
+    <string name="btn_send">SEND</string>
+
 </resources>

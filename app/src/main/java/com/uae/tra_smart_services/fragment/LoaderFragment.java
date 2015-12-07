@@ -19,6 +19,7 @@ import com.uae.tra_smart_services.customviews.ServiceRatingView;
 import com.uae.tra_smart_services.fragment.base.BaseFragment;
 import com.uae.tra_smart_services.interfaces.Loader;
 import com.uae.tra_smart_services.interfaces.LoaderMarker;
+import com.uae.tra_smart_services.util.ImageUtils;
 
 /**
  * Created by ak-buffalo on 21.09.15.
@@ -46,6 +47,7 @@ public class LoaderFragment extends BaseFragment implements View.OnClickListener
     private boolean shouldContinueLoading;
 
     public static LoaderFragment newInstance(String _msg, LoaderMarker _listener, boolean _showRating) {
+        ServiceRatingView.MODE = 1;
         Bundle args = new Bundle();
         args.putString(MSG, _msg);
         args.putBoolean(SHOW_RATING, _showRating);
@@ -67,14 +69,26 @@ public class LoaderFragment extends BaseFragment implements View.OnClickListener
     protected void initViews() {
         super.initViews();
         rlFragmentContainer = findView(R.id.rlFragmentContainer_FL);
+        int bgColor = defineBGColor(rlFragmentContainer);
+        if(ImageUtils.isBlackAndWhiteMode(getActivity())) {
+            ImageUtils.getFilteredDrawable(getActivity(), rlFragmentContainer.getBackground());
+            bgColor = Color.parseColor("#505050");
+        }
         lvLoader = findView(R.id.lvLoaderView);
+        lvLoader.init(bgColor);
         tvLoaderTitleText = findView(R.id.tvLoaderTitleText);
-        ServiceRatingView.MODE = 1;
         srvRating = findView(R.id.srvRating_FL);
         llServiceRatingContainer = findView(R.id.llServiceRatingContainer_FL);
         svScrollContainer = findView(R.id.svScrollContainer_FL);
         tvBackOrCancelBtn = findView(R.id.tvLoaderBackButton);
         btnSendRating = findView(R.id.btnSendRating_LSR);
+    }
+
+    private int defineBGColor(View _view){
+        Bitmap bitmap = ((BitmapDrawable)_view.getBackground()).getBitmap();
+        int pixel = bitmap.getPixel(bitmap.getWidth() / 2, bitmap.getHeight() / 2);
+
+        return Color.rgb(Color.red(pixel), Color.green(pixel), Color.blue(pixel));
     }
 
     @Override

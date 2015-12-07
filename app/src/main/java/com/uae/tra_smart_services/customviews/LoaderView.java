@@ -168,6 +168,11 @@ public class LoaderView extends View implements Animator.AnimatorListener {
         animatorSuccessOrFailed.addListener(this);
     }
 
+    public void init(int _color){
+        mAnimationState = State.INITIALL;
+        mSuccessOrFailPaint.setColor(_color);
+    }
+
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
