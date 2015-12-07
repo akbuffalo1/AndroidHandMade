@@ -68,7 +68,7 @@ public class TransactionDetailFragment extends BaseFragment implements View.OnCl
                         getArguments().getString(DESCRIPTION) +" "+
                         getArguments().getString(DESCRIPTION));
         btnEdit = findView(R.id.btnEdit_FTD);
-//        btnEdit.setVisibility(mModel.statusCode.equals(C.WAITING_FOR_DETAILS) ? View.VISIBLE : View.GONE);
+        btnEdit.setVisibility(mModel.statusCode.equals(C.WAITING_FOR_DETAILS) ? View.VISIBLE : View.GONE);
     }
 
     @Override

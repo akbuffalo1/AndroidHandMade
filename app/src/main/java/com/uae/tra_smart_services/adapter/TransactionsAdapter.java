@@ -296,8 +296,8 @@ public class TransactionsAdapter extends Adapter<ViewHolder> implements Filterab
         public void setData(int _position, final GetTransactionResponseModel _model) {
             if (!isProgress) {
                 sStartOffset.setVisibility(_position % 2 == 0 ? View.GONE : View.VISIBLE);
-                //TODO - REMOVE RANDOMIZER
-                final int[] icon_color = C.TRANSACTION_STATUS.get(_position % 3 == 0 ? "Waiting for Details" : _position % 2 == 0 ? _model.statusCode : "On Hold");
+                //_position % 3 == 0 ? "Waiting for Details" : _position % 2 == 0 ? _model.statusCode : "On Hold"
+                final int[] icon_color = C.TRANSACTION_STATUS.get(_model.statusCode);
                 hexagonView.setBorderColor(icon_color[1]);
                 hexagonView.setHexagonSrcDrawable(icon_color[0]);
                 if(mConstraint.length() != 0){
