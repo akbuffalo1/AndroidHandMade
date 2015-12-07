@@ -48,16 +48,9 @@ public class ServiceRatingDialog extends DialogFragment implements DialogInterfa
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         ratingView = new ServiceRatingView(getActivity());
-        TextView title = new TextView(getActivity());
-        title.setText(R.string.rate_service_title);
-        title.setPadding(40, 30, 0, 20);
-        title.setGravity(Gravity.LEFT);
-        title.setTextColor(Color.DKGRAY);
-        title.setTextSize(20);
-
         AlertDialog.Builder alertBuilder =
                 new AlertDialog.Builder(getActivity(), THEME_HOLO_LIGHT)
-                        .setCustomTitle(title)
+                        .setTitle(R.string.rate_service_title)
                         .setView(ratingView, 20, 20, 20, 20);
 
         alertBuilder.setNegativeButton(getString(R.string.btn_close), this);
