@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,11 +23,12 @@ import static android.app.AlertDialog.THEME_HOLO_LIGHT;
 /**
  * Created by ak-buffalo on 02.10.15.
  */
-public class ServiceRatingDialog extends DialogFragment implements DialogInterface.OnClickListener {
+public class ServiceRatingDialog extends DialogFragment implements View.OnClickListener, DialogInterface.OnShowListener {
     private static final String LOG_TAG = ServiceRatingDialog.class.getSimpleName();
 
     private CallBacks mCallBacks;
     private ServiceRatingView ratingView;
+    private AlertDialog mDialog;
 
     public static ServiceRatingDialog newInstance(Fragment targetFragment) {
         ServiceRatingView.MODE = -1;
@@ -48,15 +51,15 @@ public class ServiceRatingDialog extends DialogFragment implements DialogInterfa
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         ratingView = new ServiceRatingView(getActivity());
-        AlertDialog.Builder alertBuilder =
+        mDialog =
                 new AlertDialog.Builder(getActivity(), THEME_HOLO_LIGHT)
                         .setTitle(R.string.rate_service_title)
-                        .setView(ratingView, 20, 20, 20, 20);
-
-        alertBuilder.setNegativeButton(getString(R.string.btn_close), this);
-        alertBuilder.setPositiveButton(getString(R.string.btn_send), this);
-
-        return alertBuilder.create();
+                        .setView(ratingView, 20, 20, 20, 20)
+                        .setNegativeButton(getString(R.string.btn_close), null)
+                        .setPositiveButton(getString(R.string.btn_send), null)
+                        .create();
+        mDialog.setOnShowListener(this);
+        return mDialog;
     }
 
     public final void show(FragmentManager manager) {
@@ -64,23 +67,34 @@ public class ServiceRatingDialog extends DialogFragment implements DialogInterfa
     }
 
     @Override
-    public void onClick(DialogInterface dialog, int which) {
+    public void onClick(View _view) {
         if (mCallBacks != null) {
-            switch (which){
-                case DialogInterface.BUTTON_NEGATIVE:
+            switch ((int) _view.getTag()){
+                case AlertDialog.BUTTON_NEGATIVE:
                     dismiss();
                     break;
-                case DialogInterface.BUTTON_POSITIVE:
+                case AlertDialog.BUTTON_POSITIVE:
                     Object[] rating = ratingView.getRating();
-                    if (rating == null){
+                    if (rating == null) {
                         Toast.makeText(getActivity(), R.string.choose_rating_error_message, Toast.LENGTH_SHORT).show();
                         return;
                     }
                     mCallBacks.onRate((int) rating[0], (String) rating[1]);
-                    dismiss();
+                    mDialog.dismiss();
                     break;
             }
         }
+    }
+
+    @Override
+    public void onShow(DialogInterface dialog) {
+        Button positiveButton = mDialog.getButton(AlertDialog.BUTTON_POSITIVE);
+        positiveButton.setTag(AlertDialog.BUTTON_POSITIVE);
+        positiveButton.setOnClickListener(this);
+
+        Button negativeButton = mDialog.getButton(AlertDialog.BUTTON_NEGATIVE);
+        negativeButton.setTag(AlertDialog.BUTTON_NEGATIVE);
+        negativeButton.setOnClickListener(this);
     }
 
     @Override
