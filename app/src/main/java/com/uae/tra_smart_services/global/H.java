@@ -1,11 +1,15 @@
 package com.uae.tra_smart_services.global;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.content.res.XmlResourceParser;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.support.annotation.XmlRes;
 import android.util.Log;
+import android.util.TypedValue;
+
+import com.uae.tra_smart_services.R;
 
 import org.xmlpull.v1.XmlPullParser;
 
@@ -121,5 +125,12 @@ public class H {
         }
 
         return Bitmap.createBitmap(src, 0, 0, src.getWidth(), src.getHeight(), matrix, true);
+    }
+
+    public static int getPrimaryColor(Context _context){
+        TypedValue typedValue = new TypedValue();
+        Resources.Theme theme = _context.getTheme();
+        theme.resolveAttribute(R.attr.colorPrimary, typedValue, true);
+        return typedValue.data;
     }
 }
