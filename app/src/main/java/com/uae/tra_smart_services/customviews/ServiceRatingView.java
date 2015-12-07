@@ -44,7 +44,6 @@ public class ServiceRatingView extends LinearLayout implements OnClickListener {
         hvNeut = (CheckableHexagonView) findViewById(R.id.hvDomainCheckRating_2_FDC);
         hvGood = (CheckableHexagonView) findViewById(R.id.hvDomainCheckRating_3_FDC);
         etFeedBack = (EditText) findViewById(R.id.etFeedBack_LSR);
-        etFeedBack.clearFocus();
     }
 
     private void initListeners() {
