@@ -2,12 +2,12 @@ package com.uae.tra_smart_services.customviews;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.view.View;
 import android.widget.Checkable;
 
 /**
  * Created by and on 04.12.15.
  */
-
 public class CheckableHexagonView extends HexagonView implements Checkable {
     private boolean mChecked = false;
     public CheckableHexagonView(Context context) {
@@ -33,8 +33,10 @@ public class CheckableHexagonView extends HexagonView implements Checkable {
 
     @Override
     public void setChecked(boolean checked) {
-        mChecked = checked;
-        refreshDrawableState();
+        if (checked != mChecked) {
+            mChecked = checked;
+            refreshDrawableState();
+        }
     }
 
     @Override
@@ -45,5 +47,11 @@ public class CheckableHexagonView extends HexagonView implements Checkable {
     @Override
     public void toggle() {
         setChecked(!mChecked);
+    }
+
+    @Override
+    protected void drawableStateChanged() {
+        super.drawableStateChanged();
+        invalidate();
     }
 }
