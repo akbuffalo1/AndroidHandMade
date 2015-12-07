@@ -18,7 +18,7 @@
             app:hexagonSrc="@drawable/ic_btn_bad_line"
             app:hexagonBorderColor="?rating_bad_color"
             app:hexagonSrcTintColor="?rating_bad_color"
-            app:hexagonBorderSize="1dp"
+            app:hexagonBorderSize="1.1dp"
             android:tag="1"
             android:layout_marginEnd="20dp"/>
 
@@ -31,7 +31,7 @@
             app:hexagonSrc="@drawable/ic_btn_neut_line"
             app:hexagonBorderColor="?rating_neut_color"
             app:hexagonSrcTintColor="?rating_neut_color"
-            app:hexagonBorderSize="1dp"
+            app:hexagonBorderSize="1.1dp"
             android:tag="2"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"/>
@@ -45,7 +45,7 @@
             app:hexagonSrc="@drawable/ic_btn_good_line"
             app:hexagonBorderColor="?rating_good_color"
             app:hexagonSrcTintColor="?rating_good_color"
-            app:hexagonBorderSize="1dp"
+            app:hexagonBorderSize="1.1dp"
             android:tag="3"
             android:layout_marginStart="20dp"/>
     </LinearLayout>

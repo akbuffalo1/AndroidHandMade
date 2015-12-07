@@ -399,5 +399,6 @@
     <string name="rating_view_title">Choose Rating</string>
     <string name="loader_view_send_btn">SEND</string>
     <string name="str_my_imei">MY IMEI</string>
-
+    <string name="btn_close">CLOSE</string>
+    <string name="btn_send">SEND</string>
 </resources>
