@@ -51,7 +51,7 @@ public class ServiceRatingDialog extends DialogFragment implements DialogInterfa
         ratingView = new ServiceRatingView(getActivity());
 
         TextView title = new TextView(getActivity());
-        title.setText(R.string.rate);
+        title.setText(R.string.rate_service_title);
         title.setPadding(10, 10, 10, 10);
         title.setGravity(Gravity.CENTER);
         title.setTextColor(Color.DKGRAY);
@@ -82,7 +82,7 @@ public class ServiceRatingDialog extends DialogFragment implements DialogInterfa
                 case DialogInterface.BUTTON_POSITIVE:
                     Object[] rating = ratingView.getRating();
                     if ((int) rating[0] == 0){
-                        Toast.makeText(getActivity(), R.string.choose_rating, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), R.string.choose_rating_error_message, Toast.LENGTH_SHORT).show();
 //                        return;
                         break;
                     } else {
