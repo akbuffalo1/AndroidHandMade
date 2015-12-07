@@ -50,7 +50,7 @@
                     android:textColor="?attr/colorPrimary"
                     android:textColorHint="?attr/colorPrimary"
                     android:textSize="18sp"
-                    tools:text="tra.gov.ae"/>
+                    android:text="tra.gov.ae"/>
 
                 <TextView
                     android:layout_alignTop="@id/etDomainAvail_FDCH"
@@ -108,13 +108,6 @@
                     android:textSize="16sp"/>
 
             </RelativeLayout>
-
-            <com.uae.tra_smart_services.customviews.ServiceRatingView
-                android:id="@+id/llDomainServiceRatingView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                tools:visibility="invisible"/>
 
         </LinearLayout>
     </ScrollView>

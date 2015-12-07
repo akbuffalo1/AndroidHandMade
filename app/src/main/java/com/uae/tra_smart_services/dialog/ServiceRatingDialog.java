@@ -27,8 +27,8 @@ public class ServiceRatingDialog extends DialogFragment implements DialogInterfa
     private CallBacks mCallBacks;
     private ServiceRatingView ratingView;
 
-
     public static ServiceRatingDialog newInstance(Fragment targetFragment) {
+        ServiceRatingView.MODE = -1;
         ServiceRatingDialog pickerDialog = new ServiceRatingDialog();
         pickerDialog.setTargetFragment(targetFragment, 0);
         return pickerDialog;
@@ -47,13 +47,11 @@ public class ServiceRatingDialog extends DialogFragment implements DialogInterfa
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        ServiceRatingView.MODE = -1;
         ratingView = new ServiceRatingView(getActivity());
-
         TextView title = new TextView(getActivity());
         title.setText(R.string.rate_service_title);
-        title.setPadding(10, 10, 10, 10);
-        title.setGravity(Gravity.CENTER);
+        title.setPadding(40, 30, 0, 20);
+        title.setGravity(Gravity.LEFT);
         title.setTextColor(Color.DKGRAY);
         title.setTextSize(20);
 
@@ -62,8 +60,8 @@ public class ServiceRatingDialog extends DialogFragment implements DialogInterfa
                         .setCustomTitle(title)
                         .setView(ratingView, 20, 20, 20, 20);
 
-        alertBuilder.setNegativeButton(getString(R.string.str_cancel), this);
-        alertBuilder.setPositiveButton(getString(R.string.str_ok), this);
+        alertBuilder.setNegativeButton(getString(R.string.btn_close), this);
+        alertBuilder.setPositiveButton(getString(R.string.btn_send), this);
 
         return alertBuilder.create();
     }
@@ -83,7 +81,6 @@ public class ServiceRatingDialog extends DialogFragment implements DialogInterfa
                     Object[] rating = ratingView.getRating();
                     if ((int) rating[0] == 0){
                         Toast.makeText(getActivity(), R.string.choose_rating_error_message, Toast.LENGTH_SHORT).show();
-//                        return;
                         break;
                     } else {
                         mCallBacks.onRate((int) rating[0], (String) rating[1]);

@@ -423,4 +423,7 @@
 
     <string name="choose_rating_error_message">Please, choose appropriate rating and fill feedback</string>
 
+    <string name="btn_close">CLOSE</string>
+    <string name="btn_send">SEND</string>
+
 </resources>
