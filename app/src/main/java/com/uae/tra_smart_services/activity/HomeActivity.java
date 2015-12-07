@@ -227,7 +227,7 @@ public class HomeActivity extends BaseFragmentActivity implements //region INTER
                 replaceFragment(ApprovedDevicesFragment.newInstance(), _useBackStack);
                 break;
             case REPORT_SPAM:
-                openFragmentIfAuthorized(ReportSmsSpamFragment.newInstance(), _service, _useBackStack);
+                openReportSmsSpamFragmentIfAuthorized(_service, _data, _useBackStack);
                 break;
             case MOBILE_VERIFICATION:
                 replaceFragment(MobileVerificationFragment.newInstance(), _useBackStack);
@@ -235,14 +235,19 @@ public class HomeActivity extends BaseFragmentActivity implements //region INTER
             case POOR_COVERAGE:
                 replaceFragment(PoorCoverageFragment.newInstance(), _useBackStack);
                 break;
-            case SMS_SPAM:
-                replaceFragment(_data != null ? ReportSmsSpamFragment.newInstance(_data) : ReportSmsSpamFragment.newInstance(), _useBackStack);
-                break;
-
+//            case SMS_SPAM:
+//                replaceFragment(_data != null ? ReportSmsSpamFragment.newInstance(_data) : ReportSmsSpamFragment.newInstance(), _useBackStack);
+//                break;
+//
 //            case INTERNET_SPEEDTEST:
 //                replaceFragment(SpeedTestFragment.newInstance(), _useBackStack);
 //                break;
         }
+    }
+
+    private void openReportSmsSpamFragmentIfAuthorized(Service _service, @Nullable Parcelable _data, boolean _useBackStack) {
+        final ReportSmsSpamFragment fragment = _data != null ? ReportSmsSpamFragment.newInstance(_data) : ReportSmsSpamFragment.newInstance();
+        openFragmentIfAuthorized(fragment, _service, _data, _useBackStack);
     }
 
     private void openFragmentIfAuthorized(final BaseFragment _fragment, final Enum _service) {

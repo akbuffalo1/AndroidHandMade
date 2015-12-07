@@ -257,6 +257,12 @@ public enum Service {
         public String getServiceName() {
             return C.BLOCK_SMS_SPAM;
         }
+
+        @Nullable
+        @Override
+        public String getTransactionName() {
+            return C.SMS_SPAM;
+        }
     },
     POOR_COVERAGE {
         @Override
@@ -278,18 +284,6 @@ public enum Service {
         @Override
         public String getServiceName() {
             return C.COVERAGE;
-        }
-    },
-    SMS_SPAM {
-        @Override
-        protected boolean isStaticMainScreenService() {
-            return true;
-        }
-
-        @Nullable
-        @Override
-        public String getTransactionName() {
-            return C.SMS_SPAM;
         }
     };
 

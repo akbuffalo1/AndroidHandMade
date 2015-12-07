@@ -21,6 +21,7 @@ import com.uae.tra_smart_services.customviews.HexagonView;
 import com.uae.tra_smart_services.customviews.LoaderView;
 import com.uae.tra_smart_services.entities.NetworkErrorHandler;
 import com.uae.tra_smart_services.global.C;
+import com.uae.tra_smart_services.global.Service;
 import com.uae.tra_smart_services.global.SpannableWrapper;
 import com.uae.tra_smart_services.interfaces.OperationStateManager;
 import com.uae.tra_smart_services.rest.RestClient;
@@ -317,7 +318,12 @@ public class TransactionsAdapter extends Adapter<ViewHolder> implements Filterab
                     hexagonView.setSrcTintColor(Color.TRANSPARENT);
                 }
 
-                hexagonView.setHexagonSrcDrawable(icon_color[C.TRANSACTION_STATUS_ICON_INDEX]);
+                if (C.WEB_REPORT.equals(_model.type)) {
+                    hexagonView.setHexagonSrcDrawable(Service.BLOCK_WEBSITE.getDrawableRes());
+                } else {
+                    hexagonView.setHexagonSrcDrawable(icon_color[C.TRANSACTION_STATUS_ICON_INDEX]);
+                }
+
                 if (mConstraint.length() != 0) {
                     title.setText(SpannableWrapper.makeSelectedTextBold(mConstraint, _model.title));
                     description.setText(SpannableWrapper.makeSelectedTextBold(mConstraint, _model.description));
