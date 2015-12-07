@@ -204,7 +204,7 @@ public enum Service {
         @Nullable
         @Override
         public String getServiceName() {
-            return C.SPAM_REPORT;
+            return C.BLOCK_WEBSITE;
         }
 
         @Nullable
@@ -255,7 +255,7 @@ public enum Service {
         @Nullable
         @Override
         public String getServiceName() {
-            return C.SPAM_REPORT;
+            return C.BLOCK_SMS_SPAM;
         }
     },
     POOR_COVERAGE {
