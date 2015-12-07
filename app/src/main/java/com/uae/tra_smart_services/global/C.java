@@ -135,21 +135,39 @@ public final class C {
     public static Map<String, int[]> TRANSACTION_STATUS = new HashMap<>();
 
     public static final String WAITING_FOR_DETAILS = "Waiting for Details";
+    public static final String RESEARCHING = "Researching";
+    public static final String ON_HOLD = "On Hold";
+    public static final String WAITING_TO_BE_REVIEWED = "Waiting to be Reviewed";
+    public static final String APPROVED = "Approved";
+    public static final String IMPLEMENTED = "Implemented";
+    public static final String REFERRED_TO_LICENSEE = "Referred To Licensee";
+    public static final String IN_PROGRESS = "In Progress";
 
     static {
         TRANSACTION_STATUS.put(null, new int[]{R.drawable.ic_form, R.color.hex_primary_green});
 
-        TRANSACTION_STATUS.put("In Progress", new int[]{R.drawable.ic_form, R.color.hex_primary_green});
-        TRANSACTION_STATUS.put("Referred To Licensee", new int[]{R.drawable.ic_form, R.color.hex_primary_green});
-        TRANSACTION_STATUS.put("Implemented", new int[]{R.drawable.ic_form, R.color.hex_primary_green});
-        TRANSACTION_STATUS.put("Approved", new int[]{R.drawable.ic_form, R.color.hex_primary_green});
-        TRANSACTION_STATUS.put("Waiting to be Reviewed", new int[]{R.drawable.ic_form, R.color.hex_primary_green});
+        TRANSACTION_STATUS.put(IN_PROGRESS, new int[]{R.drawable.ic_form, R.color.hex_primary_green});
+        TRANSACTION_STATUS.put(REFERRED_TO_LICENSEE, new int[]{R.drawable.ic_form, R.color.hex_primary_green});
+        TRANSACTION_STATUS.put(IMPLEMENTED, new int[]{R.drawable.ic_form, R.color.hex_primary_green});
+        TRANSACTION_STATUS.put(APPROVED, new int[]{R.drawable.ic_form, R.color.hex_primary_green});
+        TRANSACTION_STATUS.put(WAITING_TO_BE_REVIEWED, new int[]{R.drawable.ic_form, R.color.hex_primary_green});
 
-        TRANSACTION_STATUS.put("On Hold", new int[]{R.drawable.ic_download, R.color.hex_primary_orange});
-        TRANSACTION_STATUS.put("Researching", new int[]{R.drawable.ic_download, R.color.hex_primary_orange});
+        TRANSACTION_STATUS.put(ON_HOLD, new int[]{R.drawable.ic_download, R.color.hex_primary_orange});
+        TRANSACTION_STATUS.put(RESEARCHING, new int[]{R.drawable.ic_download, R.color.hex_primary_orange});
 
         TRANSACTION_STATUS.put(WAITING_FOR_DETAILS, new int[]{R.drawable.ic_domain, R.color.hex_primary_red});
     }
+
+    public static final int TRANSACTION_STATUS_ICON_INDEX = 0;
+    public static final int TRANSACTION_STATUS_COLOR_INDEX = 1;
+    //endregion
+
+    //region Transaction names const
+    public static final String COMPLAINT_ABOUT_SERVICE_PROVIDER = "Complaint about Service Provider";
+    public static final String COMPLAINT_ABOUT_TRA = "Complaint about TRA";
+    public static final String INQUIRY = "Inquiry";
+    public static final String WEB_REPORT = "Web Report";
+    public static final String SMS_SPAM = "SMS Spam";
     //endregion
 
 }
