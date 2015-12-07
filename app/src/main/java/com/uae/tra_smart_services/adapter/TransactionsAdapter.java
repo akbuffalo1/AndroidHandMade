@@ -1,6 +1,7 @@
 package com.uae.tra_smart_services.adapter;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.support.annotation.UiThread;
 import android.support.annotation.WorkerThread;
 import android.support.v7.widget.RecyclerView;
@@ -20,6 +21,7 @@ import com.uae.tra_smart_services.customviews.HexagonView;
 import com.uae.tra_smart_services.customviews.LoaderView;
 import com.uae.tra_smart_services.entities.NetworkErrorHandler;
 import com.uae.tra_smart_services.global.C;
+import com.uae.tra_smart_services.global.Service;
 import com.uae.tra_smart_services.global.SpannableWrapper;
 import com.uae.tra_smart_services.interfaces.OperationStateManager;
 import com.uae.tra_smart_services.rest.RestClient;
@@ -79,7 +81,7 @@ public class TransactionsAdapter extends Adapter<ViewHolder> implements Filterab
         return mDataSet.isEmpty();
     }
 
-    public void clearData(){
+    public void clearData() {
         mDataSet.clear();
         mShowingData.clear();
         notifyDataSetChanged();
@@ -96,7 +98,7 @@ public class TransactionsAdapter extends Adapter<ViewHolder> implements Filterab
         }
     }
 
-    public GetTransactionResponseModel.List getAllData(){
+    public GetTransactionResponseModel.List getAllData() {
         return mDataSet;
     }
 
@@ -142,7 +144,7 @@ public class TransactionsAdapter extends Adapter<ViewHolder> implements Filterab
         }
     }
 
-    public boolean isIsInSearchMode(){
+    public boolean isIsInSearchMode() {
         return mIsInSearchMode;
     }
 
@@ -191,7 +193,7 @@ public class TransactionsAdapter extends Adapter<ViewHolder> implements Filterab
             mSearchResultPageNum = 1;
         }
 
-        public void reset(){
+        public void reset() {
             mSearchResultPageNum = 1;
         }
 
@@ -298,9 +300,16 @@ public class TransactionsAdapter extends Adapter<ViewHolder> implements Filterab
                 sStartOffset.setVisibility(_position % 2 == 0 ? View.GONE : View.VISIBLE);
                 //_position % 3 == 0 ? "Waiting for Details" : _position % 2 == 0 ? _model.statusCode : "On Hold"
                 final int[] icon_color = C.TRANSACTION_STATUS.get(_model.statusCode);
-                hexagonView.setBorderColor(icon_color[1]);
-                hexagonView.setHexagonSrcDrawable(icon_color[0]);
-                if(mConstraint.length() != 0){
+                hexagonView.setBorderColor(icon_color[C.TRANSACTION_STATUS_COLOR_INDEX]);
+
+                if (C.WEB_REPORT.equals(_model.type)) {
+                    hexagonView.setSrcTintColorRes(icon_color[C.TRANSACTION_STATUS_COLOR_INDEX]);
+                    hexagonView.setHexagonSrcDrawable(Service.BLOCK_WEBSITE.getDrawableRes());
+                } else {
+                    hexagonView.setSrcTintColor(Color.TRANSPARENT);
+                    hexagonView.setHexagonSrcDrawable(icon_color[C.TRANSACTION_STATUS_ICON_INDEX]);
+                }
+                if (mConstraint.length() != 0) {
                     title.setText(SpannableWrapper.makeSelectedTextBold(mConstraint, _model.title));
                     description.setText(SpannableWrapper.makeSelectedTextBold(mConstraint, _model.description));
                     date.setText(SpannableWrapper.makeSelectedTextBold(mConstraint, _model.modifiedDatetime));

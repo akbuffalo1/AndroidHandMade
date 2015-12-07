@@ -118,8 +118,8 @@ public class HexagonView extends View {
         }
     }
 
-    public void setBorderColor(@ColorRes final int _borderColor){
-        mBorderPathPaint.setColor(ContextCompat.getColor(getContext(),_borderColor));
+    public void setBorderColor(@ColorRes final int _borderColor) {
+        mBorderPathPaint.setColor(ContextCompat.getColor(getContext(), _borderColor));
         invalidate();
     }
 
@@ -149,6 +149,14 @@ public class HexagonView extends View {
         mSrcDrawable = _backgroundDrawable;
         tintDrawableIfNeed();
         invalidate();
+    }
+
+    public void setSrcTintColor(@ColorInt int _srcTintColor) {
+        mSrcTintColor = _srcTintColor;
+    }
+
+    public void setSrcTintColorRes(@ColorRes int _srcTintColorRes) {
+        mSrcTintColor = ContextCompat.getColor(getContext(), _srcTintColorRes);
     }
 
     public void postScaleType(@ScaleType int _scaleType) {

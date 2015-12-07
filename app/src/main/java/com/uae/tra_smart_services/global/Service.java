@@ -37,7 +37,7 @@ public enum Service {
         @Nullable
         @Override
         public String getTransactionName() {
-            return "Complaint about Service Provider";
+            return C.COMPLAINT_ABOUT_SERVICE_PROVIDER;
         }
     },
     COMPLAINT_ABOUT_TRA {
@@ -60,7 +60,9 @@ public enum Service {
 
         @Nullable
         @Override
-        public String getTransactionName() { return "Complaint about TRA"; }
+        public String getTransactionName() {
+            return C.COMPLAINT_ABOUT_TRA;
+        }
     },
     SUGGESTION {
         @Override
@@ -166,7 +168,7 @@ public enum Service {
         @Nullable
         @Override
         public String getTransactionName() {
-            return "Inquiry";
+            return C.INQUIRY;
         }
     },
     APPROVED_DEVICES {
@@ -208,7 +210,7 @@ public enum Service {
         @Nullable
         @Override
         public String getTransactionName() {
-            return "Web Report";
+            return C.WEB_REPORT;
         }
     },
     MOBILE_VERIFICATION {
@@ -286,7 +288,9 @@ public enum Service {
 
         @Nullable
         @Override
-        public String getTransactionName() { return "SMS Spam"; }
+        public String getTransactionName() {
+            return C.SMS_SPAM;
+        }
     };
 
 //    , INTERNET_SPEEDTEST {
@@ -312,7 +316,7 @@ public enum Service {
     }
 
     @StringRes
-    public int getTitleRes(){
+    public int getTitleRes() {
         return R.string.service_suggestion;
     }
 
@@ -323,7 +327,7 @@ public enum Service {
     }
 
     @Nullable
-    public String getTransactionName(){
+    public String getTransactionName() {
         return null;
     }
 
@@ -372,10 +376,10 @@ public enum Service {
         return services;
     }
 
-    public static Service getServiceTypeByString(String _serviceStr){
+    public static Service getServiceTypeByString(String _serviceStr) {
         initUniqueServicesList();
-        for(Service service : UNIQUE_SERVICES){
-            if(_serviceStr != null && _serviceStr.equals(service.getTransactionName())){
+        for (Service service : UNIQUE_SERVICES) {
+            if (_serviceStr != null && _serviceStr.equals(service.getTransactionName())) {
                 return service;
             }
         }
