@@ -5,18 +5,19 @@ import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.DialogInterface;
-import android.graphics.Color;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
-import android.view.Gravity;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.uae.tra_smart_services.R;
+import com.uae.tra_smart_services.TRAApplication;
 import com.uae.tra_smart_services.customviews.ServiceRatingView;
+import com.uae.tra_smart_services.global.H;
 
 import static android.app.AlertDialog.THEME_HOLO_LIGHT;
 
@@ -88,11 +89,15 @@ public class ServiceRatingDialog extends DialogFragment implements View.OnClickL
 
     @Override
     public void onShow(DialogInterface dialog) {
+        int primaryColor = H.getPrimaryColor(getActivity());
+
         Button positiveButton = mDialog.getButton(AlertDialog.BUTTON_POSITIVE);
+        positiveButton.setTextColor(primaryColor);
         positiveButton.setTag(AlertDialog.BUTTON_POSITIVE);
         positiveButton.setOnClickListener(this);
 
         Button negativeButton = mDialog.getButton(AlertDialog.BUTTON_NEGATIVE);
+        negativeButton.setTextColor(primaryColor);
         negativeButton.setTag(AlertDialog.BUTTON_NEGATIVE);
         negativeButton.setOnClickListener(this);
     }
