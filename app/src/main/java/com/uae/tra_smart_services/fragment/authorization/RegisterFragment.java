@@ -1,7 +1,9 @@
 package com.uae.tra_smart_services.fragment.authorization;
 
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
@@ -27,6 +29,8 @@ import com.uae.tra_smart_services.util.LayoutDirectionUtils;
 import com.uae.tra_smart_services.util.StringUtils;
 import com.uae.tra_smart_services.util.TRAPatterns;
 
+import java.util.regex.Pattern;
+
 import retrofit.client.Response;
 
 import static com.uae.tra_smart_services.global.C.MAX_PASSWORD_LENGTH;
@@ -37,10 +41,11 @@ import static com.uae.tra_smart_services.global.C.MIN_USERNAME_LENGTH;
 /**
  * Created by ak-buffalo on 22.07.15.
  */
-public class RegisterFragment extends BaseAuthorizationFragment implements View.OnClickListener, Loader.Cancelled {
+public class RegisterFragment extends BaseAuthorizationFragment implements View.OnClickListener, Loader.Cancelled, TextWatcher {
 
     private static final String KEY_REGISTER_REQUEST = "REGISTER_REQUEST";
     private static final int MIN_PHONE_LENGTH = 4;
+    private static final int MAX_EMIRATES_ID_LENGTH = 4;
 
     private EditText etUserName, etPhone, etPassword, etConfirmPassword, etFirstName,
             etLastName, etEmiratesId, etEmail;
@@ -94,6 +99,8 @@ public class RegisterFragment extends BaseAuthorizationFragment implements View.
     protected final void initListeners() {
         mRequestListener = new RequestListener();
         tvRegister.setOnClickListener(this);
+        etEmiratesId.addTextChangedListener(this);
+        etEmiratesId.setOnFocusChangeListener(this);
     }
 
     @Override
@@ -235,6 +242,157 @@ public class RegisterFragment extends BaseAuthorizationFragment implements View.
         if (getSpiceManager().isStarted() && mRegisterRequest != null) {
             getSpiceManager().cancel(mRegisterRequest);
         }
+    }
+
+
+    @Override
+    public void onFocusChange(View _view, boolean hasFocus) {
+        resetToPattern();
+    }
+
+    private void resetToPattern(){
+        if(etEmiratesId.length() != 4 && current != (STARTS_WITH + "YYYY-NNNNNNN-C")){
+            etEmiratesId.setText(current = (STARTS_WITH + "YYYY-NNNNNNN-C"));
+        }
+
+    }
+
+    int len = 0;
+    private String current = "";
+    private String mMask = "784YYYYNNNNNNNC";
+    private int sector = 1;
+//    private String mMask = "DDMMYYYY";
+    @Override
+    public void afterTextChanged(Editable s) {
+        /*String str = etEmiratesId.getText().toString();
+        if((str.length() == 3 || str.length() == 8 || str.length() == 16) && len < str.length()) {
+            etEmiratesId.append("-");
+        }*/
+
+        if (!s.toString().equals(current)) {
+            String clean = s.toString().replaceAll("[^\\d.]", "");
+            String cleanC = current.replaceAll("[^\\d.]", "");
+
+            int cl = clean.length();
+            int sel = cl;
+
+            if(cl == 14) {
+                if(clean.length() > cleanC.length()){
+                    sel = cl++;
+                    sel += ++ sector;
+                } else {
+                    sel = --cl;
+                    sel += sector --;
+                }
+            } else if(cl == 7) {
+                if(clean.length() > cleanC.length()){
+                    sel = cl++;
+                    sel += ++ sector;
+                } else {
+                    sel = --cl;
+                    sel += sector --;
+                }
+            } /*else if(cl == 3) {
+                if(clean.length() > cleanC.length()){
+                    sel = cl++;
+                    sel += ++ sector;
+                } else {
+                    sel = --cl;
+                    sel += sector --;
+                }
+            }*/ else {
+                sel += sector;
+            }
+
+            if (clean.equals(cleanC)) sel--;
+
+            if (clean.length() < 15){
+                clean = clean + mMask.substring(clean.length());
+            }else{
+                int num1  = Integer.parseInt(clean.substring(0,3));
+                int num2  = Integer.parseInt(clean.substring(3,7));
+                int num3 = Integer.parseInt(clean.substring(7,14));
+                int num4 = Integer.parseInt(clean.substring(14,15));
+
+                clean = String.format("%02d%02d%02d%02d", num1, num2, num3, num4);
+            }
+
+            clean = String.format("%s-%s-%s-%s",
+                    clean.substring(0, 3),
+                    clean.substring(3, 7),
+                    clean.substring(7, 14),
+                    clean.substring(14, 15)
+            );
+
+            sel = sel < 0 ? 0 : sel;
+
+            if(sel <= 0) {sector = 0;}
+            current = clean;
+            etEmiratesId.setText(current);
+            etEmiratesId.setSelection(sel < current.length() ? sel : current.length());
+
+        }
+        /*if (!s.toString().equals(current)) {
+            String clean = s.toString().replaceAll("[^\\d.]", "");
+            String cleanC = current.replaceAll("[^\\d.]", "");
+
+            int cl = clean.length();
+            int sel = cl;
+            for (int i = 2; i <= cl && i < 6; i += 2) {
+                sel++;
+            }
+            //Fix for pressing delete next to a forward slash
+            if (clean.equals(cleanC)) sel--;
+
+            if (clean.length() < 8) {
+                clean = clean + mMask.substring(clean.length());
+            } else {
+                //This part makes sure that when we finish entering numbers
+                //the date is correct, fixing it otherwise
+                int day = Integer.parseInt(clean.substring(0, 2));
+                int mon = Integer.parseInt(clean.substring(2, 4));
+                int year = Integer.parseInt(clean.substring(4, 8));
+
+                clean = String.format("%02d%02d%02d", day, mon, year);
+            }
+
+            clean = String.format("%s/%s/%s", clean.substring(0, 2),
+                    clean.substring(2, 4),
+                    clean.substring(4, 8));
+
+            sel = sel < 0 ? 0 : sel;
+            current = clean;
+            etEmiratesId.setText(current);
+            etEmiratesId.setSelection(sel < current.length() ? sel : current.length());
+        }*/
+        int i = 0;
+    }
+
+    private static final String STARTS_WITH = "784-";
+
+    @Override
+    public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
+        /*len = etEmiratesId.getText().toString().length();*/
+//        if(etEmiratesId.length() != 0 && arg0.toString().equals("XXX-YYYY-NNNNNNN-C")){
+//            etEmiratesId.setText("");
+//        }
+//        resetToPattern();
+        etEmiratesId.setText("");
+        etEmiratesId.setSelection(4);
+    }
+
+    Pattern pattern = Pattern.compile("\\d{3}-\\d{4}-\\d{7}-\\d{1}");
+    @Override
+    public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
+        /*Matcher matcher = pattern.matcher(charSequence);
+        if (matcher.region(0, count).matches()) {
+            etEmiratesId.setText(charSequence);
+        } else {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                etEmiratesId.cancelPendingInputEvents();
+            }
+        }*/
+        int i = 0;
     }
 
     private class RequestListener implements PendingRequestListener<Response> {
