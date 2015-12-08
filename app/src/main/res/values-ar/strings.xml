@@ -66,7 +66,7 @@
     <string name="str_signal_level">مستوى الإشارة</string>
     <string name="str_signal_coverage">تغطية الإشارة</string>
     <string name="str_enter_url">ادخل عنوان رابط</string>
-    <string name="str_report_url">ساعد سالم</string>
+    <string name="str_report_url">حجب موقع</string>
     <string name="str_description">شرح</string>
     <string name="str_number_of_spammer">رقم المرسل الغير مرغوب</string>
     <string name="str_sms_report_number">شكوى على رقم SMS</string>
@@ -147,7 +147,7 @@
     <string name="service_provider">مزود الخدمة</string>
     <string name="number_of_spammer">رقم المرسل الغير مرغوب</string>
     <string name="description">الشرح</string>
-    <string name="complain_title">العنوان</string>
+    <string name="complain_title">الموضوع</string>
     <string name="reference_number">الرقم المرجعي</string>
     <string name="content_description_add_attachment">إضافة ملف ملحق</string>
     <string name="approved_device_information">معلومات عن الأجهزة المعتمدة</string>
@@ -203,7 +203,7 @@
     <string name="lang_en">English</string>
     <string name="lang_ar">العربية</string>
 
-    <string name="fragment_complain_no_title">يرجى ادخال العنوان</string>
+    <string name="fragment_complain_no_title">يرجى ادخال الموضوع</string>
     <string name="fragment_complain_no_service_provider">يرجى اختيار مزود الخدمة</string>
     <string name="fragment_complain_no_reference_number">يرجى ادخال الرقم المرجعي</string>
     <string name="fragment_complain_no_description">يرجى كتابة شرح</string>
@@ -232,7 +232,7 @@
     <string name="fragment_edit_user_profile_change_photo">تغيير الصورة</string>
     <string name="fragment_edit_user_profile_first_name">الاسم</string>
     <string name="fragment_edit_user_profile_last_name">اللقب</string>
-    <string name="fragment_edit_user_profile_address">العنوان</string>
+    <string name="fragment_edit_user_profile_address">الموضوع</string>
     <string name="fragment_edit_user_profile_number">رقم الاتصال</string>
     <string name="fragment_edit_user_profile_cancel" tools:ignore="ButtonCase">إلغاء</string>
     <string name="fragment_edit_user_profile_reset">استعادة</string>
@@ -294,7 +294,7 @@
     <string name="fragment_report_spam_sms_description_hint">شرح</string>
     <string name="fragment_report_spam_sms_submit">إرسال</string>
 
-    <string name="fragment_report_spam_web_title">ساعد سالم</string>
+    <string name="fragment_report_spam_web_title">حجب موقع</string>
     <string name="fragment_report_spam_web_link">رابط</string>
     <string name="fragment_report_spam_web_description_hint">شرح...</string>
 
@@ -308,13 +308,13 @@
     <string name="app_tutorial_screens">شاشات المساعدة</string>
     <string name="activate_tutorial">تفعيل شاشات المساعدة</string>
 
-    <string name="fragment_approved_devices_no_results">There are no approved\ndevices were found</string>
+    <string name="fragment_approved_devices_no_results">لم يتم العثور على\nأجهزة معتمدة.</string>
 
     <string name="str_enter_imei">أدخل رقم IMEI للجهاز المراد التحقق منه</string>
     <string name="str_send_imei">أرسل</string>
 
     <string name="str_innovations">مركز الإبداع والابتكار</string>
-    <string name="str_title">العنوان</string>
+    <string name="str_title">الموضوع</string>
     <string name="str_message">الرسالة</string>
     <string name="str_type_your_message_here">اكتب رسالتك هنا</string>
     <string name="str_no_data_found">لا توجد بيانات</string>
@@ -330,7 +330,7 @@
 
 
 
-    <string name="service_report_spam">الرسائل الغير مرغوبة</string>
+    <string name="service_report_spam">الرسائل التسويقية</string>
 
 
     <string name="fragment_innovation_idea_title">أفكار ابتكارية تساهم بـ</string>
@@ -364,41 +364,41 @@
     <string name="authorization_invalid_password_short">كلمة المرور قصيرة. يجب أن تحتوي على ثمانية محرف على الأقل</string>
     <string name="authorization_invalid_password_long">كلمة المرور يجب أن لا تتجاوز أثنين و ثلاثين محرفاً.</string>
     <string name="authorization_invalid_email_format">اسم المستخدم يجب أن يبدأ بحرف</string>
-    <string name="attachment_manager_delete_attachment">Delete attachment</string>
-    <string name="phone_number_is_too_short">Phone number is too short</string>
-    <string name="authorization_invalid_firstname_short">First name is too short. It must be at least three characters</string>
-    <string name="authorization_invalid_firstname_long">First name is too long. It must be less than thirty-two characters</string>
-    <string name="authorization_invalid_lastname_short">Last name is too short. It must be at least three characters</string>
-    <string name="authorization_invalid_lastname_long">Last name is too long. It must be less than thirty-two characters</string>
+    <string name="attachment_manager_delete_attachment">حذف ملف ملحق</string>
+    <string name="phone_number_is_too_short">رقم الهاتف قصير جداً</string>
+    <string name="authorization_invalid_firstname_short">الاسم يجب أن يتكون من حرفين على الأقل</string>
+    <string name="authorization_invalid_firstname_long">الاسم يجب أن لا يزيد عن أثنين و ثلاثين حرفاً</string>
+    <string name="authorization_invalid_lastname_short">اللقب يجب أن يتكون من حرفين على الأقل</string>
+    <string name="authorization_invalid_lastname_long">اللقب يجب أن لا يزيد عن أثنين و ثلاثين حرفاً</string>
 
-    <string name="fragment_edit_profile_image_error">"Can't load image"</string>
-    <string name="attachment_manager_delete_image">Delete image</string>
+    <string name="fragment_edit_profile_image_error">"لا يمكن تحميل الصورة"</string>
+    <string name="attachment_manager_delete_image">حذف الصورة</string>
     <string name="fragment_domain_checker_hint">تغطي الخدمة اسماء النطاقات .ae حصراً</string>
 
-    <string name="fragment_mobile_verification_camera_permission_explanation">Camera access is required to display the camera preview.</string>
-    <string name="fragment_mobile_verification_phone_permission_explanation">Phone access is required to get IMEI code.</string>
-    <string name="attachment_manager_storage_permission_explanation">Storage access is required to create photo.</string>
-    <string name="fragment_poor_coverage_location_permission_explanation">Location access is required to detect your location.</string>
-    <string name="attachment_permission_denied">Permission request was denied.</string>
-    <string name="hexagon_button_block_website">Block Websites</string>
-    <string name="hexagon_button_sms_spam">SMS Spam</string>
-    <string name="activity_splash_loading">LOADING UPDATES…</string>
+    <string name="fragment_mobile_verification_camera_permission_explanation">السماح بالوصول للكاميرا مطلوب لعرض الصورة.</string>
+    <string name="fragment_mobile_verification_phone_permission_explanation">السماح بالوصول لرقم IMEI مطلوب.</string>
+    <string name="attachment_manager_storage_permission_explanation">السماح بتخزين الصورة مطلوب.</string>
+    <string name="fragment_poor_coverage_location_permission_explanation">السماح بتحديد الموقع مطلوب لتحديد العنوان.</string>
+    <string name="attachment_permission_denied">تم رفض طلب التصريح.</string>
+    <string name="hexagon_button_block_website">حجب موقع</string>
+    <string name="hexagon_button_sms_spam">الرسائل التسويقية</string>
+    <string name="activity_splash_loading">جاري التحميل...</string>
 
-    <string name="fragment_contact_us_address_label">ADDRESS</string>
-    <string name="fragment_contact_us_contact_info_label">CONTACT INFO</string>
-    <string name="fragment_contact_us_phone_label">Phone:</string>
-    <string name="fragment_contact_us_label">Mail:</string>
-    <string name="fragment_transaction_details_edit_btn">Edit</string>
-    <string name="choose_rating_error_message">Please, choose appropriate rating.</string>
-    <string name="fragment_contact_us">Contact Us</string>
-    <string name="fragment_info_hub_no_pending_announcements">There are no announcements.</string>
-    <string name="fragment_info_hub_no_pending_transactions">There are no pending transactions.</string>
-    <string name="fragment_mobile_verification_no_radio_module">There is no registered radio module.</string>
-    <string name="rate_service">Rate Service</string>
-    <string name="rate_service_title">RATE</string>
-    <string name="rating_view_title">Choose Rating</string>
-    <string name="loader_view_send_btn">SEND</string>
-    <string name="str_my_imei">MY IMEI</string>
+    <string name="fragment_contact_us_address_label">العنوان</string>
+    <string name="fragment_contact_us_contact_info_label">معلومات الاتصال</string>
+    <string name="fragment_contact_us_phone_label">الهاتف:</string>
+    <string name="fragment_contact_us_label">البريد الإلكتروني:</string>
+    <string name="fragment_transaction_details_edit_btn">تعديل</string>
+    <string name="choose_rating_error_message">يرجى ملئ التقييم</string>
+    <string name="fragment_contact_us">اتصل بنا</string>
+    <string name="fragment_info_hub_no_pending_announcements">لا توجد أخبار حالياً.</string>
+    <string name="fragment_info_hub_no_pending_transactions">لا توجد معاملات لديك بعد.</string>
+    <string name="fragment_mobile_verification_no_radio_module">لا يوجد جهاز اتصال.</string>
+    <string name="rate_service">تقييم الخدمة</string>
+    <string name="rate_service_title">تقييم</string>
+    <string name="rating_view_title">أختر تقييماً</string>
+    <string name="loader_view_send_btn">ارسل</string>
+    <string name="str_my_imei">رقم IMEI لجهازي</string>
     <string name="btn_close">CLOSE</string>
     <string name="btn_send">SEND</string>
 </resources>
