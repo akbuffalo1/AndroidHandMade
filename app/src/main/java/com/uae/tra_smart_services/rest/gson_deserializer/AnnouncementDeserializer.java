@@ -21,7 +21,8 @@ import java.text.SimpleDateFormat;
 public class AnnouncementDeserializer implements JsonDeserializer<Announcement> {
 
     private static final SimpleDateFormat SOURCE_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-    private static final SimpleDateFormat RESULT_DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss a");
+    private static final SimpleDateFormat RESULT_DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy");
+//    private static final SimpleDateFormat RESULT_DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss a");
 
     @Override
     public Announcement deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)

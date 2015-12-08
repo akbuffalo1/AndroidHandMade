@@ -8,14 +8,20 @@ import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
 import com.uae.tra_smart_services.rest.model.response.GetTransactionResponseModel;
+import com.uae.tra_smart_services.util.Logger;
 import com.uae.tra_smart_services.util.StringUtils;
 
 import java.lang.reflect.Type;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 /**
  * Created by mobimaks on 07.12.2015.
  */
 public class TransactionDeserializer implements JsonDeserializer<GetTransactionResponseModel> {
+
+    private static final SimpleDateFormat SOURCE_DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss a");
+    private static final SimpleDateFormat RESULT_DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy");
 
     @Override
     public GetTransactionResponseModel deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
@@ -24,6 +30,11 @@ public class TransactionDeserializer implements JsonDeserializer<GetTransactionR
         if (transaction != null) {
             transaction.title = Html.fromHtml(StringUtils.trim(transaction.title)).toString();
             transaction.description = Html.fromHtml(StringUtils.trim(transaction.description)).toString();
+            try {
+                transaction.modifiedDatetime = RESULT_DATE_FORMAT.format(SOURCE_DATE_FORMAT.parse(transaction.modifiedDatetime));
+            } catch (ParseException e) {
+                Logger.d(getClass().getSimpleName(), String.valueOf(e));
+            }
         }
         return transaction;
     }

@@ -10,6 +10,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_gravity="center_horizontal"
+        android:scrollbars="none"
         app:layout_widthPercent="90%"
         android:layout_height="match_parent">
 
@@ -118,9 +119,9 @@
                 android:layout_alignTop="@id/llContactInfoLabels_FCU"
                 tools:text="03 784 0654"
                 android:id="@+id/tvPhone_FCU"
+                android:textDirection="ltr"
                 android:singleLine="true"
                 android:ellipsize="end"
-                android:autoLink="phone"
                 android:textSize="16sp"
                 android:layout_marginBottom="8dp"
                 android:textColor="?themeMainColor"
@@ -128,12 +129,12 @@
 
             <TextView
                 android:layout_width="wrap_content"
+                android:textDirection="ltr"
                 android:layout_toEndOf="@id/llContactInfoLabels_FCU"
                 android:layout_below="@id/tvPhone_FCU"
                 tools:text="info@radiance_uae.com"
                 android:id="@+id/tvEmail_FCU"
                 android:singleLine="true"
-                android:autoLink="email"
                 android:ellipsize="end"
                 android:textSize="16sp"
                 android:textColor="?themeMainColor"
