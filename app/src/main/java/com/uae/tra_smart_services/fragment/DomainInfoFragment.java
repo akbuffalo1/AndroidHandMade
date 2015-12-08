@@ -9,6 +9,8 @@ import android.support.annotation.Nullable;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.uae.tra_smart_services.R;
@@ -26,12 +28,23 @@ import java.util.Map;
  */
 public class DomainInfoFragment extends BaseServiceFragment implements AlertDialogFragment.OnOkListener, LoaderManager.LoaderCallbacks<Map<String, String>> {
 
+    private static final String KEY_BLACKLISTED = "BLACKLISTED";
+    private static final String KEY_DOMAIN_NAME = "Domain Name";
+    private static final String KEY_REGISTRAR_ID = "Registrar ID";
+    private static final String KEY_REGISTRAR_NAME = "Registrar Name";
+    private static final String KEY_STATUS = "Status";
+    private static final String KEY_REGISTRANT_CONTACT_ID = "Registrant Contact ID";
+    private static final String KEY_REGISTRANT_CONTACT_NAME = "Registrant Contact Name";
+
     private TextView tvDomainName_FDI;
     private TextView tvRegisterId_FDI;
     private TextView tvRegisterName_FDI;
     private TextView tvStatus_FDI;
     private TextView tvRegContactId_FDI;
     private TextView tvRegContactName_FDI;
+
+    private TextView tvError;
+    private LinearLayout llDataContainer;
 
     public static DomainInfoFragment newInstance(final DomainInfoCheckResponseModel _domainInfo) {
         final DomainInfoFragment fragment = new DomainInfoFragment();
@@ -56,7 +69,7 @@ public class DomainInfoFragment extends BaseServiceFragment implements AlertDial
     @Override
     public void onPrepareOptionsMenu(Menu menu) {
         MenuItem menuItem;
-        if((menuItem = menu.findItem(R.id.action_show_info)) != null){
+        if ((menuItem = menu.findItem(R.id.action_show_info)) != null) {
             menuItem.setVisible(false);
         }
         super.onPrepareOptionsMenu(menu);
@@ -88,6 +101,9 @@ public class DomainInfoFragment extends BaseServiceFragment implements AlertDial
         tvStatus_FDI = findView(R.id.tvStatus_FDI);
         tvRegContactId_FDI = findView(R.id.tvRegContactId_FDI);
         tvRegContactName_FDI = findView(R.id.tvRegContactName_FDI);
+
+        tvError = findView(R.id.tvError_FDI);
+        llDataContainer = findView(R.id.llDataContainer_FDI);
     }
 
     @Override
@@ -113,12 +129,20 @@ public class DomainInfoFragment extends BaseServiceFragment implements AlertDial
 
     @Override
     public void onLoadFinished(Loader<Map<String, String>> loader, Map<String, String> data) {
-        tvDomainName_FDI.setText(data.get("Domain Name"));
-        tvRegisterId_FDI.setText(data.get("Registrar ID"));
-        tvRegisterName_FDI.setText(data.get("Registrar Name"));
-        tvStatus_FDI.setText(data.get("Status"));
-        tvRegContactId_FDI.setText(data.get("Registrant Contact ID"));
-        tvRegContactName_FDI.setText(data.get("Registrant Contact Name"));
+        if (data.containsKey(KEY_BLACKLISTED)) {
+            tvError.setVisibility(View.VISIBLE);
+            llDataContainer.setVisibility(View.GONE);
+            tvError.setText(data.get(KEY_BLACKLISTED));
+        } else {
+            tvError.setVisibility(View.GONE);
+            llDataContainer.setVisibility(View.VISIBLE);
+            tvDomainName_FDI.setText(data.get(KEY_DOMAIN_NAME));
+            tvRegisterId_FDI.setText(data.get(KEY_REGISTRAR_ID));
+            tvRegisterName_FDI.setText(data.get(KEY_REGISTRAR_NAME));
+            tvStatus_FDI.setText(data.get(KEY_STATUS));
+            tvRegContactId_FDI.setText(data.get(KEY_REGISTRANT_CONTACT_ID));
+            tvRegContactName_FDI.setText(data.get(KEY_REGISTRANT_CONTACT_NAME));
+        }
     }
 
     @Override

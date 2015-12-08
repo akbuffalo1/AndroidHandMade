@@ -109,7 +109,7 @@ public class ServiceInfoFragment extends BaseFragment implements View.OnClickLis
 
     private void loadServiceInfo() {
         mInfoRequestListener = new ServiceInfoRequestListener();
-        mServiceInfoRequest = new ServiceInfoRequest(mServiceName, getResources().getConfiguration().locale.toString());
+        mServiceInfoRequest = new ServiceInfoRequest(mServiceName, getResources().getConfiguration().locale.getLanguage());
         loaderOverlayShow(getString(R.string.str_loading), mInfoRequestListener, false);
         loaderOverlayButtonBehavior(new Loader.BackButton() {
             @Override

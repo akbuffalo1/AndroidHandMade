@@ -17,6 +17,7 @@ public final class ServerConstants {
     public static final String BASE_URL2 = HTTP_SCHEME + "185.54.19.249:80";
     public static final String BASE_URL3 = HTTP_SCHEME + "192.168.120.40:80";
     public static final String BASE_URL4 = HTTP_SCHEME + "projects.thinkmobiles.com:7791";
+    public static final String BASE_URL5 = HTTPS_SCHEME + "mobsrv.tra.gov.ae";
     public static String BASE_URL = BASE_URL1;
 
     public static final String APP_KEY_HEADER_NAME = "appkey";
