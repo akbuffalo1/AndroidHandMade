@@ -399,6 +399,6 @@
     <string name="rating_view_title">أختر تقييماً</string>
     <string name="loader_view_send_btn">ارسل</string>
     <string name="str_my_imei">رقم IMEI لجهازي</string>
-    <string name="btn_close">CLOSE</string>
-    <string name="btn_send">SEND</string>
+    <string name="btn_close">أغلق</string>
+    <string name="btn_send">أرسل</string>
 </resources>
