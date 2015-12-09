@@ -17,6 +17,7 @@
             android:id="@+id/sSecurityQuestion_FSL"
             android:layout_width="match_parent"
             android:layout_height="48dp"
+            android:paddingStart="@dimen/dp_transparent_fields_padding"
             android:background="@android:color/transparent"
             tools:listitem="@layout/simple_arrow_spinner_item"/>
 
@@ -26,9 +27,7 @@
             android:id="@+id/etSecurityAnswer_FSL"
             style="@style/AuthorizationFields"
             android:gravity="top|start"
-            android:hint="@string/fragment_security_login_answer_hint"
-            android:maxLines="5"
-            android:minLines="2"/>
+            android:hint="@string/fragment_security_login_answer_hint"/>
 
         <View
             style="@style/AuthorizationFieldsSeparator"

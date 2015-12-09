@@ -13,8 +13,9 @@ import com.uae.tra_smart_services.R;
 import com.uae.tra_smart_services.adapter.SecurityQuestionAdapter;
 import com.uae.tra_smart_services.fragment.base.BaseAuthorizationFragment;
 import com.uae.tra_smart_services.rest.model.request.LoginModel;
+import com.uae.tra_smart_services.util.ImageUtils;
 
-import java.util.Collections;
+import java.util.ArrayList;
 
 /**
  * Created by mobimaks on 09.12.2015.
@@ -67,8 +68,14 @@ public class SecurityQuestionLoginFragment extends BaseAuthorizationFragment imp
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        mQuestionAdapter = new SecurityQuestionAdapter(getActivity(), Collections.<String>emptyList());
+        ArrayList<String> data = new ArrayList<>();//TODO: remove stub data
+        data.add("Test item #" + 1);
+        data.add("Test item #" + 2);
+        data.add("Test item #" + 3);
+        data.add("Test item #" + 4);
+        mQuestionAdapter = new SecurityQuestionAdapter(getActivity(), data);
         sSecurityQuestion.setAdapter(mQuestionAdapter);
+        mQuestionAdapter.setItemTextColor(ImageUtils.getThemeColor(getActivity()));
     }
 
     @Override
