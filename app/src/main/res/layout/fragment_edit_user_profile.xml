@@ -16,10 +16,11 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:fillViewport="true"
-        android:paddingTop="?attr/actionBarSize"
         android:layout_height="match_parent"
-        android:overScrollMode="never">
+        android:fillViewport="true"
+        android:overScrollMode="never"
+        android:paddingTop="?attr/actionBarSize"
+        tools:paddingTop="0dp">
 
         <android.support.percent.PercentRelativeLayout
             android:layout_width="match_parent"
@@ -31,11 +32,12 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="32dp"
-                app:hexagonSrc="@drawable/ic_user_placeholder"
                 app:hexagonBackground="?userAvatarBackground"
                 app:hexagonBorderColor="@android:color/white"
                 app:hexagonBorderSize="2dp"
-                app:hexagonSideSize="48dp"/>
+                app:hexagonSideSize="48dp"
+                app:hexagonSrc="@drawable/ic_user_placeholder"
+                tools:layout_marginTop="0dp"/>
 
             <TextView
                 android:id="@+id/tvChangePhoto_FEUP"
@@ -44,7 +46,7 @@
                 android:layout_below="@id/hvUserAvatar_FEUP"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="8dp"
-                android:minHeight="36dp"
+                android:minHeight="@dimen/fragment_edit_user_profile_item_height"
                 android:text="@string/fragment_edit_user_profile_change_photo"
                 android:textColor="@android:color/darker_gray"
                 android:textSize="10sp"/>
@@ -70,7 +72,7 @@
                 android:id="@+id/tvLastNameHint_FEUP"
                 style="@style/EditUserProfileEditTextHintStyle"
                 android:layout_below="@id/vFirstNameDivider_FEUP"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="@dimen/fragment_edit_user_profile_margin_top"
                 android:text="@string/fragment_edit_user_profile_last_name"/>
 
             <EditText
@@ -86,59 +88,145 @@
 
             <TextView
                 android:id="@+id/tvAddressHint_FEUP"
-                android:visibility="gone"
                 style="@style/EditUserProfileEditTextHintStyle"
                 android:layout_below="@id/vLastNameDivider_FEUP"
-                android:layout_marginTop="16dp"
-                android:text="@string/fragment_edit_user_profile_address"/>
+                android:layout_marginTop="@dimen/fragment_edit_user_profile_margin_top"
+                android:text="@string/fragment_edit_user_profile_address"
+                android:visibility="gone"/>
 
             <EditText
                 android:id="@+id/etAddress_FEUP"
                 style="@style/EditUserProfileEditTextStyle"
-                android:visibility="gone"
                 android:layout_below="@id/tvAddressHint_FEUP"
+                android:visibility="gone"
                 tools:text="Garhoud, Deira"/>
 
             <View
                 android:id="@+id/vAddressDivider_FEUP"
-                android:visibility="gone"
                 style="@style/UserProfileDivider"
-                android:layout_below="@id/etAddress_FEUP"/>
+                android:layout_below="@id/etAddress_FEUP"
+                android:visibility="gone"/>
 
             <TextView
                 android:id="@+id/tvPhoneHint_FEUP"
-                android:visibility="gone"
                 style="@style/EditUserProfileEditTextHintStyle"
                 android:layout_below="@id/vAddressDivider_FEUP"
-                android:layout_marginTop="16dp"
-                android:text="@string/fragment_edit_user_profile_number"/>
+                android:layout_marginTop="@dimen/fragment_edit_user_profile_margin_top"
+                android:text="@string/fragment_edit_user_profile_number"
+                android:visibility="gone"/>
 
             <EditText
                 android:id="@+id/etPhone_FEUP"
-                android:visibility="gone"
                 style="@style/EditUserProfileEditTextStyle"
                 android:layout_below="@id/tvPhoneHint_FEUP"
                 android:inputType="phone"
+                android:visibility="gone"
                 tools:text="+97 55 784 1298"/>
 
             <View
                 android:id="@+id/vPhoneDivider_FEUP"
-                android:visibility="gone"
                 style="@style/UserProfileDivider"
-                android:layout_below="@id/etPhone_FEUP"/>
+                android:layout_below="@id/etPhone_FEUP"
+                android:visibility="gone"/>
+
+            <RelativeLayout
+                android:id="@+id/rlEnhancedSecurity_FEUP"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/fragment_edit_user_profile_item_height"
+                android:layout_below="@id/vPhoneDivider_FEUP"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="8dp"
+                app:layout_widthPercent="90%">
+
+                <CheckBox
+                    android:id="@+id/cbEnhancedSecurity_FEUP"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:clickable="false"/>
+
+                <TextView
+                    android:id="@+id/tvEnhancedSecurity_FEUP"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_toStartOf="@id/cbEnhancedSecurity_FEUP"
+                    android:singleLine="true"
+                    android:text="@string/fragment_register_enhanced_security"
+                    android:textColor="@color/fragment_user_profile_text_color_primary"
+                    android:textSize="@dimen/fragment_edit_user_profile_text_size"/>
+
+            </RelativeLayout>
+
+            <View
+                android:id="@+id/vEnhancedSecurityDivider_FEUP"
+                style="@style/UserProfileDivider"
+                android:layout_below="@id/rlEnhancedSecurity_FEUP"/>
+
+            <TextView
+                android:id="@+id/tvSecurityQuestionHint_FEUP"
+                style="@style/EditUserProfileEditTextHintStyle"
+                android:layout_below="@id/vEnhancedSecurityDivider_FEUP"
+                android:layout_marginTop="@dimen/fragment_edit_user_profile_margin_top"
+                android:text="@string/fragment_edit_user_profile_security_question_hint"/>
+
+            <Spinner
+                android:id="@+id/sSecurityQuestion_FEUP"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/fragment_edit_user_profile_item_height"
+                android:layout_below="@id/tvSecurityQuestionHint_FEUP"
+                android:layout_centerHorizontal="true"
+                android:background="@android:color/transparent"
+                app:layout_widthPercent="90%"
+                tools:listitem="@layout/simple_arrow_spinner_item"/>
+
+            <View
+                android:id="@+id/vSecurityQuestionDivider_FEUP"
+                style="@style/UserProfileDivider"
+                android:layout_below="@id/sSecurityQuestion_FEUP"/>
+
+            <TextView
+                android:id="@+id/tvSecurityAnswerHint_FEUP"
+                style="@style/EditUserProfileEditTextHintStyle"
+                android:layout_below="@id/vSecurityQuestionDivider_FEUP"
+                android:layout_marginTop="@dimen/fragment_edit_user_profile_margin_top"
+                android:text="@string/fragment_edit_user_profile_security_answer_hint"/>
+
+            <EditText
+                android:id="@+id/etSecurityAnswer_FEUP"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvSecurityAnswerHint_FEUP"
+                android:layout_centerHorizontal="true"
+                android:background="@android:color/transparent"
+                android:gravity="top|start"
+                android:maxLines="5"
+                android:minHeight="@dimen/fragment_edit_user_profile_item_height"
+                android:minLines="2"
+                android:paddingBottom="8dp"
+                android:paddingTop="8dp"
+                android:textColor="@color/fragment_user_profile_text_color_primary"
+                android:textSize="@dimen/fragment_edit_user_profile_text_size"
+                app:layout_widthPercent="90%"
+                tools:text="Security Answer text"/>
+
+            <View
+                android:id="@+id/vSecurityAnswerDivider_FEUP"
+                style="@style/UserProfileDivider"
+                android:layout_below="@id/etSecurityAnswer_FEUP"/>
 
             <com.uae.tra_smart_services.customviews.ProfileController
                 android:id="@+id/pcProfileController_FEUP"
-                android:layout_alignParentBottom="true"
-                android:gravity="bottom"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/vPhoneDivider_FEUP"
+                android:layout_alignParentBottom="true"
+                android:layout_below="@id/vSecurityAnswerDivider_FEUP"
                 android:layout_centerHorizontal="true"
                 android:layout_marginBottom="12dp"
-                android:layout_marginTop="12dp"/>
-
-            <!--app:layout_widthPercent="90%"/>-->
+                android:layout_marginTop="12dp"
+                android:gravity="bottom"/>
 
         </android.support.percent.PercentRelativeLayout>
 

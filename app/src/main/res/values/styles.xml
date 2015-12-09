@@ -105,21 +105,21 @@
     <style name="EditUserProfileEditTextHintStyle">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">#b9b9b9</item>
+        <item name="android:textColor">@color/fragment_user_profile_hint_color</item>
         <item name="android:layout_centerHorizontal">true</item>
-        <item name="android:textSize">10sp</item>
+        <item name="android:textSize">11sp</item>
         <item name="layout_widthPercent">90%</item>
     </style>
 
     <style name="EditUserProfileEditTextStyle">
         <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">36dp</item>
+        <item name="android:layout_height">@dimen/fragment_edit_user_profile_item_height</item>
         <item name="android:layout_centerHorizontal">true</item>
         <item name="android:background">@null</item>
         <item name="android:inputType">textCapWords</item>
         <item name="android:singleLine">true</item>
         <item name="android:textColor">@color/fragment_user_profile_text_color_primary</item>
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">@dimen/fragment_edit_user_profile_text_size</item>
         <item name="layout_widthPercent">90%</item>
     </style>
 
@@ -158,4 +158,5 @@
         <!-- colorControlActivated & colorControlHighlight use the colorAccent color by default -->
     </style>
 
+    <color name="fragment_user_profile_hint_color">#b9b9b9</color>
 </resources>

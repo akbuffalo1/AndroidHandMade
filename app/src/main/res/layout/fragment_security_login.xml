@@ -25,7 +25,10 @@
         <EditText
             android:id="@+id/etSecurityAnswer_FSL"
             style="@style/AuthorizationFields"
-            android:hint="@string/fragment_security_login_answer_hint"/>
+            android:gravity="top|start"
+            android:hint="@string/fragment_security_login_answer_hint"
+            android:maxLines="5"
+            android:minLines="2"/>
 
         <View
             style="@style/AuthorizationFieldsSeparator"

@@ -427,5 +427,7 @@
     <string name="btn_send">SEND</string>
     <string name="fragment_security_login_answer_hint">Security Answer</string>
     <string name="fragment_register_enhanced_security">Enhanced Security</string>
+    <string name="fragment_edit_user_profile_security_question_hint">SECURITY QUESTION</string>
+    <string name="fragment_edit_user_profile_security_answer_hint">SECURITY ANSWER</string>
 
 </resources>

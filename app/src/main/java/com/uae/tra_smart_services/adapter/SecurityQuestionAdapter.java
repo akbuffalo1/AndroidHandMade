@@ -50,8 +50,8 @@ public class SecurityQuestionAdapter extends BaseSpinnerAdapter<String> {
 
     protected class QuestionViewHolder extends ViewHolder<String> {
 
-        private TextView tvTitle;
-        private ThemedImageView tivArrowIcon;
+        protected TextView tvTitle;
+        protected ThemedImageView tivArrowIcon;
 
         public QuestionViewHolder(final View _view) {
             super(_view);

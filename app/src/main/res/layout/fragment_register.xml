@@ -122,9 +122,9 @@
                 android:id="@+id/sSecurityQuestion_FR"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                tools:enabled="false"
                 android:background="@android:color/transparent"
                 android:paddingStart="@dimen/dp_transparent_fields_padding"
+                tools:enabled="false"
                 tools:ignore="RtlSymmetry"
                 tools:listitem="@layout/simple_arrow_spinner_item"/>
 
@@ -134,7 +134,10 @@
             <EditText
                 android:id="@+id/etSecurityAnswer_FR"
                 style="@style/AuthorizationFields"
+                android:gravity="top|start"
                 android:hint="@string/fragment_security_login_answer_hint"
+                android:maxLines="5"
+                android:minLines="2"
                 android:textColor="?themeEnableColor"
                 android:textColorHint="?themeEnableColor"/>
 

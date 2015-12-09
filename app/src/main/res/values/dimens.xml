@@ -33,5 +33,10 @@
     <dimen name="fragment_dynamic_service_item_margin">6dp</dimen>
     <dimen name="fragment_dynamic_service_item_height">40dp</dimen>
 
+    <!--            FragmentEditUserProfile         -->
+    <dimen name="fragment_edit_user_profile_item_height">36dp</dimen>
+    <dimen name="fragment_edit_user_profile_text_size">16sp</dimen>
+    <dimen name="fragment_edit_user_profile_margin_top">16dp</dimen>
+
 
 </resources>

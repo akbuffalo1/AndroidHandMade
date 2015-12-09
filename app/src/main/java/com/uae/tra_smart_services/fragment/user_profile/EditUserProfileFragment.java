@@ -7,9 +7,15 @@ import android.os.Bundle;
 import android.support.annotation.CallSuper;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +26,7 @@ import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
 import com.squareup.picasso.Picasso;
 import com.uae.tra_smart_services.R;
+import com.uae.tra_smart_services.UserProfileQuestionAdapter;
 import com.uae.tra_smart_services.customviews.HexagonView;
 import com.uae.tra_smart_services.customviews.HexagonView.ScaleType;
 import com.uae.tra_smart_services.customviews.LoaderView;
@@ -42,6 +49,8 @@ import com.uae.tra_smart_services.rest.model.response.UserProfileResponseModel;
 import com.uae.tra_smart_services.rest.robo_requests.ChangeUserProfileRequest;
 import com.uae.tra_smart_services.util.StringUtils;
 
+import java.util.ArrayList;
+
 import retrofit.client.Response;
 
 import static com.uae.tra_smart_services.global.C.MAX_USERNAME_LENGTH;
@@ -52,7 +61,7 @@ import static com.uae.tra_smart_services.global.C.MIN_USERNAME_LENGTH;
  */
 public final class EditUserProfileFragment extends BaseFragment
         implements OnClickListener, OnControllerButtonClickListener, OnImageGetCallback,
-        OnOpenPermissionExplanationDialogListener, OnImageSourceSelectListener, OnOkListener {
+        OnOpenPermissionExplanationDialogListener, OnImageSourceSelectListener, OnOkListener, OnCheckedChangeListener {
 
     private static final String KEY_USER_PROFILE_MODEL = "USER_PROFILE_MODEL";
     private static final String KEY_EDIT_PROFILE_REQUEST = "EDIT_PROFILE_REQUEST";
@@ -60,6 +69,13 @@ public final class EditUserProfileFragment extends BaseFragment
     private HexagonView hvUserAvatar;
     private TextView tvChangePhoto;
     private EditText etFirstName, etLastName, etAddress, etPhone;
+
+    private RelativeLayout rlEnhancedSecurity;
+    private CheckBox cbEnhancedSecurity;
+    private Spinner sSecurityQuestion;
+    private EditText etSecurityAnswer;
+
+    private UserProfileQuestionAdapter mQuestionAdapter;
 
     private AttachmentManager mAttachmentManager;
     private ProfileController pcProfileController;
@@ -108,6 +124,10 @@ public final class EditUserProfileFragment extends BaseFragment
         etAddress = findView(R.id.etAddress_FEUP);
         etPhone = findView(R.id.etPhone_FEUP);
         pcProfileController = findView(R.id.pcProfileController_FEUP);
+        rlEnhancedSecurity = findView(R.id.rlEnhancedSecurity_FEUP);
+        cbEnhancedSecurity = findView(R.id.cbEnhancedSecurity_FEUP);
+        sSecurityQuestion = findView(R.id.sSecurityQuestion_FEUP);
+        etSecurityAnswer = findView(R.id.etSecurityAnswer_FEUP);
     }
 
     @Override
@@ -115,6 +135,8 @@ public final class EditUserProfileFragment extends BaseFragment
         super.initListeners();
         tvChangePhoto.setOnClickListener(this);
         pcProfileController.setOnButtonClickListener(this);
+        rlEnhancedSecurity.setOnClickListener(this);
+        cbEnhancedSecurity.setOnCheckedChangeListener(this);
     }
 
     @Override
@@ -126,6 +148,20 @@ public final class EditUserProfileFragment extends BaseFragment
         } else {
             mAttachmentManager.onRestoreInstanceState(_savedInstanceState);
         }
+
+        ArrayList<String> data = new ArrayList<>();//TODO: remove stub data
+        data.add("Test item #" + 1);
+        data.add("Test item #" + 2);
+        data.add("Test item #" + 3);
+        data.add("Test item #" + 4);
+        mQuestionAdapter = new UserProfileQuestionAdapter(getActivity(), data);
+        sSecurityQuestion.setAdapter(mQuestionAdapter);
+    }
+
+    @Override
+    public void onViewStateRestored(Bundle savedInstanceState) {
+        super.onViewStateRestored(savedInstanceState);
+        setSecurityQuestionEnabled(cbEnhancedSecurity.isChecked());
     }
 
     @Override
@@ -147,7 +183,31 @@ public final class EditUserProfileFragment extends BaseFragment
             case R.id.tvChangePhoto_FEUP:
                 openImagePicker();
                 break;
+            case R.id.rlEnhancedSecurity_FEUP:
+                cbEnhancedSecurity.toggle();
+                break;
         }
+    }
+
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        if (buttonView.getId() == R.id.cbEnhancedSecurity_FEUP) {
+            setSecurityQuestionEnabled(isChecked);
+        }
+    }
+
+    private void setSecurityQuestionEnabled(boolean _enabled) {
+        sSecurityQuestion.setEnabled(_enabled);
+        etSecurityAnswer.setEnabled(_enabled);
+
+        final int textColor = ContextCompat.getColor(getActivity(), _enabled
+                ? R.color.fragment_user_profile_text_color_primary
+                : R.color.fragment_user_profile_hint_color);
+        etSecurityAnswer.setTextColor(textColor);
+        if (mQuestionAdapter != null) {
+            mQuestionAdapter.setItemTextColor(textColor);
+        }
+
     }
 
     private void openImagePicker() {
