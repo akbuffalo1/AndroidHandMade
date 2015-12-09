@@ -135,6 +135,7 @@ public class RegisterFragment extends BaseAuthorizationFragment implements OnCli
         tvRegister.setOnClickListener(this);
         cbEnhancedSecurity.setOnCheckedChangeListener(this);
         rlEnhancedSecurity.setOnClickListener(this);
+        etEmiratesId.addTextChangedListener(this);
     }
 
     @Override
