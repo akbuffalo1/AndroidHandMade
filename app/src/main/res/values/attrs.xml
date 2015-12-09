@@ -109,4 +109,6 @@
 
     <attr name="rating_button_background_selector" format="reference"/>
 
+    <attr name="themeEnableColor" format="color"/>
+
 </resources>

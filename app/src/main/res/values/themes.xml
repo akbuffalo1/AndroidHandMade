@@ -60,6 +60,7 @@
         <item name="treeNodeCheckboxSelector">@drawable/selector_tree_item_checkbox_green</item>
         <item name="progressBarDrawable">@drawable/progress_bar_orange</item>
         <item name="rating_button_background_selector">@drawable/hexagon_orange_selector</item>
+        <item name="themeEnableColor">@color/theme_enable_selector_orange</item>
     </style>
 
     <style name="AppThemeGreen" parent="BaseAppTheme">
@@ -83,6 +84,7 @@
         <item name="treeNodeCheckboxSelector">@drawable/selector_tree_item_checkbox_green</item>
         <item name="progressBarDrawable">@drawable/progress_bar_green</item>
         <item name="rating_button_background_selector">@drawable/hexagon_green_selector</item>
+        <item name="themeEnableColor">@color/theme_enable_selector_green</item>
     </style>
 
     <style name="AppThemeBlue" parent="BaseAppTheme">
@@ -106,6 +108,7 @@
         <item name="treeNodeCheckboxSelector">@drawable/selector_tree_item_checkbox_green</item>
         <item name="progressBarDrawable">@drawable/progress_bar_blue</item>
         <item name="rating_button_background_selector">@drawable/hexagon_blue_selector</item>
+        <item name="themeEnableColor">@color/theme_enable_selector_blue</item>
     </style>
 
     <!--<style name="AppThemeRed" parent="BaseAppTheme">-->
@@ -162,5 +165,6 @@
         <item name="treeNodeCheckboxSelector">@drawable/selector_tree_item_checkbox_green</item>
         <item name="progressBarDrawable">@drawable/progress_bar_black</item>
         <item name="rating_button_background_selector">@drawable/hexagon_black_selector</item>
+        <item name="themeEnableColor">@color/theme_enable_selector_black</item>
     </style>
 </resources>

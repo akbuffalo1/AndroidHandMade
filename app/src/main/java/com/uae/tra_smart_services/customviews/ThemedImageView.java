@@ -40,6 +40,14 @@ public final class ThemedImageView extends ImageView {
         setImageDrawable(mImageDrawable);
     }
 
+    public void setTintColor(@ColorInt int _tintColor) {
+        mTintColor = _tintColor;
+        invalidateDrawable();
+    }
+
+    private void invalidateDrawable() {
+        setImageDrawable(getDrawable());
+    }
 
     @Override
     public void setImageDrawable(final @Nullable Drawable _drawable) {

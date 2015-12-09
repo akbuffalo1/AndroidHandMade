@@ -1,12 +1,19 @@
 package com.uae.tra_smart_services.fragment.authorization;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -15,17 +22,22 @@ import com.octo.android.robospice.persistence.DurationInMillis;
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.PendingRequestListener;
 import com.uae.tra_smart_services.R;
+import com.uae.tra_smart_services.adapter.SecurityQuestionAdapter;
 import com.uae.tra_smart_services.adapter.StateRegisterAdapter;
 import com.uae.tra_smart_services.entities.CustomFilterPool;
 import com.uae.tra_smart_services.entities.Filter;
 import com.uae.tra_smart_services.fragment.base.BaseAuthorizationFragment;
 import com.uae.tra_smart_services.global.C;
 import com.uae.tra_smart_services.interfaces.Loader;
+import com.uae.tra_smart_services.interfaces.Loader.Cancelled;
 import com.uae.tra_smart_services.rest.model.request.RegisterModel;
 import com.uae.tra_smart_services.rest.robo_requests.RegisterRequest;
+import com.uae.tra_smart_services.util.ImageUtils;
 import com.uae.tra_smart_services.util.LayoutDirectionUtils;
 import com.uae.tra_smart_services.util.StringUtils;
 import com.uae.tra_smart_services.util.TRAPatterns;
+
+import java.util.ArrayList;
 
 import retrofit.client.Response;
 
@@ -37,8 +49,9 @@ import static com.uae.tra_smart_services.global.C.MIN_USERNAME_LENGTH;
 /**
  * Created by ak-buffalo on 22.07.15.
  */
-public class RegisterFragment extends BaseAuthorizationFragment implements View.OnClickListener, Loader.Cancelled {
+public class RegisterFragment extends BaseAuthorizationFragment implements OnClickListener, Cancelled, OnCheckedChangeListener {
 
+    private static final String KEY_SECURITY_QUESTIONS = "SECURITY_QUESTIONS";
     private static final String KEY_REGISTER_REQUEST = "REGISTER_REQUEST";
     private static final int MIN_PHONE_LENGTH = 4;
 
@@ -48,15 +61,33 @@ public class RegisterFragment extends BaseAuthorizationFragment implements View.
     private TextView btnLogInNow;
     private Spinner acsState, acsCountry;
 
+    private RelativeLayout rlEnhancedSecurity;
+    private CheckBox cbEnhancedSecurity;
+    private Spinner sSecurityQuestion;
+    private EditText etSecurityAnswer;
+
     private RegisterRequest mRegisterRequest;
+
+    private ArrayList<String> mQuestions;
+    private SecurityQuestionAdapter mQuestionAdapter;
 
     private StateRegisterAdapter mStatesAdapter, mCountriesAdapter;
     private CustomFilterPool<RegisterModel> mFilterPool;
 
     private RequestListener mRequestListener;
 
-    public static RegisterFragment newInstance() {
-        return new RegisterFragment();
+    public static RegisterFragment newInstance(@NonNull ArrayList<String> _questions) {
+        final RegisterFragment fragment = new RegisterFragment();
+        final Bundle args = new Bundle();
+        args.putStringArrayList(KEY_SECURITY_QUESTIONS, _questions);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mQuestions = getArguments().getStringArrayList(KEY_SECURITY_QUESTIONS);
     }
 
     @Override
@@ -88,18 +119,38 @@ public class RegisterFragment extends BaseAuthorizationFragment implements View.
         LayoutDirectionUtils.setDrawableStart(getActivity(), etEmail, R.drawable.ic_mail);
 
         tvRegister = findView(R.id.tvRegister_FLI);
+
+        rlEnhancedSecurity = findView(R.id.rlEnhancedSecurity_FR);
+        sSecurityQuestion = findView(R.id.sSecurityQuestion_FR);
+        cbEnhancedSecurity = findView(R.id.cbEnhancedSecurity_FR);
+        etSecurityAnswer = findView(R.id.etSecurityAnswer_FR);
     }
 
     @Override
     protected final void initListeners() {
         mRequestListener = new RequestListener();
         tvRegister.setOnClickListener(this);
+        cbEnhancedSecurity.setOnCheckedChangeListener(this);
+        rlEnhancedSecurity.setOnClickListener(this);
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         initFilters();
+
+        initQuestionsSpinner();
+    }
+
+    @Override
+    public void onViewStateRestored(Bundle savedInstanceState) {
+        super.onViewStateRestored(savedInstanceState);
+        setSecurityQuestionEnabled(cbEnhancedSecurity.isChecked());
+    }
+
+    private void initQuestionsSpinner() {
+        mQuestionAdapter = new SecurityQuestionAdapter(getActivity(), mQuestions);
+        sSecurityQuestion.setAdapter(mQuestionAdapter);
     }
 
     @Override
@@ -114,6 +165,22 @@ public class RegisterFragment extends BaseAuthorizationFragment implements View.
     }
 
     @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        if (buttonView.getId() == R.id.cbEnhancedSecurity_FR) {
+            setSecurityQuestionEnabled(isChecked);
+        }
+    }
+
+    private void setSecurityQuestionEnabled(boolean _enabled) {
+        sSecurityQuestion.setEnabled(_enabled);
+        etSecurityAnswer.setEnabled(_enabled);
+        if (mQuestionAdapter != null) {
+            int textColor = _enabled ? ImageUtils.getThemeColor(getActivity()) : ContextCompat.getColor(getActivity(), R.color.hex_color_middle_gray);
+            mQuestionAdapter.setItemTextColor(textColor);
+        }
+    }
+
+    @Override
     public void onClick(View _v) {
         hideKeyboard(getView());
         switch (_v.getId()) {
@@ -121,6 +188,9 @@ public class RegisterFragment extends BaseAuthorizationFragment implements View.
                 if (validateData()) {
                     doRegistration();
                 }
+                break;
+            case R.id.rlEnhancedSecurity_FR:
+                cbEnhancedSecurity.toggle();
                 break;
         }
     }

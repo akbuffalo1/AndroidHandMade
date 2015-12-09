@@ -402,4 +402,5 @@
     <string name="btn_close">أغلق</string>
     <string name="btn_send">أرسل</string>
     <string name="fragment_security_login_answer_hint">Security Answer</string>
+    <string name="fragment_register_enhanced_security">Enhanced Security</string>
 </resources>

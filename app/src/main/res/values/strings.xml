@@ -426,5 +426,6 @@
     <string name="btn_close">CLOSE</string>
     <string name="btn_send">SEND</string>
     <string name="fragment_security_login_answer_hint">Security Answer</string>
+    <string name="fragment_register_enhanced_security">Enhanced Security</string>
 
 </resources>

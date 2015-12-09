@@ -6,6 +6,8 @@ import android.support.annotation.NonNull;
 import com.uae.tra_smart_services.R;
 import com.uae.tra_smart_services.rest.model.request.LoginModel;
 
+import java.util.ArrayList;
+
 /**
  * Created by ak-buffalo on 22.07.15.
  */
@@ -34,7 +36,7 @@ public abstract class BaseAuthorizationFragment extends BaseFragment{
         void onLogInSuccess();
 
         /** Handlers methods for register screen*/
-        void onOpenRegisterScreen();
+        void onOpenRegisterScreen(@NonNull ArrayList<String> _questions);
 
         void onRegisterSuccess();
 

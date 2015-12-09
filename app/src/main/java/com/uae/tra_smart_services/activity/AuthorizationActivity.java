@@ -22,6 +22,8 @@ import com.uae.tra_smart_services.interfaces.ToolbarTitleManager;
 import com.uae.tra_smart_services.rest.model.request.LoginModel;
 import com.uae.tra_smart_services.util.ImageUtils;
 
+import java.util.ArrayList;
+
 /**
  * Created by ak-buffalo on 22.07.15.
  */
@@ -106,8 +108,8 @@ public class AuthorizationActivity extends BaseFragmentActivity
     }
 
     @Override
-    public void onOpenRegisterScreen() {
-        super.replaceFragmentWithBackStack(RegisterFragment.newInstance());
+    public void onOpenRegisterScreen(@NonNull ArrayList<String> _questions) {
+        super.replaceFragmentWithBackStack(RegisterFragment.newInstance(_questions));
     }
 
     @Override

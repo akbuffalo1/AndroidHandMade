@@ -21,6 +21,8 @@ import com.uae.tra_smart_services.rest.robo_requests.LoginRequest;
 import com.uae.tra_smart_services.util.LayoutDirectionUtils;
 import com.uae.tra_smart_services.util.PreferenceManager;
 
+import java.util.ArrayList;
+
 import retrofit.client.Response;
 
 import static com.uae.tra_smart_services.global.C.MAX_PASSWORD_LENGTH;
@@ -107,7 +109,11 @@ public class LoginFragment extends BaseAuthorizationFragment
                 }
                 break;
             case R.id.tvRegisterNow_FLI:
-                actionsListener.onOpenRegisterScreen();
+                ArrayList<String> data = new ArrayList<>();//TODO: remove stub data
+                data.add("Test 1");
+                data.add("Test 2");
+                data.add("Test 3");
+                actionsListener.onOpenRegisterScreen(data);
                 break;
             case R.id.tvForgotPass_FLI:
                 actionsListener.onOpenRestorePassScreen();
@@ -171,12 +177,12 @@ public class LoginFragment extends BaseAuthorizationFragment
                     }
                 });
                 if (result != null && actionsListener != null) {
-                    if (true){//TODO: check if security question enabled
+                    if (true) {//TODO: check if security question enabled
                         LoginModel loginModel = new LoginModel();
                         loginModel.login = etUserName.getText().toString();
                         loginModel.pass = etPassword.getText().toString();
                         actionsListener.onOpenSecurityLoginScreen(loginModel);
-                    }else {
+                    } else {
                         actionsListener.onLogInSuccess();
                     }
 
