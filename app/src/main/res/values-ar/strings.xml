@@ -401,4 +401,5 @@
     <string name="str_my_imei">رقم IMEI لجهازي</string>
     <string name="btn_close">أغلق</string>
     <string name="btn_send">أرسل</string>
+    <string name="fragment_security_login_answer_hint">Security Answer</string>
 </resources>

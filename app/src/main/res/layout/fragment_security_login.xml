@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="none">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingEnd="15dp"
+        android:paddingStart="15dp">
+
+        <Spinner
+            android:id="@+id/sSecurityQuestion_FSL"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@android:color/transparent"
+            tools:listitem="@layout/simple_arrow_spinner_item"/>
+
+        <View style="@style/AuthorizationFieldsSeparator"/>
+
+        <EditText
+            android:id="@+id/etSecurityAnswer_FSL"
+            style="@style/AuthorizationFields"
+            android:hint="@string/fragment_security_login_answer_hint"/>
+
+        <View
+            style="@style/AuthorizationFieldsSeparator"
+            android:layout_marginBottom="20dp"/>
+
+        <Button
+            android:id="@+id/btnLogin_FSL"
+            style="@style/AuthorizationButtons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/str_login"/>
+
+    </LinearLayout>
+
+</ScrollView>

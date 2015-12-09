@@ -171,7 +171,15 @@ public class LoginFragment extends BaseAuthorizationFragment
                     }
                 });
                 if (result != null && actionsListener != null) {
-                    actionsListener.onLogInSuccess();
+                    if (true){//TODO: check if security question enabled
+                        LoginModel loginModel = new LoginModel();
+                        loginModel.login = etUserName.getText().toString();
+                        loginModel.pass = etPassword.getText().toString();
+                        actionsListener.onOpenSecurityLoginScreen(loginModel);
+                    }else {
+                        actionsListener.onLogInSuccess();
+                    }
+
                 }
             }
             getSpiceManager().removeDataFromCache(Response.class, KEY_LOGIN_REQUEST);

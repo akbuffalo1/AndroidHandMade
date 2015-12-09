@@ -3,6 +3,7 @@ package com.uae.tra_smart_services.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -14,9 +15,11 @@ import com.uae.tra_smart_services.activity.base.BaseFragmentActivity;
 import com.uae.tra_smart_services.fragment.authorization.LoginFragment;
 import com.uae.tra_smart_services.fragment.authorization.RegisterFragment;
 import com.uae.tra_smart_services.fragment.authorization.RestorePasswordFragment;
+import com.uae.tra_smart_services.fragment.authorization.SecurityQuestionLoginFragment;
 import com.uae.tra_smart_services.fragment.base.BaseAuthorizationFragment.AuthorizationActionsListener;
 import com.uae.tra_smart_services.global.C;
 import com.uae.tra_smart_services.interfaces.ToolbarTitleManager;
+import com.uae.tra_smart_services.rest.model.request.LoginModel;
 import com.uae.tra_smart_services.util.ImageUtils;
 
 /**
@@ -78,6 +81,11 @@ public class AuthorizationActivity extends BaseFragmentActivity
     @Override
     public void onOpenLoginScreen() {
         super.popBackStack();
+    }
+
+    @Override
+    public void onOpenSecurityLoginScreen(@NonNull LoginModel _loginModel) {
+        replaceFragmentWithBackStack(SecurityQuestionLoginFragment.newInstance(_loginModel));
     }
 
     @Override

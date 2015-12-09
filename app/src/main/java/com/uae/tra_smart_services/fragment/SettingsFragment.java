@@ -131,7 +131,7 @@ public class SettingsFragment extends BaseFragment
         themeSwitch.globalInit(mThemaDefiner.getThemeStringValue());
         themeSwitch.registerObserver(this);
 
-        tvVersionName.setHint("v1.0, build " + BuildConfig.VERSION_NAME);
+        tvVersionName.setHint("v" + BuildConfig.VERSION_NAME);
     }
 
     @Override

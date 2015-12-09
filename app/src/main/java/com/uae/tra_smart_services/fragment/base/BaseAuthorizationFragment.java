@@ -1,8 +1,10 @@
 package com.uae.tra_smart_services.fragment.base;
 
 import android.app.Activity;
+import android.support.annotation.NonNull;
 
 import com.uae.tra_smart_services.R;
+import com.uae.tra_smart_services.rest.model.request.LoginModel;
 
 /**
  * Created by ak-buffalo on 22.07.15.
@@ -26,6 +28,8 @@ public abstract class BaseAuthorizationFragment extends BaseFragment{
 
         /** Handlers methods for log in screen*/
         void onOpenLoginScreen();
+
+        void onOpenSecurityLoginScreen(@NonNull LoginModel _loginModel);
 
         void onLogInSuccess();
 
