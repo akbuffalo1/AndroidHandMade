@@ -1,5 +1,6 @@
 package com.uae.tra_smart_services.fragment.authorization;
 
+import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -18,12 +19,15 @@ import com.uae.tra_smart_services.fragment.base.BaseAuthorizationFragment;
 import com.uae.tra_smart_services.global.C;
 import com.uae.tra_smart_services.interfaces.Loader;
 import com.uae.tra_smart_services.rest.model.request.LoginModel;
+import com.uae.tra_smart_services.rest.model.response.LoginQuestionsErrorModel;
 import com.uae.tra_smart_services.rest.model.response.SecurityQuestionResponse;
 import com.uae.tra_smart_services.rest.robo_requests.LoginRequest;
 import com.uae.tra_smart_services.rest.robo_requests.SecurityQuestionsRequest;
 import com.uae.tra_smart_services.util.LayoutDirectionUtils;
+import com.uae.tra_smart_services.util.Logger;
 import com.uae.tra_smart_services.util.PreferenceManager;
 
+import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 import static com.uae.tra_smart_services.global.C.MAX_PASSWORD_LENGTH;
@@ -75,7 +79,7 @@ public class LoginFragment extends BaseAuthorizationFragment
             btnLogIn.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
-                    etUserName.setText("foouser");
+                    etUserName.setText("tuap");
                     etPassword.setText("qwerty123");
                     doLogIn();
                     return true;
@@ -188,15 +192,7 @@ public class LoginFragment extends BaseAuthorizationFragment
                     }
                 });
                 if (result != null && actionsListener != null) {
-                    if (true) {//TODO: check if security question enabled
-                        LoginModel loginModel = new LoginModel();
-                        loginModel.login = etUserName.getText().toString();
-                        loginModel.pass = etPassword.getText().toString();
-                        actionsListener.onOpenSecurityLoginScreen(loginModel);
-                    } else {
-                        actionsListener.onLogInSuccess();
-                    }
-
+                    actionsListener.onLogInSuccess();
                 }
             }
             getSpiceManager().removeDataFromCache(Response.class, KEY_LOGIN_REQUEST);
@@ -204,8 +200,47 @@ public class LoginFragment extends BaseAuthorizationFragment
 
         @Override
         public void onRequestFailure(SpiceException spiceException) {
-            processError(spiceException);
             getSpiceManager().removeDataFromCache(Response.class, KEY_LOGIN_REQUEST);
+            if (isAdded()) {
+                LoginQuestionsErrorModel loginQuestionsErrorModel = parseLoginErrorIfCan(spiceException);
+                if (loginQuestionsErrorModel == null || !C.NO_QUESTION_ERROR.equalsIgnoreCase(loginQuestionsErrorModel.error)) {
+                    processError(spiceException);
+                } else {
+                    processLoginError(loginQuestionsErrorModel);
+                }
+            }
+        }
+
+        @Nullable
+        private LoginQuestionsErrorModel parseLoginErrorIfCan(SpiceException spiceException) {
+            if (spiceException.getCause() instanceof RetrofitError) {
+                RetrofitError error = (RetrofitError) spiceException.getCause();
+                if (error.getKind() == RetrofitError.Kind.HTTP) {
+                    try {
+                        return (LoginQuestionsErrorModel) error.getBodyAs(LoginQuestionsErrorModel.class);
+                    } catch (RuntimeException e) {
+                        Logger.d(getClass().getSimpleName(), "Parse error", error);
+                    }
+                }
+            }
+            return null;
+        }
+
+        private void processLoginError(LoginQuestionsErrorModel _loginError) {
+            loaderOverlayDismissWithAction(new Loader.Dismiss() {
+                @Override
+                public void onLoadingDismissed() {
+                    getFragmentManager().popBackStack();
+                    getFragmentManager().popBackStack();
+                }
+            });
+            if (actionsListener != null) {
+                LoginModel loginModel = new LoginModel();
+                loginModel.login = etUserName.getText().toString();
+                loginModel.pass = etPassword.getText().toString();
+                loginModel.secretQuestions = _loginError.secretQuestions;
+                actionsListener.onOpenSecurityLoginScreen(loginModel);
+            }
         }
     }
 
@@ -216,7 +251,7 @@ public class LoginFragment extends BaseAuthorizationFragment
             getSpiceManager().removeDataFromCache(SecurityQuestionResponse.List.class, KEY_SECRET_QUESTIONS_REQUEST);
             if (isAdded()) {
                 loaderOverlayDismissWithAction(LoginFragment.this);
-                if (result != null && actionsListener!=null) {
+                if (result != null && actionsListener != null) {
                     actionsListener.onOpenRegisterScreen(result);
                 }
             }
