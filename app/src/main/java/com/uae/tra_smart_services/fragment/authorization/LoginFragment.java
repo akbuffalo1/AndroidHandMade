@@ -17,6 +17,7 @@ import com.uae.tra_smart_services.fragment.base.BaseAuthorizationFragment;
 import com.uae.tra_smart_services.global.C;
 import com.uae.tra_smart_services.interfaces.Loader;
 import com.uae.tra_smart_services.rest.model.request.LoginModel;
+import com.uae.tra_smart_services.rest.model.response.SecurityQuestionResponse;
 import com.uae.tra_smart_services.rest.robo_requests.LoginRequest;
 import com.uae.tra_smart_services.util.LayoutDirectionUtils;
 import com.uae.tra_smart_services.util.PreferenceManager;
@@ -109,10 +110,10 @@ public class LoginFragment extends BaseAuthorizationFragment
                 }
                 break;
             case R.id.tvRegisterNow_FLI:
-                ArrayList<String> data = new ArrayList<>();//TODO: remove stub data
-                data.add("Test 1");
-                data.add("Test 2");
-                data.add("Test 3");
+                ArrayList<SecurityQuestionResponse> data = new ArrayList<>();//TODO: remove stub data
+                data.add(new SecurityQuestionResponse(1,"Test 1"));
+                data.add(new SecurityQuestionResponse(2,"Test 2"));
+                data.add(new SecurityQuestionResponse(3,"Test 3"));
                 actionsListener.onOpenRegisterScreen(data);
                 break;
             case R.id.tvForgotPass_FLI:

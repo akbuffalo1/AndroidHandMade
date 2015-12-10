@@ -13,6 +13,7 @@ import com.uae.tra_smart_services.R;
 import com.uae.tra_smart_services.adapter.SecurityQuestionAdapter;
 import com.uae.tra_smart_services.fragment.base.BaseAuthorizationFragment;
 import com.uae.tra_smart_services.rest.model.request.LoginModel;
+import com.uae.tra_smart_services.rest.model.response.SecurityQuestionResponse;
 import com.uae.tra_smart_services.util.ImageUtils;
 
 import java.util.ArrayList;
@@ -68,11 +69,11 @@ public class SecurityQuestionLoginFragment extends BaseAuthorizationFragment imp
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        ArrayList<String> data = new ArrayList<>();//TODO: remove stub data
-        data.add("Test item #" + 1);
-        data.add("Test item #" + 2);
-        data.add("Test item #" + 3);
-        data.add("Test item #" + 4);
+        ArrayList<SecurityQuestionResponse> data = new ArrayList<>();//TODO: remove stub data
+        data.add(new SecurityQuestionResponse(1, "Test item #" + 1));
+        data.add(new SecurityQuestionResponse(2, "Test item #" + 2));
+        data.add(new SecurityQuestionResponse(3, "Test item #" + 3));
+        data.add(new SecurityQuestionResponse(4, "Test item #" + 4));
         mQuestionAdapter = new SecurityQuestionAdapter(getActivity(), data);
         sSecurityQuestion.setAdapter(mQuestionAdapter);
         mQuestionAdapter.setItemTextColor(ImageUtils.getThemeColor(getActivity()));

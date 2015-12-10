@@ -8,17 +8,22 @@ import android.widget.TextView;
 
 import com.uae.tra_smart_services.R;
 import com.uae.tra_smart_services.customviews.ThemedImageView;
+import com.uae.tra_smart_services.rest.model.response.SecurityQuestionResponse;
 
 import java.util.List;
 
 /**
  * Created by mobimaks on 09.12.2015.
  */
-public class SecurityQuestionAdapter extends BaseSpinnerAdapter<String> {
+public class SecurityQuestionAdapter extends BaseSpinnerAdapter<SecurityQuestionResponse> {
 
     private int mItemTextColor;
 
-    public SecurityQuestionAdapter(Context _context, List<String> _data) {
+    public SecurityQuestionAdapter(Context _context) {
+        super(_context);
+    }
+
+    public SecurityQuestionAdapter(Context _context, List<SecurityQuestionResponse> _data) {
         super(_context, _data);
         mItemTextColor = ContextCompat.getColor(_context, R.color.hex_color_middle_gray);
     }
@@ -34,12 +39,12 @@ public class SecurityQuestionAdapter extends BaseSpinnerAdapter<String> {
     }
 
     @Override
-    protected ViewHolder<String> getDropDownViewHolder(View _view) {
+    protected ViewHolder<SecurityQuestionResponse> getDropDownViewHolder(View _view) {
         return new QuestionDropdownViewHolder(_view);
     }
 
     @Override
-    protected ViewHolder<String> getViewHolder(View _view) {
+    protected ViewHolder<SecurityQuestionResponse> getViewHolder(View _view) {
         return new QuestionViewHolder(_view);
     }
 
@@ -48,7 +53,7 @@ public class SecurityQuestionAdapter extends BaseSpinnerAdapter<String> {
         notifyDataSetChanged();
     }
 
-    protected class QuestionViewHolder extends ViewHolder<String> {
+    protected class QuestionViewHolder extends ViewHolder<SecurityQuestionResponse> {
 
         protected TextView tvTitle;
         protected ThemedImageView tivArrowIcon;
@@ -60,15 +65,15 @@ public class SecurityQuestionAdapter extends BaseSpinnerAdapter<String> {
         }
 
         @Override
-        public void setData(int _position, final String _data) {
-            tvTitle.setText(_data);
+        public void setData(int _position, final SecurityQuestionResponse _data) {
+            tvTitle.setText(_data.text);
             tvTitle.setTextColor(mItemTextColor);
             tivArrowIcon.setTintColor(mItemTextColor);
         }
     }
 
 
-    protected final class QuestionDropdownViewHolder extends ViewHolder<String> {
+    protected final class QuestionDropdownViewHolder extends ViewHolder<SecurityQuestionResponse> {
 
         private TextView tvTitle;
 
@@ -78,8 +83,8 @@ public class SecurityQuestionAdapter extends BaseSpinnerAdapter<String> {
         }
 
         @Override
-        public void setData(final int _position, final String _data) {
-            tvTitle.setText(_data);
+        public void setData(final int _position, final SecurityQuestionResponse _data) {
+            tvTitle.setText(_data.text);
         }
     }
 }

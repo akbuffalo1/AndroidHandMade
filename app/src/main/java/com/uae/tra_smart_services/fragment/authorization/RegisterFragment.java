@@ -31,6 +31,7 @@ import com.uae.tra_smart_services.global.C;
 import com.uae.tra_smart_services.interfaces.Loader;
 import com.uae.tra_smart_services.interfaces.Loader.Cancelled;
 import com.uae.tra_smart_services.rest.model.request.RegisterModel;
+import com.uae.tra_smart_services.rest.model.response.SecurityQuestionResponse;
 import com.uae.tra_smart_services.rest.robo_requests.RegisterRequest;
 import com.uae.tra_smart_services.util.ImageUtils;
 import com.uae.tra_smart_services.util.LayoutDirectionUtils;
@@ -68,7 +69,7 @@ public class RegisterFragment extends BaseAuthorizationFragment implements OnCli
 
     private RegisterRequest mRegisterRequest;
 
-    private ArrayList<String> mQuestions;
+    private ArrayList<SecurityQuestionResponse> mQuestions;
     private SecurityQuestionAdapter mQuestionAdapter;
 
     private StateRegisterAdapter mStatesAdapter, mCountriesAdapter;
@@ -76,10 +77,10 @@ public class RegisterFragment extends BaseAuthorizationFragment implements OnCli
 
     private RequestListener mRequestListener;
 
-    public static RegisterFragment newInstance(@NonNull ArrayList<String> _questions) {
+    public static RegisterFragment newInstance(@NonNull ArrayList<SecurityQuestionResponse> _questions) {
         final RegisterFragment fragment = new RegisterFragment();
         final Bundle args = new Bundle();
-        args.putStringArrayList(KEY_SECURITY_QUESTIONS, _questions);
+        args.putParcelableArrayList(KEY_SECURITY_QUESTIONS, _questions);
         fragment.setArguments(args);
         return fragment;
     }
@@ -87,7 +88,7 @@ public class RegisterFragment extends BaseAuthorizationFragment implements OnCli
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mQuestions = getArguments().getStringArrayList(KEY_SECURITY_QUESTIONS);
+        mQuestions = getArguments().getParcelableArrayList(KEY_SECURITY_QUESTIONS);
     }
 
     @Override

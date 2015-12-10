@@ -45,11 +45,10 @@ import com.uae.tra_smart_services.interfaces.OnOpenPermissionExplanationDialogLi
 import com.uae.tra_smart_services.manager.AttachmentManager;
 import com.uae.tra_smart_services.manager.AttachmentManager.OnImageGetCallback;
 import com.uae.tra_smart_services.rest.model.request.UserNameModel;
+import com.uae.tra_smart_services.rest.model.response.SecurityQuestionResponse;
 import com.uae.tra_smart_services.rest.model.response.UserProfileResponseModel;
 import com.uae.tra_smart_services.rest.robo_requests.ChangeUserProfileRequest;
 import com.uae.tra_smart_services.util.StringUtils;
-
-import java.util.ArrayList;
 
 import retrofit.client.Response;
 
@@ -82,6 +81,7 @@ public final class EditUserProfileFragment extends BaseFragment
     private Uri mImageUri;
 
     private UserProfileResponseModel mUserProfile;
+    private boolean mIsEnhancedSecurityEnabled;
     private OnUserProfileDataChangeListener mProfileDataChangeListener;
     private EditUserProfileRequestListener mUserProfileRequestListener;
     private ChangeUserProfileRequest mChangeUserNameRequest;
@@ -106,8 +106,11 @@ public final class EditUserProfileFragment extends BaseFragment
     public void onCreate(final Bundle _savedInstanceState) {
         super.onCreate(_savedInstanceState);
 
+        final UserProfileResponseModel userProfile = getArguments().getParcelable(KEY_USER_PROFILE_MODEL);
+        mIsEnhancedSecurityEnabled = userProfile != null && userProfile.enhancedSecurity;
+
         if (_savedInstanceState == null) {
-            mUserProfile = getArguments().getParcelable(KEY_USER_PROFILE_MODEL);
+            mUserProfile = userProfile;
         } else {
             mUserProfile = _savedInstanceState.getParcelable(KEY_USER_PROFILE_MODEL);
         }
@@ -143,19 +146,15 @@ public final class EditUserProfileFragment extends BaseFragment
     public void onActivityCreated(final @Nullable Bundle _savedInstanceState) {
         super.onActivityCreated(_savedInstanceState);
         mUserProfileRequestListener = new EditUserProfileRequestListener();
+
+        mQuestionAdapter = new UserProfileQuestionAdapter(getActivity());
+        sSecurityQuestion.setAdapter(mQuestionAdapter);
+
         if (_savedInstanceState == null) {
             showUserProfile(mUserProfile);
         } else {
             mAttachmentManager.onRestoreInstanceState(_savedInstanceState);
         }
-
-        ArrayList<String> data = new ArrayList<>();//TODO: remove stub data
-        data.add("Test item #" + 1);
-        data.add("Test item #" + 2);
-        data.add("Test item #" + 3);
-        data.add("Test item #" + 4);
-        mQuestionAdapter = new UserProfileQuestionAdapter(getActivity(), data);
-        sSecurityQuestion.setAdapter(mQuestionAdapter);
     }
 
     @Override
@@ -370,7 +369,18 @@ public final class EditUserProfileFragment extends BaseFragment
             Toast.makeText(getActivity(), R.string.authorization_invalid_last_name, C.TOAST_LENGTH).show();
             return false;
         }
+
+        if (isEnhancedSecurityStateChanged() && cbEnhancedSecurity.isChecked()) {
+            if (etSecurityAnswer.getText().toString().isEmpty()) {
+                Toast.makeText(getActivity(), R.string.error_fill_all_fields, C.TOAST_LENGTH).show();
+                return false;
+            }
+        }
         return true;
+    }
+
+    private boolean isEnhancedSecurityStateChanged() {
+        return mIsEnhancedSecurityEnabled != cbEnhancedSecurity.isChecked() || !etSecurityAnswer.getText().toString().isEmpty();
     }
 
     private void saveUserProfile() {
@@ -378,6 +388,17 @@ public final class EditUserProfileFragment extends BaseFragment
         profile.firstName = etFirstName.getText().toString();
         profile.lastName = etLastName.getText().toString();
         profile.imageUri = mImageUri;
+        profile.enhancedSecurity = cbEnhancedSecurity.isChecked();
+        if (profile.enhancedSecurity) {
+            final String securityAnswerText = etSecurityAnswer.getText().toString();
+            if (securityAnswerText.isEmpty()) {
+                profile.secretQuestionType = mUserProfile.secretQuestionType;
+                profile.secretQuestionAnswer = mUserProfile.secretQuestionAnswer;
+            } else {
+                profile.secretQuestionType = ((SecurityQuestionResponse) sSecurityQuestion.getSelectedItem()).id;
+                profile.secretQuestionAnswer = securityAnswerText;
+            }
+        }
         mChangeUserNameRequest = new ChangeUserProfileRequest(getActivity(), profile);
 
         hideKeyboard(getView());
@@ -392,6 +413,7 @@ public final class EditUserProfileFragment extends BaseFragment
         etLastName.setText(mUserProfile.lastName);
         etPhone.setText(mUserProfile.mobile);
         mAttachmentManager.clearAttachment();
+        etSecurityAnswer.setText(null);
         initUserAvatar(mUserProfile);
     }
 
@@ -399,7 +421,9 @@ public final class EditUserProfileFragment extends BaseFragment
         etFirstName.setText(_userProfile.firstName);
         etLastName.setText(_userProfile.lastName);
         etPhone.setText(_userProfile.mobile);
+        cbEnhancedSecurity.setChecked(_userProfile.enhancedSecurity);
         initUserAvatar(_userProfile);
+        mQuestionAdapter.addData(_userProfile.secretQuestions);
     }
 
     @Override
