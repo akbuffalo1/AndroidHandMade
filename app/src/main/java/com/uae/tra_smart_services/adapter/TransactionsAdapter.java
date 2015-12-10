@@ -302,7 +302,13 @@ public class TransactionsAdapter extends Adapter<ViewHolder> implements Filterab
             if (!isProgress) {
                 sStartOffset.setVisibility(_position % 2 == 0 ? View.GONE : View.VISIBLE);
                 //_position % 3 == 0 ? "Waiting for Details" : _position % 2 == 0 ? _model.statusCode : "On Hold"
-                final int[] icon_color = C.TRANSACTION_STATUS.get(_model.statusCode);
+
+                final int[] icon_color;
+                if (C.TRANSACTION_STATUS.containsKey(_model.statusCode)) {
+                    icon_color = C.TRANSACTION_STATUS.get(_model.statusCode);
+                } else {
+                    icon_color = C.TRANSACTION_STATUS.get(null);
+                }
 
                 if (mIsBlackAndWhiteMode) {
                     hexagonView.setBorderColor(android.R.color.black);
