@@ -183,7 +183,7 @@ public interface TRAServicesAPI {
     DynamicService getDynamicServiceDetails(@Path(PATH_HOLDER) String _id);
 
     @GET(CONTACT_US)
-    ContactUsResponse.List getContactUsInfo();
+    ContactUsResponse.List getContactUsInfo(@Query(PARAMETER_LANGUAGE) final String _lang);
 
     @GET(SECRET_QUESTIONS)
     SecurityQuestionResponse.List getSecurityQuestions();
