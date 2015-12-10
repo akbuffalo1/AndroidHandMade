@@ -269,8 +269,13 @@ public class LoaderView extends View implements Animator.AnimatorListener {
         if(mAnimationState == State.PROCESSING)return;
         setAlpha(1);
         mAnimationState = State.PROCESSING;
-        animatorStart.start();
-        animatorEnd.start();
+        post(new Runnable(){
+            @Override
+            public void run() {
+                animatorStart.start();
+                animatorEnd.start();
+            }
+        });
     }
 
     public void stopProcessing(){

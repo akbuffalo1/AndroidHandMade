@@ -7,15 +7,11 @@ import com.squareup.okhttp.ConnectionSpec;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.TlsVersion;
 import com.uae.tra_smart_services.BuildConfig;
-import com.uae.tra_smart_services.R;
 import com.uae.tra_smart_services.global.C;
 import com.uae.tra_smart_services.global.ServerConstants;
 
-import org.bouncycastle.jce.provider.BouncyCastleProvider;
-
 import java.io.InputStream;
 import java.security.KeyStore;
-import java.security.Security;
 import java.util.concurrent.TimeUnit;
 
 import javax.net.ssl.SSLContext;
@@ -76,7 +72,6 @@ public final class RestClient {
     }
 
     private RestClient(Context _context) {
-        Security.addProvider(new BouncyCastleProvider());
         final OkHttpClient okHttpClient = new OkHttpClient();
         okHttpClient.setReadTimeout(TIMEOUT, TimeUnit.SECONDS);
         okHttpClient.setConnectTimeout(TIMEOUT, TimeUnit.SECONDS);
