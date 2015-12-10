@@ -24,6 +24,7 @@ public final class C {
     public static final String KEY_SCANNER_RESULT_TEXT = "SCANNER_RESULT_TEXT";
 
     public static final String KEY_BASE_URL = "BASE_URL";
+    public static final String HTTPS_KEYSTORE_FILE_PASS = "zkexibq1";
 
     public static final int REQUEST_CODE_LOGIN = 1;
     public static final int LOGIN_SUCCESS = 2;

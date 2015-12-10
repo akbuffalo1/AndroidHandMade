@@ -219,7 +219,7 @@ public class AnnouncementsAdapter extends Adapter<ViewHolder> implements Filtera
         private boolean mIsCurrentlyLoading;
 
         private AnnouncementsFilter() {
-            mTRAServicesAPI = RestClient.getInstance().getTRAServicesAPI();
+            mTRAServicesAPI = RestClient.getInstance(mActivity.getApplicationContext()).getTRAServicesAPI();
             mSearchResultPageNum = 1;
         }
 

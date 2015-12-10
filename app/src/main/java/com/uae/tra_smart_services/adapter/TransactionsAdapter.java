@@ -192,7 +192,7 @@ public class TransactionsAdapter extends Adapter<ViewHolder> implements Filterab
         private boolean mIsCurrentlyLoading;
 
         private TransactionFilter() {
-            mTRAServicesAPI = RestClient.getInstance().getTRAServicesAPI();
+            mTRAServicesAPI = RestClient.getInstance(mActivity.getApplicationContext()).getTRAServicesAPI();
             mSearchResultPageNum = 1;
         }
 
