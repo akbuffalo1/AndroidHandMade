@@ -33,6 +33,7 @@ import com.uae.tra_smart_services.global.C;
 import com.uae.tra_smart_services.interfaces.Loader;
 import com.uae.tra_smart_services.interfaces.Loader.Cancelled;
 import com.uae.tra_smart_services.rest.model.request.RegisterModel;
+import com.uae.tra_smart_services.rest.model.response.SecurityQuestionResponse;
 import com.uae.tra_smart_services.rest.robo_requests.RegisterRequest;
 import com.uae.tra_smart_services.util.ImageUtils;
 import com.uae.tra_smart_services.util.LayoutDirectionUtils;
@@ -70,7 +71,7 @@ public class RegisterFragment extends BaseAuthorizationFragment implements OnCli
 
     private RegisterRequest mRegisterRequest;
 
-    private ArrayList<String> mQuestions;
+    private ArrayList<SecurityQuestionResponse> mQuestions;
     private SecurityQuestionAdapter mQuestionAdapter;
 
     private StateRegisterAdapter mStatesAdapter, mCountriesAdapter;
@@ -78,10 +79,10 @@ public class RegisterFragment extends BaseAuthorizationFragment implements OnCli
 
     private RequestListener mRequestListener;
 
-    public static RegisterFragment newInstance(@NonNull ArrayList<String> _questions) {
+    public static RegisterFragment newInstance(@NonNull ArrayList<SecurityQuestionResponse> _questions) {
         final RegisterFragment fragment = new RegisterFragment();
         final Bundle args = new Bundle();
-        args.putStringArrayList(KEY_SECURITY_QUESTIONS, _questions);
+        args.putParcelableArrayList(KEY_SECURITY_QUESTIONS, _questions);
         fragment.setArguments(args);
         return fragment;
     }
@@ -89,7 +90,7 @@ public class RegisterFragment extends BaseAuthorizationFragment implements OnCli
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mQuestions = getArguments().getStringArrayList(KEY_SECURITY_QUESTIONS);
+        mQuestions = getArguments().getParcelableArrayList(KEY_SECURITY_QUESTIONS);
     }
 
     @Override
@@ -283,6 +284,15 @@ public class RegisterFragment extends BaseAuthorizationFragment implements OnCli
             return false;
         }
         //endregion
+
+        //region Security answer validation
+        if (cbEnhancedSecurity.isChecked()) {
+            if (etSecurityAnswer.getText().toString().isEmpty()) {
+                Toast.makeText(getActivity(), R.string.error_fill_all_fields, C.TOAST_LENGTH).show();
+                return false;
+            }
+        }
+        //endregion
         return true;
     }
 
@@ -296,6 +306,11 @@ public class RegisterFragment extends BaseAuthorizationFragment implements OnCli
         registerModel.state = 3; // HARDCODED DUBAI
         registerModel.email = etEmail.getText().toString();
         registerModel.emiratesId = etEmiratesId.getText().toString();
+        registerModel.enhancedSecurity = cbEnhancedSecurity.isChecked();
+        if (registerModel.enhancedSecurity) {
+            registerModel.secretQuestionType = ((SecurityQuestionResponse) sSecurityQuestion.getSelectedItem()).id;
+            registerModel.secretQuestionAnswer = etSecurityAnswer.getText().toString();
+        }
 
         if (mFilterPool.check(registerModel)) {
             loaderOverlayShow(getString(R.string.str_registering), this, false);

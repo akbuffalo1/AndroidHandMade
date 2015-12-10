@@ -20,6 +20,7 @@ import com.uae.tra_smart_services.fragment.base.BaseAuthorizationFragment.Author
 import com.uae.tra_smart_services.global.C;
 import com.uae.tra_smart_services.interfaces.ToolbarTitleManager;
 import com.uae.tra_smart_services.rest.model.request.LoginModel;
+import com.uae.tra_smart_services.rest.model.response.SecurityQuestionResponse;
 import com.uae.tra_smart_services.util.ImageUtils;
 
 import java.util.ArrayList;
@@ -108,7 +109,7 @@ public class AuthorizationActivity extends BaseFragmentActivity
     }
 
     @Override
-    public void onOpenRegisterScreen(@NonNull ArrayList<String> _questions) {
+    public void onOpenRegisterScreen(@NonNull ArrayList<SecurityQuestionResponse> _questions) {
         super.replaceFragmentWithBackStack(RegisterFragment.newInstance(_questions));
     }
 

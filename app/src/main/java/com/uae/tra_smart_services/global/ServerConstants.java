@@ -83,6 +83,7 @@ public final class ServerConstants {
     public static final String DYNAMIC_SERVICE_LIST = "/service";
     public static final String UPLOAD_ATTACHMENT = "/attachment";
     public static final String CONTACT_US = "/contact";
+    public static final String SECRET_QUESTIONS = "/crm/secretQuestions";
 
     //!!!!!!!!!!!! API PARAMETERS !!!!!!!!!!!!!!!!!!
     public static final String PARAMETER_CHECK_URL = "checkUrl";

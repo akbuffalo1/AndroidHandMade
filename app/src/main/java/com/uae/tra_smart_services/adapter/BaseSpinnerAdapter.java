@@ -14,8 +14,9 @@ import java.util.List;
  */
 public abstract class BaseSpinnerAdapter<T> extends android.widget.BaseAdapter {
 
+    protected List<T> mData;
+
     private final LayoutInflater mInflater;
-    private List<T> mData;
 
     public BaseSpinnerAdapter(final Context _context) {
         this(_context, new ArrayList<T>());

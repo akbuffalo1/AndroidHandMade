@@ -136,8 +136,6 @@
                 style="@style/AuthorizationFields"
                 android:gravity="top|start"
                 android:hint="@string/fragment_security_login_answer_hint"
-                android:maxLines="5"
-                android:minLines="2"
                 android:textColor="?themeEnableColor"
                 android:textColorHint="?themeEnableColor"/>
 
