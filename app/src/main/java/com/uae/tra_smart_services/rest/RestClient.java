@@ -61,7 +61,7 @@ public final class RestClient {
         if(SSL_SOCKET_FACTORY == null){
             try {
                 KeyStore ksTrust = KeyStore.getInstance("BKS");
-                InputStream instream = _context.getResources().openRawResource(R.raw.my_keystore);
+                InputStream instream = _context.getResources().openRawResource(C.HTTPS_KEYSTORE_FILE_RES_ID);
                 ksTrust.load(instream, C.HTTPS_KEYSTORE_FILE_PASS.toCharArray());
                 TrustManagerFactory tmf = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
                 tmf.init(ksTrust);
