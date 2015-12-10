@@ -9,6 +9,9 @@ import com.octo.android.robospice.retrofit.RetrofitGsonSpiceService;
 import com.squareup.okhttp.OkHttpClient;
 import com.uae.tra_smart_services.BuildConfig;
 
+import org.apache.http.conn.ssl.AllowAllHostnameVerifier;
+
+import java.util.Collections;
 import java.util.concurrent.TimeUnit;
 
 import retrofit.RestAdapter;
@@ -34,6 +37,9 @@ abstract class BaseRetrofitSpiceService extends RetrofitGsonSpiceService {
         final OkHttpClient okHttpClient = new OkHttpClient();
         okHttpClient.setReadTimeout(TIMEOUT, TimeUnit.SECONDS);
         okHttpClient.setConnectTimeout(TIMEOUT, TimeUnit.SECONDS);
+        okHttpClient.setSslSocketFactory(RestClient.getSSLSocketFactory(getApplicationContext()));
+//        okHttpClient.setConnectionSpecs(Collections.singletonList(RestClient.SPECS));
+//        okHttpClient.setHostnameVerifier(new AllowAllHostnameVerifier());
         builder.setClient(new OkClient(okHttpClient));
 
         return builder;
@@ -51,5 +57,4 @@ abstract class BaseRetrofitSpiceService extends RetrofitGsonSpiceService {
         return new GsonBuilder()
                 .excludeFieldsWithoutExposeAnnotation();
     }
-
 }

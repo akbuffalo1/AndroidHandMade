@@ -1,6 +1,8 @@
 package com.uae.tra_smart_services.global;
 
+import android.support.annotation.IdRes;
 import android.support.annotation.IntDef;
+import android.support.annotation.RawRes;
 import android.support.annotation.StringDef;
 import android.widget.Toast;
 
@@ -24,6 +26,9 @@ public final class C {
     public static final String KEY_SCANNER_RESULT_TEXT = "SCANNER_RESULT_TEXT";
 
     public static final String KEY_BASE_URL = "BASE_URL";
+    @RawRes
+    public static final int HTTPS_KEYSTORE_FILE_RES_ID = R.raw.ssl_keystore;
+    public static final String HTTPS_KEYSTORE_FILE_PASS = "biz.enon.tra.uae";
 
     public static final int REQUEST_CODE_LOGIN = 1;
     public static final int LOGIN_SUCCESS = 2;

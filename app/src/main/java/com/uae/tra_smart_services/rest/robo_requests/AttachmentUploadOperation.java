@@ -45,7 +45,7 @@ public class AttachmentUploadOperation implements Callable<String> {
 
             final String imageBase64 = ImageUtils.imageToBase64(mContext.getContentResolver(), mAttachmentUri);
             Logger.d(TAG, "Decode end. Length = " + (imageBase64 == null ? 0 : imageBase64.length()));
-            final DynamicServicesApi dynamicServicesApi = RestClient.getInstance().getDynamicServicesApi();
+            final DynamicServicesApi dynamicServicesApi = RestClient.getInstance(mContext.getApplicationContext()).getDynamicServicesApi();
             final AttachmentUploadRequestModel attachmentUploadModel = new AttachmentUploadRequestModel(imageBase64);
 
             AttachmentUploadResponse uploadResponse = dynamicServicesApi.uploadAttachment(attachmentUploadModel);

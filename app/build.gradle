@@ -72,4 +72,5 @@ dependencies {
     compile 'com.github.bmelnychuk:atv:1.2.+'
     compile 'com.github.johnkil.print:print:1.2.2'
     compile 'com.bignerdranch.android:expandablerecyclerview:1.0.3'
+    compile group: 'org.bouncycastle', name: 'bcprov-jdk16', version: '1.45'
 }
