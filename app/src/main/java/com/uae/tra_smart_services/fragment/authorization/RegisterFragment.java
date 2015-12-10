@@ -3,7 +3,9 @@ package com.uae.tra_smart_services.fragment.authorization;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
@@ -50,7 +52,7 @@ import static com.uae.tra_smart_services.global.C.MIN_USERNAME_LENGTH;
 /**
  * Created by ak-buffalo on 22.07.15.
  */
-public class RegisterFragment extends BaseAuthorizationFragment implements OnClickListener, Cancelled, OnCheckedChangeListener {
+public class RegisterFragment extends BaseAuthorizationFragment implements OnClickListener, Cancelled, OnCheckedChangeListener, TextWatcher {
 
     private static final String KEY_SECURITY_QUESTIONS = "SECURITY_QUESTIONS";
     private static final String KEY_REGISTER_REQUEST = "REGISTER_REQUEST";
@@ -125,6 +127,7 @@ public class RegisterFragment extends BaseAuthorizationFragment implements OnCli
         sSecurityQuestion = findView(R.id.sSecurityQuestion_FR);
         cbEnhancedSecurity = findView(R.id.cbEnhancedSecurity_FR);
         etSecurityAnswer = findView(R.id.etSecurityAnswer_FR);
+        etEmiratesId.setText(current = MASK);
     }
 
     @Override
@@ -133,6 +136,7 @@ public class RegisterFragment extends BaseAuthorizationFragment implements OnCli
         tvRegister.setOnClickListener(this);
         cbEnhancedSecurity.setOnCheckedChangeListener(this);
         rlEnhancedSecurity.setOnClickListener(this);
+        etEmiratesId.addTextChangedListener(this);
     }
 
     @Override
@@ -320,6 +324,100 @@ public class RegisterFragment extends BaseAuthorizationFragment implements OnCli
         if (getSpiceManager().isStarted() && mRegisterRequest != null) {
             getSpiceManager().cancel(mRegisterRequest);
         }
+    }
+
+    private static final String MASK = "784-YYYY-NNNNNNN-C";
+    private static final char[] SPLITTED_MASK = MASK.replaceAll("-","").toCharArray();
+    private static final String STARTS_WITH = MASK.substring(0, 3);
+    private String current = "";
+    private boolean shouldReset;
+    private int jumpTo;
+    private int[] values = new int[] {7, 8, 4, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
+    @Override
+    public void beforeTextChanged(CharSequence charSequence, int start, int count, int after) {/*Not implemented*/}
+
+    @Override
+    public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
+        if(start <= 3 && !current.equals(charSequence.toString())){
+            jumpTo = 4;
+            return;
+        }
+
+        if(!charSequence.toString().startsWith(STARTS_WITH)){
+            shouldReset = true;
+            return;
+        } else {
+            shouldReset = false;
+        }
+
+        if(count > 0 && before == 0) {
+            if(start >= 18 || !String.valueOf(charSequence.charAt(start)).matches("[0-9]+") || charSequence.length() <= 18){
+                return;
+            }
+            if (start > 0 && start < 3) {
+                values[start] = Character.getNumericValue(charSequence.charAt(start));
+            } else if (start >= 4 && start <= 7) {
+                values[start - 1] = Character.getNumericValue(charSequence.charAt(start));
+            } else if (start >= 8 && start <= 15) {
+                values[start - 2] = Character.getNumericValue(charSequence.charAt(start));
+            } else if (start > 16) {
+                values[start - 3] = Character.getNumericValue(charSequence.charAt(start));
+            }
+
+            jumpTo = start + 1;
+            if(start == 3 || start == 7 || start == 15){
+                jumpTo++;
+            }
+        } else {
+            if (start > 0 && start < 3) {
+                return;
+            } else if (start >= 4 && start <= 7) {
+                values[start - 1] = -1;
+            } else if (start >= 8 && start <= 15) {
+                values[start - 2] = -1;
+            } else if (start > 16) {
+                values[start - 3] = -1;
+            }
+
+            if(start == 9 || start == 17){
+                jumpTo = start - 1;
+            } else {
+                jumpTo = start;
+            }
+        }
+    }
+
+    @Override
+    public void afterTextChanged(Editable charSequence) {
+        if(shouldReset){
+            resetToPatternIfNeed();
+        }
+        if(!current.equals(charSequence.toString())){
+            etEmiratesId.removeTextChangedListener(this);
+            etEmiratesId.setText(current = buildByValues(values).toUpperCase());
+            etEmiratesId.setSelection(jumpTo);
+            etEmiratesId.addTextChangedListener(this);
+        }
+    }
+
+    private void resetToPatternIfNeed(){
+        if(current.isEmpty() && etEmiratesId.getText().toString().startsWith(STARTS_WITH)){
+            etEmiratesId.setText(current = MASK);
+        }
+    }
+
+    private String buildByValues(int[] _values){
+        StringBuilder builder = new StringBuilder();
+        for(int i = 0; i < _values.length; i++){
+            builder.append((_values[i] == -1) ? SPLITTED_MASK[i] : String.valueOf(_values[i]));
+            if(i == 2 || i == 6 || i == 13){
+                builder.append("-");
+            }
+        }
+        if(_values.length < 15){
+            builder.append(MASK.substring(_values.length + 1));
+        }
+        return builder.toString();
     }
 
     private class RequestListener implements PendingRequestListener<Response> {
