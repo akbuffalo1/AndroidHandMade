@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import com.uae.tra_smart_services.R;
 import com.uae.tra_smart_services.TRAApplication;
 import com.uae.tra_smart_services.activity.base.BaseFragmentActivity;
+import com.uae.tra_smart_services.entities.LoginQuestionModel;
 import com.uae.tra_smart_services.fragment.authorization.LoginFragment;
 import com.uae.tra_smart_services.fragment.authorization.RegisterFragment;
 import com.uae.tra_smart_services.fragment.authorization.RestorePasswordFragment;
@@ -19,7 +20,6 @@ import com.uae.tra_smart_services.fragment.authorization.SecurityQuestionLoginFr
 import com.uae.tra_smart_services.fragment.base.BaseAuthorizationFragment.AuthorizationActionsListener;
 import com.uae.tra_smart_services.global.C;
 import com.uae.tra_smart_services.interfaces.ToolbarTitleManager;
-import com.uae.tra_smart_services.rest.model.request.LoginModel;
 import com.uae.tra_smart_services.rest.model.response.SecurityQuestionResponse;
 import com.uae.tra_smart_services.util.ImageUtils;
 
@@ -87,7 +87,7 @@ public class AuthorizationActivity extends BaseFragmentActivity
     }
 
     @Override
-    public void onOpenSecurityLoginScreen(@NonNull LoginModel _loginModel) {
+    public void onOpenSecurityLoginScreen(@NonNull LoginQuestionModel _loginModel) {
         replaceFragmentWithBackStack(SecurityQuestionLoginFragment.newInstance(_loginModel));
     }
 

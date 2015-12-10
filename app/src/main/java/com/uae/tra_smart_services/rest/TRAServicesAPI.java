@@ -6,6 +6,7 @@ import com.uae.tra_smart_services.rest.model.request.ComplainServiceProviderMode
 import com.uae.tra_smart_services.rest.model.request.ComplainTRAServiceModel;
 import com.uae.tra_smart_services.rest.model.request.HelpSalimModel;
 import com.uae.tra_smart_services.rest.model.request.LoginModel;
+import com.uae.tra_smart_services.rest.model.request.LoginQuestionRequestModel;
 import com.uae.tra_smart_services.rest.model.request.LogoutRequestModel;
 import com.uae.tra_smart_services.rest.model.request.PoorCoverageRequestModel;
 import com.uae.tra_smart_services.rest.model.request.PostInnovationRequestModel;
@@ -132,6 +133,9 @@ public interface TRAServicesAPI {
     @POST(LOGIN_URL)
     Response login(@Body LoginModel _loginModel);
 
+    @POST(LOGIN_URL)
+    Response loginWithQuestion(@Body LoginQuestionRequestModel _loginModel);
+
     @POST(RESTORE_PASS_URL)
     Response restorePassword(@Body RestorePasswordRequestModel _loginModel);
 
@@ -152,25 +156,25 @@ public interface TRAServicesAPI {
 
     @GET(GET_TRANSACTIONS)
     GetTransactionResponseModel.List getTransactions(@Query(PARAMETER_PAGE) final int _page,
-                         @Query(PARAMETER_COUNT) final int _count);
+                                                     @Query(PARAMETER_COUNT) final int _count);
 
     @GET(GET_TRANSACTIONS)
     GetTransactionResponseModel.List searchTransactions(@Query(PARAMETER_PAGE) final int _page,
-                            @Query(PARAMETER_COUNT) final int _count,
-                            @Query(PARAMETER_SEARCH) final String _query);
+                                                        @Query(PARAMETER_COUNT) final int _count,
+                                                        @Query(PARAMETER_SEARCH) final String _query);
 
     @GET(GET_ANNOUNCEMENTS)
     GetAnnouncementsResponseModel getAnnouncements(
-                            @Query(PARAMETER_OFFSET) final int _offset,
-                            @Query(PARAMETER_LIMIT) final int _limit,
-                            @Query(PARAMETER_LANGUAGE) final String _lang);
+            @Query(PARAMETER_OFFSET) final int _offset,
+            @Query(PARAMETER_LIMIT) final int _limit,
+            @Query(PARAMETER_LANGUAGE) final String _lang);
 
     @GET(GET_ANNOUNCEMENTS)
     GetAnnouncementsResponseModel searchAnnouncements(
-                            @Query(PARAMETER_OFFSET) final int _offset,
-                            @Query(PARAMETER_LIMIT) final int _limit,
-                            @Query(PARAMETER_SEARCH) final String _query,
-                            @Query(PARAMETER_LANGUAGE) final String _lang);
+            @Query(PARAMETER_OFFSET) final int _offset,
+            @Query(PARAMETER_LIMIT) final int _limit,
+            @Query(PARAMETER_SEARCH) final String _query,
+            @Query(PARAMETER_LANGUAGE) final String _lang);
 
     @GET(SERVICE_INFO)
     ServiceInfoResponse getServiceInfo(@Query(PARAMETER_SERVICE_NAME) String _serviceName,

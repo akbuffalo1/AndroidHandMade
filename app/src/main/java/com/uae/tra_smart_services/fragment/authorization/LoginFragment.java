@@ -15,6 +15,7 @@ import com.octo.android.robospice.request.listener.PendingRequestListener;
 import com.octo.android.robospice.request.listener.RequestListener;
 import com.uae.tra_smart_services.BuildConfig;
 import com.uae.tra_smart_services.R;
+import com.uae.tra_smart_services.entities.LoginQuestionModel;
 import com.uae.tra_smart_services.fragment.base.BaseAuthorizationFragment;
 import com.uae.tra_smart_services.global.C;
 import com.uae.tra_smart_services.interfaces.Loader;
@@ -231,11 +232,10 @@ public class LoginFragment extends BaseAuthorizationFragment
                 @Override
                 public void onLoadingDismissed() {
                     getFragmentManager().popBackStack();
-                    getFragmentManager().popBackStack();
                 }
             });
             if (actionsListener != null) {
-                LoginModel loginModel = new LoginModel();
+                LoginQuestionModel loginModel = new LoginQuestionModel();
                 loginModel.login = etUserName.getText().toString();
                 loginModel.pass = etPassword.getText().toString();
                 loginModel.secretQuestions = _loginError.secretQuestions;

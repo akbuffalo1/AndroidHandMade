@@ -9,11 +9,20 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.octo.android.robospice.persistence.DurationInMillis;
+import com.octo.android.robospice.persistence.exception.SpiceException;
+import com.octo.android.robospice.request.listener.RequestListener;
 import com.uae.tra_smart_services.R;
 import com.uae.tra_smart_services.adapter.SecurityQuestionAdapter;
+import com.uae.tra_smart_services.entities.LoginQuestionModel;
 import com.uae.tra_smart_services.fragment.base.BaseAuthorizationFragment;
-import com.uae.tra_smart_services.rest.model.request.LoginModel;
+import com.uae.tra_smart_services.interfaces.Loader.Cancelled;
+import com.uae.tra_smart_services.rest.model.request.LoginQuestionRequestModel;
+import com.uae.tra_smart_services.rest.model.response.SecurityQuestionResponse;
+import com.uae.tra_smart_services.rest.robo_requests.LoginQuestionRequest;
 import com.uae.tra_smart_services.util.ImageUtils;
+
+import retrofit.client.Response;
 
 /**
  * Created by mobimaks on 09.12.2015.
@@ -25,7 +34,9 @@ public class SecurityQuestionLoginFragment extends BaseAuthorizationFragment imp
 
     private final String KEY_LOGIN_REQUEST = getClass().getSimpleName() + "_LOGIN_REQUEST";
 
-    private LoginModel mLoginData;
+    private LoginQuestionModel mLoginData;
+    private LoginResponseListener mResponseListener;
+    private LoginQuestionRequest mLoginRequest;
 
     private Spinner sSecurityQuestion;
     private EditText etSecurityAnswer;
@@ -33,7 +44,7 @@ public class SecurityQuestionLoginFragment extends BaseAuthorizationFragment imp
 
     private SecurityQuestionAdapter mQuestionAdapter;
 
-    public static SecurityQuestionLoginFragment newInstance(@NonNull LoginModel _loginData) {
+    public static SecurityQuestionLoginFragment newInstance(@NonNull LoginQuestionModel _loginData) {
         final SecurityQuestionLoginFragment fragment = new SecurityQuestionLoginFragment();
         final Bundle args = new Bundle();
         args.putParcelable(KEY_LOGIN_DATA, _loginData);
@@ -44,8 +55,7 @@ public class SecurityQuestionLoginFragment extends BaseAuthorizationFragment imp
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        final Bundle args = getArguments();
-        mLoginData = args.getParcelable(KEY_LOGIN_DATA);
+        mLoginData = getArguments().getParcelable(KEY_LOGIN_DATA);
     }
 
     @Override
@@ -60,6 +70,7 @@ public class SecurityQuestionLoginFragment extends BaseAuthorizationFragment imp
     protected void initListeners() {
         super.initListeners();
         btnLogin.setOnClickListener(this);
+        mResponseListener = new LoginResponseListener();
     }
 
     @Override
@@ -72,6 +83,12 @@ public class SecurityQuestionLoginFragment extends BaseAuthorizationFragment imp
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+        getSpiceManager().getFromCache(Response.class, KEY_LOGIN_REQUEST, DurationInMillis.ALWAYS_RETURNED, mResponseListener);
+    }
+
+    @Override
     public void onClick(final View _view) {
         if (_view.getId() == R.id.btnLogin_FSL) {
             validateAndSendDataIfCan();
@@ -80,8 +97,7 @@ public class SecurityQuestionLoginFragment extends BaseAuthorizationFragment imp
 
     private void validateAndSendDataIfCan() {
         if (validateData()) {
-            //TODO: add send data logic
-            actionsListener.onLogInSuccess();
+            doLogin();
         } else {
             Toast.makeText(getActivity(), R.string.error_fill_all_fields, Toast.LENGTH_SHORT).show();
         }
@@ -89,6 +105,48 @@ public class SecurityQuestionLoginFragment extends BaseAuthorizationFragment imp
 
     private boolean validateData() {
         return !etSecurityAnswer.getText().toString().isEmpty();
+    }
+
+    private void doLogin() {
+        loaderOverlayShow(getString(R.string.str_loading), mResponseListener, false);
+        LoginQuestionRequestModel loginModel = new LoginQuestionRequestModel();
+        loginModel.login = mLoginData.login;
+        loginModel.pass = mLoginData.pass;
+        loginModel.secretQuestionType = ((SecurityQuestionResponse) sSecurityQuestion.getSelectedItem()).id;
+        loginModel.secretQuestionAnswer = etSecurityAnswer.getText().toString();
+        mLoginRequest = new LoginQuestionRequest(loginModel);
+        getSpiceManager().execute(mLoginRequest, KEY_LOGIN_REQUEST, DurationInMillis.ALWAYS_EXPIRED, mResponseListener);
+    }
+
+    private final class LoginResponseListener implements RequestListener<Response>, Cancelled {
+
+        @Override
+        public void onRequestSuccess(Response result) {
+            getSpiceManager().removeDataFromCache(Response.class, KEY_LOGIN_REQUEST);
+            if (isAdded()) {
+                loaderOverlayDismissWithAction(SecurityQuestionLoginFragment.this);
+                if (result != null && actionsListener != null) {
+                    actionsListener.onLogInSuccess();
+                }
+            }
+        }
+
+        @Override
+        public void onLoadingCanceled() {
+            if (getSpiceManager().isStarted()) {
+                getSpiceManager().removeDataFromCache(Response.class, KEY_LOGIN_REQUEST);
+                getSpiceManager().cancel(mLoginRequest);
+            }
+
+        }
+
+        @Override
+        public void onRequestFailure(SpiceException spiceException) {
+            getSpiceManager().removeDataFromCache(Response.class, KEY_LOGIN_REQUEST);
+            if (isAdded()) {
+                processError(spiceException);
+            }
+        }
     }
 
     @Override

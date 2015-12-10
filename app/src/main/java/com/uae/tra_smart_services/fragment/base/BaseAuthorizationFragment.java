@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.support.annotation.NonNull;
 
 import com.uae.tra_smart_services.R;
-import com.uae.tra_smart_services.rest.model.request.LoginModel;
+import com.uae.tra_smart_services.entities.LoginQuestionModel;
 import com.uae.tra_smart_services.rest.model.response.SecurityQuestionResponse;
 
 import java.util.ArrayList;
@@ -32,7 +32,7 @@ public abstract class BaseAuthorizationFragment extends BaseFragment{
         /** Handlers methods for log in screen*/
         void onOpenLoginScreen();
 
-        void onOpenSecurityLoginScreen(@NonNull LoginModel _loginModel);
+        void onOpenSecurityLoginScreen(@NonNull LoginQuestionModel _loginModel);
 
         void onLogInSuccess();
 

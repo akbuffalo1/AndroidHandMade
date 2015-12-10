@@ -66,7 +66,7 @@ public final class C {
 
     public static final String IS_LOGGED_IN = "is_logged_in";
 
-    public static final String NO_QUESTION_ERROR = "NO Question or answer";
+    public static final String NO_QUESTION_ERROR = "No question or answer";
 
     //region Service names const
     @StringDef({
