@@ -395,8 +395,13 @@ public final class EditUserProfileFragment extends BaseFragment
                 profile.secretQuestionType = mUserProfile.secretQuestionType;
                 profile.secretQuestionAnswer = mUserProfile.secretQuestionAnswer;
             } else {
-                profile.secretQuestionType = ((SecurityQuestionResponse) sSecurityQuestion.getSelectedItem()).id;
-                profile.secretQuestionAnswer = securityAnswerText;
+                SecurityQuestionResponse securityQuestion = ((SecurityQuestionResponse) sSecurityQuestion.getSelectedItem());
+                if (securityQuestion != null) {
+                    profile.secretQuestionType = securityQuestion.id;
+                    profile.secretQuestionAnswer = securityAnswerText;
+                } else {
+                    profile.enhancedSecurity = false;
+                }
             }
         }
         mChangeUserNameRequest = new ChangeUserProfileRequest(getActivity(), profile);
