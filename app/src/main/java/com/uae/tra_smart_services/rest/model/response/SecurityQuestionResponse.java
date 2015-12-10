@@ -6,15 +6,12 @@ import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
+
 /**
  * Created by mobimaks on 10.12.2015.
  */
 public class SecurityQuestionResponse implements Parcelable {
-
-    public SecurityQuestionResponse(Integer _id, String _text) {
-        id = _id;
-        text = _text;
-    }
 
     @Expose
     @SerializedName("value")
@@ -24,15 +21,9 @@ public class SecurityQuestionResponse implements Parcelable {
     @SerializedName("label")
     public String text;
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeValue(this.id);
-        dest.writeString(this.text);
+    public SecurityQuestionResponse(Integer _id, String _text) {
+        id = _id;
+        text = _text;
     }
 
     public SecurityQuestionResponse() {
@@ -52,5 +43,19 @@ public class SecurityQuestionResponse implements Parcelable {
             return new SecurityQuestionResponse[size];
         }
     };
+
+    public static final class List extends ArrayList<SecurityQuestionResponse> {
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeValue(this.id);
+        dest.writeString(this.text);
+    }
 
 }

@@ -280,6 +280,15 @@ public class RegisterFragment extends BaseAuthorizationFragment implements OnCli
             return false;
         }
         //endregion
+
+        //region Security answer validation
+        if (cbEnhancedSecurity.isChecked()) {
+            if (etSecurityAnswer.getText().toString().isEmpty()) {
+                Toast.makeText(getActivity(), R.string.error_fill_all_fields, C.TOAST_LENGTH).show();
+                return false;
+            }
+        }
+        //endregion
         return true;
     }
 
@@ -293,6 +302,11 @@ public class RegisterFragment extends BaseAuthorizationFragment implements OnCli
         registerModel.state = 3; // HARDCODED DUBAI
         registerModel.email = etEmail.getText().toString();
         registerModel.emiratesId = etEmiratesId.getText().toString();
+        registerModel.enhancedSecurity = cbEnhancedSecurity.isChecked();
+        if (registerModel.enhancedSecurity) {
+            registerModel.secretQuestionType = ((SecurityQuestionResponse) sSecurityQuestion.getSelectedItem()).id;
+            registerModel.secretQuestionAnswer = etSecurityAnswer.getText().toString();
+        }
 
         if (mFilterPool.check(registerModel)) {
             loaderOverlayShow(getString(R.string.str_registering), this, false);

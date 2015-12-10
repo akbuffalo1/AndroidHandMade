@@ -23,6 +23,7 @@ import com.uae.tra_smart_services.rest.model.response.GetAnnouncementsResponseMo
 import com.uae.tra_smart_services.rest.model.response.GetTransactionResponseModel;
 import com.uae.tra_smart_services.rest.model.response.RatingServiceResponseModel;
 import com.uae.tra_smart_services.rest.model.response.SearchDeviceResponseModel;
+import com.uae.tra_smart_services.rest.model.response.SecurityQuestionResponse;
 import com.uae.tra_smart_services.rest.model.response.ServiceInfoResponse;
 import com.uae.tra_smart_services.rest.model.response.SmsSpamResponseModel;
 import com.uae.tra_smart_services.rest.model.response.UserProfileResponseModel;
@@ -70,6 +71,7 @@ import static com.uae.tra_smart_services.global.ServerConstants.REGISTER_URL;
 import static com.uae.tra_smart_services.global.ServerConstants.RESTORE_PASS_URL;
 import static com.uae.tra_smart_services.global.ServerConstants.SEARCH_DEVICE_BY_BRAND_NAME_URL;
 import static com.uae.tra_smart_services.global.ServerConstants.SEARCH_DEVICE_BY_IMEI_URL;
+import static com.uae.tra_smart_services.global.ServerConstants.SECRET_QUESTIONS;
 import static com.uae.tra_smart_services.global.ServerConstants.SEND_SUGGESTION_URL;
 import static com.uae.tra_smart_services.global.ServerConstants.SERVICE_INFO;
 import static com.uae.tra_smart_services.global.ServerConstants.SMS_SPAM_BLOCK_URL;
@@ -182,5 +184,8 @@ public interface TRAServicesAPI {
 
     @GET(CONTACT_US)
     ContactUsResponse.List getContactUsInfo();
+
+    @GET(SECRET_QUESTIONS)
+    SecurityQuestionResponse.List getSecurityQuestions();
 
 }

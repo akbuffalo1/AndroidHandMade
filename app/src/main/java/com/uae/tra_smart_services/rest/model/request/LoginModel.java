@@ -35,7 +35,7 @@ public class LoginModel implements Parcelable {
         this.pass = in.readString();
     }
 
-    public static final Parcelable.Creator<LoginModel> CREATOR = new Parcelable.Creator<LoginModel>() {
+    public static final Creator<LoginModel> CREATOR = new Creator<LoginModel>() {
         public LoginModel createFromParcel(Parcel source) {
             return new LoginModel(source);
         }
@@ -44,4 +44,5 @@ public class LoginModel implements Parcelable {
             return new LoginModel[size];
         }
     };
+
 }

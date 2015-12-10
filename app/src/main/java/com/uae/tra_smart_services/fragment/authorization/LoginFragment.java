@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.octo.android.robospice.persistence.DurationInMillis;
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.PendingRequestListener;
+import com.octo.android.robospice.request.listener.RequestListener;
 import com.uae.tra_smart_services.BuildConfig;
 import com.uae.tra_smart_services.R;
 import com.uae.tra_smart_services.fragment.base.BaseAuthorizationFragment;
@@ -19,10 +20,9 @@ import com.uae.tra_smart_services.interfaces.Loader;
 import com.uae.tra_smart_services.rest.model.request.LoginModel;
 import com.uae.tra_smart_services.rest.model.response.SecurityQuestionResponse;
 import com.uae.tra_smart_services.rest.robo_requests.LoginRequest;
+import com.uae.tra_smart_services.rest.robo_requests.SecurityQuestionsRequest;
 import com.uae.tra_smart_services.util.LayoutDirectionUtils;
 import com.uae.tra_smart_services.util.PreferenceManager;
-
-import java.util.ArrayList;
 
 import retrofit.client.Response;
 
@@ -37,6 +37,7 @@ import static com.uae.tra_smart_services.global.C.MIN_USERNAME_LENGTH;
 public class LoginFragment extends BaseAuthorizationFragment
         implements OnClickListener, Loader.Cancelled {
 
+    private static final String KEY_SECRET_QUESTIONS_REQUEST = "SECRET_QUESTIONS_REQUEST";
     private static final String KEY_LOGIN_REQUEST = "LOGIN_REQUEST";
 
     private EditText etUserName, etPassword;
@@ -44,6 +45,9 @@ public class LoginFragment extends BaseAuthorizationFragment
     private TextView tvRegisterNow, tvForgotPassword;
 
     private RequestResponseListener mRequestLoginListener;
+    private QuestionsResponseListener mQuestionsListener;
+
+    private SecurityQuestionsRequest mQuestionsRequest;
 
     public static LoginFragment newInstance() {
         return new LoginFragment();
@@ -83,6 +87,7 @@ public class LoginFragment extends BaseAuthorizationFragment
     @Override
     protected final void initListeners() {
         mRequestLoginListener = new RequestResponseListener();
+        mQuestionsListener = new QuestionsResponseListener();
 //        tvRestorePassword.setOnClickListener(this);
         btnLogIn.setOnClickListener(this);
         tvRegisterNow.setOnClickListener(this);
@@ -98,6 +103,8 @@ public class LoginFragment extends BaseAuthorizationFragment
     public void onStart() {
         super.onStart();
         getSpiceManager().addListenerIfPending(Response.class, KEY_LOGIN_REQUEST, mRequestLoginListener);
+        getSpiceManager().getFromCache(SecurityQuestionResponse.List.class, KEY_SECRET_QUESTIONS_REQUEST,
+                DurationInMillis.ALWAYS_RETURNED, mQuestionsListener);
     }
 
     @Override
@@ -110,16 +117,19 @@ public class LoginFragment extends BaseAuthorizationFragment
                 }
                 break;
             case R.id.tvRegisterNow_FLI:
-                ArrayList<SecurityQuestionResponse> data = new ArrayList<>();//TODO: remove stub data
-                data.add(new SecurityQuestionResponse(1,"Test 1"));
-                data.add(new SecurityQuestionResponse(2,"Test 2"));
-                data.add(new SecurityQuestionResponse(3,"Test 3"));
-                actionsListener.onOpenRegisterScreen(data);
+                loadQuestionsAndOpenRegister();
                 break;
             case R.id.tvForgotPass_FLI:
                 actionsListener.onOpenRestorePassScreen();
                 break;
         }
+    }
+
+    private void loadQuestionsAndOpenRegister() {
+        loaderOverlayShow(getString(R.string.str_loading), mQuestionsListener, false);
+        mQuestionsRequest = new SecurityQuestionsRequest();
+        getSpiceManager().execute(mQuestionsRequest, KEY_SECRET_QUESTIONS_REQUEST,
+                DurationInMillis.ALWAYS_EXPIRED, mQuestionsListener);
     }
 
     private boolean validateData() {
@@ -197,5 +207,37 @@ public class LoginFragment extends BaseAuthorizationFragment
             processError(spiceException);
             getSpiceManager().removeDataFromCache(Response.class, KEY_LOGIN_REQUEST);
         }
+    }
+
+    private class QuestionsResponseListener implements RequestListener<SecurityQuestionResponse.List>, Loader.Cancelled {
+
+        @Override
+        public void onRequestSuccess(SecurityQuestionResponse.List result) {
+            getSpiceManager().removeDataFromCache(SecurityQuestionResponse.List.class, KEY_SECRET_QUESTIONS_REQUEST);
+            if (isAdded()) {
+                loaderOverlayDismissWithAction(LoginFragment.this);
+                if (result != null && actionsListener!=null) {
+                    actionsListener.onOpenRegisterScreen(result);
+                }
+            }
+        }
+
+        @Override
+        public void onLoadingCanceled() {
+            if (getSpiceManager().isStarted()) {
+                getSpiceManager().removeDataFromCache(SecurityQuestionResponse.List.class, KEY_SECRET_QUESTIONS_REQUEST);
+                getSpiceManager().cancel(mQuestionsRequest);
+            }
+        }
+
+        @Override
+        public void onRequestFailure(SpiceException spiceException) {
+            getSpiceManager().removeDataFromCache(SecurityQuestionResponse.List.class, KEY_SECRET_QUESTIONS_REQUEST);
+            if (isAdded()) {
+                loaderOverlayFailed(getString(R.string.str_request_failed), false);
+            }
+
+        }
+
     }
 }
