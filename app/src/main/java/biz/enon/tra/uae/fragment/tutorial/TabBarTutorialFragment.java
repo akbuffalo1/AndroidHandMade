@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.enon.tra.uae.R;
+import biz.enon.tra.uae.R;
 
 /**
  * Created by Mikazme on 24/09/2015.

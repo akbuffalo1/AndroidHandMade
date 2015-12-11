@@ -13,10 +13,9 @@ import android.view.ViewTreeObserver;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.enon.tra.uae.R;
-
 import java.util.Locale;
 
+import biz.enon.tra.uae.R;
 import biz.enon.tra.uae.adapter.AnnouncementsAdapter;
 import biz.enon.tra.uae.customviews.HexagonSwipeRefreshLayout;
 import biz.enon.tra.uae.fragment.base.BaseFragment;

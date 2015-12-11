@@ -13,11 +13,11 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.enon.tra.uae.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import biz.enon.tra.uae.R;
 import biz.enon.tra.uae.customviews.HexagonView;
 import biz.enon.tra.uae.entities.HexagonViewTarget;
 import biz.enon.tra.uae.fragment.HexagonHomeFragment;

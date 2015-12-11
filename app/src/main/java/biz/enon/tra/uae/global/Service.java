@@ -5,11 +5,10 @@ import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 
-import com.enon.tra.uae.R;
-
 import java.util.ArrayList;
 import java.util.List;
 
+import biz.enon.tra.uae.R;
 import biz.enon.tra.uae.global.C.ServiceName;
 
 /**

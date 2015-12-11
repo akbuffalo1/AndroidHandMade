@@ -4,10 +4,9 @@ import android.content.Context;
 import android.view.View;
 import android.widget.TextView;
 
-import com.enon.tra.uae.R;
-
 import java.util.List;
 
+import biz.enon.tra.uae.R;
 import biz.enon.tra.uae.rest.model.response.ContactUsResponse;
 
 /**

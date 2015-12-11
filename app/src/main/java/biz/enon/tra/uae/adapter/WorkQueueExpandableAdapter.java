@@ -14,7 +14,6 @@ import com.bignerdranch.expandablerecyclerview.Adapter.ExpandableRecyclerAdapter
 import com.bignerdranch.expandablerecyclerview.Model.ParentObject;
 import com.bignerdranch.expandablerecyclerview.ViewHolder.ChildViewHolder;
 import com.bignerdranch.expandablerecyclerview.ViewHolder.ParentViewHolder;
-import com.enon.tra.uae.R;
 import com.github.johnkil.print.PrintView;
 
 import java.util.ArrayList;
@@ -26,6 +25,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
+import biz.enon.tra.uae.R;
 import biz.enon.tra.uae.rest.model.response.WorkQueueDataModel;
 
 /**

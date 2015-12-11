@@ -21,10 +21,9 @@ import android.support.v4.graphics.drawable.DrawableCompat;
 import android.util.Base64;
 import android.util.TypedValue;
 
-import com.enon.tra.uae.R;
-
 import java.io.ByteArrayOutputStream;
 
+import biz.enon.tra.uae.R;
 import biz.enon.tra.uae.global.C;
 
 /**

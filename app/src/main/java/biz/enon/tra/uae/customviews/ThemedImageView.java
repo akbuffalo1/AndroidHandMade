@@ -10,7 +10,7 @@ import android.support.v4.graphics.drawable.DrawableCompat;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
-import com.enon.tra.uae.R;
+import biz.enon.tra.uae.R;
 
 /**
  * Created by mobimaks on 08.09.2015.

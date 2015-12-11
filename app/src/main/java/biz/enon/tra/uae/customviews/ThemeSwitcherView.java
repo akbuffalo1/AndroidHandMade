@@ -9,11 +9,10 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import com.enon.tra.uae.R;
-
 import java.util.ArrayList;
 import java.util.Map;
 
+import biz.enon.tra.uae.R;
 import biz.enon.tra.uae.baseentities.BaseCustomSwitcher;
 import biz.enon.tra.uae.entities.RectButton;
 import biz.enon.tra.uae.entities.Separator;

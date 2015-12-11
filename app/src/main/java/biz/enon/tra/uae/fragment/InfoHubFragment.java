@@ -14,13 +14,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import com.enon.tra.uae.R;
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
 
 import java.util.ArrayList;
 import java.util.Locale;
 
+import biz.enon.tra.uae.R;
 import biz.enon.tra.uae.adapter.AnnouncementsAdapter;
 import biz.enon.tra.uae.adapter.TransactionsAdapter;
 import biz.enon.tra.uae.adapter.TransactionsAdapter.OnTransactionPressedListener;

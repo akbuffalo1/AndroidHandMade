@@ -18,11 +18,10 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.RelativeLayout;
 
-import com.enon.tra.uae.R;
-
 import java.util.ArrayList;
 import java.util.List;
 
+import biz.enon.tra.uae.R;
 import biz.enon.tra.uae.adapter.FavoritesAdapter;
 import biz.enon.tra.uae.adapter.FavoritesAdapter.OnFavoriteClickListener;
 import biz.enon.tra.uae.customviews.DragFrameLayout;

@@ -20,13 +20,13 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.enon.tra.uae.R;
 import com.octo.android.robospice.persistence.DurationInMillis;
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.PendingRequestListener;
 
 import java.util.ArrayList;
 
+import biz.enon.tra.uae.R;
 import biz.enon.tra.uae.adapter.SecurityQuestionAdapter;
 import biz.enon.tra.uae.adapter.StateRegisterAdapter;
 import biz.enon.tra.uae.entities.CustomFilterPool;

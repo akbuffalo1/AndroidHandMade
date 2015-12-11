@@ -16,7 +16,6 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.enon.tra.uae.R;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -28,6 +27,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
 
+import biz.enon.tra.uae.R;
 import biz.enon.tra.uae.adapter.ContactUsAdapter;
 import biz.enon.tra.uae.fragment.base.BaseFragment;
 import biz.enon.tra.uae.rest.model.response.ContactUsResponse;

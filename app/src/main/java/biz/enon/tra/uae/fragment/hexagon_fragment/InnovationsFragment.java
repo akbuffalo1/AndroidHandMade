@@ -18,7 +18,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.enon.tra.uae.R;
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
 
@@ -26,6 +25,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import biz.enon.tra.uae.R;
 import biz.enon.tra.uae.adapter.InnovationIdeaAdapter;
 import biz.enon.tra.uae.customviews.LoaderView;
 import biz.enon.tra.uae.customviews.ThemedImageView;

@@ -8,8 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 
-import com.enon.tra.uae.R;
-
+import biz.enon.tra.uae.R;
 import biz.enon.tra.uae.customviews.HexagonalButtonsLayout;
 import biz.enon.tra.uae.customviews.tutorial.HotBarTipView;
 

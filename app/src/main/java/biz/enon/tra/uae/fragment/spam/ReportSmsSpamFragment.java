@@ -10,7 +10,6 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.enon.tra.uae.R;
 import com.octo.android.robospice.persistence.DurationInMillis;
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
@@ -18,6 +17,7 @@ import com.octo.android.robospice.request.listener.RequestListener;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import biz.enon.tra.uae.R;
 import biz.enon.tra.uae.adapter.SpamServiceProviderAdapter;
 import biz.enon.tra.uae.customviews.LoaderView;
 import biz.enon.tra.uae.fragment.base.BaseServiceFragment;

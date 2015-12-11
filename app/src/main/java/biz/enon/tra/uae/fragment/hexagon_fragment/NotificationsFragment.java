@@ -6,8 +6,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.enon.tra.uae.R;
-
+import biz.enon.tra.uae.R;
 import biz.enon.tra.uae.fragment.base.BaseFragment;
 
 /**

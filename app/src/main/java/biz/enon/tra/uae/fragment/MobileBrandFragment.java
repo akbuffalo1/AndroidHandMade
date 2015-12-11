@@ -12,7 +12,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 
-import com.enon.tra.uae.R;
 import com.octo.android.robospice.persistence.DurationInMillis;
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
@@ -20,6 +19,7 @@ import com.octo.android.robospice.request.listener.RequestListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import biz.enon.tra.uae.R;
 import biz.enon.tra.uae.adapter.BrandsListAdapter;
 import biz.enon.tra.uae.adapter.BrandsListAdapter.OnBrandSelectListener;
 import biz.enon.tra.uae.fragment.base.BaseServiceFragment;

@@ -10,10 +10,9 @@ import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-import com.enon.tra.uae.R;
-
 import java.util.Locale;
 
+import biz.enon.tra.uae.R;
 import biz.enon.tra.uae.baseentities.BaseCustomSwitcher;
 import biz.enon.tra.uae.fragment.base.BaseFragment;
 import biz.enon.tra.uae.global.C;

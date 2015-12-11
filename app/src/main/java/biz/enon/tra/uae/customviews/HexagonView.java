@@ -19,10 +19,10 @@ import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.enon.tra.uae.R;
-
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+
+import biz.enon.tra.uae.R;
 
 import static biz.enon.tra.uae.customviews.HexagonView.ScaleType.CENTER_CROP;
 import static biz.enon.tra.uae.customviews.HexagonView.ScaleType.INSIDE_CROP;

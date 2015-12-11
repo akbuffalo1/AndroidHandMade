@@ -19,7 +19,7 @@ import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 
-import com.enon.tra.uae.R;
+import biz.enon.tra.uae.R;
 
 /**
  * Created by ak-buffalo on 21.09.15.

@@ -7,13 +7,13 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.enon.tra.uae.R;
 import com.octo.android.robospice.persistence.DurationInMillis;
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
 
 import java.math.BigDecimal;
 
+import biz.enon.tra.uae.R;
 import biz.enon.tra.uae.fragment.base.BaseServiceFragment;
 import biz.enon.tra.uae.global.Service;
 import biz.enon.tra.uae.interfaces.Loader;

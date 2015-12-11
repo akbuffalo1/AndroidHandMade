@@ -11,12 +11,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
-import com.enon.tra.uae.R;
-
 import java.lang.ref.SoftReference;
 import java.util.ArrayList;
 import java.util.List;
 
+import biz.enon.tra.uae.R;
 import biz.enon.tra.uae.entities.dynamic_service.BaseInputItem;
 import biz.enon.tra.uae.entities.dynamic_service.InputItemsPage;
 import biz.enon.tra.uae.entities.dynamic_service.input_item.AttachmentInputItem;

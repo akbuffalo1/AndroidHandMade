@@ -7,11 +7,10 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
 
-import com.enon.tra.uae.R;
-
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
+import biz.enon.tra.uae.R;
 import biz.enon.tra.uae.customviews.HexagonView;
 import biz.enon.tra.uae.fragment.base.BaseServiceFragment;
 import biz.enon.tra.uae.global.Service;

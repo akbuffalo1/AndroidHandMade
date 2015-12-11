@@ -9,11 +9,11 @@ import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-import com.enon.tra.uae.R;
 import com.google.gson.internal.LinkedHashTreeMap;
 
 import java.util.Map;
 
+import biz.enon.tra.uae.R;
 import biz.enon.tra.uae.baseentities.BaseCustomSwitcher;
 import biz.enon.tra.uae.global.C;
 

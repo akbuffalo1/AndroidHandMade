@@ -7,10 +7,10 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.LinearLayout;
 
-import com.enon.tra.uae.R;
-
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+
+import biz.enon.tra.uae.R;
 
 /**
  * Created by mobimaks on 09.09.2015.

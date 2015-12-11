@@ -16,13 +16,12 @@ import android.view.MenuItem;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 
-import com.enon.tra.uae.R;
-
 import java.net.CookieHandler;
 import java.net.CookieManager;
 import java.net.CookiePolicy;
 import java.util.List;
 
+import biz.enon.tra.uae.R;
 import biz.enon.tra.uae.TRAApplication;
 import biz.enon.tra.uae.activity.base.BaseFragmentActivity;
 import biz.enon.tra.uae.adapter.TransactionsAdapter;

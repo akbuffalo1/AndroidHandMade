@@ -9,8 +9,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-import com.enon.tra.uae.R;
-
+import biz.enon.tra.uae.R;
 import biz.enon.tra.uae.fragment.base.BaseServiceFragment;
 import biz.enon.tra.uae.global.C;
 import biz.enon.tra.uae.global.ServerConstants;

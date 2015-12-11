@@ -9,14 +9,14 @@ import android.support.annotation.XmlRes;
 import android.util.Log;
 import android.util.TypedValue;
 
-import com.enon.tra.uae.R;
-
 import org.xmlpull.v1.XmlPullParser;
 
 import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
+
+import biz.enon.tra.uae.R;
 
 /**
  * Created by ak-buffalo on 28.07.15.

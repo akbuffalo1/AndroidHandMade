@@ -8,10 +8,10 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-import com.enon.tra.uae.R;
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
 
+import biz.enon.tra.uae.R;
 import biz.enon.tra.uae.customviews.LoaderView;
 import biz.enon.tra.uae.dialog.ServiceRatingDialog;
 import biz.enon.tra.uae.fragment.LoaderFragment;

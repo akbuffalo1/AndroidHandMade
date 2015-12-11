@@ -7,10 +7,9 @@ import android.support.v4.content.ContextCompat;
 import android.util.TypedValue;
 import android.view.View;
 
-import com.enon.tra.uae.R;
-
 import java.util.List;
 
+import biz.enon.tra.uae.R;
 import biz.enon.tra.uae.rest.model.response.SecurityQuestionResponse;
 
 /**

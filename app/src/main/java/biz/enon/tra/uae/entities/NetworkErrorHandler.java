@@ -4,13 +4,13 @@ import android.app.Activity;
 import android.content.Intent;
 import android.support.annotation.Nullable;
 
-import com.enon.tra.uae.BuildConfig;
-import com.enon.tra.uae.R;
 import com.octo.android.robospice.exception.NoNetworkException;
 import com.octo.android.robospice.persistence.exception.SpiceException;
 
 import java.net.HttpURLConnection;
 
+import biz.enon.tra.uae.BuildConfig;
+import biz.enon.tra.uae.R;
 import biz.enon.tra.uae.TRAApplication;
 import biz.enon.tra.uae.activity.HomeActivity;
 import biz.enon.tra.uae.fragment.base.BaseFragment;

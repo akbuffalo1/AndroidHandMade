@@ -3,7 +3,6 @@ package biz.enon.tra.uae.rest;
 import android.support.annotation.CallSuper;
 import android.support.annotation.NonNull;
 
-import com.enon.tra.uae.BuildConfig;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.octo.android.robospice.retrofit.RetrofitGsonSpiceService;
@@ -11,6 +10,7 @@ import com.squareup.okhttp.OkHttpClient;
 
 import java.util.concurrent.TimeUnit;
 
+import biz.enon.tra.uae.BuildConfig;
 import retrofit.RestAdapter;
 import retrofit.RestAdapter.Builder;
 import retrofit.client.OkClient;

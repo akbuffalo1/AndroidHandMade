@@ -8,8 +8,7 @@ import android.widget.CompoundButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.enon.tra.uae.R;
-
+import biz.enon.tra.uae.R;
 import biz.enon.tra.uae.rest.model.response.EquipmentTreeModel;
 
 /**

@@ -5,10 +5,9 @@ import android.support.annotation.LayoutRes;
 import android.view.View;
 import android.widget.TextView;
 
-import com.enon.tra.uae.R;
-
 import java.util.Arrays;
 
+import biz.enon.tra.uae.R;
 import biz.enon.tra.uae.global.ServiceProvider;
 
 /**

@@ -13,8 +13,7 @@ import android.util.AttributeSet;
 import android.util.LayoutDirection;
 import android.view.View;
 
-import com.enon.tra.uae.R;
-
+import biz.enon.tra.uae.R;
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
 /**

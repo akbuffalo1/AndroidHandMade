@@ -12,9 +12,9 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.enon.tra.uae.R;
 import com.viewpagerindicator.CirclePageIndicator;
 
+import biz.enon.tra.uae.R;
 import biz.enon.tra.uae.adapter.TutorialPagerAdapter;
 import biz.enon.tra.uae.global.C;
 

@@ -21,7 +21,6 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.Target;
-import com.enon.tra.uae.R;
 import com.octo.android.robospice.persistence.DurationInMillis;
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
@@ -29,6 +28,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import biz.enon.tra.uae.R;
 import biz.enon.tra.uae.adapter.UserProfileQuestionAdapter;
 import biz.enon.tra.uae.customviews.HexagonView;
 import biz.enon.tra.uae.customviews.LoaderView;

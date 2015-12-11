@@ -14,11 +14,10 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-import com.enon.tra.uae.R;
-
 import java.util.ArrayList;
 import java.util.List;
 
+import biz.enon.tra.uae.R;
 import biz.enon.tra.uae.adapter.AddFavoritesAdapter;
 import biz.enon.tra.uae.adapter.AddFavoritesAdapter.OnItemClickListener;
 import biz.enon.tra.uae.fragment.base.BaseFragment;

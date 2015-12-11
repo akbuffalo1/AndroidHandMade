@@ -15,8 +15,6 @@ import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.widget.Toast;
 
-import com.enon.tra.uae.R;
-
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -24,6 +22,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import biz.enon.tra.uae.R;
 import biz.enon.tra.uae.dialog.AttachmentPickerDialog;
 import biz.enon.tra.uae.entities.Permission;
 import biz.enon.tra.uae.global.AttachmentOption;

@@ -13,11 +13,10 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.enon.tra.uae.R;
-
 import java.util.HashMap;
 import java.util.Map;
 
+import biz.enon.tra.uae.R;
 import biz.enon.tra.uae.dialog.AlertDialogFragment;
 import biz.enon.tra.uae.fragment.base.BaseServiceFragment;
 import biz.enon.tra.uae.global.C;

@@ -15,10 +15,9 @@ import android.widget.Space;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.enon.tra.uae.R;
-
 import java.util.List;
 
+import biz.enon.tra.uae.R;
 import biz.enon.tra.uae.adapter.TransactionsAdapter.ViewHolder;
 import biz.enon.tra.uae.customviews.HexagonView;
 import biz.enon.tra.uae.customviews.LoaderView;

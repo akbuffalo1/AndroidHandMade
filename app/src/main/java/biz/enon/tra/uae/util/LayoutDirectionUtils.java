@@ -4,8 +4,7 @@ import android.content.Context;
 import android.support.annotation.DrawableRes;
 import android.widget.TextView;
 
-import com.enon.tra.uae.R;
-
+import biz.enon.tra.uae.R;
 import biz.enon.tra.uae.global.C;
 
 /**

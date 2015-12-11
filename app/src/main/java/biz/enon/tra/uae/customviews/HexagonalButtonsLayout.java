@@ -22,11 +22,10 @@ import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.enon.tra.uae.R;
-
 import java.util.ArrayList;
 import java.util.List;
 
+import biz.enon.tra.uae.R;
 import biz.enon.tra.uae.global.C;
 import biz.enon.tra.uae.util.HexagonUtils;
 import biz.enon.tra.uae.util.ImageUtils;

@@ -6,10 +6,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.enon.tra.uae.R;
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.PendingRequestListener;
 
+import biz.enon.tra.uae.R;
 import biz.enon.tra.uae.dialog.AlertDialogFragment;
 import biz.enon.tra.uae.entities.CustomFilterPool;
 import biz.enon.tra.uae.entities.Filter;

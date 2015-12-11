@@ -13,7 +13,6 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.enon.tra.uae.R;
 import com.octo.android.robospice.persistence.DurationInMillis;
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
@@ -21,6 +20,7 @@ import com.octo.android.robospice.request.listener.RequestListener;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import biz.enon.tra.uae.R;
 import biz.enon.tra.uae.dialog.AlertDialogFragment;
 import biz.enon.tra.uae.dialog.AttachmentPickerDialog;
 import biz.enon.tra.uae.entities.dynamic_service.BaseInputItem;

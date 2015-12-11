@@ -8,11 +8,11 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
-import com.enon.tra.uae.R;
 import com.octo.android.robospice.persistence.DurationInMillis;
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
 
+import biz.enon.tra.uae.R;
 import biz.enon.tra.uae.customviews.HexagonView;
 import biz.enon.tra.uae.customviews.LoaderView;
 import biz.enon.tra.uae.fragment.base.BaseFragment;

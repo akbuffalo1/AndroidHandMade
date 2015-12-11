@@ -10,7 +10,7 @@ import android.os.Bundle;
 import android.support.annotation.StringRes;
 import android.support.v7.app.AlertDialog;
 
-import com.enon.tra.uae.R;
+import biz.enon.tra.uae.R;
 
 import static android.app.AlertDialog.THEME_HOLO_LIGHT;
 

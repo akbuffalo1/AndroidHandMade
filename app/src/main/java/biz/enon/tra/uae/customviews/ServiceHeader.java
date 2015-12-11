@@ -12,7 +12,7 @@ import android.view.Gravity;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.enon.tra.uae.R;
+import biz.enon.tra.uae.R;
 
 /**
  * Created by mobimaks on 04.09.2015.

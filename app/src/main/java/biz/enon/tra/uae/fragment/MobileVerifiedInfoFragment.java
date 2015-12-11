@@ -3,10 +3,9 @@ package biz.enon.tra.uae.fragment;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import com.enon.tra.uae.R;
-
 import java.util.ArrayList;
 
+import biz.enon.tra.uae.R;
 import biz.enon.tra.uae.fragment.base.BaseFragment;
 import biz.enon.tra.uae.rest.model.response.SearchDeviceResponseModel;
 

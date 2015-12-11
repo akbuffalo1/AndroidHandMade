@@ -13,8 +13,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.enon.tra.uae.R;
-
+import biz.enon.tra.uae.R;
 import biz.enon.tra.uae.customviews.LoaderView;
 import biz.enon.tra.uae.customviews.ServiceRatingView;
 import biz.enon.tra.uae.fragment.base.BaseFragment;

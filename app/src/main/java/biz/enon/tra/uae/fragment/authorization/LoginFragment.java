@@ -9,13 +9,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.enon.tra.uae.BuildConfig;
-import com.enon.tra.uae.R;
 import com.octo.android.robospice.persistence.DurationInMillis;
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.PendingRequestListener;
 import com.octo.android.robospice.request.listener.RequestListener;
 
+import biz.enon.tra.uae.BuildConfig;
+import biz.enon.tra.uae.R;
 import biz.enon.tra.uae.entities.LoginQuestionModel;
 import biz.enon.tra.uae.fragment.base.BaseAuthorizationFragment;
 import biz.enon.tra.uae.global.C;

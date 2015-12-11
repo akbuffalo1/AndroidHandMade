@@ -22,12 +22,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.enon.tra.uae.R;
 import com.octo.android.robospice.SpiceManager;
 import com.octo.android.robospice.persistence.exception.SpiceException;
 
 import org.apache.commons.lang3.text.WordUtils;
 
+import biz.enon.tra.uae.R;
 import biz.enon.tra.uae.customviews.LoaderView;
 import biz.enon.tra.uae.dialog.AlertDialogFragment;
 import biz.enon.tra.uae.dialog.ProgressDialog;

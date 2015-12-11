@@ -13,10 +13,9 @@ import android.view.animation.DecelerateInterpolator;
 import android.view.animation.LinearInterpolator;
 import android.widget.ProgressBar;
 
-import com.enon.tra.uae.R;
-
 import java.util.Random;
 
+import biz.enon.tra.uae.R;
 import biz.enon.tra.uae.activity.base.BaseActivity;
 
 public class SplashActivity extends BaseActivity {

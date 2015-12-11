@@ -17,9 +17,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.enon.tra.uae.BuildConfig;
-import com.enon.tra.uae.R;
-
+import biz.enon.tra.uae.BuildConfig;
+import biz.enon.tra.uae.R;
 import biz.enon.tra.uae.activity.HomeActivity;
 import biz.enon.tra.uae.baseentities.BaseCustomSwitcher;
 import biz.enon.tra.uae.customviews.FontSizeSwitcherView;

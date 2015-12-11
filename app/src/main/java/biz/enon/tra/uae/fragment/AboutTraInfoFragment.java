@@ -3,8 +3,7 @@ package biz.enon.tra.uae.fragment;
 import android.annotation.SuppressLint;
 import android.webkit.WebView;
 
-import com.enon.tra.uae.R;
-
+import biz.enon.tra.uae.R;
 import biz.enon.tra.uae.fragment.base.BaseFragment;
 
 /**

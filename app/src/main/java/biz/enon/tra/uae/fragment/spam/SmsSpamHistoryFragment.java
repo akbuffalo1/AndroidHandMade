@@ -4,11 +4,10 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.enon.tra.uae.R;
-
 import java.util.ArrayList;
 import java.util.List;
 
+import biz.enon.tra.uae.R;
 import biz.enon.tra.uae.adapter.SpamHistoryAdapter;
 import biz.enon.tra.uae.adapter.SpamHistoryAdapter.OnDeleteClickListener;
 import biz.enon.tra.uae.fragment.base.BaseFragment;

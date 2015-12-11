@@ -14,13 +14,13 @@ import android.widget.Space;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.enon.tra.uae.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import biz.enon.tra.uae.R;
 import biz.enon.tra.uae.adapter.AnnouncementsAdapter.ViewHolder;
 import biz.enon.tra.uae.customviews.HexagonView;
 import biz.enon.tra.uae.customviews.LoaderView;

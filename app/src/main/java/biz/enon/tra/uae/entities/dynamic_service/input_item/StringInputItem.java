@@ -10,11 +10,11 @@ import android.util.Patterns;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.enon.tra.uae.R;
 import com.google.gson.JsonPrimitive;
 
 import org.apache.commons.lang3.math.NumberUtils;
 
+import biz.enon.tra.uae.R;
 import biz.enon.tra.uae.entities.dynamic_service.BaseInputItem;
 import biz.enon.tra.uae.entities.dynamic_service.InputItemBuilderFabric;
 

@@ -13,11 +13,10 @@ import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.Space;
 
-import com.enon.tra.uae.R;
-
 import java.util.ArrayList;
 import java.util.List;
 
+import biz.enon.tra.uae.R;
 import biz.enon.tra.uae.adapter.BrandsListAdapter.ViewHolder;
 import biz.enon.tra.uae.customviews.HexagonView;
 import biz.enon.tra.uae.fragment.MobileBrandFragment;

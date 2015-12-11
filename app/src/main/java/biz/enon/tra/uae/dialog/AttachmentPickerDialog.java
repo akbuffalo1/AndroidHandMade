@@ -12,11 +12,10 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
-import com.enon.tra.uae.R;
-
 import java.util.Arrays;
 import java.util.List;
 
+import biz.enon.tra.uae.R;
 import biz.enon.tra.uae.adapter.AttachmentOptionsAdapter;
 import biz.enon.tra.uae.global.AttachmentOption;
 

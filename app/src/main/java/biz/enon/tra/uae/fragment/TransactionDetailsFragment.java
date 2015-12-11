@@ -8,8 +8,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.enon.tra.uae.R;
-
+import biz.enon.tra.uae.R;
 import biz.enon.tra.uae.customviews.HexagonView;
 import biz.enon.tra.uae.fragment.HexagonHomeFragment.OnServiceSelectListener;
 import biz.enon.tra.uae.fragment.base.BaseFragment;

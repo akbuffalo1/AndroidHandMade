@@ -4,9 +4,9 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.widget.EditText;
 
-import com.enon.tra.uae.R;
 import com.octo.android.robospice.persistence.DurationInMillis;
 
+import biz.enon.tra.uae.R;
 import biz.enon.tra.uae.TRAApplication;
 import biz.enon.tra.uae.customviews.LoaderView;
 import biz.enon.tra.uae.global.C;

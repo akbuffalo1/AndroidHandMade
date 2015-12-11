@@ -2,7 +2,6 @@ package biz.enon.tra.uae.rest;
 
 import android.content.Context;
 
-import com.enon.tra.uae.BuildConfig;
 import com.squareup.okhttp.CipherSuite;
 import com.squareup.okhttp.ConnectionSpec;
 import com.squareup.okhttp.OkHttpClient;
@@ -16,6 +15,7 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManagerFactory;
 
+import biz.enon.tra.uae.BuildConfig;
 import biz.enon.tra.uae.global.C;
 import biz.enon.tra.uae.global.ServerConstants;
 import retrofit.RestAdapter;

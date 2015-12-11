@@ -10,10 +10,9 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.widget.ImageView;
 
-import com.enon.tra.uae.R;
-
 import java.util.List;
 
+import biz.enon.tra.uae.R;
 import biz.enon.tra.uae.adapter.DeviceApprovalAdapter;
 import biz.enon.tra.uae.fragment.base.BaseFragment;
 import biz.enon.tra.uae.rest.model.response.SearchDeviceResponseModel;

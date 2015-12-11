@@ -5,12 +5,12 @@ import android.support.annotation.RawRes;
 import android.support.annotation.StringDef;
 import android.widget.Toast;
 
-import com.enon.tra.uae.R;
-
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.HashMap;
 import java.util.Map;
+
+import biz.enon.tra.uae.R;
 
 /**
  * Created by mobimaks on 13.08.2015.

@@ -10,8 +10,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-import com.enon.tra.uae.R;
-
+import biz.enon.tra.uae.R;
 import biz.enon.tra.uae.dialog.AlertDialogFragment.OnOkListener;
 import biz.enon.tra.uae.dialog.AttachmentPickerDialog.OnImageSourceSelectListener;
 import biz.enon.tra.uae.global.AttachmentOption;

@@ -2,7 +2,7 @@ package biz.enon.tra.uae.global;
 
 import android.support.annotation.StringRes;
 
-import com.enon.tra.uae.R;
+import biz.enon.tra.uae.R;
 
 /**
  * Created by ak-buffalo on 14.08.15.

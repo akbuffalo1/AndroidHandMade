@@ -8,11 +8,11 @@ import android.support.design.widget.TabLayout;
 import android.support.design.widget.TabLayout.OnTabSelectedListener;
 import android.support.design.widget.TabLayout.Tab;
 
-import com.enon.tra.uae.R;
 import com.octo.android.robospice.persistence.DurationInMillis;
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
 
+import biz.enon.tra.uae.R;
 import biz.enon.tra.uae.fragment.base.BaseFragment;
 import biz.enon.tra.uae.interfaces.Loader;
 import biz.enon.tra.uae.rest.model.response.ContactUsResponse;

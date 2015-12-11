@@ -12,8 +12,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.enon.tra.uae.R;
-
+import biz.enon.tra.uae.R;
 import biz.enon.tra.uae.adapter.SearchRecyclerViewAdapter;
 import biz.enon.tra.uae.entities.SearchResult;
 import biz.enon.tra.uae.fragment.HexagonHomeFragment;

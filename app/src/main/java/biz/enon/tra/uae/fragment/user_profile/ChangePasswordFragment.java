@@ -9,11 +9,11 @@ import android.widget.EditText;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
-import com.enon.tra.uae.R;
 import com.octo.android.robospice.persistence.DurationInMillis;
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
 
+import biz.enon.tra.uae.R;
 import biz.enon.tra.uae.customviews.HexagonView;
 import biz.enon.tra.uae.customviews.LoaderView;
 import biz.enon.tra.uae.customviews.ProfileController;

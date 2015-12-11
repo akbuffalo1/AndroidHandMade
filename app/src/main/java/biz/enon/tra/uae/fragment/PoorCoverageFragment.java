@@ -31,7 +31,6 @@ import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.enon.tra.uae.R;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
@@ -63,6 +62,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import biz.enon.tra.uae.R;
 import biz.enon.tra.uae.customviews.LoaderView;
 import biz.enon.tra.uae.dialog.AlertDialogFragment.OnOkListener;
 import biz.enon.tra.uae.dialog.SingleChoiceDialog;

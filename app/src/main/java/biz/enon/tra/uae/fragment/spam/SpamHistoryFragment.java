@@ -11,11 +11,10 @@ import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 
-import com.enon.tra.uae.R;
-
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
+import biz.enon.tra.uae.R;
 import biz.enon.tra.uae.fragment.base.BaseFragment;
 import biz.enon.tra.uae.fragment.spam.ReportSpamFragment.OnReportSpamServiceSelectListener;
 

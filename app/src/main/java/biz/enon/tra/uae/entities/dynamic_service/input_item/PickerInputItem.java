@@ -11,9 +11,9 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.enon.tra.uae.R;
 import com.google.gson.JsonPrimitive;
 
+import biz.enon.tra.uae.R;
 import biz.enon.tra.uae.adapter.DynamicSpinnerAdapter;
 import biz.enon.tra.uae.entities.dynamic_service.BaseInputItem;
 

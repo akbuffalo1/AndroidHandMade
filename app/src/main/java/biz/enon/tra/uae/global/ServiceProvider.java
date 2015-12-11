@@ -2,7 +2,7 @@ package biz.enon.tra.uae.global;
 
 import android.support.annotation.StringRes;
 
-import com.enon.tra.uae.R;
+import biz.enon.tra.uae.R;
 
 /**
  * Created by mobimaks on 11.08.2015.

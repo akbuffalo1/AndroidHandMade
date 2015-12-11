@@ -8,10 +8,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.enon.tra.uae.R;
-
 import java.util.List;
 
+import biz.enon.tra.uae.R;
 import biz.enon.tra.uae.global.AttachmentOption;
 
 /**

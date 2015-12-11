@@ -8,9 +8,9 @@ import android.view.View.OnClickListener;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
-import com.enon.tra.uae.R;
-
 import java.util.ArrayList;
+
+import biz.enon.tra.uae.R;
 
 /**
  * Created by ak-buffalo on 14.09.15.

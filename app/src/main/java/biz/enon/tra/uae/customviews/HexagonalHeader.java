@@ -27,7 +27,6 @@ import android.util.LayoutDirection;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.enon.tra.uae.R;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
@@ -37,6 +36,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import biz.enon.tra.uae.R;
 import biz.enon.tra.uae.util.HexagonUtils;
 import biz.enon.tra.uae.util.ImageUtils;
 

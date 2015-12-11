@@ -3,10 +3,9 @@ package biz.enon.tra.uae.fragment.base;
 import android.app.Activity;
 import android.support.annotation.NonNull;
 
-import com.enon.tra.uae.R;
-
 import java.util.ArrayList;
 
+import biz.enon.tra.uae.R;
 import biz.enon.tra.uae.entities.LoginQuestionModel;
 import biz.enon.tra.uae.rest.model.response.SecurityQuestionResponse;
 

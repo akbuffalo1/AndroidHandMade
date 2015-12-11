@@ -2,7 +2,7 @@ package biz.enon.tra.uae.util;
 
 import android.util.Log;
 
-import com.enon.tra.uae.BuildConfig;
+import biz.enon.tra.uae.BuildConfig;
 
 /**
  * Created by mobimaks on 09.11.2015.

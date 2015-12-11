@@ -12,8 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.enon.tra.uae.R;
-
+import biz.enon.tra.uae.R;
 import biz.enon.tra.uae.customviews.ServiceRatingView;
 import biz.enon.tra.uae.global.H;
 
