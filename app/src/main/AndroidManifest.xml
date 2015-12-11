@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="com.enon.tra.uae"
+<manifest package="biz.enon.tra.uae"
           xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!-- Normal permissions -->
