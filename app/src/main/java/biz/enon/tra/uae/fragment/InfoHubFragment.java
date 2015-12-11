@@ -354,7 +354,6 @@ public final class InfoHubFragment extends BaseFragment
             loadTransactionPage(mTransactionPageNum = 1, true);
             mAnnouncementsListAdapter.addAll(mAnnouncementsModel);
             mAnnouncementsOperationStateManager.showData();
-            tvSeeMoreAnnouncements.setVisibility(View.VISIBLE);
         } else if (mAnnouncementsModel.size() == 0){
             loadAnnouncementsPage(1, true);
             mTransactionsListAdapter.addAll(mTransactionsModel);
@@ -362,7 +361,6 @@ public final class InfoHubFragment extends BaseFragment
         } else {
             mAnnouncementsListAdapter.addAll(mAnnouncementsModel);
             mAnnouncementsOperationStateManager.showData();
-            tvSeeMoreAnnouncements.setVisibility(View.VISIBLE);
             mTransactionsListAdapter.addAll(mTransactionsModel);
             mTransactionsOperationStateManager.showData();
         }
