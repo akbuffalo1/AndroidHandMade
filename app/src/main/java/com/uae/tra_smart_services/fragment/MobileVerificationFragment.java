@@ -132,7 +132,8 @@ public class MobileVerificationFragment extends BaseServiceFragment
     }
 
     private void searchDeviceByImei() {
-        mRequest = new SearchByImeiRequest(etImeiNumber.getText().toString());
+        final String imeiText = etImeiNumber.getText().toString().replace(" ", "");
+        mRequest = new SearchByImeiRequest(imeiText);
         loaderOverlayShow(getString(R.string.str_sending), this);
         loaderOverlayButtonBehavior(new Loader.BackButton() {
             @Override
