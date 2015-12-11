@@ -1,4 +1,4 @@
-package com.uae.tra_smart_services;
+package com.uae.tra_smart_services.adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -7,7 +7,7 @@ import android.support.v4.content.ContextCompat;
 import android.util.TypedValue;
 import android.view.View;
 
-import com.uae.tra_smart_services.adapter.SecurityQuestionAdapter;
+import com.uae.tra_smart_services.R;
 import com.uae.tra_smart_services.rest.model.response.SecurityQuestionResponse;
 
 import java.util.List;

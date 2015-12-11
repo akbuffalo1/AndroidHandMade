@@ -9,7 +9,7 @@ public final class DynamicRestService extends BaseRetrofitSpiceService {
 
     @Override
     protected final String getServerUrl() {
-        return ServerConstants.BASE_URL4;
+        return ServerConstants.BASE_URL1;
     }
 
 }

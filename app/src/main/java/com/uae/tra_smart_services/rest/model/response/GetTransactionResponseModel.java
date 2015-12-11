@@ -8,7 +8,7 @@ import com.google.gson.annotations.Expose;
 import java.util.ArrayList;
 
 /**
- * Created by Vitaliy on 05/10/2015.
+ * Created by Mikazme on 05/10/2015.
  */
 public class GetTransactionResponseModel implements Parcelable {
     @Expose

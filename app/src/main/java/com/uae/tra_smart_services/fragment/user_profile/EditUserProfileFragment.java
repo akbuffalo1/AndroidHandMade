@@ -26,7 +26,7 @@ import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
 import com.squareup.picasso.Picasso;
 import com.uae.tra_smart_services.R;
-import com.uae.tra_smart_services.UserProfileQuestionAdapter;
+import com.uae.tra_smart_services.adapter.UserProfileQuestionAdapter;
 import com.uae.tra_smart_services.customviews.HexagonView;
 import com.uae.tra_smart_services.customviews.HexagonView.ScaleType;
 import com.uae.tra_smart_services.customviews.LoaderView;

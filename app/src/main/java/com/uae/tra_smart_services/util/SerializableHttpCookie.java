@@ -12,7 +12,7 @@ import java.lang.reflect.Field;
 import java.net.HttpCookie;
 
 /**
- * Created by Vitaliy on 30/09/2015.
+ * Created by Mikazme on 30/09/2015.
  */
 public class SerializableHttpCookie implements Serializable {
     private static final String TAG = SerializableHttpCookie.class

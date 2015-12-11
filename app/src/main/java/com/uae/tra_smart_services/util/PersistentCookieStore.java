@@ -17,7 +17,7 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * Created by Vitaliy on 30/09/2015.
+ * Created by Mikazme on 30/09/2015.
  */
 public class PersistentCookieStore implements CookieStore {
     private static final String TAG = PersistentCookieStore.class

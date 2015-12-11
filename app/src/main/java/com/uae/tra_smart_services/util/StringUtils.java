@@ -3,7 +3,7 @@ package com.uae.tra_smart_services.util;
 import android.support.annotation.Nullable;
 
 /**
- * Created by Vitaliy on 08/10/2015.
+ * Created by Mikazme on 08/10/2015.
  */
 public final class StringUtils {
 

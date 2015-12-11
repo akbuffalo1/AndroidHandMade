@@ -4,7 +4,7 @@ import com.uae.tra_smart_services.rest.TRAServicesAPI;
 import com.uae.tra_smart_services.rest.model.response.GetTransactionResponseModel;
 
 /**
- * Created by Vitaliy on 05/10/2015.
+ * Created by Mikazme on 05/10/2015.
  */
 public class GetTransactionsRequest extends BaseRequest<GetTransactionResponseModel.List, TRAServicesAPI> {
 

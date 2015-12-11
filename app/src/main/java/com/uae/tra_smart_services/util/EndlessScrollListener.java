@@ -8,7 +8,7 @@ import android.support.v7.widget.RecyclerView.OnScrollListener;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 
 /**
- * Created by Vitaliy on 05/10/2015.
+ * Created by Mikazme on 05/10/2015.
  */
 public final class EndlessScrollListener extends OnScrollListener {
 
