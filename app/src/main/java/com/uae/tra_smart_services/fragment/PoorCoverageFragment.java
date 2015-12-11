@@ -186,7 +186,6 @@ public class PoorCoverageFragment extends BaseServiceFragment implements //regio
     }
 
     private void removeListeners() {
-        mLocationPermissionManager.setRequestSuccessListener(null);
 //        etLocation.setOnFocusChangeListener(null);
         sbPoorCoverage.setOnSeekBarChangeListener(null);
     }
@@ -219,11 +218,13 @@ public class PoorCoverageFragment extends BaseServiceFragment implements //regio
     public void onActivityCreated(Bundle _savedInstanceState) {
         super.onActivityCreated(_savedInstanceState);
         hideKeyboard(tvSignalLevel);
-        checkLocationSettingsIfPermissionGranted();
-        mvMap.onCreate(_savedInstanceState);
         if (_savedInstanceState != null) {
             mLocationPermissionManager.onRestoreInstanceState(_savedInstanceState);
+            mLocationPermissionManager.removeSavedState(_savedInstanceState);
+        } else {
+            checkLocationSettingsIfPermissionGranted();
         }
+        mvMap.onCreate(_savedInstanceState);
     }
 
     @Override

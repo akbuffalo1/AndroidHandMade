@@ -122,6 +122,10 @@ public final class PermissionManager {
         mPermissionsToCheck = _savedInstanceState.getParcelableArrayList(KEY_PERMISSIONS);
     }
 
+    public final void removeSavedState(@NonNull final Bundle _savedInstanceState) {
+        _savedInstanceState.remove(KEY_PERMISSIONS);
+    }
+
     public final void onSaveInstanceState(@NonNull final Bundle _outState) {
         _outState.putParcelableArrayList(KEY_PERMISSIONS, mPermissionsToCheck);
     }

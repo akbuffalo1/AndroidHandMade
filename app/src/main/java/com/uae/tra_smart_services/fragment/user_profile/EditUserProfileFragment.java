@@ -50,6 +50,8 @@ import com.uae.tra_smart_services.rest.model.response.UserProfileResponseModel;
 import com.uae.tra_smart_services.rest.robo_requests.ChangeUserProfileRequest;
 import com.uae.tra_smart_services.util.StringUtils;
 
+import java.util.List;
+
 import retrofit.client.Response;
 
 import static com.uae.tra_smart_services.global.C.MAX_USERNAME_LENGTH;
@@ -370,7 +372,7 @@ public final class EditUserProfileFragment extends BaseFragment
             return false;
         }
 
-        if (isEnhancedSecurityStateChanged() && cbEnhancedSecurity.isChecked()) {
+        if (cbEnhancedSecurity.isChecked()) {
             if (etSecurityAnswer.getText().toString().isEmpty()) {
                 Toast.makeText(getActivity(), R.string.error_fill_all_fields, C.TOAST_LENGTH).show();
                 return false;
@@ -390,18 +392,12 @@ public final class EditUserProfileFragment extends BaseFragment
         profile.imageUri = mImageUri;
         profile.enhancedSecurity = cbEnhancedSecurity.isChecked();
         if (profile.enhancedSecurity) {
-            final String securityAnswerText = etSecurityAnswer.getText().toString();
-            if (securityAnswerText.isEmpty()) {
+            SecurityQuestionResponse securityQuestion = ((SecurityQuestionResponse) sSecurityQuestion.getSelectedItem());
+            profile.secretQuestionAnswer = etSecurityAnswer.getText().toString();
+            if (securityQuestion == null) {
                 profile.secretQuestionType = mUserProfile.secretQuestionType;
-                profile.secretQuestionAnswer = mUserProfile.secretQuestionAnswer;
             } else {
-                SecurityQuestionResponse securityQuestion = ((SecurityQuestionResponse) sSecurityQuestion.getSelectedItem());
-                if (securityQuestion != null) {
-                    profile.secretQuestionType = securityQuestion.id;
-                    profile.secretQuestionAnswer = securityAnswerText;
-                } else {
-                    profile.enhancedSecurity = false;
-                }
+                profile.secretQuestionType = securityQuestion.id;
             }
         }
         mChangeUserNameRequest = new ChangeUserProfileRequest(getActivity(), profile);
@@ -428,7 +424,30 @@ public final class EditUserProfileFragment extends BaseFragment
         etPhone.setText(_userProfile.mobile);
         cbEnhancedSecurity.setChecked(_userProfile.enhancedSecurity);
         initUserAvatar(_userProfile);
+        initSecretQuestionView(_userProfile);
+    }
+
+    private void initSecretQuestionView(UserProfileResponseModel _userProfile) {
         mQuestionAdapter.addData(_userProfile.secretQuestions);
+
+        Integer selectedQuestionPosition = findQuestionPositionById(_userProfile.secretQuestions, _userProfile.secretQuestionType);
+        if (selectedQuestionPosition != null) {
+            sSecurityQuestion.setSelection(selectedQuestionPosition);
+        }
+        etSecurityAnswer.setText(_userProfile.secretQuestionAnswer);
+    }
+
+    @Nullable
+    private Integer findQuestionPositionById(@Nullable List<SecurityQuestionResponse> _dataSource, @Nullable Integer _id) {
+        if (_dataSource != null && _id != null) {
+            for (int i = 0; i < _dataSource.size(); i++) {
+                final SecurityQuestionResponse question = _dataSource.get(i);
+                if (_id.equals(question.id)) {
+                    return i;
+                }
+            }
+        }
+        return null;
     }
 
     @Override
