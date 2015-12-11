@@ -30,7 +30,7 @@
             android:paddingBottom="24dp"
             android:layout_height="wrap_content">
 
-            <com.uae.tra_smart_services.customviews.HexagonView
+            <biz.enon.tra.uae.customviews.HexagonView
                 android:id="@+id/hvAboutService_FSI"
                 app:hexagonBackground="@drawable/hexagon_translucent_selector"
                 android:layout_width="wrap_content"
@@ -57,7 +57,7 @@
                 android:textColor="@android:color/white"
                 app:layout_widthPercent="50%"/>
 
-            <com.uae.tra_smart_services.customviews.HexagonView
+            <biz.enon.tra.uae.customviews.HexagonView
                 android:id="@+id/hvRequiredDocuments_FSI"
                 android:layout_width="wrap_content"
                 app:hexagonBackground="@drawable/hexagon_translucent_selector"
@@ -84,7 +84,7 @@
                 android:textColor="@android:color/white"
                 app:layout_widthPercent="50%"/>
 
-            <com.uae.tra_smart_services.customviews.HexagonView
+            <biz.enon.tra.uae.customviews.HexagonView
                 android:id="@+id/hvTermsAndConditions_FSI"
                 android:layout_width="wrap_content"
                 android:layout_marginTop="12dp"
@@ -112,7 +112,7 @@
                 android:textColor="@android:color/white"
                 app:layout_widthPercent="50%"/>
 
-            <com.uae.tra_smart_services.customviews.HexagonView
+            <biz.enon.tra.uae.customviews.HexagonView
                 android:id="@+id/hvServicePackage_FSI"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -141,7 +141,7 @@
                 android:textColor="@android:color/white"
                 app:layout_widthPercent="50%"/>
 
-            <com.uae.tra_smart_services.customviews.HexagonView
+            <biz.enon.tra.uae.customviews.HexagonView
                 android:id="@+id/hvProcessingTime_FSI"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -169,7 +169,7 @@
                 android:textColor="@android:color/white"
                 app:layout_widthPercent="50%"/>
 
-            <com.uae.tra_smart_services.customviews.HexagonView
+            <biz.enon.tra.uae.customviews.HexagonView
                 android:id="@+id/hvServiceFees_FSI"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -198,7 +198,7 @@
                 android:textColor="@android:color/white"
                 app:layout_widthPercent="50%"/>
 
-            <com.uae.tra_smart_services.customviews.HexagonView
+            <biz.enon.tra.uae.customviews.HexagonView
                 android:id="@+id/hvContactInCharge_FSI"
                 android:layout_width="wrap_content"
                 android:layout_marginTop="12dp"

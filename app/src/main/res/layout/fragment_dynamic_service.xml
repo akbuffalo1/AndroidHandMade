@@ -24,7 +24,7 @@
         app:layout_widthPercent="92%"
         tools:layout_marginTop="0dp">
 
-        <com.uae.tra_smart_services.customviews.PercentLinearLayout
+        <biz.enon.tra.uae.customviews.PercentLinearLayout
             android:id="@+id/llContainer_FDS"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

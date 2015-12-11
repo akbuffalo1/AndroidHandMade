@@ -69,7 +69,7 @@
                 android:visibility="invisible"
                 android:scrollbars="horizontal"/>
 
-            <com.uae.tra_smart_services.customviews.LoaderView
+            <biz.enon.tra.uae.customviews.LoaderView
                 android:id="@+id/lvLoadingAnnoncements_FIH"
                 android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true"
@@ -110,13 +110,13 @@
                 android:textSize="16sp"
                 android:textStyle="bold"/>
 
-            <com.uae.tra_smart_services.customviews.HexagonSwipeRefreshLayout
+            <biz.enon.tra.uae.customviews.HexagonSwipeRefreshLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/hsrlTransactionRefresher_FIH"
                 android:layout_below="@+id/tvTransText_FIH">
 
-                <com.uae.tra_smart_services.customviews.LoaderView
+                <biz.enon.tra.uae.customviews.LoaderView
                     android:id="@+id/lvLoadingTransactions_FIH"
                     android:layout_centerVertical="true"
                     android:layout_centerHorizontal="true"
@@ -152,7 +152,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:visibility="gone"/>
-            </com.uae.tra_smart_services.customviews.HexagonSwipeRefreshLayout>
+            </biz.enon.tra.uae.customviews.HexagonSwipeRefreshLayout>
 
         </RelativeLayout>
     </LinearLayout>

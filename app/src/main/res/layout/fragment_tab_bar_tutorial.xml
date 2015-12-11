@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"/>
 
-    <com.uae.tra_smart_services.customviews.tutorial.TabBarTipView
+    <biz.enon.tra.uae.customviews.tutorial.TabBarTipView
         android:layout_alignParentTop="true"
         android:layout_above="@id/vTabBarSeparator_AH"
         android:layout_width="match_parent"

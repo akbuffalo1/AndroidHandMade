@@ -4,7 +4,7 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
-    <com.uae.tra_smart_services.customviews.HexagonalHeader
+    <biz.enon.tra.uae.customviews.HexagonalHeader
         android:id="@+id/hhHeader_FHBT"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -17,7 +17,7 @@
         app:pressedColor="?attr/hexagonHeaderButtonPressedColor"
         android:visibility="invisible"/>
 
-    <com.uae.tra_smart_services.customviews.HexagonalButtonsLayout
+    <biz.enon.tra.uae.customviews.HexagonalButtonsLayout
         android:id="@+id/hblHexagonalButtons_FHBT"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -28,7 +28,7 @@
         app:separatorStrokeWidth="2dp"
         app:isTutorialMode="true"/>
 
-    <com.uae.tra_smart_services.customviews.tutorial.HotBarTipView
+    <biz.enon.tra.uae.customviews.tutorial.HotBarTipView
         android:id="@+id/hbtvHotBarTipView_FHBT"
         android:layout_below="@id/hblHexagonalButtons_FHBT"
         android:layout_width="match_parent"

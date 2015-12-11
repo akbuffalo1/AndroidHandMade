@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <com.uae.tra_smart_services.customviews.CheckableHexagonView
+        <biz.enon.tra.uae.customviews.CheckableHexagonView
             android:layout_width="wrap_content"
             android:id="@+id/hvDomainCheckRating_1_FDC"
             android:layout_height="wrap_content"
@@ -23,7 +23,7 @@
             android:tag="1"
             android:layout_marginEnd="20dp"/>
 
-        <com.uae.tra_smart_services.customviews.CheckableHexagonView
+        <biz.enon.tra.uae.customviews.CheckableHexagonView
             android:layout_width="wrap_content"
             android:id="@+id/hvDomainCheckRating_2_FDC"
             android:layout_height="wrap_content"
@@ -38,7 +38,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"/>
 
-        <com.uae.tra_smart_services.customviews.CheckableHexagonView
+        <biz.enon.tra.uae.customviews.CheckableHexagonView
             android:layout_width="wrap_content"
             android:id="@+id/hvDomainCheckRating_3_FDC"
             android:layout_height="wrap_content"

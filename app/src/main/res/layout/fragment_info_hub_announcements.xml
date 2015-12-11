@@ -14,13 +14,13 @@
         android:scaleType="centerCrop"
         tools:src="?attr/favoritesBackground"/>
 
-    <com.uae.tra_smart_services.customviews.HexagonSwipeRefreshLayout
+    <biz.enon.tra.uae.customviews.HexagonSwipeRefreshLayout
         android:layout_marginTop="?attr/actionBarSize"
         android:id="@+id/hsrlRefresher_FIHA"
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
 
-        <com.uae.tra_smart_services.customviews.LoaderView
+        <biz.enon.tra.uae.customviews.LoaderView
             android:id="@+id/lvLoader_FIHA"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
@@ -56,6 +56,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:visibility="gone"/>
-    </com.uae.tra_smart_services.customviews.HexagonSwipeRefreshLayout>
+    </biz.enon.tra.uae.customviews.HexagonSwipeRefreshLayout>
 
 </FrameLayout>

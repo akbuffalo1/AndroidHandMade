@@ -96,7 +96,7 @@
                     android:layout_centerHorizontal="true"
                     android:background="?attr/colorPrimary"/>
 
-                <com.uae.tra_smart_services.customviews.ThemedImageView
+                <biz.enon.tra.uae.customviews.ThemedImageView
                     android:id="@+id/tivPhoneIcon_FRSS"
                     android:layout_width="48dp"
                     android:layout_height="48dp"

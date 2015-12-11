@@ -13,7 +13,7 @@
     android:paddingTop="8dp"
     tools:background="#5aaa">
 
-    <com.uae.tra_smart_services.customviews.HexagonView
+    <biz.enon.tra.uae.customviews.HexagonView
         android:id="@+id/hvIcon_LIAF"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

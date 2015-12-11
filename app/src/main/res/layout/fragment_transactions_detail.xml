@@ -27,7 +27,7 @@
             android:layout_height="match_parent"
             android:paddingTop="?attr/actionBarSize">
 
-            <com.uae.tra_smart_services.customviews.HexagonView
+            <biz.enon.tra.uae.customviews.HexagonView
                 android:id="@+id/hvIcon_FTD"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

@@ -29,7 +29,7 @@
                 android:layout_width="240dp"
                 android:layout_height="100dp"/>
 
-            <com.uae.tra_smart_services.customviews.LoaderView
+            <biz.enon.tra.uae.customviews.LoaderView
                 android:id="@+id/lvLoaderView"
                 android:layout_marginTop="25dp"
                 android:layout_below="@+id/tvLoaderTitleText"
@@ -83,7 +83,7 @@
                     android:textColor="@color/hex_text_color_white"
                     android:textSize="16sp"/>
 
-                <com.uae.tra_smart_services.customviews.ServiceRatingView
+                <biz.enon.tra.uae.customviews.ServiceRatingView
                     android:id="@+id/srvRating_FL"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>

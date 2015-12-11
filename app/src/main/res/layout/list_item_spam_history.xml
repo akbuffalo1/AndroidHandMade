@@ -7,7 +7,7 @@
     android:paddingBottom="12dp"
     android:paddingTop="12dp">
 
-    <com.uae.tra_smart_services.customviews.HexagonView
+    <biz.enon.tra.uae.customviews.HexagonView
         android:id="@+id/hvIcon_LISH"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

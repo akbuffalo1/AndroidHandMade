@@ -24,7 +24,7 @@
         android:layout_width="16dp"
         android:layout_height="match_parent"/>
 
-    <com.uae.tra_smart_services.customviews.ThemedImageView
+    <biz.enon.tra.uae.customviews.ThemedImageView
         android:id="@+id/tivArrowIcon_SISSP"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -23,7 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <com.uae.tra_smart_services.customviews.HexagonView
+            <biz.enon.tra.uae.customviews.HexagonView
                 android:id="@+id/hvUserAvatar_FUP"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -57,7 +57,7 @@
                 android:orientation="horizontal"
                 app:layout_widthPercent="90%">
 
-                <com.uae.tra_smart_services.customviews.ThemedImageView
+                <biz.enon.tra.uae.customviews.ThemedImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -78,7 +78,7 @@
                     android:textColor="#475762"
                     android:textSize="14sp"/>
 
-                <com.uae.tra_smart_services.customviews.ThemedImageView
+                <biz.enon.tra.uae.customviews.ThemedImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -106,7 +106,7 @@
                 android:orientation="horizontal"
                 app:layout_widthPercent="90%">
 
-                <com.uae.tra_smart_services.customviews.ThemedImageView
+                <biz.enon.tra.uae.customviews.ThemedImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -127,7 +127,7 @@
                     android:textColor="#475762"
                     android:textSize="14sp"/>
 
-                <com.uae.tra_smart_services.customviews.ThemedImageView
+                <biz.enon.tra.uae.customviews.ThemedImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -202,7 +202,7 @@
                 android:orientation="horizontal"
                 app:layout_widthPercent="90%">
 
-                <com.uae.tra_smart_services.customviews.ThemedImageView
+                <biz.enon.tra.uae.customviews.ThemedImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"

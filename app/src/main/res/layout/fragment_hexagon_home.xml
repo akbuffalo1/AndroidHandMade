@@ -24,7 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.uae.tra_smart_services.customviews.HexagonalHeader
+        <biz.enon.tra.uae.customviews.HexagonalHeader
             android:id="@+id/hhHeader_FHH"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -46,7 +46,7 @@
             android:paddingStart="5dp"
             tools:listitem="@layout/recycler_service_item"/>
 
-        <com.uae.tra_smart_services.customviews.HexagonalButtonsLayout
+        <biz.enon.tra.uae.customviews.HexagonalButtonsLayout
             android:id="@+id/hblHexagonalButtons_FHH"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

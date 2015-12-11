@@ -43,7 +43,7 @@
                     android:singleLine="true"
                     android:ellipsize="end"/>
 
-                <com.uae.tra_smart_services.customviews.LanguageSwitcherView
+                <biz.enon.tra.uae.customviews.LanguageSwitcherView
                     android:id="@+id/cvLangSwitch"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -92,7 +92,7 @@
                     style="@style/UserSettingsStaticText"
                     android:text="@string/str_fontsize"/>
 
-                <com.uae.tra_smart_services.customviews.FontSizeSwitcherView
+                <biz.enon.tra.uae.customviews.FontSizeSwitcherView
                     android:id="@+id/cvFontSwitch"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -174,7 +174,7 @@
                         android:paddingStart="@dimen/dp_transparent_fields_padding"/>
                 </LinearLayout>
 
-                <com.uae.tra_smart_services.customviews.ThemeSwitcherView
+                <biz.enon.tra.uae.customviews.ThemeSwitcherView
                     android:id="@+id/cvThemeSwitch"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"

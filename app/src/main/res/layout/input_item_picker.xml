@@ -12,7 +12,7 @@
         tools:text="@string/fragment_edit_user_profile_first_name"
         style="@style/InputItemNameStyle"/>
 
-    <com.uae.tra_smart_services.customviews.ThemedImageView
+    <biz.enon.tra.uae.customviews.ThemedImageView
         android:id="@+id/tivArrowIcon_IIP"
         android:layout_below="@id/tvDisplayName_IIP"
         android:layout_width="wrap_content"

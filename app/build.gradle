@@ -23,7 +23,7 @@ android {
     buildToolsVersion '23.0.2'
 
     defaultConfig {
-        applicationId "com.uae.tra_smart_services"
+        applicationId "biz.enon.tra.uae"
         minSdkVersion 17
         targetSdkVersion 23
         versionCode 1

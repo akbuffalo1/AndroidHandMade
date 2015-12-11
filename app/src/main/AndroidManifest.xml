@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="com.uae.tra_smart_services"
+<manifest package="com.enon.tra.uae"
           xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!-- Normal permissions -->
@@ -17,7 +17,7 @@
         android:required="false"/>
 
     <application
-        android:name=".TRAApplication"
+        android:name="biz.enon.tra.uae.TRAApplication"
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -27,7 +27,7 @@
         android:theme="@style/AppThemeGreen">
         
         <activity
-            android:name=".activity.SplashActivity"
+            android:name="biz.enon.tra.uae.activity.SplashActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -36,28 +36,28 @@
         </activity>
 
         <activity
-            android:name=".activity.AuthorizationActivity"
-            android:parentActivityName=".activity.HomeActivity"
+            android:name="biz.enon.tra.uae.activity.AuthorizationActivity"
+            android:parentActivityName="biz.enon.tra.uae.activity.HomeActivity"
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name=".activity.HomeActivity"
+            android:name="biz.enon.tra.uae.activity.HomeActivity"
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name=".activity.ScannerActivity"
+            android:name="biz.enon.tra.uae.activity.ScannerActivity"
             android:screenOrientation="portrait"/>
 
         <service
-            android:name=".rest.TRARestService"
+            android:name="biz.enon.tra.uae.rest.TRARestService"
             android:exported="false"/>
 
         <service
-            android:name=".rest.DynamicRestService"
+            android:name="biz.enon.tra.uae.rest.DynamicRestService"
             android:exported="false"/>
 
         <service
-            android:name=".service.AttachmentUploadService"
+            android:name="biz.enon.tra.uae.service.AttachmentUploadService"
             android:exported="false"/>
 
         <meta-data
