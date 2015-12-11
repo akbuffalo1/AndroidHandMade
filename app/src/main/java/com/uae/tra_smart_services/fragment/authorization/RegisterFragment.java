@@ -41,6 +41,7 @@ import com.uae.tra_smart_services.util.StringUtils;
 import com.uae.tra_smart_services.util.TRAPatterns;
 
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 import retrofit.client.Response;
 
@@ -57,6 +58,7 @@ public class RegisterFragment extends BaseAuthorizationFragment implements OnCli
     private static final String KEY_SECURITY_QUESTIONS = "SECURITY_QUESTIONS";
     private static final String KEY_REGISTER_REQUEST = "REGISTER_REQUEST";
     private static final int MIN_PHONE_LENGTH = 4;
+    private static final int MAX_EMIRATES_ID_LENGTH = 4;
 
     private EditText etUserName, etPhone, etPassword, etConfirmPassword, etFirstName,
             etLastName, etEmiratesId, etEmail;
@@ -137,6 +139,7 @@ public class RegisterFragment extends BaseAuthorizationFragment implements OnCli
         cbEnhancedSecurity.setOnCheckedChangeListener(this);
         rlEnhancedSecurity.setOnClickListener(this);
         etEmiratesId.addTextChangedListener(this);
+        etEmiratesId.setOnFocusChangeListener(this);
     }
 
     @Override
