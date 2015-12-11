@@ -221,6 +221,9 @@ public class PoorCoverageFragment extends BaseServiceFragment implements //regio
         if (_savedInstanceState != null) {
             mLocationPermissionManager.onRestoreInstanceState(_savedInstanceState);
             mLocationPermissionManager.removeSavedState(_savedInstanceState);
+            if (mLocationPermissionManager.isAllPermissionsChecked()) {
+                checkLocationSettings();
+            }
         } else {
             checkLocationSettingsIfPermissionGranted();
         }
