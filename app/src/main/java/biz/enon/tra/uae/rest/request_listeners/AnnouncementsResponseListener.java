@@ -56,6 +56,7 @@ public final class AnnouncementsResponseListener implements RequestListener<GetA
 
     @Override
     public final void onRequestFailure(SpiceException spiceException) {
+        mOperationStateManager.endLoading();
         mIsAnnouncementsInLoading.falseV();
         mAnnouncementsPageNum--;
         handleNoResult();
@@ -68,6 +69,5 @@ public final class AnnouncementsResponseListener implements RequestListener<GetA
         } else {
             mAnnouncementsListAdapter.stopLoading();
         }
-        mOperationStateManager.endLoading();
     }
 }

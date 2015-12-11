@@ -417,9 +417,6 @@ public final class InfoHubFragment extends BaseFragment
             mTransactionPageNum--;
             handleNoResult();
             processError(spiceException);
-            if (isAdded()) {
-                mTransactionsOperationStateManager.endLoading();
-            }
         }
 
         private void handleNoResult() {
