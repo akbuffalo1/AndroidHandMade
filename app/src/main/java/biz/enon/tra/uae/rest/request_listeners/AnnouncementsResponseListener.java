@@ -44,8 +44,8 @@ public final class AnnouncementsResponseListener implements RequestListener<GetA
                     handleNoResult();
                 } else {
                     if(mModel != null) mModel.addAll(result.announcements);
-                    mOperationStateManager.showData();
                     mAnnouncementsListAdapter.addAll(result.announcements);
+                    mOperationStateManager.showData();
                 }
             } else {
                 mAnnouncementsPageNum--;
