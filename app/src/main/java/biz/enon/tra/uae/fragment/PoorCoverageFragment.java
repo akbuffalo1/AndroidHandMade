@@ -56,11 +56,15 @@ import com.octo.android.robospice.persistence.DurationInMillis;
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 
 import biz.enon.tra.uae.R;
 import biz.enon.tra.uae.customviews.LoaderView;
@@ -646,14 +650,15 @@ public class PoorCoverageFragment extends BaseServiceFragment implements //regio
 
         @Override
         public void onRequestSuccess(Address address) {
-            String userFriendlyAddress = new StringBuilder()
-                    .append(address.getLocality()).append(", ")
-                    .append(address.getThoroughfare()).append(", ")
-                    .append(address.getSubThoroughfare()).append(", ")
-                    .append(address.getAdminArea()).append(", ")
-                    .append(address.getCountryName()).append(", ")
-                    .append(address.getCountryCode())
-                    .toString();
+            Set<String> addressData = new LinkedHashSet<>();
+            addressData.add(address.getLocality());
+            addressData.add(address.getThoroughfare());
+            addressData.add(address.getSubThoroughfare());
+            addressData.add(address.getAdminArea());
+            addressData.add(address.getCountryName());
+            addressData.remove(null);
+
+            String userFriendlyAddress = StringUtils.join(addressData, ", ");
 //            etLocation.setOnClickListener(PoorCoverageFragment.this);
             etLocation.setText(userFriendlyAddress);
             sbProgressBar.setVisibility(View.INVISIBLE);
