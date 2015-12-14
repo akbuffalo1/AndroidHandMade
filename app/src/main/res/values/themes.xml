@@ -5,6 +5,7 @@
     <style name="BaseAppTheme" parent="@style/Theme.AppCompat.Light.NoActionBar">
         <item name="android:layoutDirection">locale</item>
         <item name="android:textDirection">locale</item>
+        <item name="colorControlNormal">@android:color/white</item>
         <!-- colorAccent is used as the default value for colorControlActivated,
              which is used to tint widgets -->
         <item name="android:textColorPrimary">@android:color/white</item>
