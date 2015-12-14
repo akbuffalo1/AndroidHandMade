@@ -140,7 +140,7 @@ public class ReportSmsSpamFragment extends BaseServiceFragment implements OnClic
     }
 
     private boolean validateData() {
-        if (etNumberOfSpammer.getText().toString().isEmpty()) {
+        if (etNumberOfSpammer.getText().toString().trim().isEmpty()) {
             Toast.makeText(getActivity(), R.string.str_invalid_number, C.TOAST_LENGTH).show();
             return false;
         }
