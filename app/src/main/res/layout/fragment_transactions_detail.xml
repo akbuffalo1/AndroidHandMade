@@ -51,34 +51,53 @@
                 android:maxEms="10"
                 android:singleLine="false"
                 android:textColor="?attr/globalButtonTextColor"
-                android:textSize="16sp"
+                android:textSize="20sp"
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp"
                 android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
                 android:gravity="start"
                 tools:text="Title"
                 android:layout_toEndOf="@+id/hvIcon_FTD"
                 android:layout_alignTop="@+id/hvIcon_FTD" />
 
             <TextView
-                tools:text="John Doe asdasd asdasda asdasda najsdnasjn jnj nkjnkjqdsn adads akjsdna asdjnaskjdas da sda sd as   asdasdasdasd asdasdasdasd najsdnasjn jnj nkjnkjqdsn adads akjsdna asdjnaskjdas da sda sd as   asdasdasdasd asdasdasdasd asdasda najsdnasjn jnj nkjnkjqdsn adads akjsdna asdjnaskjdas da sda sd as   asdasdasdasd asdasdasdasd asdasdas dasd as d"
-                android:layout_gravity="fill"
-                android:id="@+id/hvDescr_FTD"
+                tools:text="@string/status"
+                android:text="@string/status"
+                android:id="@+id/tvStatusTitle_FTD"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:ellipsize="marquee"
-                android:minLines="1"
-                android:maxLines="2"
-                android:maxEms="12"
-                android:singleLine = "false"
-                android:width="20dp"
                 android:textSize="16sp"
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp"
-                android:layout_alignParentEnd="true"
-                android:gravity="start"
                 android:layout_toEndOf="@+id/hvIcon_FTD"
                 android:layout_below="@+id/hvTitle_FTD" />
+
+            <TextView
+                tools:text="Approved"
+                android:id="@+id/tvStatusValue_FTD"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:paddingStart="5dp"
+                android:paddingEnd="10dp"
+                android:layout_alignBaseline="@+id/tvStatusTitle_FTD"
+                android:layout_alignBottom="@+id/tvStatusTitle_FTD"
+                android:layout_toEndOf="@+id/tvStatusTitle_FTD" />
+
+            <TextView
+                android:id="@+id/tvDate_FTD"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignWithParentIfMissing="true"
+                android:gravity="center"
+                android:layout_marginBottom="5dp"
+                android:paddingStart="10dp"
+                android:text="date"
+                android:textSize="14sp"
+                android:textColor="@color/hex_color_accent"
+                android:layout_alignBottom="@+id/hvIcon_FTD"
+                android:layout_alignStart="@+id/tvStatusTitle_FTD" />
 
             <View
                 android:layout_marginLeft="20dp"
@@ -97,8 +116,7 @@
                 android:layout_marginTop="25dp"
                 android:layout_marginBottom="25dp"
                 android:layout_below="@+id/vListViewItemSeparator"
-                android:layout_alignEnd="@+id/hvDescr_FTD"
-                android:id="@+id/tvComplainInformation_FTD" />
+                android:id="@+id/tvDescription_FTD" />
 
             <Button
                 android:id="@+id/btnEdit_FTD"
@@ -108,7 +126,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/fragment_transaction_details_edit_btn"
-                android:layout_below="@+id/tvComplainInformation_FTD"
+                android:layout_below="@+id/tvDescription_FTD"
                 android:layout_centerHorizontal="true" />
         </RelativeLayout>
     </ScrollView>
