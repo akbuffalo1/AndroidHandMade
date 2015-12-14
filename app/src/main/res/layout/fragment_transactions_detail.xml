@@ -68,7 +68,7 @@
                 android:textSize="16sp"
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp"
-                android:layout_marginBottom="15dp"
+                android:layout_marginBottom="10dp"
                 android:layout_above="@+id/tvDate_FTD"
                 android:layout_alignStart="@+id/hvTitle_FTD" />
 
