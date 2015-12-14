@@ -159,8 +159,8 @@ public abstract class BaseFragment extends Fragment implements Loader.Dismiss, L
     protected final boolean loaderDialogDismiss() {
         Log.d("DeviceBrand", "loaderDialogDismiss");
         ProgressDialog dialog = findFragmentByTag(ProgressDialog.TAG);
-        Log.d(AttachmentUploadService.TAG, "loaderDialogDismiss dialog = " + String.valueOf(dialog));
         if (dialog != null) {
+            Log.d(AttachmentUploadService.TAG, "loaderDialogDismiss dialog = " + String.valueOf(dialog));
             dialog.dismiss();
             return true;
         } else {
