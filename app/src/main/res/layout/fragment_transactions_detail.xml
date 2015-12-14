@@ -47,17 +47,15 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="marquee"
                 android:minLines="1"
-                android:maxLines="1"
+                android:maxLines="2"
                 android:maxEms="10"
-                android:singleLine="false"
                 android:textColor="?attr/globalButtonTextColor"
                 android:textSize="20sp"
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginBottom="15dp"
+                android:layout_marginTop="5dp"
                 android:gravity="start"
-                tools:text="Title"
+                tools:text="Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title"
                 android:layout_toEndOf="@+id/hvIcon_FTD"
                 android:layout_alignTop="@+id/hvIcon_FTD" />
 
@@ -70,8 +68,9 @@
                 android:textSize="16sp"
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp"
-                android:layout_toEndOf="@+id/hvIcon_FTD"
-                android:layout_below="@+id/hvTitle_FTD" />
+                android:layout_marginBottom="15dp"
+                android:layout_above="@+id/tvDate_FTD"
+                android:layout_alignStart="@+id/hvTitle_FTD" />
 
             <TextView
                 tools:text="Approved"
