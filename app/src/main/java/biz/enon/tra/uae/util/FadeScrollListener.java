@@ -18,7 +18,7 @@ public class FadeScrollListener extends OnScrollListener implements SaveStateObj
 
     private final String KEY_SCROLL_POSITION = getClass().getSimpleName() + "_SCROLL_POSITION";
 
-    public static final float ALPHA_COEFFICIENT = 1.5f;
+    public static final float ALPHA_COEFFICIENT = 3f;
 
     private final StaggeredGridLayoutManager mLayoutManager;
     private final int mSpanCount;

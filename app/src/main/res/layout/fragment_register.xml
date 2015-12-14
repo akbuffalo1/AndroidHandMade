@@ -1,176 +1,276 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scrollbars="none">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:scrollbars="none">
 
-    <LinearLayout
+    <RelativeLayout
+        android:id="@+id/llRegisterFields_FR"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingEnd="20dp"
-        android:paddingStart="20dp">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <LinearLayout
-            android:id="@+id/llRegisterFields_FR"
+        <EditText
+            android:id="@+id/etFirstName_FR"
+            style="@style/AuthorizationFields"
+            android:drawablePadding="@dimen/dp_transparent_fields_padding"
+            android:hint="@string/hint_first_name"
+            android:inputType="textCapSentences"/>
+
+        <TextView
+            android:layout_margin="5dp"
+            android:layout_alignTop="@id/etDomainAvail_FDCH"
+            style="@style/StarLabelStyle"/>
+
+        <View
+            android:id="@+id/separato1"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            style="@style/AuthorizationFieldsSeparator"
+            android:layout_below="@+id/etFirstName_FR"
+            android:layout_alignParentStart="true" />
+
+        <EditText
+            android:id="@+id/etLastName_FR"
+            style="@style/AuthorizationFields"
+            android:drawablePadding="@dimen/dp_transparent_fields_padding"
+            android:hint="@string/hint_last_name"
+            android:inputType="textPersonName"
+            android:layout_below="@+id/separato1"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:layout_margin="5dp"
+            android:layout_alignTop="@id/etLastName_FR"
+            style="@style/StarLabelStyle"/>
+
+        <View
+            android:id="@+id/separator2"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_below="@+id/etLastName_FR"
+            android:layout_alignParentStart="true"
+            style="@style/AuthorizationFieldsSeparator"/>
+
+        <EditText
+            android:id="@+id/etEmiratesID_FR"
+            android:layout_below="@+id/separator2"
+            android:layout_alignParentStart="true"
+            style="@style/AuthorizationFields"
+            android:drawablePadding="@dimen/dp_transparent_fields_padding"
+            android:hint="@string/hint_emirates_id"
+            android:inputType="number|text"/>
+
+        <TextView
+            android:layout_margin="5dp"
+            android:layout_alignTop="@id/etEmiratesID_FR"
+            style="@style/StarLabelStyle"/>
+
+        <View
+            android:id="@+id/separator3"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_below="@+id/etEmiratesID_FR"
+            android:layout_alignParentStart="true"
+            style="@style/AuthorizationFieldsSeparator"/>
+
+        <EditText
+            android:id="@+id/etUsername_FR"
+            android:layout_below="@+id/separator3"
+            android:layout_alignParentStart="true"
+            style="@style/AuthorizationFields"
+            android:drawablePadding="@dimen/dp_transparent_fields_padding"
+            android:hint="@string/hint_username"
+            android:inputType="textEmailAddress"/>
+
+        <TextView
+            android:layout_margin="5dp"
+            android:layout_alignTop="@id/etUsername_FR"
+            style="@style/StarLabelStyle"/>
+
+        <View
+            android:id="@+id/separator4"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_below="@+id/etUsername_FR"
+            android:layout_alignParentStart="true"
+            style="@style/AuthorizationFieldsSeparator"/>
+
+        <EditText
+            android:id="@+id/etPhone_FR"
+            android:layout_below="@+id/separator4"
+            android:layout_alignParentStart="true"
+            style="@style/AuthorizationFields"
+            android:drawablePadding="@dimen/dp_transparent_fields_padding"
+            android:hint="@string/str_phone"
+            android:inputType="number"/>
+
+        <TextView
+            android:layout_margin="5dp"
+            android:layout_alignTop="@id/etPhone_FR"
+            style="@style/StarLabelStyle"/>
+
+        <View
+            android:id="@+id/separator5"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_below="@+id/etPhone_FR"
+            android:layout_alignParentStart="true"
+            style="@style/AuthorizationFieldsSeparator"/>
+
+        <EditText
+            android:id="@+id/etEmail_FRP"
+            android:layout_below="@+id/separator5"
+            android:layout_alignParentStart="true"
+            style="@style/AuthorizationFields"
+            android:drawablePadding="@dimen/dp_transparent_fields_padding"
+            android:hint="@string/str_email"
+            android:inputType="textEmailAddress"/>
+
+        <TextView
+            android:layout_margin="5dp"
+            android:layout_alignTop="@id/etEmail_FRP"
+            style="@style/StarLabelStyle"/>
+
+        <View
+            android:id="@+id/separator6"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_below="@+id/etEmail_FRP"
+            android:layout_alignParentStart="true"
+            style="@style/AuthorizationFieldsSeparator"/>
+
+        <EditText
+            android:id="@+id/etPassword_FR"
+            style="@style/AuthorizationFields"
+            android:layout_below="@+id/separator6"
+            android:layout_alignParentStart="true"
+            android:drawablePadding="@dimen/dp_transparent_fields_padding"
+            android:hint="@string/str_password"
+            android:inputType="textPassword"/>
+
+        <TextView
+            android:layout_margin="5dp"
+            android:layout_alignTop="@id/etPassword_FR"
+            style="@style/StarLabelStyle"/>
+
+        <View
+            android:id="@+id/separator7"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_below="@+id/etPassword_FR"
+            android:layout_alignParentStart="true"
+            style="@style/AuthorizationFieldsSeparator"/>
+
+
+        <EditText
+            android:id="@+id/etConfirmPassword_FR"
+            android:layout_below="@+id/separator7"
+            android:layout_alignParentStart="true"
+            style="@style/AuthorizationFields"
+            android:drawablePadding="@dimen/dp_transparent_fields_padding"
+            android:hint="@string/hint_confirm_password"
+            android:inputType="textPassword"/>
+
+        <TextView
+            android:layout_margin="5dp"
+            android:layout_alignTop="@id/etConfirmPassword_FR"
+            style="@style/StarLabelStyle"/>
+
+        <View
+            android:id="@+id/separator8"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_below="@+id/etConfirmPassword_FR"
+            android:layout_alignParentStart="true"
+            style="@style/AuthorizationFieldsSeparator"/>
+
+        <RelativeLayout
+            android:id="@+id/rlEnhancedSecurity_FR"
+            android:layout_below="@+id/separator8"
+            android:layout_alignParentStart="true"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
 
-            <EditText
-                android:id="@+id/etFirstName_FR"
+            <CheckBox
+                android:id="@+id/cbEnhancedSecurity_FR"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:layout_alignBottom="@+id/tvEnhancedSecurity_FR"
+                android:layout_alignParentEnd="true"
+                android:layout_alignTop="@id/tvEnhancedSecurity_FR"
+                android:clickable="false"/>
+
+            <TextView
+                android:id="@id/tvEnhancedSecurity_FR"
                 style="@style/AuthorizationFields"
+                android:layout_toStartOf="@id/cbEnhancedSecurity_FR"
                 android:drawablePadding="@dimen/dp_transparent_fields_padding"
-                android:hint="@string/hint_first_name"
-                android:inputType="textCapSentences"/>
+                android:singleLine="true"
+                android:text="@string/fragment_register_enhanced_security"
+                android:textSize="18sp"/>
 
-            <View style="@style/AuthorizationFieldsSeparator"/>
+        </RelativeLayout>
 
-            <EditText
-                android:id="@+id/etLastName_FR"
-                style="@style/AuthorizationFields"
-                android:drawablePadding="@dimen/dp_transparent_fields_padding"
-                android:hint="@string/hint_last_name"
-                android:inputType="textPersonName"/>
+        <View
+            android:id="@+id/separator9"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_below="@+id/rlEnhancedSecurity_FR"
+            android:layout_alignParentStart="true"
+            style="@style/AuthorizationFieldsSeparator"/>
 
-            <View style="@style/AuthorizationFieldsSeparator"/>
+        <Spinner
+            android:id="@+id/sSecurityQuestion_FR"
+            android:layout_width="match_parent"
+            android:layout_below="@+id/separator9"
+            android:layout_alignParentStart="true"
+            android:layout_height="48dp"
+            android:background="@android:color/transparent"
+            android:paddingStart="@dimen/dp_transparent_fields_padding"
+            android:paddingEnd="5dp"
+            tools:enabled="false"
+            tools:ignore="RtlSymmetry"
+            tools:listitem="@layout/simple_arrow_spinner_item"/>
 
-            <EditText
-                android:id="@+id/etEmiratesID_FR"
-                style="@style/AuthorizationFields"
-                android:drawablePadding="@dimen/dp_transparent_fields_padding"
-                android:hint="@string/hint_emirates_id"
-                android:inputType="number|text"/>
+        <View
+            android:id="@+id/separator10"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_below="@+id/sSecurityQuestion_FR"
+            android:layout_alignParentStart="true"
+            style="@style/AuthorizationFieldsSeparator"/>
 
-            <View style="@style/AuthorizationFieldsSeparator"/>
+        <EditText
+            android:id="@+id/etSecurityAnswer_FR"
+            style="@style/AuthorizationFields"
+            android:layout_below="@+id/separator10"
+            android:layout_alignParentStart="true"
+            android:gravity="top|start"
+            android:hint="@string/fragment_security_login_answer_hint"
+            android:textColor="?themeEnableColor"
+            android:textColorHint="?themeEnableColor"/>
 
-            <EditText
-                android:id="@+id/etUsername_FR"
-                style="@style/AuthorizationFields"
-                android:drawablePadding="@dimen/dp_transparent_fields_padding"
-                android:hint="@string/hint_username"
-                android:inputType="textEmailAddress"/>
-
-            <View style="@style/AuthorizationFieldsSeparator"/>
-
-            <EditText
-                android:id="@+id/etPhone_FR"
-                style="@style/AuthorizationFields"
-                android:drawablePadding="@dimen/dp_transparent_fields_padding"
-                android:hint="@string/str_phone"
-                android:inputType="number"/>
-
-            <View style="@style/AuthorizationFieldsSeparator"/>
-
-            <EditText
-                android:id="@+id/etEmail_FRP"
-                style="@style/AuthorizationFields"
-                android:drawablePadding="@dimen/dp_transparent_fields_padding"
-                android:hint="@string/str_email"
-                android:inputType="textEmailAddress"/>
-
-            <View style="@style/AuthorizationFieldsSeparator"/>
-
-
-            <EditText
-                android:id="@+id/etPassword_FR"
-                style="@style/AuthorizationFields"
-                android:drawablePadding="@dimen/dp_transparent_fields_padding"
-                android:hint="@string/str_password"
-                android:inputType="textPassword"/>
-
-            <View style="@style/AuthorizationFieldsSeparator"/>
-
-            <EditText
-                android:id="@+id/etConfirmPassword_FR"
-                style="@style/AuthorizationFields"
-                android:drawablePadding="@dimen/dp_transparent_fields_padding"
-                android:hint="@string/hint_confirm_password"
-                android:inputType="textPassword"/>
-
-            <View style="@style/AuthorizationFieldsSeparator"/>
-
-            <RelativeLayout
-                android:id="@+id/rlEnhancedSecurity_FR"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <CheckBox
-                    android:id="@+id/cbEnhancedSecurity_FR"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/tvEnhancedSecurity_FR"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignTop="@id/tvEnhancedSecurity_FR"
-                    android:clickable="false"/>
-
-                <TextView
-                    android:id="@id/tvEnhancedSecurity_FR"
-                    style="@style/AuthorizationFields"
-                    android:layout_toStartOf="@id/cbEnhancedSecurity_FR"
-                    android:drawablePadding="@dimen/dp_transparent_fields_padding"
-                    android:singleLine="true"
-                    android:text="@string/fragment_register_enhanced_security"
-                    android:textSize="18sp"/>
-
-            </RelativeLayout>
-
-            <View style="@style/AuthorizationFieldsSeparator"/>
-
-            <Spinner
-                android:id="@+id/sSecurityQuestion_FR"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:background="@android:color/transparent"
-                android:paddingStart="@dimen/dp_transparent_fields_padding"
-                tools:enabled="false"
-                tools:ignore="RtlSymmetry"
-                tools:listitem="@layout/simple_arrow_spinner_item"/>
-
-            <View
-                style="@style/AuthorizationFieldsSeparator"/>
-
-            <EditText
-                android:id="@+id/etSecurityAnswer_FR"
-                style="@style/AuthorizationFields"
-                android:gravity="top|start"
-                android:hint="@string/fragment_security_login_answer_hint"
-                android:textColor="?themeEnableColor"
-                android:textColorHint="?themeEnableColor"/>
-
-            <View
-                style="@style/AuthorizationFieldsSeparator"/>
-
-        </LinearLayout>
-
-        <!--<LinearLayout-->
-        <!--android:id="@+id/llRegisterActions"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_centerVertical="true"-->
-        <!--android:paddingTop="@dimen/dp_register_actions_area_padding"-->
-        <!--android:paddingBottom="@dimen/dp_register_actions_area_padding"-->
-        <!--android:orientation="vertical">-->
+        <View
+            android:id="@+id/separator11"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_below="@+id/etSecurityAnswer_FR"
+            android:layout_alignParentStart="true"
+            style="@style/AuthorizationFieldsSeparator"/>
 
         <Button
             android:id="@+id/tvRegister_FLI"
+            android:layout_below="@+id/separator11"
+            android:layout_alignParentStart="true"
             style="@style/AuthorizationButtons"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/str_register"/>
 
-        <!--<TextView-->
-        <!--android:id="@+id/btnLogInNow_FLI"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:autoLink="all"-->
-        <!--android:gravity="center"-->
-        <!--android:padding="@dimen/dp_login_now_static_text_padding"-->
-        <!--android:text="@string/str_login"-->
-        <!--android:textColor="?attr/globalButtonTextColor"-->
-        <!--android:paddingBottom="@dimen/dp_register_actions_area_padding"-->
-        <!--android:textSize="@dimen/sp_authorization_button_text_size" />-->
-        <!--</LinearLayout>-->
-    </LinearLayout>
+
+    </RelativeLayout>
 </ScrollView>

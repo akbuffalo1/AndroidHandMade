@@ -2,17 +2,17 @@
 <resources>
 
     <color name="hex_primary_orange">#f2911a</color>
-    <color name="hex_translucent_orange">#ddf2911a</color>
+    <color name="hex_translucent_orange">#f2f2911a</color>
     <color name="hex_toolbar_orange">#ddf2911a</color>
     <color name="hex_dark_orange">#996300</color>
 
     <color name="hex_primary_green">#01864f</color>
-    <color name="hex_translucent_green">#dd01864f</color>
+    <color name="hex_translucent_green">#f201864f</color>
     <color name="hex_toolbar_green">#dd01864f</color>
     <color name="hex_dark_green">#01713c</color>
 
     <color name="hex_primary_blue">#01549f</color>
-    <color name="hex_translucent_blue">#dd01549f</color>
+    <color name="hex_translucent_blue">#f201549f</color>
     <color name="hex_toolbar_blue">#dd01549f</color>
     <color name="hex_dark_blue">#014284</color>
     <color name="sada">#ff4b4b4b</color>
@@ -21,7 +21,7 @@
     <color name="hex_dark_red">#ff8d0000</color>
 
     <color name="hex_black_color">#ff000000</color>
-    <color name="hex_translucent_black">#dd000000</color>
+    <color name="hex_translucent_black">#f2000000</color>
     <color name="hex_toolbar_black">#dd000000</color>
     <color name="hex_text_color_white">#ffffff</color>
     <color name="hex_color_accent">#ff8c8c8c</color>

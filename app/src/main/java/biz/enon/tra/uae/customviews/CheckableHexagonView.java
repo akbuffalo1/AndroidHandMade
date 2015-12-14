@@ -5,7 +5,7 @@ import android.util.AttributeSet;
 import android.widget.Checkable;
 
 /**
- * Created by and on 04.12.15.
+ * Created by ak-buffalo on 04.12.15.
  */
 public class CheckableHexagonView extends HexagonView implements Checkable {
     private boolean mChecked = false;

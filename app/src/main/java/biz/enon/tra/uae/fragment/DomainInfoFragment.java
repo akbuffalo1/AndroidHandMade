@@ -62,7 +62,7 @@ public class DomainInfoFragment extends BaseServiceFragment implements AlertDial
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_rate, menu);
+//        inflater.inflate(R.menu.menu_rate, menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
 
