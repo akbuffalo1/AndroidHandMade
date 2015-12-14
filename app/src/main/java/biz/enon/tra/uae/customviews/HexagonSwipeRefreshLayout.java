@@ -68,7 +68,7 @@ public class HexagonSwipeRefreshLayout extends RelativeLayout implements ViewTre
         }
         mDraggingState = ViewDragHelper.STATE_IDLE;
         mDragHelper.smoothSlideViewTo(listview, 0, 0);
-        if(!_isSucceed && listview.getAdapter().getItemCount() == 0) {
+        if(!_isSucceed && listview.getAdapter().getItemCount() <= 1) {
             listview.setVisibility(INVISIBLE);
             loaderView.setLayoutParams(setTop(false));
             noPendingTransactions.setVisibility(VISIBLE);

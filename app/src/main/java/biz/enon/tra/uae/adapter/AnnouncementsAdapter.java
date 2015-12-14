@@ -143,6 +143,10 @@ public class AnnouncementsAdapter extends Adapter<ViewHolder> implements Filtera
         mIsInSearchMode = true;
     }
 
+    public boolean isIsInSearchMode() {
+        return mIsInSearchMode;
+    }
+
     public final void loadMoreSearchResults() {
         if (mFilter == null) {
             mFilter = new AnnouncementsFilter();

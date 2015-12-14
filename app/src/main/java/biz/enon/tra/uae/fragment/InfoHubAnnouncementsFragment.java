@@ -127,12 +127,15 @@ public class InfoHubAnnouncementsFragment extends BaseFragment
 
     private void startFirstLoad() {
         mHexagonSwipeRefreshLayout.onLoadingStart();
-        loadAnnouncementsPage(mAnnouncementsPageNum = 1);
+        loadAnnouncementsPage(mAnnouncementsPageNum = 1, false);
     }
 
-    private void loadAnnouncementsPage(final int _page) {
+    private void loadAnnouncementsPage(final int _page, boolean _showLoader) {
         mIsAnnouncementsInLoading.trueV();
         GetAnnouncementsRequest announcementsRequest = new GetAnnouncementsRequest(QueryAdapter.pageToOffset(_page, DEFAULT_OFFSET_ANNOUNCEMENTS), Locale.getDefault().getLanguage().toUpperCase());
+        if(_showLoader){
+            showProgress();
+        }
         getSpiceManager().execute(announcementsRequest, mAnnouncementsResponseListener);
     }
 
@@ -141,7 +144,7 @@ public class InfoHubAnnouncementsFragment extends BaseFragment
         if (mIsSearching) {
             mListAdapter.loadMoreSearchResults();
         } else if (!mIsAllAnnouncementsDownloaded && !mIsAnnouncementsInLoading.getV()) {
-            loadAnnouncementsPage(++mAnnouncementsPageNum);
+            loadAnnouncementsPage(++mAnnouncementsPageNum, false);
         }
     }
 
@@ -212,14 +215,18 @@ public class InfoHubAnnouncementsFragment extends BaseFragment
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.tvNoResult_FIHA){
-            onRefresh(mSearchPhrase);
+            if (mListAdapter.isIsInSearchMode() && !mSearchPhrase.isEmpty()) {
+                onRefresh(mSearchPhrase);
+            } else {
+                loadAnnouncementsPage(mAnnouncementsPageNum = 1, true);
+            }
         }
     }
 
     @Override
     public void onRefresh() {
         mHexagonSwipeRefreshLayout.onLoadingStart();
-        loadAnnouncementsPage(mAnnouncementsPageNum = 1);
+        loadAnnouncementsPage(mAnnouncementsPageNum = 1, false);
     }
 
     @Override
