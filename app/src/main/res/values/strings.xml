@@ -102,9 +102,9 @@
     <string name="str_domain_info">Domain Info</string>
     <string name="str_request_failed">Request Failed</string>
     <string name="str_something_went_wrong">Something went wrong</string>
-    <string name="str_registering">Registration..</string>
-    <string name="str_checking">Checking..</string>
-    <string name="str_sending">Sending..</string>
+    <string name="str_registering">Registration...</string>
+    <string name="str_checking">Checking...</string>
+    <string name="str_sending">Sending...</string>
     <string name="str_restoring">Restoring...</string>
     <string name="str_loading">Loading...</string>
     <string name="str_authenticating">Authenticating...</string>
@@ -199,7 +199,7 @@
 
     <string name="hint_first_name">First Name</string>
     <string name="hint_last_name">Last Name</string>
-    <string name="hint_emirates_id">784-YYYY-NNNNNNN-C</string>
+    <string name="hint_emirates_id">Emirates ID</string>
     <string name="hint_username">Username</string>
     <string name="hint_confirm_password">Confirm Password</string>
     <string name="error_valid_email">Please enter valid email address</string>
@@ -264,11 +264,11 @@
 
     <string name="activity_home_not_logged_in">You are not logged in</string>
 
-    <string name="str_you_have_notification">You have %s Notifications</string>
+    <string name="str_you_have_notification">You have %s notifications</string>
     <string name="str_no_notifications">There are no notifications\nfor you as of the moment</string>
     <string name="str_no">no</string>
 
-    <string name="str_put_search_phrase">Type Your search phrase here</string>
+    <string name="str_put_search_phrase">Type your search phrase here</string>
     <string name="str_no_search_result">There are no search\nresult where found</string>
     <string name="str_are_you_looking_for">ARE YOU LOOKING FOR</string>
 
@@ -296,7 +296,7 @@
     <string name="fragment_report_spam_title">SPAM</string>
     <string name="fragment_report_spam_hint">Report SMS or Websites\nas Spam to TRA</string>
     <string name="fragment_report_spam_sms">REPORT\nSMS</string>
-    <string name="fragment_report_spam_web">HELP\nSALIM</string>
+    <string name="fragment_report_spam_web">BACK\nWEBSITE</string>
     <string name="fragment_report_spam_history">VIEW\nMY LIST</string>
     <string name="fragment_report_spam_cant_send_sms">"Can't send sms. Please, install sms messenger"</string>
 
@@ -305,7 +305,7 @@
     <string name="fragment_report_spam_sms_description_hint">Copy and Paste the SMS here…</string>
     <string name="fragment_report_spam_sms_submit">Report</string>
 
-    <string name="fragment_report_spam_web_title">Help Salim</string>
+    <string name="fragment_report_spam_web_title">Block Website</string>
     <string name="fragment_report_spam_web_link">Link</string>
     <string name="fragment_report_spam_web_description_hint">Description…</string>
 
@@ -326,7 +326,7 @@
     <string name="tutorial_tab_bar_title">MAIN MENU</string>
     <string name="tutorial_tab_bar_text">You can reach your favourite services, news and change settings from here</string>
 
-    <string name="fragment_approved_devices_no_results">There are no approved\ndevices were found</string>
+    <string name="fragment_approved_devices_no_results">No approved\ndevices were found</string>
 
     <string name="str_enter_imei">Enter the IMEI of the mobile phone to be verified</string>
     <string name="str_send_imei">SEND IMEI CODE</string>
@@ -421,7 +421,7 @@
     <string name="fragment_contact_us_phone_label">Phone:</string>
     <string name="fragment_contact_us_label">Mail:</string>
 
-    <string name="choose_rating_error_message">Please, choose appropriate rating.</string>
+    <string name="choose_rating_error_message">Please, choose a rating and fill feedback.</string>
 
     <string name="btn_close">CLOSE</string>
     <string name="btn_send">SEND</string>

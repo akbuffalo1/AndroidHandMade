@@ -122,7 +122,6 @@ public class RegisterFragment extends BaseAuthorizationFragment implements OnCli
         sSecurityQuestion = findView(R.id.sSecurityQuestion_FR);
         cbEnhancedSecurity = findView(R.id.cbEnhancedSecurity_FR);
         etSecurityAnswer = findView(R.id.etSecurityAnswer_FR);
-        etEmiratesId.setText(current = MASK);
     }
 
     @Override
@@ -133,6 +132,14 @@ public class RegisterFragment extends BaseAuthorizationFragment implements OnCli
         rlEnhancedSecurity.setOnClickListener(this);
         etEmiratesId.addTextChangedListener(this);
         etEmiratesId.setOnFocusChangeListener(this);
+    }
+
+    @Override
+    public void onFocusChange(View v, boolean hasFocus) {
+        super.onFocusChange(v, hasFocus);
+        if(v.getId() == R.id.etEmiratesID_FR && hasFocus){
+            etEmiratesId.setText(current = MASK);
+        }
     }
 
     @Override
