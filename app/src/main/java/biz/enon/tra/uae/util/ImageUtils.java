@@ -85,7 +85,7 @@ public final class ImageUtils {
             matrix.setSaturation(0);
             mColorFilter = new ColorMatrixColorFilter(matrix);
         }
-        if (isBlackAndWhiteMode(_context)) {
+        if (isBlackAndWhiteMode(_context) && _origDrawable != null) {
             _origDrawable.mutate().setColorFilter(mColorFilter);
         }
         return _origDrawable;

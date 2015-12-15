@@ -330,7 +330,7 @@ public class HomeActivity extends BaseFragmentActivity implements //region INTER
                 openFragmentIfAuthorized(ReportWebSpamFragment.newInstance(), Service.BLOCK_WEBSITE);
                 break;
             case POOR_COVERAGE_SERVICE:
-                replaceFragmentWithBackStack(PoorCoverageFragment.newInstance());
+                openFragmentIfAuthorized(PoorCoverageFragment.newInstance(), Service.POOR_COVERAGE);
                 break;
             case VERIFY_DEVICE:
                 replaceFragmentWithBackStack(MobileVerificationFragment.newInstance());

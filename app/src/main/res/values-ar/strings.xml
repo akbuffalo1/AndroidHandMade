@@ -1,5 +1,5 @@
 <resources  xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name">UAE TRA</string>
+    <string name="app_name">هيئة تنظيم الاتصالات</string>
 
     <string name="title_activity_authorization">تسجيل الدخول</string>
 
@@ -188,7 +188,7 @@
 
     <string name="hint_first_name">الاسم</string>
     <string name="hint_last_name">اللقب</string>
-    <string name="hint_emirates_id">784-YYYY-NNNNNNN-C</string>
+    <string name="hint_emirates_id">هوية الإمارات</string>
     <string name="hint_username">اسم المستخدم</string>
     <string name="hint_confirm_password">تأكيد كلمة المرور</string>
     <string name="error_valid_email">يرجى ادخال عنوان بريد إلكتروني صحيح</string>
@@ -401,9 +401,9 @@
     <string name="str_my_imei">رقم IMEI لجهازي</string>
     <string name="btn_close">أغلق</string>
     <string name="btn_send">أرسل</string>
-    <string name="fragment_security_login_answer_hint">Security Answer</string>
-    <string name="fragment_register_enhanced_security">Enhanced Security</string>
-    <string name="fragment_edit_user_profile_security_question_hint">SECURITY QUESTION</string>
-    <string name="fragment_edit_user_profile_security_answer_hint">SECURITY ANSWER</string>
-    <string name="status">Status:</string>
+    <string name="fragment_security_login_answer_hint">الجواب السري</string>
+    <string name="fragment_register_enhanced_security">الأمان المحسن</string>
+    <string name="fragment_edit_user_profile_security_question_hint">سؤال سري</string>
+    <string name="fragment_edit_user_profile_security_answer_hint">الجواب السري</string>
+    <string name="status">الحالة:</string>
 </resources>

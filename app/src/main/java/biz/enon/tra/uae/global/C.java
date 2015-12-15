@@ -179,6 +179,7 @@ public final class C {
     public static final String INQUIRY = "Inquiry";
     public static final String WEB_REPORT = "Web Report";
     public static final String SMS_SPAM = "SMS Spam";
+    public static final String POOR_COVERAGE = "Poor Coverage";
     //endregion
 
     //region Rate names

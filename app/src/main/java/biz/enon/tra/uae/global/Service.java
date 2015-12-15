@@ -285,6 +285,12 @@ public enum Service {
         public String getServiceInfoName() {
             return C.COVERAGE;
         }
+
+        @Nullable
+        @Override
+        public String getTransactionName() {
+            return C.POOR_COVERAGE;
+        }
     };
 
 //    , INTERNET_SPEEDTEST {

@@ -44,8 +44,8 @@ public final class AnnouncementsResponseListener implements RequestListener<GetA
                     handleNoResult();
                 } else {
                     if(mModel != null) mModel.addAll(result.announcements);
-                    mAnnouncementsListAdapter.addAll(result.announcements);
                     mOperationStateManager.showData();
+                    mAnnouncementsListAdapter.addAll(result.announcements);
                 }
             } else {
                 mAnnouncementsPageNum--;
@@ -56,7 +56,6 @@ public final class AnnouncementsResponseListener implements RequestListener<GetA
 
     @Override
     public final void onRequestFailure(SpiceException spiceException) {
-        mOperationStateManager.endLoading();
         mIsAnnouncementsInLoading.falseV();
         mAnnouncementsPageNum--;
         handleNoResult();
@@ -69,5 +68,6 @@ public final class AnnouncementsResponseListener implements RequestListener<GetA
         } else {
             mAnnouncementsListAdapter.stopLoading();
         }
+        mOperationStateManager.endLoading();
     }
 }
