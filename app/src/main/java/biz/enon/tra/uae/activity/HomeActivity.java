@@ -489,7 +489,6 @@ public class HomeActivity extends BaseFragmentActivity implements //region INTER
     public final void onFavoriteServicesSelected(final List<Service> _items) {
         getFragmentManager().popBackStackImmediate();
         final FavoritesFragment favoritesFragment = (FavoritesFragment) getFragmentManager().findFragmentById(getContainerId());
-        Log.d("Favorites", "Selected items count: " + _items.size());
         favoritesFragment.addServicesToFavorites(_items);
     }
 
@@ -551,7 +550,6 @@ public class HomeActivity extends BaseFragmentActivity implements //region INTER
     public void onHeaderStaticServiceSelected(HeaderStaticService _service) {
         switch (_service) {
             case INNOVATIONS:
-//                onServiceSelect(Service.SUGGESTION, null);
                 openFragmentIfAuthorized(InnovationsFragment.newInstance(), FragmentType.INNOVATIONS);
                 break;
             case NOTIFICATION:
