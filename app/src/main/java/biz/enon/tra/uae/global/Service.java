@@ -368,9 +368,14 @@ public enum Service {
 
     public static List<Service> getSecondaryServices() {
         List<Service> services = new ArrayList<>();
+        int i = 0;
         for (Service service : Service.values()) {
             if (service.isMainScreenService() && !service.isStaticMainScreenService()) {
+                if(i == 4){
+                    services.add(null); // TODO: LIFE HACK - REMOVE THIS CONDITION WITH BODY, used to skip one empty service in layoutmanager
+                }
                 services.add(service);
+                i++;
             }
         }
         return services;
