@@ -188,35 +188,33 @@ public abstract class BaseFragment extends Fragment implements Loader.Dismiss, L
     }
 
     protected final void loaderOverlayCustomShow(String _title, LoaderMarker _callBack, boolean _showRating) {
-        if(loader == null && (loader = (LoaderFragment) getFragmentManager().findFragmentByTag(LoaderFragment.TAG)) == null) {
-            getFragmentManager()
-                    .beginTransaction()
-                    .addToBackStack(null)
-                    .add(getGlobalContainerResource(), (Fragment) (loader = CustomLoaderFragment.newInstance(_title, _callBack, _showRating)), LoaderFragment.TAG)
-                    .commit();
-        }
+        getFragmentManager()
+                .beginTransaction()
+                .addToBackStack(null)
+                .add(getGlobalContainerResource(), (Fragment) (loader = CustomLoaderFragment.newInstance(_title, _callBack, _showRating)), LoaderFragment.TAG)
+                .commit();
     }
 
     public void loaderOverlaySuccess(String _msg) {
-        if(loader != null && ((LoaderFragment)loader).isAdded()){
+        if (loader != null) {
             loader.successLoading(_msg);
         }
     }
 
     public void loaderOverlayCancelled(String _msg) {
-        if(loader != null && ((LoaderFragment)loader).isAdded()){
+        if (loader != null) {
             loader.cancelLoading(_msg);
         }
     }
 
     public void loaderOverlayFailed(String _msg, boolean _hasToShowRating) {
-        if(loader != null && ((LoaderFragment)loader).isAdded()){
+        if (loader != null) {
             loader.failedLoading(_msg, _hasToShowRating);
         }
     }
 
     protected final void loaderOverlayDismissWithAction(Loader.Dismiss _afterDissmiss) {
-        if(loader != null && ((LoaderFragment)loader).isAdded()){
+        if (loader != null) {
             loader.dissmissLoadingWithAction(_afterDissmiss);
         }
     }
@@ -228,7 +226,10 @@ public abstract class BaseFragment extends Fragment implements Loader.Dismiss, L
     }
 
     protected final boolean loaderOverlayIsDone() {
-        return loader != null ? loader.isDone() : false;
+        if (loader != null) {
+            return loader.isDone();
+        }
+        return false;
     }
 
     @Override

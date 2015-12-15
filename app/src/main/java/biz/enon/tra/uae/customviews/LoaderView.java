@@ -12,7 +12,6 @@ import android.graphics.Path;
 import android.graphics.PathEffect;
 import android.graphics.PathMeasure;
 import android.graphics.drawable.Drawable;
-import android.os.Bundle;
 import android.support.annotation.ColorInt;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.util.AttributeSet;
@@ -27,7 +26,6 @@ import biz.enon.tra.uae.R;
  */
 public class LoaderView extends View implements Animator.AnimatorListener {
     private static final String LOG_TAG = "LoaderView";
-
     public enum State{
         INITIALL(0), PROCESSING(1), FILLING(2), SUCCESS(3), CANCELLED(4), FAILURE(5);
 
@@ -253,10 +251,6 @@ public class LoaderView extends View implements Animator.AnimatorListener {
         return mCurrentState;
     }
 
-    public State getAnimationState(){
-        return mAnimationState;
-    }
-
     public boolean isInLoading(){
         return mAnimationState == State.PROCESSING;
     }
@@ -272,11 +266,12 @@ public class LoaderView extends View implements Animator.AnimatorListener {
     }
 
     public void startProcessing(){
-        post(new Runnable() {
+        if(mAnimationState == State.PROCESSING)return;
+        setAlpha(1);
+        mAnimationState = State.PROCESSING;
+        post(new Runnable(){
             @Override
             public void run() {
-                setAlpha(1);
-                mAnimationState = State.PROCESSING;
                 animatorStart.start();
                 animatorEnd.start();
             }
@@ -285,67 +280,34 @@ public class LoaderView extends View implements Animator.AnimatorListener {
 
     public void stopProcessing(){
         setAlpha(0);
-        if(mAnimationState == State.PROCESSING){
-            post(new Runnable() {
-                @Override
-                public void run() {
-                    animatorStart.cancel();
-                    animatorEnd.cancel();
-                }
-            });
+        if(mAnimationState == State.PROCESSING/*animatorStart != null && animatorStart.isRunning() || animatorEnd != null && animatorEnd.isRunning()*/){
+            animatorStart.cancel();
+            animatorEnd.cancel();
         }
         mAnimationState = State.INITIALL;
     }
 
     public void startFilling(final State _currentState){
+        mAnimationState = State.FILLING;
+        mCurrentState = _currentState;
         if (animatorFilling != null) {
-            post(new Runnable() {
-                @Override
-                public void run() {
-                    mAnimationState = State.FILLING;
-                    mCurrentState = _currentState;
-                    animatorFilling.start();
-                }
-            });
+            animatorFilling.start();
         }
     }
 
     private void startDrawSuccessFigure() {
-        post(new Runnable() {
-            @Override
-            public void run() {
-                mAnimationState = State.SUCCESS;
-                animatorSuccessOrFailed.start();
-            }
-        });
+        mAnimationState = State.SUCCESS;
+        animatorSuccessOrFailed.start();
     }
 
     private void startDrawFailureFigure() {
-        post(new Runnable() {
-            @Override
-            public void run() {
-                mAnimationState = State.FAILURE;
-                animatorSuccessOrFailed.start();
-            }
-        });
+        mAnimationState = State.FAILURE;
+        animatorSuccessOrFailed.start();
     }
 
-    public void onViewStateRestored(Bundle savedInstanceState){
-        mAnimationState = (State) savedInstanceState.getSerializable(State.class.getSimpleName());
-        switch (mAnimationState){
-            case SUCCESS:
-                startDrawSuccessFigure();
-                break;
-            case FAILURE:
-                startDrawFailureFigure();
-                break;
-            default:
-                invalidate();
-        }
-    }
-
-    public void onSaveInstanceState(Bundle outState) {
-        outState.putSerializable(State.class.getSimpleName(), getAnimationState());
+    public void showState(State _state){
+        mAnimationState = _state;
+        invalidate();
     }
 
     private float phaseStart;

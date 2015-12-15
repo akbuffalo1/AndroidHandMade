@@ -116,23 +116,20 @@ public final class InfoHubFragment extends BaseFragment
 
         @Override
         public void endLoading() {
-            hideLoaderIfNeed();
+            loadedCount++;
+            if (loadedCount >= 2) {
+                loadedCount = 0;
+                loaderOverlayDismissWithAction(new Loader.Dismiss() {
+                    @Override
+                    public void onLoadingDismissed() {
+                        if (isAdded()) {
+                            getFragmentManager().popBackStack();
+                        }
+                    }
+                });
+            }
         }
     };
-
-    private void hideLoaderIfNeed(){
-        if (++loadedCount >= 2) {
-            loadedCount = 0;
-            loaderOverlayDismissWithAction(new Loader.Dismiss() {
-                @Override
-                public void onLoadingDismissed() {
-                    if (isAdded()) {
-                        getFragmentManager().popBackStack();
-                    }
-                }
-            });
-        }
-    }
 
     private final OperationStateManager mTransactionsOperationStateManager = new OperationStateManager() {
 
@@ -154,7 +151,18 @@ public final class InfoHubFragment extends BaseFragment
 
         @Override
         public void endLoading() {
-            hideLoaderIfNeed();
+            loadedCount++;
+            if (loadedCount >= 2) {
+                loadedCount = 0;
+                loaderOverlayDismissWithAction(new Loader.Dismiss() {
+                    @Override
+                    public void onLoadingDismissed() {
+                        if (isAdded()) {
+                            getFragmentManager().popBackStack();
+                        }
+                    }
+                });
+            }
         }
     };
 
@@ -397,16 +405,24 @@ public final class InfoHubFragment extends BaseFragment
                     if (mIsAllTransactionDownloaded) {
                         handleNoResult();
                     } else {
+                        mTransactionsOperationStateManager.showData();
                         if (mTransactionPageNum == 1) {
                             mTransactionsListAdapter.clearData();
                         }
                         mTransactionsListAdapter.addAll(result);
-                        mTransactionsOperationStateManager.showData();
                     }
                 } else {
                     mTransactionPageNum--;
                 }
                 mTransactionsOperationStateManager.endLoading();
+            }
+        }
+
+        private void handleNoResult() {
+            if (mTransactionsListAdapter.isEmpty()) {
+                mTransactionsOperationStateManager.showEmptyView();
+            } else {
+                mTransactionsListAdapter.stopLoading();
             }
         }
 
@@ -417,13 +433,8 @@ public final class InfoHubFragment extends BaseFragment
             mTransactionPageNum--;
             handleNoResult();
             processError(spiceException);
-        }
-
-        private void handleNoResult() {
-            if (mTransactionsListAdapter.isEmpty()) {
-                mTransactionsOperationStateManager.showEmptyView();
-            } else {
-                mTransactionsListAdapter.stopLoading();
+            if (isAdded()) {
+                mTransactionsOperationStateManager.endLoading();
             }
         }
     }
