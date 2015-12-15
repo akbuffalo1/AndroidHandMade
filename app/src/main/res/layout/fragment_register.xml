@@ -10,6 +10,8 @@
         android:id="@+id/llRegisterFields_FR"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingEnd="15dp"
+        android:paddingStart="15dp"
         android:orientation="vertical">
 
         <EditText

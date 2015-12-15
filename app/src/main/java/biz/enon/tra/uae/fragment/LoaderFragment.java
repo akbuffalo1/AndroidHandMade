@@ -214,14 +214,14 @@ public class LoaderFragment extends BaseFragment implements View.OnClickListener
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
-        outState.putSerializable(STATE, mAnimationState);
+        lvLoader.onSaveInstanceState(outState);
         super.onSaveInstanceState(outState);
     }
 
     @Override
     public void onViewStateRestored(Bundle savedInstanceState) {
         if(savedInstanceState != null){
-            lvLoader.showState((LoaderView.State) savedInstanceState.getSerializable(STATE));
+            lvLoader.onViewStateRestored(savedInstanceState);
         }
         super.onViewStateRestored(savedInstanceState);
     }
