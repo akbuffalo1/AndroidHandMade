@@ -430,5 +430,6 @@
     <string name="fragment_edit_user_profile_security_question_hint">SECURITY QUESTION</string>
     <string name="fragment_edit_user_profile_security_answer_hint">SECURITY ANSWER</string>
     <string name="status">Status:</string>
+    <string name="error_server_connection">Unable to connect to the server.</string>
 
 </resources>

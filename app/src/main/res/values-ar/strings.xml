@@ -406,4 +406,5 @@
     <string name="fragment_edit_user_profile_security_question_hint">سؤال سري</string>
     <string name="fragment_edit_user_profile_security_answer_hint">الجواب السري</string>
     <string name="status">الحالة:</string>
+    <string name="error_server_connection">غير قادر على الاتصال بالخادم.</string>
 </resources>

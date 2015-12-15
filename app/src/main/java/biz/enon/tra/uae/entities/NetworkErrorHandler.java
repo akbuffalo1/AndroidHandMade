@@ -49,7 +49,7 @@ public final class NetworkErrorHandler {
     public static String processRetrofitError(final Activity _activity, final RetrofitError _error) {
         switch (_error.getKind()) {
             case NETWORK:
-                return _activity.getString(R.string.error_no_network);
+                return _activity.getString(R.string.error_server_connection);
             case HTTP:
                 if (_error.getResponse().getStatus() == HttpURLConnection.HTTP_INTERNAL_ERROR) {
                     return _activity.getString(R.string.error_server);
