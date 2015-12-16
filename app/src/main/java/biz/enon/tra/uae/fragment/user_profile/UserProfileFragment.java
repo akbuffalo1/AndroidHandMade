@@ -119,7 +119,7 @@ public final class UserProfileFragment extends BaseFragment implements OnClickLi
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode == LOGOUT_REQUEST_CODE && resultCode == Activity.RESULT_OK){
-            logout(false);
+            logout();
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
@@ -135,17 +135,14 @@ public final class UserProfileFragment extends BaseFragment implements OnClickLi
                     mProfileClickListener.onUserProfileItemClick(this, mUserProfile, USER_PROFILE_CHANGE_PASSWORD);
                     break;
                 case R.id.llLogout_FUP:
-                    logout(true);
+                    logout();
                     break;
             }
         }
     }
-    private void logout(boolean _canDismiss) {
+    private void logout() {
         mLogoutRequest = new LogoutRequest(new LogoutRequestModel());
-        if(_canDismiss)
-            loaderOverlayShow(getString(R.string.str_logout), null, false);
-        else
-            loaderOverlayCustomShow(getString(R.string.str_logout), null, false);
+        loaderOverlayCustomShow(getString(R.string.str_logout), null, false);
         getSpiceManager().execute(mLogoutRequest, KEY_LOGOUT_REQUEST, DurationInMillis.ALWAYS_EXPIRED, mLogoutRequestListener);
     }
 
