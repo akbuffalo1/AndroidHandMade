@@ -23,10 +23,12 @@ import biz.enon.tra.uae.customviews.ThemedImageView;
 import biz.enon.tra.uae.fragment.base.BaseComplainFragment;
 import biz.enon.tra.uae.global.C;
 import biz.enon.tra.uae.global.Service;
+import biz.enon.tra.uae.global.ServiceProvider;
 import biz.enon.tra.uae.interfaces.Loader;
-import biz.enon.tra.uae.interfaces.LoaderMarker;
 import biz.enon.tra.uae.rest.model.request.ComplainServiceProviderModel;
+import biz.enon.tra.uae.rest.robo_requests.BaseRequest;
 import biz.enon.tra.uae.rest.robo_requests.ComplainAboutServiceRequest;
+import biz.enon.tra.uae.rest.robo_requests.PutTransactionsRequest;
 import retrofit.client.Response;
 
 /**
@@ -41,7 +43,8 @@ public final class ComplainAboutServiceFragment extends BaseComplainFragment
     private ThemedImageView tivAddAttachment;
     private EditText etComplainTitle, etReferenceNumber, etDescription;
 
-    private ComplainAboutServiceRequest mComplainAboutServiceRequest;
+    private BaseRequest mRequest;
+    private ServiceProviderAdapter spinnerAdapter;
 
     private RequestResponseListener mRequestResponseListener;
 
@@ -79,8 +82,8 @@ public final class ComplainAboutServiceFragment extends BaseComplainFragment
 
     private void initSpinner() {
         sProviderSpinner = findView(R.id.sProviderSpinner_FCAS);
-        ServiceProviderAdapter adapter = new ServiceProviderAdapter(getActivity());
-        sProviderSpinner.setAdapter(adapter);
+        spinnerAdapter = new ServiceProviderAdapter(getActivity());
+        sProviderSpinner.setAdapter(spinnerAdapter);
     }
 
     @Override
@@ -95,9 +98,26 @@ public final class ComplainAboutServiceFragment extends BaseComplainFragment
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        if(getArguments() != null && (mModel = getArguments().getParcelable(KEY_DATA)) != null){
-            etComplainTitle.setText(mModel.title);
-            etDescription.setText(mModel.description);
+        prepareFieldsIfNeed();
+    }
+
+    private void prepareFieldsIfNeed(){
+        if(getArguments() != null && (mTransactionModel = getArguments().getParcelable(KEY_DATA)) != null) {
+            mIsInEditMode = true;
+            if (mTransactionModel.hasAttachment) {
+                onAttachmentGet(null);
+            }
+            int i = 0;
+            for (ServiceProvider provider : spinnerAdapter.getProviderList()) {
+                if (provider.toString().equals(mTransactionModel.serviceProvider)) {
+                    sProviderSpinner.setSelection(i);
+                    return;
+                }
+                i++;
+            }
+            etComplainTitle.setText(mTransactionModel.title);
+            etReferenceNumber.setText(mTransactionModel.referenceNumber);
+            etDescription.setText(mTransactionModel.description);
         }
     }
 
@@ -109,14 +129,21 @@ public final class ComplainAboutServiceFragment extends BaseComplainFragment
 
     @Override
     protected void sendComplain() {
-        ComplainServiceProviderModel complainModel = new ComplainServiceProviderModel();
-        complainModel.title = etComplainTitle.getText().toString();
-        complainModel.serviceProvider = sProviderSpinner.getSelectedItem().toString();
-        complainModel.referenceNumber = etReferenceNumber.getText().toString();
-        complainModel.description = etDescription.getText().toString();
-        mComplainAboutServiceRequest = new ComplainAboutServiceRequest(complainModel, getActivity(), getImageUri());
-
-        loaderOverlayShow(getString(R.string.str_sending), (LoaderMarker) this);
+        if(mIsInEditMode && mTransactionModel != null){
+            mTransactionModel.title = etComplainTitle.getText().toString();
+            mTransactionModel.serviceProvider = sProviderSpinner.getSelectedItem().toString();
+            mTransactionModel.referenceNumber = etReferenceNumber.getText().toString();
+            mTransactionModel.description = etDescription.getText().toString();
+            mRequest = new PutTransactionsRequest(mTransactionModel, getActivity(), getImageUri());
+        } else {
+            ComplainServiceProviderModel complainModel = new ComplainServiceProviderModel();
+            complainModel.title = etComplainTitle.getText().toString();
+            complainModel.serviceProvider = sProviderSpinner.getSelectedItem().toString();
+            complainModel.referenceNumber = etReferenceNumber.getText().toString();
+            complainModel.description = etDescription.getText().toString();
+            mRequest = new ComplainAboutServiceRequest(complainModel, getActivity(), getImageUri());
+        }
+        loaderOverlayShow(getString(R.string.str_sending), this);
         loaderOverlayButtonBehavior(new Loader.BackButton() {
             @Override
             public void onBackButtonPressed(LoaderView.State _currentState) {
@@ -127,7 +154,7 @@ public final class ComplainAboutServiceFragment extends BaseComplainFragment
             }
         });
 
-        getSpiceManager().execute(mComplainAboutServiceRequest, KEY_COMPLAIN_REQUEST, DurationInMillis.ALWAYS_EXPIRED, mRequestResponseListener);
+        getSpiceManager().execute(mRequest, KEY_COMPLAIN_REQUEST, DurationInMillis.ALWAYS_EXPIRED, mRequestResponseListener);
     }
 
     @Override
@@ -141,16 +168,16 @@ public final class ComplainAboutServiceFragment extends BaseComplainFragment
             return false;
         }
 
-//        if (phone.length() < TRAPatterns.MIN_PHONE_NUMBER_LENGTH) {
-//            Toast.makeText(getActivity(), R.string.phone_number_is_too_short, C.TOAST_LENGTH).show();
-//            return false;
-//        }
-//
-//        boolean numberInvalid = !Patterns.PHONE.matcher(phone).matches();
-//        if (numberInvalid) {
-//            Toast.makeText(getActivity(), R.string.fragment_complain_no_reference_number, C.TOAST_LENGTH).show();
-//            return false;
-//        }
+        /*if (phone.length() < TRAPatterns.MIN_PHONE_NUMBER_LENGTH) {
+            Toast.makeText(getActivity(), R.string.phone_number_is_too_short, C.TOAST_LENGTH).show();
+            return false;
+        }
+
+        boolean numberInvalid = !Patterns.PHONE.matcher(phone).matches();
+        if (numberInvalid) {
+            Toast.makeText(getActivity(), R.string.fragment_complain_no_reference_number, C.TOAST_LENGTH).show();
+            return false;
+        }*/
         return true;
     }
 
@@ -171,13 +198,14 @@ public final class ComplainAboutServiceFragment extends BaseComplainFragment
 
     @Override
     protected void onAttachmentDeleted() {
+        mTransactionModel.hasAttachment = false;
         tivAddAttachment.setImageResource(R.drawable.ic_action_attachment);
     }
 
     @Override
     public void onLoadingCanceled() {
         if (getSpiceManager().isStarted()) {
-            getSpiceManager().cancel(mComplainAboutServiceRequest);
+            getSpiceManager().cancel(mRequest);
         }
     }
 
@@ -199,9 +227,6 @@ public final class ComplainAboutServiceFragment extends BaseComplainFragment
             if (isAdded()) {
                 loaderOverlaySuccess(getString(R.string.str_complain_has_been_sent));
                 getSpiceManager().removeDataFromCache(Response.class, KEY_COMPLAIN_REQUEST);
-//                if (result != null) {
-//                    getFragmentManager().popBackStackImmediate();
-//                }
             }
         }
 

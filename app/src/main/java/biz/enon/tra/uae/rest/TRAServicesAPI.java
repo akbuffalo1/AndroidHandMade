@@ -21,7 +21,7 @@ import biz.enon.tra.uae.rest.model.response.DomainAvailabilityCheckResponseModel
 import biz.enon.tra.uae.rest.model.response.DomainInfoCheckResponseModel;
 import biz.enon.tra.uae.rest.model.response.DynamicServiceInfoResponseModel;
 import biz.enon.tra.uae.rest.model.response.GetAnnouncementsResponseModel;
-import biz.enon.tra.uae.rest.model.response.GetTransactionResponseModel;
+import biz.enon.tra.uae.rest.model.response.TransactionModel;
 import biz.enon.tra.uae.rest.model.response.RatingServiceResponseModel;
 import biz.enon.tra.uae.rest.model.response.SearchDeviceResponseModel;
 import biz.enon.tra.uae.rest.model.response.SecurityQuestionResponse;
@@ -47,6 +47,7 @@ import static biz.enon.tra.uae.global.ServerConstants.CONTACT_US;
 import static biz.enon.tra.uae.global.ServerConstants.DYNAMIC_SERVICE_LIST;
 import static biz.enon.tra.uae.global.ServerConstants.GET_ANNOUNCEMENTS;
 import static biz.enon.tra.uae.global.ServerConstants.GET_TRANSACTIONS;
+import static biz.enon.tra.uae.global.ServerConstants.PUT_TRANSACTIONS;
 import static biz.enon.tra.uae.global.ServerConstants.HELP_SALIM_URL;
 import static biz.enon.tra.uae.global.ServerConstants.JSON_TYPE;
 import static biz.enon.tra.uae.global.ServerConstants.LOGIN_URL;
@@ -154,13 +155,16 @@ public interface TRAServicesAPI {
     Response postInnovation(@Body PostInnovationRequestModel _model);
 
     @GET(GET_TRANSACTIONS)
-    GetTransactionResponseModel.List getTransactions(@Query(PARAMETER_PAGE) final int _page,
+    TransactionModel.List getTransactions(@Query(PARAMETER_PAGE) final int _page,
                                                      @Query(PARAMETER_COUNT) final int _count);
 
     @GET(GET_TRANSACTIONS)
-    GetTransactionResponseModel.List searchTransactions(@Query(PARAMETER_PAGE) final int _page,
+    TransactionModel.List searchTransactions(@Query(PARAMETER_PAGE) final int _page,
                                                         @Query(PARAMETER_COUNT) final int _count,
                                                         @Query(PARAMETER_SEARCH) final String _query);
+
+    @POST(PUT_TRANSACTIONS + "/{path}")
+    Response putTransactions(@Path("path") String _path, @Body TransactionModel _transactionModel);
 
     @GET(GET_ANNOUNCEMENTS)
     GetAnnouncementsResponseModel getAnnouncements(

@@ -14,5 +14,4 @@ public class ComplainTRAServiceModel {
 
     @Expose
     public String attachment;
-
 }

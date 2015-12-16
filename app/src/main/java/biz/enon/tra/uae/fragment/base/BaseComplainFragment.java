@@ -103,7 +103,9 @@ public abstract class BaseComplainFragment extends BaseServiceFragment
                 mAttachmentManager.tryOpenCamera(this);
                 break;
             case DELETE_ATTACHMENT:
-                mAttachmentManager.clearAttachment();
+                if(!mIsInEditMode){
+                    mAttachmentManager.clearAttachment();
+                }
                 onAttachmentDeleted();
                 break;
         }

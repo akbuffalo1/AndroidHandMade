@@ -427,7 +427,6 @@ public class HexagonHomeFragment extends BaseFragment implements OnServiceSelect
             if (isAdded() && result != null) {
                 mAdapter.addDynamicServices(result);
             }
-
         }
 
         @Override

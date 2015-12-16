@@ -37,7 +37,7 @@ public enum Service {
         @Nullable
         @Override
         public String getTransactionName() {
-            return C.COMPLAINT_ABOUT_SERVICE_PROVIDER;
+            return C.T_COMPLAINT_ABOUT_SERVICE_PROVIDER;
         }
     },
     COMPLAINT_ABOUT_TRA {
@@ -61,7 +61,7 @@ public enum Service {
         @Nullable
         @Override
         public String getTransactionName() {
-            return C.COMPLAINT_ABOUT_TRA;
+            return C.T_COMPLAINT_ABOUT_TRA;
         }
     },
     SUGGESTION {
@@ -79,7 +79,13 @@ public enum Service {
 
         @Override
         public String getServiceInfoName() {
-            return C.SUGGESTION;
+            return C.T_SUGGESTION;
+        }
+
+        @Nullable
+        @Override
+        public String getTransactionName() {
+            return C.T_SUGGESTION;
         }
     },
     DOMAIN_CHECK {
@@ -168,7 +174,7 @@ public enum Service {
         @Nullable
         @Override
         public String getTransactionName() {
-            return C.INQUIRY;
+            return C.T_INQUIRY;
         }
     },
     MOBILE_BRAND {
@@ -210,7 +216,7 @@ public enum Service {
         @Nullable
         @Override
         public String getTransactionName() {
-            return C.WEB_REPORT;
+            return C.T_WEB_REPORT;
         }
     },
     MOBILE_VERIFICATION {
@@ -261,7 +267,7 @@ public enum Service {
         @Nullable
         @Override
         public String getTransactionName() {
-            return C.SMS_SPAM;
+            return C.T_SMS_SPAM;
         }
     },
     POOR_COVERAGE {
@@ -289,7 +295,7 @@ public enum Service {
         @Nullable
         @Override
         public String getTransactionName() {
-            return C.POOR_COVERAGE;
+            return C.T_POOR_COVERAGE;
         }
     };
 

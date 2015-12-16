@@ -12,22 +12,22 @@ import java.lang.reflect.Type;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
-import biz.enon.tra.uae.rest.model.response.GetTransactionResponseModel;
+import biz.enon.tra.uae.rest.model.response.TransactionModel;
 import biz.enon.tra.uae.util.Logger;
 import biz.enon.tra.uae.util.StringUtils;
 
 /**
  * Created by mobimaks on 07.12.2015.
  */
-public class TransactionDeserializer implements JsonDeserializer<GetTransactionResponseModel> {
+public class TransactionDeserializer implements JsonDeserializer<TransactionModel> {
 
     private static final SimpleDateFormat SOURCE_DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss a");
     private static final SimpleDateFormat RESULT_DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy");
 
     @Override
-    public GetTransactionResponseModel deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
+    public TransactionModel deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
             throws JsonParseException {
-        final GetTransactionResponseModel transaction = new Gson().fromJson(json, typeOfT);
+        final TransactionModel transaction = new Gson().fromJson(json, typeOfT);
         if (transaction != null) {
             transaction.title = Html.fromHtml(StringUtils.trim(transaction.title)).toString();
             transaction.description = Html.fromHtml(StringUtils.trim(transaction.description)).toString();

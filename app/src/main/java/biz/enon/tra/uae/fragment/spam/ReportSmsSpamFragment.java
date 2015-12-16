@@ -23,10 +23,13 @@ import biz.enon.tra.uae.customviews.LoaderView;
 import biz.enon.tra.uae.fragment.base.BaseServiceFragment;
 import biz.enon.tra.uae.global.C;
 import biz.enon.tra.uae.global.Service;
+import biz.enon.tra.uae.global.ServiceProvider;
 import biz.enon.tra.uae.interfaces.Loader;
 import biz.enon.tra.uae.interfaces.Loader.Cancelled;
 import biz.enon.tra.uae.rest.model.request.SmsReportRequestModel;
 import biz.enon.tra.uae.rest.model.response.SmsSpamResponseModel;
+import biz.enon.tra.uae.rest.robo_requests.BaseRequest;
+import biz.enon.tra.uae.rest.robo_requests.PutTransactionsRequest;
 import biz.enon.tra.uae.rest.robo_requests.SmsReportRequest;
 import biz.enon.tra.uae.util.SmsUtils;
 
@@ -36,14 +39,13 @@ import biz.enon.tra.uae.util.SmsUtils;
 public class ReportSmsSpamFragment extends BaseServiceFragment implements OnClickListener, Cancelled {
 
     private static final String KEY_REPORT_SMS_SPAM_REQUEST = "REPORT_SMS_SPAM_REQUEST";
-    private static final String REGEXP_TITLE_CUT = "SMS Spam from "+"(.*)";
 
     private Spinner sProviderSpinner;
     private EditText etNumberOfSpammer, etDescription;
-    private Button btnClose, btnSubmit;
+    private Button btnSubmit;
 
     private SpamServiceProviderAdapter mProviderAdapter;
-    private SmsReportRequest mSmsReportRequest;
+    private BaseRequest mRequest;
 
     public static ReportSmsSpamFragment newInstance() {
         return new ReportSmsSpamFragment();
@@ -58,38 +60,18 @@ public class ReportSmsSpamFragment extends BaseServiceFragment implements OnClic
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        if (getArguments() != null && (mModel = getArguments().getParcelable(KEY_DATA)) != null) {
-            etNumberOfSpammer.setText(getAllAfter(mModel.title, REGEXP_TITLE_CUT));
-            etDescription.setText(mModel.description);
-        }
-    }
-
-    @Override
     protected void initViews() {
         super.initViews();
         sProviderSpinner = findView(R.id.sProviderSpinner_FRSS);
         etNumberOfSpammer = findView(R.id.etNumberOfSpammer_FRSS);
         etDescription = findView(R.id.etDescription_FRSS);
         setCapitalizeTextWatcher(etDescription);
-//        btnClose = findView(R.id.btnClose_FRSS);
         btnSubmit = findView(R.id.btnSubmit_FRSS);
-    }
-
-    private static final String getAllAfter(String _original, String _pattrens){
-        Pattern p = Pattern.compile(_pattrens);
-        Matcher m = p.matcher(_original);
-        if ( m.find() ) {
-            return m.group(1);
-        }
-        return _original;
     }
 
     @Override
     protected void initListeners() {
         super.initListeners();
-//        btnClose.setOnClickListener(this);
         btnSubmit.setOnClickListener(this);
         etNumberOfSpammer.setOnFocusChangeListener(this);
         etDescription.setOnFocusChangeListener(this);
@@ -103,20 +85,48 @@ public class ReportSmsSpamFragment extends BaseServiceFragment implements OnClic
     }
 
     @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        prepareFieldsIfNeed();
+    }
+
+    private void prepareFieldsIfNeed(){
+        if(getArguments() != null && (mTransactionModel = getArguments().getParcelable(KEY_DATA)) != null) {
+            mIsInEditMode = true;
+            int i = 0;
+            for (ServiceProvider provider : mProviderAdapter.getProviderList()) {
+                if (provider.toString().equals(mTransactionModel.serviceProvider)) {
+                    sProviderSpinner.setSelection(i);
+                    return;
+                }
+                i++;
+            }
+            etNumberOfSpammer.setText(mTransactionModel.phone);
+            etDescription.setText(mTransactionModel.description);
+        }
+    }
+
+    @Override
     public final void onClick(final View _view) {
         hideKeyboard(_view);
-        switch (_view.getId()) {
-//            case R.id.btnClose_FRSS:
-//                getFragmentManager().popBackStack();
-//                break;
-            case R.id.btnSubmit_FRSS:
-                validateAndSendData();
-                break;
+        if (_view.getId() == R.id.btnSubmit_FRSS) {
+            validateAndSendData();
         }
     }
 
     private void validateAndSendData() {
         if (validateData()) {
+            if(mIsInEditMode && mTransactionModel != null) {
+                mTransactionModel.phone = etNumberOfSpammer.getText().toString();
+                mTransactionModel.description = etDescription.getText().toString();
+                mRequest = new PutTransactionsRequest(mTransactionModel, getActivity(), null);
+            } else {
+                mRequest = new SmsReportRequest(
+                        new SmsReportRequestModel(
+                                etNumberOfSpammer.getText().toString(),
+                                etDescription.getText().toString()
+                        ));
+            }
             loaderOverlayShow(getString(R.string.str_sending), this);
             loaderOverlayButtonBehavior(new Loader.BackButton() {
                 @Override
@@ -128,13 +138,8 @@ public class ReportSmsSpamFragment extends BaseServiceFragment implements OnClic
                     }
                 }
             });
-            mSmsReportRequest = new SmsReportRequest(
-                    new SmsReportRequestModel(
-                            etNumberOfSpammer.getText().toString(),
-                            etDescription.getText().toString()
-                    ));
             getSpiceManager().execute(
-                    mSmsReportRequest, KEY_REPORT_SMS_SPAM_REQUEST,
+                    mRequest, KEY_REPORT_SMS_SPAM_REQUEST,
                     DurationInMillis.ALWAYS_EXPIRED, new SmsSpamReportResponseListener());
         }
     }
@@ -160,8 +165,8 @@ public class ReportSmsSpamFragment extends BaseServiceFragment implements OnClic
 
     @Override
     public void onLoadingCanceled() {
-        if (getSpiceManager().isStarted() && mSmsReportRequest != null) {
-            getSpiceManager().cancel(mSmsReportRequest);
+        if (getSpiceManager().isStarted() && mRequest != null) {
+            getSpiceManager().cancel(mRequest);
         }
     }
 

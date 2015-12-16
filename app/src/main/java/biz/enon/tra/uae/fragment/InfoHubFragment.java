@@ -34,7 +34,7 @@ import biz.enon.tra.uae.interfaces.Loader;
 import biz.enon.tra.uae.interfaces.OnInfoHubItemClickListener;
 import biz.enon.tra.uae.interfaces.OperationStateManager;
 import biz.enon.tra.uae.rest.model.response.GetAnnouncementsResponseModel;
-import biz.enon.tra.uae.rest.model.response.GetTransactionResponseModel;
+import biz.enon.tra.uae.rest.model.response.TransactionModel;
 import biz.enon.tra.uae.rest.request_listeners.AnnouncementsResponseListener;
 import biz.enon.tra.uae.rest.robo_requests.GetAnnouncementsRequest;
 import biz.enon.tra.uae.rest.robo_requests.GetTransactionsRequest;
@@ -78,7 +78,7 @@ public final class InfoHubFragment extends BaseFragment
     private int loadedCount = 0;
     private String mSearchPhrase = "";
 
-    private ArrayList<GetTransactionResponseModel> mTransactionsModel = new ArrayList<>();
+    private ArrayList<TransactionModel> mTransactionsModel = new ArrayList<>();
     private ArrayList<GetAnnouncementsResponseModel.Announcement> mAnnouncementsModel = new ArrayList<>();
 
     public static InfoHubFragment newInstance() {
@@ -379,16 +379,16 @@ public final class InfoHubFragment extends BaseFragment
     }
 
     @Override
-    public void onTransactionPressed(int[] icon_color, GetTransactionResponseModel _model) {
+    public void onTransactionPressed(int[] icon_color, TransactionModel _model) {
         mIsSearching = false;
         if (mItemPressedListener != null) {
             mItemPressedListener.onTransactionPressed(icon_color, _model);
         }
     }
 
-    private final class TransactionsResponseListener implements RequestListener<GetTransactionResponseModel.List> {
+    private final class TransactionsResponseListener implements RequestListener<TransactionModel.List> {
         @Override
-        public final void onRequestSuccess(GetTransactionResponseModel.List result) {
+        public final void onRequestSuccess(TransactionModel.List result) {
             mIsTransactionsInLoading = false;
             if (isAdded()) {
                 if (result != null) {

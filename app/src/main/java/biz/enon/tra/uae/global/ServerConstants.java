@@ -78,6 +78,7 @@ public final class ServerConstants {
     public static final String USER_PROFILE = "/crm/profile";
     public static final String CHANGE_PASSWORD = "/crm/changePass";
     public static final String GET_TRANSACTIONS = "/crm/transactions";
+    public static final String PUT_TRANSACTIONS = "/crm/transactions";
     public static final String GET_ANNOUNCEMENTS = "/announcement";
     public static final String POST_INNOVATION = "/innovation";
     public static final String SERVICE_INFO = "/service/about";

@@ -28,7 +28,7 @@ import biz.enon.tra.uae.global.SpannableWrapper;
 import biz.enon.tra.uae.interfaces.OperationStateManager;
 import biz.enon.tra.uae.rest.RestClient;
 import biz.enon.tra.uae.rest.TRAServicesAPI;
-import biz.enon.tra.uae.rest.model.response.GetTransactionResponseModel;
+import biz.enon.tra.uae.rest.model.response.TransactionModel;
 import biz.enon.tra.uae.util.ImageUtils;
 import retrofit.RetrofitError;
 
@@ -39,7 +39,7 @@ public class TransactionsAdapter extends Adapter<ViewHolder> implements Filterab
 
     private final Activity mActivity;
     private final OperationStateManager mOperationStateManager;
-    private final GetTransactionResponseModel.List mDataSet, mShowingData;
+    private final TransactionModel.List mDataSet, mShowingData;
     private final boolean mIsBlackAndWhiteMode;
 
     private TransactionFilter mFilter;
@@ -53,8 +53,8 @@ public class TransactionsAdapter extends Adapter<ViewHolder> implements Filterab
         mActivity = _activity;
         mOperationStateManager = _operationStateManager;
         mIsShowingLoaderForData = true;
-        mDataSet = new GetTransactionResponseModel.List();
-        mShowingData = new GetTransactionResponseModel.List();
+        mDataSet = new TransactionModel.List();
+        mShowingData = new TransactionModel.List();
         mItemPressedListener = _itemPressedListener;
         mIsBlackAndWhiteMode = ImageUtils.isBlackAndWhiteMode(mActivity);
     }
@@ -89,7 +89,7 @@ public class TransactionsAdapter extends Adapter<ViewHolder> implements Filterab
         notifyDataSetChanged();
     }
 
-    public void addAll(final List<GetTransactionResponseModel> _transactionResponses) {
+    public void addAll(final List<TransactionModel> _transactionResponses) {
 //        mDataSet.clear();
         mDataSet.addAll(_transactionResponses);
         if (!mIsInSearchMode) {
@@ -100,7 +100,7 @@ public class TransactionsAdapter extends Adapter<ViewHolder> implements Filterab
         }
     }
 
-    public GetTransactionResponseModel.List getAllData() {
+    public TransactionModel.List getAllData() {
         return mDataSet;
     }
 
@@ -214,7 +214,7 @@ public class TransactionsAdapter extends Adapter<ViewHolder> implements Filterab
             mSearchQuery = String.valueOf(constraint);
             mIsCurrentlyLoading = true;
 
-            final List<GetTransactionResponseModel> filteredList;
+            final List<TransactionModel> filteredList;
             final FilterResults filterResults = new FilterResults();
             try {
                 filteredList = mTRAServicesAPI.searchTransactions(mSearchResultPageNum, DEFAULT_PAGE_SIZE, mSearchQuery);
@@ -266,7 +266,7 @@ public class TransactionsAdapter extends Adapter<ViewHolder> implements Filterab
         @UiThread
         private void showNewSearchResults(FilterResults results, CharSequence _constraint) {
             mOperationStateManager.showData();
-            mShowingData.addAll((GetTransactionResponseModel.List) results.values);
+            mShowingData.addAll((TransactionModel.List) results.values);
             notifyDataSetChanged();
             mConstraint = _constraint;
         }
@@ -297,7 +297,7 @@ public class TransactionsAdapter extends Adapter<ViewHolder> implements Filterab
                     ViewGroup.LayoutParams.WRAP_CONTENT));
         }
 
-        public void setData(int _position, final GetTransactionResponseModel _model) {
+        public void setData(int _position, final TransactionModel _model) {
             if (!isProgress) {
                 sStartOffset.setVisibility(_position % 2 == 0 ? View.GONE : View.VISIBLE);
                 //_position % 3 == 0 ? "Waiting for Details" : _position % 2 == 0 ? _model.statusCode : "On Hold"
@@ -317,13 +317,13 @@ public class TransactionsAdapter extends Adapter<ViewHolder> implements Filterab
 
                 if (mIsBlackAndWhiteMode) {
                     hexagonView.setSrcTintColorRes(R.color.hex_color_dark_gray);
-                } else if (C.WEB_REPORT.equals(_model.type)) {
+                } else if (C.T_WEB_REPORT.equals(_model.type)) {
                     hexagonView.setSrcTintColorRes(icon_color[C.TRANSACTION_STATUS_COLOR_INDEX]);
                 } else {
                     hexagonView.setSrcTintColor(Color.TRANSPARENT);
                 }
 
-                if (C.WEB_REPORT.equals(_model.type)) {
+                if (C.T_WEB_REPORT.equals(_model.type)) {
                     hexagonView.setHexagonSrcDrawable(Service.BLOCK_WEBSITE.getDrawableRes());
                 } else {
                     hexagonView.setHexagonSrcDrawable(icon_color[C.TRANSACTION_STATUS_ICON_INDEX]);
@@ -349,6 +349,6 @@ public class TransactionsAdapter extends Adapter<ViewHolder> implements Filterab
     }
 
     public interface OnTransactionPressedListener {
-        void onTransactionPressed(int[] icon_color, GetTransactionResponseModel _model);
+        void onTransactionPressed(int[] icon_color, TransactionModel _model);
     }
 }

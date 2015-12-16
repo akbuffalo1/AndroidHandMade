@@ -19,7 +19,7 @@ import biz.enon.tra.uae.global.Service;
 import biz.enon.tra.uae.interfaces.Loader.Cancelled;
 import biz.enon.tra.uae.interfaces.OpenServiceInfo;
 import biz.enon.tra.uae.rest.model.request.RatingServiceRequestModel;
-import biz.enon.tra.uae.rest.model.response.GetTransactionResponseModel;
+import biz.enon.tra.uae.rest.model.response.TransactionModel;
 import biz.enon.tra.uae.rest.model.response.RatingServiceResponseModel;
 import biz.enon.tra.uae.rest.robo_requests.RatingServiceRequest;
 
@@ -30,9 +30,10 @@ public abstract class BaseServiceFragment extends BaseFragment
         implements Cancelled, LoaderFragment.CallBacks, ServiceRatingDialog.CallBacks {
 
     protected static final String KEY_DATA = "data";
+    protected boolean mIsInEditMode = false;
 
     private OpenServiceInfo mOpenServiceInfoListener;
-    protected GetTransactionResponseModel mModel;
+    protected TransactionModel mTransactionModel;
 
     @CallSuper
     @Override

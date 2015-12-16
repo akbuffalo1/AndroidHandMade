@@ -14,7 +14,7 @@ import biz.enon.tra.uae.rest.gson_deserializer.InputItemDeserializer;
 import biz.enon.tra.uae.rest.gson_deserializer.InputItemsPageDeserializer;
 import biz.enon.tra.uae.rest.gson_deserializer.TransactionDeserializer;
 import biz.enon.tra.uae.rest.model.response.GetAnnouncementsResponseModel;
-import biz.enon.tra.uae.rest.model.response.GetTransactionResponseModel;
+import biz.enon.tra.uae.rest.model.response.TransactionModel;
 
 /**
  * Created by Mikazme on 13/08/2015.
@@ -33,7 +33,7 @@ public final class TRARestService extends BaseRetrofitSpiceService {
                 .registerTypeAdapter(BaseInputItem.class, new InputItemDeserializer())
                 .registerTypeAdapter(InputItemsPage.class, new InputItemsPageDeserializer())
                 .registerTypeAdapter(DynamicService.class, new DynamicServiceDeserializer())
-                .registerTypeAdapter(GetTransactionResponseModel.class, new TransactionDeserializer())
+                .registerTypeAdapter(TransactionModel.class, new TransactionDeserializer())
                 .registerTypeAdapter(GetAnnouncementsResponseModel.Announcement.class, new AnnouncementDeserializer())
                 ;
     }

@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import java.util.Arrays;
+import java.util.List;
 
 import biz.enon.tra.uae.R;
 import biz.enon.tra.uae.global.ServiceProvider;
@@ -15,8 +16,10 @@ import biz.enon.tra.uae.global.ServiceProvider;
  */
 public class ServiceProviderAdapter extends BaseSpinnerAdapter<ServiceProvider> {
 
+    private static List<ServiceProvider> mProviderList;
+
     public ServiceProviderAdapter(final Context _context) {
-        super(_context, Arrays.asList(ServiceProvider.values()));
+        super(_context, mProviderList = Arrays.asList(ServiceProvider.values()));
     }
 
     protected ViewHolder<ServiceProvider> getViewHolder(View _view) {
@@ -35,6 +38,10 @@ public class ServiceProviderAdapter extends BaseSpinnerAdapter<ServiceProvider> 
     @Override
     protected int getDropdownLayoutRes() {
         return R.layout.spinner_dropdown_item_service_provider;
+    }
+
+    public List<ServiceProvider> getProviderList(){
+        return mProviderList;
     }
 
     private class ServiceViewHolder extends ViewHolder<ServiceProvider> {

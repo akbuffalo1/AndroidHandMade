@@ -56,9 +56,9 @@ public class ReportWebSpamFragment extends BaseServiceFragment implements OnClic
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        if(getArguments() != null && (mModel = getArguments().getParcelable(KEY_DATA)) != null){
-            etUrl.setText(mModel.title);
-            etDescription.setText(mModel.description);
+        if(getArguments() != null && (mTransactionModel = getArguments().getParcelable(KEY_DATA)) != null){
+            etUrl.setText(mTransactionModel.title);
+            etDescription.setText(mTransactionModel.description);
         }
     }
 

@@ -77,7 +77,7 @@ public final class C {
             COVERAGE,
             COMPLAIN_ABOUT_TRA,
             COMPLAIN_ABOUT_SERVICE_PROVIDER,
-            SUGGESTION,
+            T_SUGGESTION,
             ENQUIRIES,
             SPAM_REPORT,
             MOBILE_BRAND,
@@ -174,12 +174,13 @@ public final class C {
     //endregion
 
     //region Transaction names const
-    public static final String COMPLAINT_ABOUT_SERVICE_PROVIDER = "Complaint about Service Provider";
-    public static final String COMPLAINT_ABOUT_TRA = "Complaint about TRA";
-    public static final String INQUIRY = "Inquiry";
-    public static final String WEB_REPORT = "Web Report";
-    public static final String SMS_SPAM = "SMS Spam";
-    public static final String POOR_COVERAGE = "Poor Coverage";
+    public static final String T_COMPLAINT_ABOUT_SERVICE_PROVIDER = "Complaint about Service Provider";
+    public static final String T_COMPLAINT_ABOUT_TRA = "Complaint about TRA";
+    public static final String T_INQUIRY = "Inquiry";
+    public static final String T_WEB_REPORT = "Web Report";
+    public static final String T_SMS_SPAM = "SMS Spam";
+    public static final String T_POOR_COVERAGE = "Poor Coverage";
+    public static final String T_SUGGESTION = "Suggestion";
     //endregion
 
     //region Rate names

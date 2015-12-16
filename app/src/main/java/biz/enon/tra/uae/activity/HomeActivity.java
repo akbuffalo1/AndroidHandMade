@@ -71,7 +71,7 @@ import biz.enon.tra.uae.interfaces.ToolbarTitleManager;
 import biz.enon.tra.uae.rest.model.response.DomainAvailabilityCheckResponseModel;
 import biz.enon.tra.uae.rest.model.response.DomainInfoCheckResponseModel;
 import biz.enon.tra.uae.rest.model.response.DynamicServiceInfoResponseModel;
-import biz.enon.tra.uae.rest.model.response.GetTransactionResponseModel;
+import biz.enon.tra.uae.rest.model.response.TransactionModel;
 import biz.enon.tra.uae.rest.model.response.SearchDeviceResponseModel;
 import biz.enon.tra.uae.rest.model.response.UserProfileResponseModel;
 import biz.enon.tra.uae.util.PersistentCookieStore;
@@ -201,7 +201,7 @@ public class HomeActivity extends BaseFragmentActivity implements //region INTER
                 openFragmentIfAuthorized(_data != null ? ComplainAboutTraFragment.newInstance(_data) : ComplainAboutTraFragment.newInstance(), _service, _useBackStack);
                 break;
             case SUGGESTION:
-                openFragmentIfAuthorized(SuggestionFragment.newInstance(), _service, _useBackStack);
+                openFragmentIfAuthorized(_data != null ? SuggestionFragment.newInstance(_data) : SuggestionFragment.newInstance(), _service, _useBackStack);
                 break;
             case BLOCK_WEBSITE:
                 openFragmentIfAuthorized(_data != null ? ReportWebSpamFragment.newInstance(_data) : ReportWebSpamFragment.newInstance(), _service, _useBackStack);
@@ -218,7 +218,7 @@ public class HomeActivity extends BaseFragmentActivity implements //region INTER
             case POOR_COVERAGE:
                 replaceFragment(PoorCoverageFragment.newInstance(), _useBackStack);
                 break;
-//            case SMS_SPAM:
+//            case T_SMS_SPAM:
 //                replaceFragment(_data != null ? ReportSmsSpamFragment.newInstance(_data) : ReportSmsSpamFragment.newInstance(), _useBackStack);
 //                break;
 //
@@ -603,7 +603,7 @@ public class HomeActivity extends BaseFragmentActivity implements //region INTER
     }
 
     @Override
-    public void onTransactionPressed(int[] _icon_color, GetTransactionResponseModel _model) {
+    public void onTransactionPressed(int[] _icon_color, TransactionModel _model) {
         replaceFragmentWithBackStack(TransactionDetailsFragment.newInstance(_icon_color, _model));
     }
 }

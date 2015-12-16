@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import biz.enon.tra.uae.R;
 import biz.enon.tra.uae.customviews.HexagonView;
@@ -15,7 +14,7 @@ import biz.enon.tra.uae.fragment.HexagonHomeFragment.OnServiceSelectListener;
 import biz.enon.tra.uae.fragment.base.BaseFragment;
 import biz.enon.tra.uae.global.C;
 import biz.enon.tra.uae.global.Service;
-import biz.enon.tra.uae.rest.model.response.GetTransactionResponseModel;
+import biz.enon.tra.uae.rest.model.response.TransactionModel;
 import biz.enon.tra.uae.util.ImageUtils;
 
 import static biz.enon.tra.uae.global.C.TRANSACTION_STATUS_COLOR_INDEX;
@@ -30,7 +29,7 @@ public class TransactionDetailsFragment extends BaseFragment implements OnClickL
     private static final String KEY_TRANSACTION = "TRANSACTION";
     private static final String KEY_ICON_RES_AND_COLOR = "ICON_COLOR";
 
-    public static TransactionDetailsFragment newInstance(int[] _icon_color, GetTransactionResponseModel _model) {
+    public static TransactionDetailsFragment newInstance(int[] _icon_color, TransactionModel _model) {
         final TransactionDetailsFragment fragment = new TransactionDetailsFragment();
         final Bundle args = new Bundle();
         args.putParcelable(KEY_TRANSACTION, _model);
@@ -45,7 +44,7 @@ public class TransactionDetailsFragment extends BaseFragment implements OnClickL
 
     private OnServiceSelectListener mOnServiceSelectListener;
 
-    private GetTransactionResponseModel mTransaction;
+    private TransactionModel mTransaction;
     private Service service;
     private int[] mIconColor;
 
@@ -81,13 +80,13 @@ public class TransactionDetailsFragment extends BaseFragment implements OnClickL
 
         if (isBlackAndWhiteMode) {
             hexagonView.setSrcTintColorRes(R.color.hex_color_dark_gray);
-        } else if (C.WEB_REPORT.equals(mTransaction.type)) {
+        } else if (C.T_WEB_REPORT.equals(mTransaction.type)) {
             hexagonView.setSrcTintColorRes(mIconColor[TRANSACTION_STATUS_COLOR_INDEX]);
         } else {
             hexagonView.setSrcTintColor(Color.TRANSPARENT);
         }
 
-        if (C.WEB_REPORT.equals(mTransaction.type)) {
+        if (C.T_WEB_REPORT.equals(mTransaction.type)) {
             hexagonView.setHexagonSrcDrawable(Service.BLOCK_WEBSITE.getDrawableRes());
         } else {
             hexagonView.setHexagonSrcDrawable(mIconColor[TRANSACTION_STATUS_ICON_INDEX]);
@@ -110,7 +109,7 @@ public class TransactionDetailsFragment extends BaseFragment implements OnClickL
         tvStatus.setTextColor(getResources().getColor(mIconColor[1]));
 
         btnEdit = findView(R.id.btnEdit_FTD);
-        btnEdit.setVisibility(/*WAITING_FOR_DETAILS.equals(mTransaction.statusCode) ? View.VISIBLE :*/ View.GONE);
+        btnEdit.setVisibility(/*C.WAITING_FOR_DETAILS.equals(mTransaction.statusCode) ? */View.VISIBLE/* : View.GONE*/);
     }
 
     @Override

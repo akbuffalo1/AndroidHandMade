@@ -24,9 +24,10 @@ import biz.enon.tra.uae.fragment.base.BaseComplainFragment;
 import biz.enon.tra.uae.global.C;
 import biz.enon.tra.uae.global.Service;
 import biz.enon.tra.uae.interfaces.Loader;
-import biz.enon.tra.uae.interfaces.LoaderMarker;
 import biz.enon.tra.uae.rest.model.request.ComplainTRAServiceModel;
+import biz.enon.tra.uae.rest.robo_requests.BaseRequest;
 import biz.enon.tra.uae.rest.robo_requests.ComplainAboutTRAServiceRequest;
+import biz.enon.tra.uae.rest.robo_requests.PutTransactionsRequest;
 import retrofit.client.Response;
 
 /**
@@ -40,7 +41,7 @@ public class ComplainAboutTraFragment extends BaseComplainFragment
     private ThemedImageView tivAddAttachment;
     protected EditText etComplainTitle, etDescription;
 
-    private ComplainAboutTRAServiceRequest request;
+    private BaseRequest mRequest;
     private RequestResponseListener mRequestListener;
 
     public static ComplainAboutTraFragment newInstance() {
@@ -66,9 +67,17 @@ public class ComplainAboutTraFragment extends BaseComplainFragment
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        if(getArguments() != null && (mModel = getArguments().getParcelable(KEY_DATA)) != null){
-            etComplainTitle.setText(mModel.title);
-            etDescription.setText(mModel.description);
+        prepareFieldsIfNeed();
+    }
+
+    private void prepareFieldsIfNeed(){
+        if(getArguments() != null && (mTransactionModel = getArguments().getParcelable(KEY_DATA)) != null) {
+            mIsInEditMode = true;
+            if (mTransactionModel.hasAttachment) {
+                onAttachmentGet(null);
+            }
+            etComplainTitle.setText(mTransactionModel.title);
+            etDescription.setText(mTransactionModel.description);
         }
     }
 
@@ -119,6 +128,7 @@ public class ComplainAboutTraFragment extends BaseComplainFragment
 
     @Override
     protected void onAttachmentDeleted() {
+        mTransactionModel.hasAttachment = false;
         tivAddAttachment.setImageResource(R.drawable.ic_action_attachment);
     }
 
@@ -136,11 +146,17 @@ public class ComplainAboutTraFragment extends BaseComplainFragment
 
     @Override
     protected void sendComplain() {
-        ComplainTRAServiceModel traServiceModel = new ComplainTRAServiceModel();
-        traServiceModel.title = getTitleText();
-        traServiceModel.description = getDescriptionText();
-        request = new ComplainAboutTRAServiceRequest(traServiceModel, getActivity(), getImageUri());
-        loaderOverlayShow(getString(R.string.str_sending), (LoaderMarker) this);
+        if(mIsInEditMode && mTransactionModel != null) {
+            mTransactionModel.title = etComplainTitle.getText().toString();
+            mTransactionModel.description = etDescription.getText().toString();
+            mRequest = new PutTransactionsRequest(mTransactionModel, getActivity(), getImageUri());
+        } else {
+            ComplainTRAServiceModel traServiceModel = new ComplainTRAServiceModel();
+            traServiceModel.title = getTitleText();
+            traServiceModel.description = getDescriptionText();
+            mRequest = new ComplainAboutTRAServiceRequest(traServiceModel, getActivity(), getImageUri());
+        }
+        loaderOverlayShow(getString(R.string.str_sending), this);
         loaderOverlayButtonBehavior(new Loader.BackButton() {
             @Override
             public void onBackButtonPressed(LoaderView.State _currentState) {
@@ -150,14 +166,14 @@ public class ComplainAboutTraFragment extends BaseComplainFragment
                 }
             }
         });
-        getSpiceManager().execute(request, getRequestKey(), DurationInMillis.ALWAYS_EXPIRED, mRequestListener);
+        getSpiceManager().execute(mRequest, getRequestKey(), DurationInMillis.ALWAYS_EXPIRED, mRequestListener);
     }
 
     @Override
     public void onLoadingCanceled() {
         if (getSpiceManager().isStarted()) {
             getSpiceManager().removeDataFromCache(Response.class, getRequestKey());
-            getSpiceManager().cancel(request);
+            getSpiceManager().cancel(mRequest);
         }
     }
 

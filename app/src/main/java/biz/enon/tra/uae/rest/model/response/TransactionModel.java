@@ -10,7 +10,10 @@ import java.util.ArrayList;
 /**
  * Created by Mikazme on 05/10/2015.
  */
-public class GetTransactionResponseModel implements Parcelable {
+public class TransactionModel implements Parcelable {
+    @Expose
+    public String _id;
+
     @Expose
     public String title;
 
@@ -38,7 +41,22 @@ public class GetTransactionResponseModel implements Parcelable {
     @Expose
     public String description;
 
-    public static class List extends ArrayList<GetTransactionResponseModel> {
+    @Expose
+    public String phone;
+
+    @Expose
+    public String referenceNumber = null;
+
+    @Expose
+    public String serviceProvider = null;
+
+    @Expose
+    public boolean hasAttachment;
+
+    @Expose
+    public String attachment = null;
+
+    public static class List extends ArrayList<TransactionModel> {
     }
 
     @Override
@@ -59,10 +77,10 @@ public class GetTransactionResponseModel implements Parcelable {
         dest.writeString(this.description);
     }
 
-    public GetTransactionResponseModel() {
+    public TransactionModel() {
     }
 
-    protected GetTransactionResponseModel(Parcel in) {
+    protected TransactionModel(Parcel in) {
         this.title = in.readString();
         this.type = in.readString();
         this.traSubmitDatetime = in.readString();
@@ -74,13 +92,13 @@ public class GetTransactionResponseModel implements Parcelable {
         this.description = in.readString();
     }
 
-    public static final Parcelable.Creator<GetTransactionResponseModel> CREATOR = new Parcelable.Creator<GetTransactionResponseModel>() {
-        public GetTransactionResponseModel createFromParcel(Parcel source) {
-            return new GetTransactionResponseModel(source);
+    public static final Parcelable.Creator<TransactionModel> CREATOR = new Parcelable.Creator<TransactionModel>() {
+        public TransactionModel createFromParcel(Parcel source) {
+            return new TransactionModel(source);
         }
 
-        public GetTransactionResponseModel[] newArray(int size) {
-            return new GetTransactionResponseModel[size];
+        public TransactionModel[] newArray(int size) {
+            return new TransactionModel[size];
         }
     };
 }
