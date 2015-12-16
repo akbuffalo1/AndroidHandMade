@@ -1,5 +1,7 @@
 package biz.enon.tra.uae.fragment.user_profile;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.PasswordTransformationMethod;
 import android.view.View;
@@ -167,6 +169,12 @@ public class ChangePasswordFragment extends BaseFragment implements OnCheckedCha
         etNewPasswordRetype.getText().clear();
     }
 
+    private void doLodOut(){
+        getFragmentManager().popBackStackImmediate();
+        Intent intent = new Intent();
+        getTargetFragment().onActivityResult(getTargetRequestCode(), Activity.RESULT_OK, intent);
+    }
+
     private class ChangePasswordRequestListener implements RequestListener<Response>, BackButton, Cancelled {
 
         private boolean isRequestSuccess;
@@ -183,8 +191,8 @@ public class ChangePasswordFragment extends BaseFragment implements OnCheckedCha
         @Override
         public void onBackButtonPressed(LoaderView.State _currentState) {
             getFragmentManager().popBackStackImmediate();
-            if (isRequestSuccess) {
-                getFragmentManager().popBackStackImmediate();
+            if (isRequestSuccess && isAdded()) {
+                doLodOut();
             }
         }
 
@@ -199,6 +207,7 @@ public class ChangePasswordFragment extends BaseFragment implements OnCheckedCha
 
         @Override
         public void onRequestFailure(SpiceException spiceException) {
+            isRequestSuccess = false;
             getSpiceManager().removeDataFromCache(Response.class, KEY_CHANGE_PASSWORD_REQUEST);
             processError(spiceException);
         }

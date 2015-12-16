@@ -38,6 +38,7 @@ public final class UserProfileFragment extends BaseFragment implements OnClickLi
 
     private static final String KEY_LOGOUT_REQUEST = "LOGOUT_REQUEST";
     private static final String KEY_USER_PROFILE_MODEL = "USER_PROFILE_MODEL";
+    public static final int LOGOUT_REQUEST_CODE = 100;
 
     public static final int USER_PROFILE_EDIT_PROFILE = 0;
     public static final int USER_PROFILE_CHANGE_PASSWORD = 1;
@@ -117,6 +118,9 @@ public final class UserProfileFragment extends BaseFragment implements OnClickLi
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == LOGOUT_REQUEST_CODE && resultCode == Activity.RESULT_OK){
+            logout(false);
+        }
         super.onActivityResult(requestCode, resultCode, data);
     }
 
@@ -131,15 +135,17 @@ public final class UserProfileFragment extends BaseFragment implements OnClickLi
                     mProfileClickListener.onUserProfileItemClick(this, mUserProfile, USER_PROFILE_CHANGE_PASSWORD);
                     break;
                 case R.id.llLogout_FUP:
-                    logout();
+                    logout(true);
                     break;
             }
         }
     }
-
-    private void logout() {
+    private void logout(boolean _canDismiss) {
         mLogoutRequest = new LogoutRequest(new LogoutRequestModel());
-        loaderOverlayShow(getString(R.string.str_logout), null, false);
+        if(_canDismiss)
+            loaderOverlayShow(getString(R.string.str_logout), null, false);
+        else
+            loaderOverlayCustomShow(getString(R.string.str_logout), null, false);
         getSpiceManager().execute(mLogoutRequest, KEY_LOGOUT_REQUEST, DurationInMillis.ALWAYS_EXPIRED, mLogoutRequestListener);
     }
 
@@ -212,5 +218,4 @@ public final class UserProfileFragment extends BaseFragment implements OnClickLi
     public interface OnUserProfileClickListener {
         void onUserProfileItemClick(Fragment _targetFragment, UserProfileResponseModel _userProfile, @UserProfileAction int _profileItem);
     }
-
 }

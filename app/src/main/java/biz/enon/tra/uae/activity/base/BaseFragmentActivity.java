@@ -1,5 +1,6 @@
 package biz.enon.tra.uae.activity.base;
 
+import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.support.annotation.CallSuper;
@@ -10,6 +11,7 @@ import android.view.inputmethod.InputMethodManager;
 import com.octo.android.robospice.SpiceManager;
 
 import biz.enon.tra.uae.fragment.base.BaseFragment;
+import biz.enon.tra.uae.fragment.user_profile.UserProfileFragment;
 import biz.enon.tra.uae.global.C;
 import biz.enon.tra.uae.interfaces.SpiceLoader;
 import biz.enon.tra.uae.rest.DynamicRestService;
@@ -80,6 +82,16 @@ public abstract class BaseFragmentActivity extends BaseActivity implements Spice
 
     public final void replaceFragmentWithBackStack(final @NonNull BaseFragment _fragment) {
         hideKeyboard();
+        getFragmentManager()
+                .beginTransaction()
+                .addToBackStack(null)
+                .replace(getContainerId(), _fragment)
+                .commit();
+    }
+
+    public final void replaceFragmentWithBackStack(final @NonNull Fragment _targetFragment, final @NonNull BaseFragment _fragment) {
+        hideKeyboard();
+        _fragment.setTargetFragment(_targetFragment, UserProfileFragment.LOGOUT_REQUEST_CODE);
         getFragmentManager()
                 .beginTransaction()
                 .addToBackStack(null)
