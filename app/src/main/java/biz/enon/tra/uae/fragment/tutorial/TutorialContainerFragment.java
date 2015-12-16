@@ -14,6 +14,8 @@ import android.widget.ImageView;
 
 import com.viewpagerindicator.CirclePageIndicator;
 
+import java.util.Locale;
+
 import biz.enon.tra.uae.R;
 import biz.enon.tra.uae.adapter.TutorialPagerAdapter;
 import biz.enon.tra.uae.global.C;
@@ -62,8 +64,9 @@ public class TutorialContainerFragment extends Fragment implements OnClickListen
 
     private void initViews(final View _view) {
         vpTutorial = (ViewPager) _view.findViewById(R.id.vpTutorial_FTC);
-        mAdapter = new TutorialPagerAdapter(getChildFragmentManager());
+        mAdapter = new TutorialPagerAdapter(getChildFragmentManager(), vpTutorial);
         vpTutorial.setAdapter(mAdapter);
+        mAdapter.setRtlMode(Locale.getDefault().getLanguage().equals("ar"));
 
         cpiCirclePageIndicator = (CirclePageIndicator) _view.findViewById(R.id.cpiCirclePageIndicator_FTC);
         cpiCirclePageIndicator.setViewPager(vpTutorial);
