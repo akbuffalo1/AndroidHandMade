@@ -80,7 +80,7 @@ public class TransactionDetailsFragment extends BaseFragment implements OnClickL
 
         if (isBlackAndWhiteMode) {
             hexagonView.setSrcTintColorRes(R.color.hex_color_dark_gray);
-        } else if (C.T_WEB_REPORT.equals(mTransaction.type)) {
+        } else if (C.T_WEB_REPORT.equals(mTransaction.type) || C.T_POOR_COVERAGE.equals(mTransaction.type)) {
             hexagonView.setSrcTintColorRes(mIconColor[TRANSACTION_STATUS_COLOR_INDEX]);
         } else {
             hexagonView.setSrcTintColor(Color.TRANSPARENT);
@@ -88,6 +88,8 @@ public class TransactionDetailsFragment extends BaseFragment implements OnClickL
 
         if (C.T_WEB_REPORT.equals(mTransaction.type)) {
             hexagonView.setHexagonSrcDrawable(Service.BLOCK_WEBSITE.getDrawableRes());
+        } else if (C.T_POOR_COVERAGE.equals(mTransaction.type)) {
+            hexagonView.setHexagonSrcDrawable(Service.POOR_COVERAGE.getDrawableRes());
         } else {
             hexagonView.setHexagonSrcDrawable(mIconColor[TRANSACTION_STATUS_ICON_INDEX]);
         }
@@ -109,7 +111,11 @@ public class TransactionDetailsFragment extends BaseFragment implements OnClickL
         tvStatus.setTextColor(getResources().getColor(mIconColor[1]));
 
         btnEdit = findView(R.id.btnEdit_FTD);
-        btnEdit.setVisibility(/*C.WAITING_FOR_DETAILS.equals(mTransaction.statusCode) ? */View.VISIBLE/* : View.GONE*/);
+        if(!C.WAITING_FOR_DETAILS.equals(mTransaction.statusCode)
+                || C.T_WEB_REPORT.equals(mTransaction.type)
+                || C.T_POOR_COVERAGE.equals(mTransaction.type)){
+            btnEdit.setVisibility(View.GONE);
+        }
     }
 
     @Override

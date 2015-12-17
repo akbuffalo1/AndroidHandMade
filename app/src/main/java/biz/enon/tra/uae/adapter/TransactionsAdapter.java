@@ -300,7 +300,7 @@ public class TransactionsAdapter extends Adapter<ViewHolder> implements Filterab
         public void setData(int _position, final TransactionModel _model) {
             if (!isProgress) {
                 sStartOffset.setVisibility(_position % 2 == 0 ? View.GONE : View.VISIBLE);
-                //_position % 3 == 0 ? "Waiting for Details" : _position % 2 == 0 ? _model.statusCode : "On Hold"
+//                _model.statusCode = _position % 3 == 0 ? "Waiting for Details" : _position % 2 == 0 ? _model.statusCode : "On Hold";
 
                 final int[] icon_color;
                 if (C.TRANSACTION_STATUS.containsKey(_model.statusCode)) {
@@ -317,7 +317,7 @@ public class TransactionsAdapter extends Adapter<ViewHolder> implements Filterab
 
                 if (mIsBlackAndWhiteMode) {
                     hexagonView.setSrcTintColorRes(R.color.hex_color_dark_gray);
-                } else if (C.T_WEB_REPORT.equals(_model.type)) {
+                } else if (C.T_WEB_REPORT.equals(_model.type) || C.T_POOR_COVERAGE.equals(_model.type)) {
                     hexagonView.setSrcTintColorRes(icon_color[C.TRANSACTION_STATUS_COLOR_INDEX]);
                 } else {
                     hexagonView.setSrcTintColor(Color.TRANSPARENT);
@@ -325,6 +325,8 @@ public class TransactionsAdapter extends Adapter<ViewHolder> implements Filterab
 
                 if (C.T_WEB_REPORT.equals(_model.type)) {
                     hexagonView.setHexagonSrcDrawable(Service.BLOCK_WEBSITE.getDrawableRes());
+                } else if (C.T_POOR_COVERAGE.equals(_model.type)) {
+                    hexagonView.setHexagonSrcDrawable(Service.POOR_COVERAGE.getDrawableRes());
                 } else {
                     hexagonView.setHexagonSrcDrawable(icon_color[C.TRANSACTION_STATUS_ICON_INDEX]);
                 }
