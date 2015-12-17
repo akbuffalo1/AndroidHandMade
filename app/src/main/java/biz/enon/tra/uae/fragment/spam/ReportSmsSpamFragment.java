@@ -14,9 +14,6 @@ import com.octo.android.robospice.persistence.DurationInMillis;
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import biz.enon.tra.uae.R;
 import biz.enon.tra.uae.adapter.SpamServiceProviderAdapter;
 import biz.enon.tra.uae.customviews.LoaderView;
@@ -28,6 +25,7 @@ import biz.enon.tra.uae.interfaces.Loader;
 import biz.enon.tra.uae.interfaces.Loader.Cancelled;
 import biz.enon.tra.uae.rest.model.request.SmsReportRequestModel;
 import biz.enon.tra.uae.rest.model.response.SmsSpamResponseModel;
+import biz.enon.tra.uae.rest.model.response.TransactionModel;
 import biz.enon.tra.uae.rest.robo_requests.BaseRequest;
 import biz.enon.tra.uae.rest.robo_requests.PutTransactionsRequest;
 import biz.enon.tra.uae.rest.robo_requests.SmsReportRequest;
@@ -53,7 +51,7 @@ public class ReportSmsSpamFragment extends BaseServiceFragment implements OnClic
 
     public static ReportSmsSpamFragment newInstance(Parcelable _inputData) {
         Bundle bundle = new Bundle();
-        bundle.putParcelable(KEY_DATA, _inputData);
+        bundle.putParcelable(KEY_TARNS_MODEL, _inputData);
         ReportSmsSpamFragment fragment = new ReportSmsSpamFragment();
         fragment.setArguments(bundle);
         return fragment;
@@ -85,25 +83,17 @@ public class ReportSmsSpamFragment extends BaseServiceFragment implements OnClic
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        prepareFieldsIfNeed();
-    }
-
-    private void prepareFieldsIfNeed(){
-        if(getArguments() != null && (mTransactionModel = getArguments().getParcelable(KEY_DATA)) != null) {
-            mIsInEditMode = true;
-            int i = 0;
-            for (ServiceProvider provider : mProviderAdapter.getProviderList()) {
-                if (provider.toString().equals(mTransactionModel.serviceProvider)) {
-                    sProviderSpinner.setSelection(i);
-                    return;
-                }
-                i++;
+    protected void prepareFieldsIfModelExist(TransactionModel _transactionModel){
+        int i = 0;
+        for (ServiceProvider provider : mProviderAdapter.getProviderList()) {
+            if (provider.toString().equals(_transactionModel.serviceProvider)) {
+                sProviderSpinner.setSelection(i);
+                return;
             }
-            etNumberOfSpammer.setText(mTransactionModel.phone);
-            etDescription.setText(mTransactionModel.description);
+            i++;
         }
+        etNumberOfSpammer.setText(_transactionModel.phone);
+        etDescription.setText(_transactionModel.description);
     }
 
     @Override
@@ -116,10 +106,11 @@ public class ReportSmsSpamFragment extends BaseServiceFragment implements OnClic
 
     private void validateAndSendData() {
         if (validateData()) {
-            if(mIsInEditMode && mTransactionModel != null) {
-                mTransactionModel.phone = etNumberOfSpammer.getText().toString();
-                mTransactionModel.description = etDescription.getText().toString();
-                mRequest = new PutTransactionsRequest(mTransactionModel, getActivity(), null);
+            TransactionModel model = getTransactionModel();
+            if(isIsInEditMode() && model != null) {
+                model.phone = etNumberOfSpammer.getText().toString();
+                model.description = etDescription.getText().toString();
+                mRequest = new PutTransactionsRequest(model, getActivity(), null);
             } else {
                 mRequest = new SmsReportRequest(
                         new SmsReportRequestModel(

@@ -2,8 +2,8 @@ package biz.enon.tra.uae.fragment;
 
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.support.annotation.CallSuper;
 import android.support.annotation.NonNull;
-import android.view.View;
 import android.widget.EditText;
 
 import com.octo.android.robospice.persistence.DurationInMillis;
@@ -11,10 +11,12 @@ import com.octo.android.robospice.persistence.DurationInMillis;
 import biz.enon.tra.uae.R;
 import biz.enon.tra.uae.TRAApplication;
 import biz.enon.tra.uae.customviews.LoaderView;
+import biz.enon.tra.uae.fragment.base.BaseServiceFragment;
 import biz.enon.tra.uae.global.C;
 import biz.enon.tra.uae.global.Service;
 import biz.enon.tra.uae.interfaces.Loader;
 import biz.enon.tra.uae.rest.model.request.ComplainTRAServiceModel;
+import biz.enon.tra.uae.rest.model.response.TransactionModel;
 import biz.enon.tra.uae.rest.robo_requests.BaseRequest;
 import biz.enon.tra.uae.rest.robo_requests.ComplainSuggestionServiceRequest;
 import biz.enon.tra.uae.rest.robo_requests.PutTransactionsRequest;
@@ -34,7 +36,7 @@ public class SuggestionFragment extends ComplainAboutTraFragment {
 
     public static SuggestionFragment newInstance(Parcelable data) {
         Bundle bundle = new Bundle();
-        bundle.putParcelable(KEY_DATA, data);
+        bundle.putParcelable(BaseServiceFragment.KEY_TARNS_MODEL, data);
         SuggestionFragment fragment = new SuggestionFragment();
         fragment.setArguments(bundle);
         return fragment;
@@ -55,28 +57,21 @@ public class SuggestionFragment extends ComplainAboutTraFragment {
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        prepareFieldsIfNeed();
-    }
-
-    private void prepareFieldsIfNeed(){
-        if(getArguments() != null && (mTransactionModel = getArguments().getParcelable(KEY_DATA)) != null) {
-            mIsInEditMode = true;
-            if (mTransactionModel.hasAttachment) {
-                onAttachmentGet(null);
-            }
-            etComplainTitle.setText(mTransactionModel.title);
-            etDescription.setText(mTransactionModel.description);
+    protected void prepareFieldsIfModelExist(TransactionModel _transactionModel){
+        if (_transactionModel.hasAttachment) {
+            onAttachmentGet(null);
         }
+        etComplainTitle.setText(_transactionModel.title);
+        etDescription.setText(_transactionModel.description);
     }
 
     @Override
     protected void sendComplain() {
-        if(mIsInEditMode && mTransactionModel != null) {
-            mTransactionModel.title = etComplainTitle.getText().toString();
-            mTransactionModel.description = etDescription.getText().toString();
-            mRequest = new PutTransactionsRequest(mTransactionModel, getActivity(), getImageUri());
+        TransactionModel model = getTransactionModel();
+        if(isIsInEditMode() && model != null) {
+            model.title = etComplainTitle.getText().toString();
+            model.description = etDescription.getText().toString();
+            mRequest = new PutTransactionsRequest(model, getActivity(), getImageUri());
         } else {
             ComplainTRAServiceModel traServiceModel = new ComplainTRAServiceModel();
             traServiceModel.title = getTitleText();
@@ -90,6 +85,9 @@ public class SuggestionFragment extends ComplainAboutTraFragment {
                 getFragmentManager().popBackStack();
                 if (_currentState == LoaderView.State.FAILURE || _currentState == LoaderView.State.SUCCESS) {
                     getFragmentManager().popBackStack();
+                    if(isIsInEditMode()){
+                        getFragmentManager().popBackStack();
+                    }
                 }
             }
         });

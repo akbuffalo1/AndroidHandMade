@@ -3,6 +3,7 @@ package biz.enon.tra.uae.fragment.base;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.CallSuper;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -29,11 +30,12 @@ import biz.enon.tra.uae.rest.robo_requests.RatingServiceRequest;
 public abstract class BaseServiceFragment extends BaseFragment
         implements Cancelled, LoaderFragment.CallBacks, ServiceRatingDialog.CallBacks {
 
-    protected static final String KEY_DATA = "data";
-    protected boolean mIsInEditMode = false;
+    protected static String KEY_MODE = "MODE";
+    protected static String KEY_TARNS_MODEL = "TRANS_MODEL";
+    private boolean mIsInEditMode = false;
+    private TransactionModel mTransactionModel;
 
     private OpenServiceInfo mOpenServiceInfoListener;
-    protected TransactionModel mTransactionModel;
 
     @CallSuper
     @Override
@@ -42,6 +44,48 @@ public abstract class BaseServiceFragment extends BaseFragment
         if (_activity instanceof OpenServiceInfo) {
             mOpenServiceInfoListener = (OpenServiceInfo) _activity;
         }
+    }
+
+    @CallSuper
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        TransactionModel model = prepareTransactionModel(savedInstanceState);
+        if(model != null){
+            mIsInEditMode = true;
+            prepareFieldsIfModelExist(model);
+        }
+    }
+
+    protected boolean isIsInEditMode(){
+        return mIsInEditMode;
+    }
+
+    protected TransactionModel getTransactionModel(){
+        return mTransactionModel;
+    }
+
+    protected void prepareFieldsIfModelExist(@NonNull TransactionModel _transModel){
+        //TODO Implement this method if you like to edit transaction
+    }
+
+    protected TransactionModel prepareTransactionModel(Bundle savedInstanceState) {
+        mTransactionModel = null;
+        if (getArguments() != null){
+            mTransactionModel = getArguments().getParcelable(KEY_TARNS_MODEL);
+        } else if (savedInstanceState != null && savedInstanceState.getBoolean(KEY_MODE)) {
+            mTransactionModel = savedInstanceState.getParcelable(KEY_TARNS_MODEL);
+        }
+        return mTransactionModel;
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {outState.putBoolean(KEY_MODE, getArguments() != null);
+        outState.putBoolean(KEY_MODE, mTransactionModel != null);
+        if(getArguments() != null){
+            outState.putParcelable(KEY_TARNS_MODEL, mTransactionModel);
+        }
+        super.onSaveInstanceState(outState);
     }
 
     @Override

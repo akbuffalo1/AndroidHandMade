@@ -21,10 +21,12 @@ import biz.enon.tra.uae.customviews.LoaderView;
 import biz.enon.tra.uae.customviews.ThemedImageView;
 import biz.enon.tra.uae.dialog.AlertDialogFragment;
 import biz.enon.tra.uae.fragment.base.BaseComplainFragment;
+import biz.enon.tra.uae.fragment.base.BaseServiceFragment;
 import biz.enon.tra.uae.global.C;
 import biz.enon.tra.uae.global.Service;
 import biz.enon.tra.uae.interfaces.Loader;
 import biz.enon.tra.uae.rest.model.request.ComplainTRAServiceModel;
+import biz.enon.tra.uae.rest.model.response.TransactionModel;
 import biz.enon.tra.uae.rest.robo_requests.BaseRequest;
 import biz.enon.tra.uae.rest.robo_requests.ComplainAboutTRAServiceRequest;
 import biz.enon.tra.uae.rest.robo_requests.PutTransactionsRequest;
@@ -50,7 +52,7 @@ public class ComplainAboutTraFragment extends BaseComplainFragment
 
     public static ComplainAboutTraFragment newInstance(Parcelable data) {
         Bundle bundle = new Bundle();
-        bundle.putParcelable(KEY_DATA, data);
+        bundle.putParcelable(BaseServiceFragment.KEY_TARNS_MODEL, data);
         ComplainAboutTraFragment fragment = new ComplainAboutTraFragment();
         fragment.setArguments(bundle);
         return fragment;
@@ -65,20 +67,12 @@ public class ComplainAboutTraFragment extends BaseComplainFragment
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        prepareFieldsIfNeed();
-    }
-
-    private void prepareFieldsIfNeed(){
-        if(getArguments() != null && (mTransactionModel = getArguments().getParcelable(KEY_DATA)) != null) {
-            mIsInEditMode = true;
-            if (mTransactionModel.hasAttachment) {
-                onAttachmentGet(null);
-            }
-            etComplainTitle.setText(mTransactionModel.title);
-            etDescription.setText(mTransactionModel.description);
+    protected void prepareFieldsIfModelExist(TransactionModel _transModel) {
+        if (_transModel.hasAttachment) {
+            onAttachmentGet(null);
         }
+        etComplainTitle.setText(_transModel.title);
+        etDescription.setText(_transModel.description);
     }
 
     @Override
@@ -128,7 +122,7 @@ public class ComplainAboutTraFragment extends BaseComplainFragment
 
     @Override
     protected void onAttachmentDeleted() {
-        mTransactionModel.hasAttachment = false;
+        getTransactionModel().hasAttachment = false;
         tivAddAttachment.setImageResource(R.drawable.ic_action_attachment);
     }
 
@@ -146,10 +140,11 @@ public class ComplainAboutTraFragment extends BaseComplainFragment
 
     @Override
     protected void sendComplain() {
-        if(mIsInEditMode && mTransactionModel != null) {
-            mTransactionModel.title = etComplainTitle.getText().toString();
-            mTransactionModel.description = etDescription.getText().toString();
-            mRequest = new PutTransactionsRequest(mTransactionModel, getActivity(), getImageUri());
+        TransactionModel model = getTransactionModel();
+        if(isIsInEditMode() && model != null) {
+            model.title = etComplainTitle.getText().toString();
+            model.description = etDescription.getText().toString();
+            mRequest = new PutTransactionsRequest(model, getActivity(), getImageUri());
         } else {
             ComplainTRAServiceModel traServiceModel = new ComplainTRAServiceModel();
             traServiceModel.title = getTitleText();
@@ -163,6 +158,9 @@ public class ComplainAboutTraFragment extends BaseComplainFragment
                 getFragmentManager().popBackStack();
                 if (_currentState == LoaderView.State.FAILURE || _currentState == LoaderView.State.SUCCESS) {
                     getFragmentManager().popBackStack();
+                    if(isIsInEditMode()){
+                        getFragmentManager().popBackStack();
+                    }
                 }
             }
         });

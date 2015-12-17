@@ -36,7 +36,7 @@ public class ReportWebSpamFragment extends BaseServiceFragment implements OnClic
     private static final String KEY_REPORT_WEB_SPAM = "REPORT_WEB_SPAM";
 
     private EditText etUrl, etDescription;
-    private Button btnClose, btnSubmit;
+    private Button btnSubmit;
 
     private HelpSalimRequest mHelpSalimRequest;
     private CustomFilterPool<String> mFilters;
@@ -47,19 +47,10 @@ public class ReportWebSpamFragment extends BaseServiceFragment implements OnClic
 
     public static ReportWebSpamFragment newInstance(Parcelable _inputData) {
         Bundle bundle = new Bundle();
-        bundle.putParcelable(KEY_DATA, _inputData);
+        bundle.putParcelable(KEY_TARNS_MODEL, _inputData);
         ReportWebSpamFragment fragment = new ReportWebSpamFragment();
         fragment.setArguments(bundle);
         return fragment;
-    }
-
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        if(getArguments() != null && (mTransactionModel = getArguments().getParcelable(KEY_DATA)) != null){
-            etUrl.setText(mTransactionModel.title);
-            etDescription.setText(mTransactionModel.description);
-        }
     }
 
     @Override
@@ -83,14 +74,12 @@ public class ReportWebSpamFragment extends BaseServiceFragment implements OnClic
         etUrl = findView(R.id.etUrlOfSpammer_FRWS);
         etDescription = findView(R.id.etDescription_FRWS);
         setCapitalizeTextWatcher(etDescription);
-//        btnClose = findView(R.id.btnClose_FRWS);
         btnSubmit = findView(R.id.btnSubmit_FRWS);
     }
 
     @Override
     protected void initListeners() {
         super.initListeners();
-//        btnClose.setOnClickListener(this);
         btnSubmit.setOnClickListener(this);
         etDescription.setOnFocusChangeListener(this);
     }
@@ -99,9 +88,6 @@ public class ReportWebSpamFragment extends BaseServiceFragment implements OnClic
     public final void onClick(final View _view) {
         hideKeyboard(_view);
         switch (_view.getId()) {
-//            case R.id.btnClose_FRWS:
-//                getFragmentManager().popBackStack();
-//                break;
             case R.id.btnSubmit_FRWS:
                 hideKeyboard(_view);
                 collectAndSendToServer();
@@ -136,10 +122,10 @@ public class ReportWebSpamFragment extends BaseServiceFragment implements OnClic
             Toast.makeText(getActivity(), R.string.str_invalid_url, C.TOAST_LENGTH).show();
             return false;
         }
-//        if (etDescription.getText().toString().isEmpty()) {
-//            Toast.makeText(getActivity(), R.string.fragment_complain_no_description, C.TOAST_LENGTH).show();
-//            return false;
-//        }
+        /*if (etDescription.getText().toString().isEmpty()) {
+            Toast.makeText(getActivity(), R.string.fragment_complain_no_description, C.TOAST_LENGTH).show();
+            return false;
+        }*/
         return true;
     }
 

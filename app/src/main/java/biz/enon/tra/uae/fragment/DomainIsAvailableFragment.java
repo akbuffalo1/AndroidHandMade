@@ -2,6 +2,7 @@ package biz.enon.tra.uae.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.ColorRes;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.view.Menu;
@@ -15,6 +16,7 @@ import biz.enon.tra.uae.global.C;
 import biz.enon.tra.uae.global.ServerConstants;
 import biz.enon.tra.uae.global.Service;
 import biz.enon.tra.uae.rest.model.response.DomainAvailabilityCheckResponseModel;
+import biz.enon.tra.uae.rest.model.response.TransactionModel;
 import biz.enon.tra.uae.util.ImageUtils;
 
 /**

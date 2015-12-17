@@ -163,7 +163,7 @@ public interface TRAServicesAPI {
                                                         @Query(PARAMETER_COUNT) final int _count,
                                                         @Query(PARAMETER_SEARCH) final String _query);
 
-    @POST(PUT_TRANSACTIONS + "/{path}")
+    @PUT(PUT_TRANSACTIONS + "/{path}")
     Response putTransactions(@Path("path") String _path, @Body TransactionModel _transactionModel);
 
     @GET(GET_ANNOUNCEMENTS)
