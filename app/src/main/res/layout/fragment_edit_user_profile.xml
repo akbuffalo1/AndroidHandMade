@@ -155,7 +155,7 @@
                     android:layout_toStartOf="@id/cbEnhancedSecurity_FEUP"
                     android:singleLine="true"
                     android:text="@string/fragment_register_enhanced_security"
-                    android:textColor="@color/fragment_user_profile_text_color_primary"
+                    android:textColor="?attr/colorPrimary"
                     android:textSize="@dimen/fragment_edit_user_profile_text_size"/>
 
             </RelativeLayout>
@@ -205,7 +205,7 @@
                 android:minHeight="@dimen/fragment_edit_user_profile_item_height"
                 android:paddingBottom="8dp"
                 android:paddingTop="8dp"
-                android:textColor="@color/fragment_user_profile_text_color_primary"
+                android:textColor="?attr/colorPrimary"
                 android:textSize="@dimen/fragment_edit_user_profile_text_size"
                 app:layout_widthPercent="90%"
                 tools:text="Security Answer text"/>

@@ -1,6 +1,7 @@
 package biz.enon.tra.uae.fragment;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.MenuItemCompat.OnActionExpandListener;
@@ -364,6 +365,11 @@ public final class InfoHubFragment extends BaseFragment
             mTransactionsListAdapter.addAll(mTransactionsModel);
             mTransactionsOperationStateManager.showData();
         }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override
