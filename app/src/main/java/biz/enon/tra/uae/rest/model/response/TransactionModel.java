@@ -66,6 +66,7 @@ public class TransactionModel implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this._id);
         dest.writeString(this.title);
         dest.writeString(this.type);
         dest.writeString(this.traSubmitDatetime);
@@ -75,12 +76,18 @@ public class TransactionModel implements Parcelable {
         dest.writeString(this.traStatus);
         dest.writeString(this.serviceStage);
         dest.writeString(this.description);
+        dest.writeString(this.phone);
+        dest.writeString(this.referenceNumber);
+        dest.writeString(this.serviceProvider);
+        dest.writeByte(hasAttachment ? (byte) 1 : (byte) 0);
+        dest.writeString(this.attachment);
     }
 
     public TransactionModel() {
     }
 
     protected TransactionModel(Parcel in) {
+        this._id = in.readString();
         this.title = in.readString();
         this.type = in.readString();
         this.traSubmitDatetime = in.readString();
@@ -90,6 +97,11 @@ public class TransactionModel implements Parcelable {
         this.traStatus = in.readString();
         this.serviceStage = in.readString();
         this.description = in.readString();
+        this.phone = in.readString();
+        this.referenceNumber = in.readString();
+        this.serviceProvider = in.readString();
+        this.hasAttachment = in.readByte() != 0;
+        this.attachment = in.readString();
     }
 
     public static final Parcelable.Creator<TransactionModel> CREATOR = new Parcelable.Creator<TransactionModel>() {
