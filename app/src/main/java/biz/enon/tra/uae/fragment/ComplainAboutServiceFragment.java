@@ -107,7 +107,7 @@ public final class ComplainAboutServiceFragment extends BaseComplainFragment
         for (ServiceProvider provider : spinnerAdapter.getProviderList()) {
             if (provider.toString().equals(_transModel.serviceProvider)) {
                 sProviderSpinner.setSelection(i);
-                return;
+                break;
             }
             i++;
         }

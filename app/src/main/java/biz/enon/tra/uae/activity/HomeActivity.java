@@ -53,7 +53,7 @@ import biz.enon.tra.uae.fragment.base.BaseFragment;
 import biz.enon.tra.uae.fragment.hexagon_fragment.InnovationsFragment;
 import biz.enon.tra.uae.fragment.hexagon_fragment.NotificationsFragment;
 import biz.enon.tra.uae.fragment.hexagon_fragment.SearchFragment;
-import biz.enon.tra.uae.fragment.spam.ReportSmsSpamFragment;
+import biz.enon.tra.uae.fragment.spam.SmsSpamReportFragment;
 import biz.enon.tra.uae.fragment.spam.ReportSpamFragment;
 import biz.enon.tra.uae.fragment.spam.ReportWebSpamFragment;
 import biz.enon.tra.uae.fragment.spam.SpamHistoryFragment;
@@ -219,7 +219,7 @@ public class HomeActivity extends BaseFragmentActivity implements //region INTER
                 replaceFragment(PoorCoverageFragment.newInstance(), _useBackStack);
                 break;
 //            case T_SMS_SPAM:
-//                replaceFragment(_data != null ? ReportSmsSpamFragment.newInstance(_data) : ReportSmsSpamFragment.newInstance(), _useBackStack);
+//                replaceFragment(_data != null ? SmsSpamReportFragment.newInstance(_data) : SmsSpamReportFragment.newInstance(), _useBackStack);
 //                break;
 //
 //            case INTERNET_SPEEDTEST:
@@ -229,7 +229,7 @@ public class HomeActivity extends BaseFragmentActivity implements //region INTER
     }
 
     private void openReportSmsSpamFragmentIfAuthorized(Service _service, @Nullable Parcelable _data, boolean _useBackStack) {
-        final ReportSmsSpamFragment fragment = _data != null ? ReportSmsSpamFragment.newInstance(_data) : ReportSmsSpamFragment.newInstance();
+        final SmsSpamReportFragment fragment = _data != null ? SmsSpamReportFragment.newInstance(_data) : SmsSpamReportFragment.newInstance();
         openFragmentIfAuthorized(fragment, _service, _data, _useBackStack);
     }
 
@@ -300,7 +300,7 @@ public class HomeActivity extends BaseFragmentActivity implements //region INTER
     private void openFragmentAfterLogin(final FragmentType _fragmentType, @Nullable Parcelable _data, final boolean _useBackStack) {
         switch (_fragmentType) {
             case REPORT_SMS_SPAM:
-                replaceFragment(ReportSmsSpamFragment.newInstance(), _useBackStack);
+                replaceFragment(SmsSpamReportFragment.newInstance(), _useBackStack);
                 break;
             case REPORT_WEB_SPAM:
                 replaceFragment(ReportWebSpamFragment.newInstance(), _useBackStack);
@@ -336,7 +336,7 @@ public class HomeActivity extends BaseFragmentActivity implements //region INTER
                 replaceFragmentWithBackStack(MobileVerificationFragment.newInstance());
                 break;
             case SMS_SPAM:
-                openFragmentIfAuthorized(ReportSmsSpamFragment.newInstance(), Service.REPORT_SPAM);
+                openFragmentIfAuthorized(SmsSpamReportFragment.newInstance(), Service.REPORT_SPAM);
                 break;
         }
     }
@@ -387,7 +387,7 @@ public class HomeActivity extends BaseFragmentActivity implements //region INTER
     public final void onReportSpamServiceSelect(@ReportSpamFragment.SpamOption int _service) {
         switch (_service) {
             case ReportSpamFragment.SPAM_OPTION_REPORT_SMS:
-                openFragmentIfAuthorized(ReportSmsSpamFragment.newInstance(), FragmentType.REPORT_SMS_SPAM);
+                openFragmentIfAuthorized(SmsSpamReportFragment.newInstance(), FragmentType.REPORT_SMS_SPAM);
                 break;
             case ReportSpamFragment.SPAM_OPTION_REPORT_WEB:
                 openFragmentIfAuthorized(ReportWebSpamFragment.newInstance(), FragmentType.REPORT_WEB_SPAM);
@@ -472,7 +472,7 @@ public class HomeActivity extends BaseFragmentActivity implements //region INTER
     public final void onAddToSpamClick(@SpamHistoryFragment.SpamType final int _spamType) {
         switch (_spamType) {
             case SpamHistoryFragment.SPAM_SMS:
-                openFragmentIfAuthorized(ReportSmsSpamFragment.newInstance(), FragmentType.REPORT_SMS_SPAM);
+                openFragmentIfAuthorized(SmsSpamReportFragment.newInstance(), FragmentType.REPORT_SMS_SPAM);
                 break;
             case SpamHistoryFragment.SPAM_WEB:
                 openFragmentIfAuthorized(ReportWebSpamFragment.newInstance(), FragmentType.REPORT_WEB_SPAM);

@@ -35,7 +35,7 @@ import retrofit.client.Response;
 /**
  * Created by mobimaks on 24.09.2015.
  */
-public class ReportSmsSpamFragment extends BaseServiceFragment implements OnClickListener, Cancelled, RequestListener<Response> {
+public class SmsSpamReportFragment extends BaseServiceFragment implements OnClickListener, Cancelled, RequestListener<Response> {
 
     private static final String KEY_REPORT_SMS_SPAM_REQUEST = "REPORT_SMS_SPAM_REQUEST";
     private static final String KEY_PUT_TRANSACTION_REQUEST = "PUT_TRANSACTION_REQUEST";
@@ -47,14 +47,14 @@ public class ReportSmsSpamFragment extends BaseServiceFragment implements OnClic
     private SpamServiceProviderAdapter mProviderAdapter;
     private BaseRequest mRequest;
 
-    public static ReportSmsSpamFragment newInstance() {
-        return new ReportSmsSpamFragment();
+    public static SmsSpamReportFragment newInstance() {
+        return new SmsSpamReportFragment();
     }
 
-    public static ReportSmsSpamFragment newInstance(Parcelable _inputData) {
+    public static SmsSpamReportFragment newInstance(Parcelable _inputData) {
         Bundle bundle = new Bundle();
         bundle.putParcelable(KEY_TARNS_MODEL, _inputData);
-        ReportSmsSpamFragment fragment = new ReportSmsSpamFragment();
+        SmsSpamReportFragment fragment = new SmsSpamReportFragment();
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -90,7 +90,7 @@ public class ReportSmsSpamFragment extends BaseServiceFragment implements OnClic
         for (ServiceProvider provider : mProviderAdapter.getProviderList()) {
             if (provider.toString().equals(_transactionModel.serviceProvider)) {
                 sProviderSpinner.setSelection(i);
-                return;
+                break;
             }
             i++;
         }
