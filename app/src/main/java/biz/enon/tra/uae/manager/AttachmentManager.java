@@ -224,5 +224,4 @@ public final class AttachmentManager implements OnOpenPermissionExplanationDialo
     public interface OnImageGetCallback {
         void onAttachmentGet(final @NonNull Uri _imageUri);
     }
-
 }

@@ -67,17 +67,6 @@ public class SuggestionFragment extends ComplainAboutTraFragment {
 
     @Override
     protected void sendComplain() {
-        TransactionModel model = getTransactionModel();
-        if(isIsInEditMode() && model != null) {
-            model.title = etComplainTitle.getText().toString();
-            model.description = etDescription.getText().toString();
-            mRequest = new PutTransactionsRequest(model, getActivity(), getImageUri());
-        } else {
-            ComplainTRAServiceModel traServiceModel = new ComplainTRAServiceModel();
-            traServiceModel.title = getTitleText();
-            traServiceModel.description = getDescriptionText();
-            mRequest = new ComplainSuggestionServiceRequest(traServiceModel, getActivity(), getImageUri());
-        }
         loaderOverlayShow(getString(R.string.str_sending), this);
         loaderOverlayButtonBehavior(new Loader.BackButton() {
             @Override
@@ -91,6 +80,17 @@ public class SuggestionFragment extends ComplainAboutTraFragment {
                 }
             }
         });
+        TransactionModel model = getTransactionModel();
+        if(isIsInEditMode() && model != null) {
+            model.title = etComplainTitle.getText().toString();
+            model.description = etDescription.getText().toString();
+            mRequest = new PutTransactionsRequest(model, getActivity(), getImageUri());
+        } else {
+            ComplainTRAServiceModel traServiceModel = new ComplainTRAServiceModel();
+            traServiceModel.title = getTitleText();
+            traServiceModel.description = getDescriptionText();
+            mRequest = new ComplainSuggestionServiceRequest(traServiceModel, getActivity(), getImageUri());
+        }
         getSpiceManager().execute(mRequest, getRequestKey(), DurationInMillis.ALWAYS_EXPIRED, getRequestListener());
     }
 

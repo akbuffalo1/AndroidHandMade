@@ -98,7 +98,6 @@ public class ComplainAboutTraFragment extends BaseComplainFragment
     public void onStart() {
         super.onStart();
         getSpiceManager().getFromCache(Response.class, getRequestKey(), DurationInMillis.ALWAYS_RETURNED, mRequestListener);
-//        getSpiceManager().addListenerIfPending(Response.class, getRequestKey(), mRequestListener);
     }
 
     protected String getRequestKey() {
@@ -117,12 +116,13 @@ public class ComplainAboutTraFragment extends BaseComplainFragment
 
     @Override
     public void onAttachmentGet(@NonNull Uri _uri) {
+        super.onAttachmentGet(_uri);
         tivAddAttachment.setImageResource(R.drawable.ic_check);
     }
 
     @Override
     protected void onAttachmentDeleted() {
-        getTransactionModel().hasAttachment = false;
+        super.onAttachmentDeleted();
         tivAddAttachment.setImageResource(R.drawable.ic_action_attachment);
     }
 
@@ -140,17 +140,6 @@ public class ComplainAboutTraFragment extends BaseComplainFragment
 
     @Override
     protected void sendComplain() {
-        TransactionModel model = getTransactionModel();
-        if(isIsInEditMode() && model != null) {
-            model.title = etComplainTitle.getText().toString();
-            model.description = etDescription.getText().toString();
-            mRequest = new PutTransactionsRequest(model, getActivity(), getImageUri());
-        } else {
-            ComplainTRAServiceModel traServiceModel = new ComplainTRAServiceModel();
-            traServiceModel.title = getTitleText();
-            traServiceModel.description = getDescriptionText();
-            mRequest = new ComplainAboutTRAServiceRequest(traServiceModel, getActivity(), getImageUri());
-        }
         loaderOverlayShow(getString(R.string.str_sending), this);
         loaderOverlayButtonBehavior(new Loader.BackButton() {
             @Override
@@ -164,6 +153,17 @@ public class ComplainAboutTraFragment extends BaseComplainFragment
                 }
             }
         });
+        TransactionModel model = getTransactionModel();
+        if(isIsInEditMode() && model != null) {
+            model.title = etComplainTitle.getText().toString();
+            model.description = etDescription.getText().toString();
+            mRequest = new PutTransactionsRequest(model, getActivity(), getImageUri());
+        } else {
+            ComplainTRAServiceModel traServiceModel = new ComplainTRAServiceModel();
+            traServiceModel.title = getTitleText();
+            traServiceModel.description = getDescriptionText();
+            mRequest = new ComplainAboutTRAServiceRequest(traServiceModel, getActivity(), getImageUri());
+        }
         getSpiceManager().execute(mRequest, getRequestKey(), DurationInMillis.ALWAYS_EXPIRED, mRequestListener);
     }
 

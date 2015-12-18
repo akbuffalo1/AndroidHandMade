@@ -51,17 +51,6 @@ public class EnquiriesFragment extends ComplainAboutTraFragment {
 
     @Override
     protected void sendComplain() {
-        TransactionModel model = getTransactionModel();
-        if(isIsInEditMode() && model != null){
-            model.title = getTitleText();
-            model.description = getDescriptionText();
-            mRequest = new PutTransactionsRequest(model, getActivity(), getImageUri());
-        } else {
-            ComplainTRAServiceModel traServiceModel = new ComplainTRAServiceModel();
-            traServiceModel.title = getTitleText();
-            traServiceModel.description = getDescriptionText();
-            mRequest = new ComplainEnquiriesServiceRequest(traServiceModel, getActivity(), getImageUri());
-        }
         loaderOverlayShow(getString(R.string.str_sending), this);
         loaderOverlayButtonBehavior(new Loader.BackButton() {
             @Override
@@ -75,6 +64,17 @@ public class EnquiriesFragment extends ComplainAboutTraFragment {
                 }
             }
         });
+        TransactionModel model = getTransactionModel();
+        if(isIsInEditMode() && model != null){
+            model.title = getTitleText();
+            model.description = getDescriptionText();
+            mRequest = new PutTransactionsRequest(model, getActivity(), getImageUri());
+        } else {
+            ComplainTRAServiceModel traServiceModel = new ComplainTRAServiceModel();
+            traServiceModel.title = getTitleText();
+            traServiceModel.description = getDescriptionText();
+            mRequest = new ComplainEnquiriesServiceRequest(traServiceModel, getActivity(), getImageUri());
+        }
         getSpiceManager().execute(mRequest, getRequestKey(), DurationInMillis.ALWAYS_EXPIRED, getRequestListener());
     }
 

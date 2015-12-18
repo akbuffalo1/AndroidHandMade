@@ -124,6 +124,19 @@ public final class ComplainAboutServiceFragment extends BaseComplainFragment
 
     @Override
     protected void sendComplain() {
+        loaderOverlayShow(getString(R.string.str_sending), this);
+        loaderOverlayButtonBehavior(new Loader.BackButton() {
+            @Override
+            public void onBackButtonPressed(LoaderView.State _currentState) {
+                getFragmentManager().popBackStack();
+                if (_currentState == LoaderView.State.FAILURE || _currentState == LoaderView.State.SUCCESS) {
+                    getFragmentManager().popBackStack();
+                    if(isIsInEditMode()){
+                        getFragmentManager().popBackStack();
+                    }
+                }
+            }
+        });
         TransactionModel model = getTransactionModel();
         if(isIsInEditMode() && model != null){
             model.title = etComplainTitle.getText().toString();
@@ -139,19 +152,6 @@ public final class ComplainAboutServiceFragment extends BaseComplainFragment
             complainModel.description = etDescription.getText().toString();
             mRequest = new ComplainAboutServiceRequest(complainModel, getActivity(), getImageUri());
         }
-        loaderOverlayShow(getString(R.string.str_sending), this);
-        loaderOverlayButtonBehavior(new Loader.BackButton() {
-            @Override
-            public void onBackButtonPressed(LoaderView.State _currentState) {
-                getFragmentManager().popBackStack();
-                if (_currentState == LoaderView.State.FAILURE || _currentState == LoaderView.State.SUCCESS) {
-                    getFragmentManager().popBackStack();
-                    if(isIsInEditMode()){
-                        getFragmentManager().popBackStack();
-                    }
-                }
-            }
-        });
         getSpiceManager().execute(mRequest, KEY_COMPLAIN_REQUEST, DurationInMillis.ALWAYS_EXPIRED, mRequestResponseListener);
     }
 
@@ -191,12 +191,13 @@ public final class ComplainAboutServiceFragment extends BaseComplainFragment
 
     @Override
     public void onAttachmentGet(@NonNull Uri _uri) {
+        super.onAttachmentGet(_uri);
         tivAddAttachment.setImageResource(R.drawable.ic_check);
     }
 
     @Override
     protected void onAttachmentDeleted() {
-        getTransactionModel().hasAttachment = false;
+        super.onAttachmentDeleted();
         tivAddAttachment.setImageResource(R.drawable.ic_action_attachment);
     }
 
