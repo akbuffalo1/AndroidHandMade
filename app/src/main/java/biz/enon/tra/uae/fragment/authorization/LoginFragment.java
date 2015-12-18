@@ -63,6 +63,16 @@ public class LoginFragment extends BaseAuthorizationFragment
         return R.string.str_login;
     }
 
+    private View.OnLongClickListener listener = new View.OnLongClickListener() {
+        @Override
+        public boolean onLongClick(View v) {
+            etUserName.setText("tuap");
+            etPassword.setText("qwerty123");
+            doLogIn();
+            return true;
+        }
+    };
+
     @Override
     protected final void initViews() {
         // Input fields
@@ -77,15 +87,7 @@ public class LoginFragment extends BaseAuthorizationFragment
         tvForgotPassword = findView(R.id.tvForgotPass_FLI);
 
         if (BuildConfig.DEBUG) {
-            btnLogIn.setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View v) {
-                    etUserName.setText("tuap");
-                    etPassword.setText("qwerty123");
-                    doLogIn();
-                    return true;
-                }
-            });
+            btnLogIn.setOnLongClickListener(listener);
         }
     }
 
