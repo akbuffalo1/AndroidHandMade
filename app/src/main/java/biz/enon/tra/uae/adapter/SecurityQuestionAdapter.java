@@ -10,6 +10,7 @@ import java.util.List;
 
 import biz.enon.tra.uae.R;
 import biz.enon.tra.uae.customviews.ThemedImageView;
+import biz.enon.tra.uae.global.H;
 import biz.enon.tra.uae.rest.model.response.SecurityQuestionResponse;
 
 /**
@@ -85,6 +86,7 @@ public class SecurityQuestionAdapter extends BaseSpinnerAdapter<SecurityQuestion
         @Override
         public void setData(final int _position, final SecurityQuestionResponse _data) {
             tvTitle.setText(_data.text);
+            tvTitle.setTextColor(H.getPrimaryColor(tvTitle.getContext()));
         }
     }
 }

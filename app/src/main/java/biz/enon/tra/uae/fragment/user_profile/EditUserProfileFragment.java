@@ -39,6 +39,7 @@ import biz.enon.tra.uae.entities.HexagonViewTarget;
 import biz.enon.tra.uae.fragment.base.BaseFragment;
 import biz.enon.tra.uae.global.AttachmentOption;
 import biz.enon.tra.uae.global.C;
+import biz.enon.tra.uae.global.H;
 import biz.enon.tra.uae.interfaces.Loader.BackButton;
 import biz.enon.tra.uae.interfaces.Loader.Cancelled;
 import biz.enon.tra.uae.interfaces.OnOpenPermissionExplanationDialogListener;
@@ -194,9 +195,13 @@ public final class EditUserProfileFragment extends BaseFragment
         sSecurityQuestion.setEnabled(_enabled);
         etSecurityAnswer.setEnabled(_enabled);
 
-        final int textColor = ContextCompat.getColor(getActivity(), _enabled
-                ? R.color.fragment_user_profile_text_color_primary
-                : R.color.fragment_user_profile_hint_color);
+        final int textColor;
+        if(_enabled){
+            textColor = H.getPrimaryColor(getActivity());
+        } else {
+            textColor = ContextCompat.getColor(getActivity(), R.color.fragment_user_profile_hint_color);
+        }
+
         etSecurityAnswer.setTextColor(textColor);
         if (mQuestionAdapter != null) {
             mQuestionAdapter.setItemTextColor(textColor);

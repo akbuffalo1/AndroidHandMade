@@ -10,6 +10,7 @@ import android.view.View;
 import java.util.List;
 
 import biz.enon.tra.uae.R;
+import biz.enon.tra.uae.global.H;
 import biz.enon.tra.uae.rest.model.response.SecurityQuestionResponse;
 
 /**
@@ -46,10 +47,7 @@ public class UserProfileQuestionAdapter extends SecurityQuestionAdapter {
         public UserProfileQuestionViewHolder(View _view) {
             super(_view);
             tvTitle.setTextSize(TypedValue.COMPLEX_UNIT_PX, mContext.getResources().getDimension(R.dimen.fragment_edit_user_profile_text_size));
-            tvTitle.setTextColor(ContextCompat.getColor(mContext, R.color.fragment_user_profile_text_color_primary));
+            tvTitle.setTextColor(H.getPrimaryColor(mContext));
         }
-
-
     }
-
 }
