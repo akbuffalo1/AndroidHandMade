@@ -33,25 +33,6 @@ public final class RestClient {
     private TRAServicesAPI mTRAServicesAPI;
     private DynamicServicesApi mDynamicServicesApi;
     private static SSLSocketFactory SSL_SOCKET_FACTORY;
-    public static ConnectionSpec SPECS;
-    static {
-        SPECS = new ConnectionSpec.Builder(ConnectionSpec.MODERN_TLS)
-                .tlsVersions(TlsVersion.TLS_1_2)
-                .cipherSuites(
-                        CipherSuite.TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,
-                        CipherSuite.TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,
-                        CipherSuite.TLS_DHE_RSA_WITH_AES_128_GCM_SHA256,
-                        CipherSuite.TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA,
-                        CipherSuite.TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA,
-                        CipherSuite.TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA,
-                        CipherSuite.TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA,
-                        CipherSuite.TLS_ECDHE_ECDSA_WITH_RC4_128_SHA,
-                        CipherSuite.TLS_ECDHE_RSA_WITH_RC4_128_SHA,
-                        CipherSuite.TLS_DHE_RSA_WITH_AES_128_CBC_SHA,
-                        CipherSuite.TLS_DHE_DSS_WITH_AES_128_CBC_SHA,
-                        CipherSuite.TLS_DHE_RSA_WITH_AES_256_CBC_SHA)
-                .build();
-    }
 
     public static SSLSocketFactory getSSLSocketFactory(Context _context){
         if(SSL_SOCKET_FACTORY == null){
@@ -76,16 +57,12 @@ public final class RestClient {
         okHttpClient.setReadTimeout(TIMEOUT, TimeUnit.SECONDS);
         okHttpClient.setConnectTimeout(TIMEOUT, TimeUnit.SECONDS);
         okHttpClient.setSslSocketFactory(getSSLSocketFactory(_context));
-//        okHttpClient.setConnectionSpecs(Collections.singletonList(SPECS));
-//        okHttpClient.setHostnameVerifier(new AllowAllHostnameVerifier());
 
-        final Builder builder = new Builder()
+        final RestAdapter adapter = new Builder()
                 .setEndpoint(ServerConstants.BASE_URL)
-                .setClient(new OkClient(okHttpClient));
-        if (BuildConfig.DEBUG) {
-            builder.setLogLevel(RestAdapter.LogLevel.HEADERS);
-        }
-        final RestAdapter adapter = builder.build();
+                .setClient(new OkClient(okHttpClient))
+                .setLogLevel(BuildConfig.DEBUG ? RestAdapter.LogLevel.FULL : RestAdapter.LogLevel.NONE)
+                .build();
         mTRAServicesAPI = adapter.create(TRAServicesAPI.class);
         mDynamicServicesApi = adapter.create(DynamicServicesApi.class);
     }

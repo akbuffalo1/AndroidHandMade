@@ -26,17 +26,13 @@ abstract class BaseRetrofitSpiceService extends RetrofitGsonSpiceService {
 
     @Override
     protected final Builder createRestAdapterBuilder() {
-        final Builder builder = super.createRestAdapterBuilder();
-        if (BuildConfig.DEBUG) {
-            builder.setLogLevel(RestAdapter.LogLevel.FULL);
-        }
-
         final OkHttpClient okHttpClient = new OkHttpClient();
         okHttpClient.setReadTimeout(TIMEOUT, TimeUnit.SECONDS);
         okHttpClient.setConnectTimeout(TIMEOUT, TimeUnit.SECONDS);
         okHttpClient.setSslSocketFactory(RestClient.getSSLSocketFactory(getApplicationContext()));
-//        okHttpClient.setConnectionSpecs(Collections.singletonList(RestClient.SPECS));
-//        okHttpClient.setHostnameVerifier(new AllowAllHostnameVerifier());
+
+        final Builder builder = super.createRestAdapterBuilder();
+        builder.setLogLevel(BuildConfig.DEBUG ? RestAdapter.LogLevel.FULL : RestAdapter.LogLevel.NONE);
         builder.setClient(new OkClient(okHttpClient));
 
         return builder;

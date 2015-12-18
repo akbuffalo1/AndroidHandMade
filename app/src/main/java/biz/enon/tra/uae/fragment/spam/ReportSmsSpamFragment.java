@@ -77,9 +77,9 @@ public class ReportSmsSpamFragment extends BaseServiceFragment implements OnClic
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
         mProviderAdapter = new SpamServiceProviderAdapter(getActivity());
         sProviderSpinner.setAdapter(mProviderAdapter);
+        super.onActivityCreated(savedInstanceState);
     }
 
     @Override
@@ -140,10 +140,6 @@ public class ReportSmsSpamFragment extends BaseServiceFragment implements OnClic
             Toast.makeText(getActivity(), R.string.str_invalid_number, C.TOAST_LENGTH).show();
             return false;
         }
-//        if (etDescription.getText().toString().isEmpty()) {
-//            Toast.makeText(getActivity(), R.string.fragment_complain_no_description, C.TOAST_LENGTH).show();
-//            return false;
-//        }
         return true;
     }
 

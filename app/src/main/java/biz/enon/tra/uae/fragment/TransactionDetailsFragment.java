@@ -59,7 +59,6 @@ public class TransactionDetailsFragment extends BaseFragment implements OnClickL
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         final Bundle args = getArguments();
         mTransaction = args.getParcelable(KEY_TRANSACTION);
         mIconColor = args.getIntArray(KEY_ICON_RES_AND_COLOR);
