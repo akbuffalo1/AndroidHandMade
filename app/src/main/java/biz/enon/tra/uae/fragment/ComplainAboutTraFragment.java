@@ -109,7 +109,7 @@ public class ComplainAboutTraFragment extends BaseComplainFragment
         hideKeyboard(v);
         switch (v.getId()) {
             case R.id.tivAddAttachment_FCAT:
-                openImagePicker();
+                openImagePicker(getTransactionModel()!= null ? getTransactionModel().hasAttachment : false);
                 break;
         }
     }

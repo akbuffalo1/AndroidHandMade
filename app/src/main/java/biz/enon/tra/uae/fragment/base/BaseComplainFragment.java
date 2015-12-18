@@ -89,8 +89,12 @@ public abstract class BaseComplainFragment extends BaseServiceFragment
         return mAttachmentManager.getImageUri();
     }
 
-    protected void openImagePicker() {
-        mAttachmentManager.openDefaultPicker(getActivity(), this);
+    protected void openImagePicker(boolean _forceShowDeleteButton) {
+        if(_forceShowDeleteButton){
+            mAttachmentManager.openDefaultPicker(getActivity(), this, _forceShowDeleteButton);
+        } else {
+            mAttachmentManager.openDefaultPicker(getActivity(), this);
+        }
     }
 
     @Override
