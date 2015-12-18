@@ -30,13 +30,15 @@ import biz.enon.tra.uae.rest.robo_requests.BaseRequest;
 import biz.enon.tra.uae.rest.robo_requests.PutTransactionsRequest;
 import biz.enon.tra.uae.rest.robo_requests.SmsReportRequest;
 import biz.enon.tra.uae.util.SmsUtils;
+import retrofit.client.Response;
 
 /**
  * Created by mobimaks on 24.09.2015.
  */
-public class ReportSmsSpamFragment extends BaseServiceFragment implements OnClickListener, Cancelled {
+public class ReportSmsSpamFragment extends BaseServiceFragment implements OnClickListener, Cancelled, RequestListener<Response> {
 
     private static final String KEY_REPORT_SMS_SPAM_REQUEST = "REPORT_SMS_SPAM_REQUEST";
+    private static final String KEY_PUT_TRANSACTION_REQUEST = "PUT_TRANSACTION_REQUEST";
 
     private Spinner sProviderSpinner;
     private EditText etNumberOfSpammer, etDescription;
@@ -106,18 +108,6 @@ public class ReportSmsSpamFragment extends BaseServiceFragment implements OnClic
 
     private void validateAndSendData() {
         if (validateData()) {
-            TransactionModel model = getTransactionModel();
-            if(isIsInEditMode() && model != null) {
-                model.phone = etNumberOfSpammer.getText().toString();
-                model.description = etDescription.getText().toString();
-                mRequest = new PutTransactionsRequest(model, getActivity(), null);
-            } else {
-                mRequest = new SmsReportRequest(
-                        new SmsReportRequestModel(
-                                etNumberOfSpammer.getText().toString(),
-                                etDescription.getText().toString()
-                        ));
-            }
             loaderOverlayShow(getString(R.string.str_sending), this);
             loaderOverlayButtonBehavior(new Loader.BackButton() {
                 @Override
@@ -129,9 +119,25 @@ public class ReportSmsSpamFragment extends BaseServiceFragment implements OnClic
                     }
                 }
             });
-            getSpiceManager().execute(
-                    mRequest, KEY_REPORT_SMS_SPAM_REQUEST,
-                    DurationInMillis.ALWAYS_EXPIRED, new SmsSpamReportResponseListener());
+
+            TransactionModel model = getTransactionModel();
+            if(isIsInEditMode() && model != null) {
+                model.phone = etNumberOfSpammer.getText().toString();
+                model.description = etDescription.getText().toString();
+                mRequest = new PutTransactionsRequest(model, getActivity(), null);
+                getSpiceManager().execute(
+                        mRequest, KEY_PUT_TRANSACTION_REQUEST,
+                        DurationInMillis.ALWAYS_EXPIRED, this);
+            } else {
+                mRequest = new SmsReportRequest(
+                        new SmsReportRequestModel(
+                                etNumberOfSpammer.getText().toString(),
+                                etDescription.getText().toString()
+                        ));
+                getSpiceManager().execute(
+                        mRequest, KEY_REPORT_SMS_SPAM_REQUEST,
+                        DurationInMillis.ALWAYS_EXPIRED, new SmsSpamReportResponseListener());
+            }
         }
     }
 
@@ -148,6 +154,8 @@ public class ReportSmsSpamFragment extends BaseServiceFragment implements OnClic
         super.onStart();
         getSpiceManager().getFromCache(SmsSpamResponseModel.class, KEY_REPORT_SMS_SPAM_REQUEST,
                 DurationInMillis.ALWAYS_RETURNED, new SmsSpamReportResponseListener());
+        getSpiceManager().getFromCache(Response.class, KEY_REPORT_SMS_SPAM_REQUEST,
+                DurationInMillis.ALWAYS_RETURNED, this);
     }
 
     @Override
@@ -166,6 +174,19 @@ public class ReportSmsSpamFragment extends BaseServiceFragment implements OnClic
     @Override
     protected String getServiceName() {
         return C.RATE_NAME_SPAM_REPORT;//"SMS Spam Report";
+    }
+
+    @Override
+    public void onRequestFailure(SpiceException spiceException) {
+        processError(spiceException);
+    }
+
+    @Override
+    public void onRequestSuccess(Response _response) {
+        if (isAdded()) {
+            getSpiceManager().removeDataFromCache(SmsSpamResponseModel.class, KEY_PUT_TRANSACTION_REQUEST);
+            loaderOverlaySuccess(getString(R.string.str_reuqest_has_been_sent));
+        }
     }
 
     private final class SmsSpamReportResponseListener implements RequestListener<SmsSpamResponseModel> {

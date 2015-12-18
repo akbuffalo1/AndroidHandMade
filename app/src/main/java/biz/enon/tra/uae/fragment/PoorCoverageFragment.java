@@ -318,7 +318,6 @@ public class PoorCoverageFragment extends BaseServiceFragment implements //regio
     }
 
     protected synchronized void buildGoogleApiClient() {
-        Log.i(TAG, "Building GoogleApiClient");
         mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
