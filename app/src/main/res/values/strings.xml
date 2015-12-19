@@ -348,7 +348,7 @@
     <string name="rate_service">Rate Service</string>
     <string name="rate_service_title">RATE</string>
 
-    <string-array name="rate_names">
+    <string-array name="rate_names" translatable="false">
         <item>1</item>
         <item>2</item>
         <item>3</item>
