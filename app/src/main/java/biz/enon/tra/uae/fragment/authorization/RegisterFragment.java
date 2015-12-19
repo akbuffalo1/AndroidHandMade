@@ -542,9 +542,15 @@ public class RegisterFragment extends BaseAuthorizationFragment implements OnCli
                             etPassword.requestFocus();
                             return false;
                         }
+                        return true;
+                    }
+                });
+
+                addFilter(new Filter<RegisterModel>() {
+                    @Override
+                    public boolean check(RegisterModel _data) {
                         if (!_data.pass.equals(etConfirmPassword.getText().toString())) {
                             showMessage(0, R.string.str_error, R.string.error_password_confirm);
-                            etPassword.setError(getString(R.string.error_password_confirm));
                             etConfirmPassword.setError(getString(R.string.error_password_confirm));
                             etConfirmPassword.requestFocus();
                             return false;
