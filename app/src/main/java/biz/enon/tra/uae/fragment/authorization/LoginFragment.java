@@ -68,7 +68,7 @@ public class LoginFragment extends BaseAuthorizationFragment
         @Override
         public boolean onLongClick(View v) {
             etUserName.setText("hello");
-            etPassword.setText("qwerty123");
+            etPassword.setText("Qwertyui123");
             doLogIn();
             return true;
         }

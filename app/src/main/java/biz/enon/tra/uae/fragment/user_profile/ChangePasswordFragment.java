@@ -26,6 +26,7 @@ import biz.enon.tra.uae.global.C;
 import biz.enon.tra.uae.interfaces.Loader.BackButton;
 import biz.enon.tra.uae.interfaces.Loader.Cancelled;
 import biz.enon.tra.uae.rest.robo_requests.ChangePasswordRequest;
+import biz.enon.tra.uae.util.TRAPatterns;
 import retrofit.client.Response;
 
 import static biz.enon.tra.uae.global.C.MAX_PASSWORD_LENGTH;
@@ -130,7 +131,7 @@ public class ChangePasswordFragment extends BaseFragment implements OnCheckedCha
             return false;
         }
 
-        if (newPass.length() < MIN_PASSWORD_LENGTH) {
+        /*if (newPass.length() < MIN_PASSWORD_LENGTH) {
             Toast.makeText(getActivity(), R.string.authorization_invalid_password_short, C.TOAST_LENGTH).show();
             return false;
         }
@@ -138,10 +139,10 @@ public class ChangePasswordFragment extends BaseFragment implements OnCheckedCha
         if (newPass.length() > MAX_PASSWORD_LENGTH) {
             Toast.makeText(getActivity(), R.string.authorization_invalid_password_long, C.TOAST_LENGTH).show();
             return false;
-        }
+        }*/
 
-        if (!newPass.equals(newPassRetype)) {
-            Toast.makeText(getActivity(), R.string.error_password_confirm, C.TOAST_LENGTH).show();
+        if (!TRAPatterns.PASSWORD_PATTERN.matcher(newPass).matches()) {
+            Toast.makeText(getActivity(), getString(R.string.error_password_rules), C.TOAST_LENGTH).show();
             return false;
         }
 
