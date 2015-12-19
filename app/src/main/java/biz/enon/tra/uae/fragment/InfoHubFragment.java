@@ -402,16 +402,17 @@ public final class InfoHubFragment extends BaseFragment
             mIsTransactionsInLoading = false;
             if (isAdded()) {
                 if (result != null) {
-                    if (mTransactionsModel != null) mTransactionsModel.addAll(result);
                     mIsAllTransactionDownloaded = result.isEmpty();
                     if (mIsAllTransactionDownloaded) {
                         handleNoResult();
                     } else {
                         if (mTransactionPageNum == 1) {
                             mTransactionsListAdapter.clearData();
+                            mTransactionsModel.clear();
                         }
                         mTransactionsListAdapter.addAll(result);
                         mTransactionsOperationStateManager.showData();
+                        mTransactionsModel.addAll(result);
                     }
                 } else {
                     mTransactionPageNum--;
