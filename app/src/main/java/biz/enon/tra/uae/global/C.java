@@ -9,6 +9,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import biz.enon.tra.uae.R;
 
@@ -40,8 +42,6 @@ public final class C {
 
     public static final String ORANGE_THEME = "AppThemeOrange";
 
-    public static final String DOMAIN_PATTERN = "^(http|ftp|https)://|^[a-zA-Z0-9]+\\.[a-zA-Z][a-zA-Z]";
-
     public static final String DOMAIN_INFO = "domainStrValue";
 
     public static final String DOMAIN_STATUS = "domain_status";
@@ -71,6 +71,10 @@ public final class C {
     public static final String IS_LOGGED_IN = "is_logged_in";
 
     public static final String NO_QUESTION_ERROR = "No question or answer";
+
+    public static final int PASS_GOOD = 1;
+
+    public static final int PASS_BAD = -1;
 
     //region Service names const
     @StringDef({

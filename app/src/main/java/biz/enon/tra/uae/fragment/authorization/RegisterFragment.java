@@ -6,7 +6,6 @@ import android.support.v4.content.ContextCompat;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -132,6 +131,8 @@ public class RegisterFragment extends BaseAuthorizationFragment implements OnCli
         rlEnhancedSecurity.setOnClickListener(this);
         etEmiratesId.addTextChangedListener(this);
         etEmiratesId.setOnFocusChangeListener(this);
+        etPassword.setOnFocusChangeListener(this);
+        etConfirmPassword.setOnFocusChangeListener(this);
     }
 
     @Override
@@ -140,13 +141,26 @@ public class RegisterFragment extends BaseAuthorizationFragment implements OnCli
         if(v.getId() == R.id.etEmiratesID_FR && hasFocus){
             etEmiratesId.setText(current = MASK);
         }
+        if(v.getId() == R.id.etPassword_FR && ((TextView) v).getText().length() > 0 && !hasFocus){
+            if(!TRAPatterns.PASSWORD_PATTERN.matcher(((TextView) v).getText().toString()).matches()){
+                Toast.makeText(getActivity(), getString(R.string.error_password_rules), Toast.LENGTH_LONG).show();
+                v.setTag(C.PASS_BAD);
+                return;
+            }
+            v.setTag(C.PASS_GOOD);
+        }
+        if(v.getId() == R.id.etConfirmPassword_FR && ((TextView) v).getText().length() > 0 && !hasFocus && etPassword.getTag().equals(C.PASS_GOOD)){
+            if (!etConfirmPassword.getText().toString().equals(etPassword.getText().toString())) {
+                Toast.makeText(getActivity(), getString(R.string.error_password_confirm), Toast.LENGTH_LONG).show();
+                return;
+            }
+        }
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         initFilters();
-
         initQuestionsSpinner();
     }
 
@@ -275,13 +289,12 @@ public class RegisterFragment extends BaseAuthorizationFragment implements OnCli
             Toast.makeText(getActivity(), R.string.authorization_invalid_email_format, C.TOAST_LENGTH).show();
             return false;
         }
-        if (password.length() < C.MIN_PASSWORD_LENGTH) {
-            Toast.makeText(getActivity(), R.string.authorization_invalid_password_short, C.TOAST_LENGTH).show();
-            return false;
-        } else if (password.length() > C.MAX_PASSWORD_LENGTH) {
-            Toast.makeText(getActivity(), R.string.authorization_invalid_password_long, C.TOAST_LENGTH).show();
+
+        if (!TRAPatterns.PASSWORD_PATTERN.matcher(password).matches()) {
+            Toast.makeText(getActivity(), getString(R.string.error_password_rules), C.TOAST_LENGTH).show();
             return false;
         }
+
         if (!password.equals(confirmPassword)) {
             Toast.makeText(getActivity(), R.string.error_password_confirm, C.TOAST_LENGTH).show();
             return false;
@@ -430,7 +443,6 @@ public class RegisterFragment extends BaseAuthorizationFragment implements OnCli
 
         @Override
         public void onRequestSuccess(Response result) {
-            Log.d(getClass().getSimpleName(), "Success. isAdded: " + isAdded());
             if (isAdded()) {
                 loaderOverlayDismissWithAction(new Loader.Dismiss() {
                     @Override
@@ -524,6 +536,12 @@ public class RegisterFragment extends BaseAuthorizationFragment implements OnCli
                 addFilter(new Filter<RegisterModel>() {
                     @Override
                     public boolean check(RegisterModel _data) {
+                        if (!TRAPatterns.PASSWORD_PATTERN.matcher(_data.pass).matches()) {
+                            showMessage(0, R.string.str_error, R.string.error_password_rules);
+                            etPassword.setError(getString(R.string.error_password_rules));
+                            etPassword.requestFocus();
+                            return false;
+                        }
                         if (!_data.pass.equals(etConfirmPassword.getText().toString())) {
                             showMessage(0, R.string.str_error, R.string.error_password_confirm);
                             etPassword.setError(getString(R.string.error_password_confirm));

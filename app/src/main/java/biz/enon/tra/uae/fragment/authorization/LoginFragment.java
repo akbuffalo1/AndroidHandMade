@@ -53,6 +53,7 @@ public class LoginFragment extends BaseAuthorizationFragment
     private QuestionsResponseListener mQuestionsListener;
 
     private SecurityQuestionsRequest mQuestionsRequest;
+    private LoginRequest mLoginRequest;
 
     public static LoginFragment newInstance() {
         return new LoginFragment();
@@ -66,7 +67,7 @@ public class LoginFragment extends BaseAuthorizationFragment
     private View.OnLongClickListener listener = new View.OnLongClickListener() {
         @Override
         public boolean onLongClick(View v) {
-            etUserName.setText("tuap");
+            etUserName.setText("hello");
             etPassword.setText("qwerty123");
             doLogIn();
             return true;
@@ -95,7 +96,6 @@ public class LoginFragment extends BaseAuthorizationFragment
     protected final void initListeners() {
         mRequestLoginListener = new RequestResponseListener();
         mQuestionsListener = new QuestionsResponseListener();
-//        tvRestorePassword.setOnClickListener(this);
         btnLogIn.setOnClickListener(this);
         tvRegisterNow.setOnClickListener(this);
         tvForgotPassword.setOnClickListener(this);
@@ -157,22 +157,20 @@ public class LoginFragment extends BaseAuthorizationFragment
         return true;
     }
 
-    private LoginRequest mRequest;
-
     private void doLogIn() {
+        loaderOverlayShow(getString(R.string.str_authenticating), this, false);
+
         LoginModel model = new LoginModel();
         model.login = etUserName.getText().toString();
         model.pass = etPassword.getText().toString();
 
-        loaderOverlayShow(getString(R.string.str_authenticating), this, false);
-
-        getSpiceManager().execute(mRequest = new LoginRequest(model), KEY_LOGIN_REQUEST, DurationInMillis.ALWAYS_EXPIRED, mRequestLoginListener);
+        getSpiceManager().execute(mLoginRequest = new LoginRequest(model), KEY_LOGIN_REQUEST, DurationInMillis.ALWAYS_EXPIRED, mRequestLoginListener);
     }
 
     @Override
     public void onLoadingCanceled() {
-        if (getSpiceManager().isStarted() && mRequest != null) {
-            getSpiceManager().cancel(mRequest);
+        if (getSpiceManager().isStarted() && mLoginRequest != null) {
+            getSpiceManager().cancel(mLoginRequest);
         }
     }
 
@@ -273,8 +271,6 @@ public class LoginFragment extends BaseAuthorizationFragment
             if (isAdded()) {
                 loaderOverlayFailed(getString(R.string.str_request_failed), false);
             }
-
         }
-
     }
 }

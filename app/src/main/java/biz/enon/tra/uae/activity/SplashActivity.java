@@ -18,9 +18,7 @@ import java.util.Random;
 import biz.enon.tra.uae.R;
 import biz.enon.tra.uae.activity.base.BaseActivity;
 
-public class SplashActivity extends BaseActivity {
-
-//    private static final int SPLASH_DELAY = 100000;
+public class SplashActivity extends BaseActivity implements Animator.AnimatorListener {
 
     public static final String PROGRESS_PROPERTY = "progress";
     private static final int MIN_DURATION = 2000; //ms
@@ -40,48 +38,8 @@ public class SplashActivity extends BaseActivity {
         ObjectAnimator animator = ObjectAnimator.ofInt(pbLoadingProgress, PROGRESS_PROPERTY, 0, 100);
         animator.setDuration(new Random().nextInt(MAX_DURATION - MIN_DURATION) + MIN_DURATION);
         animator.setInterpolator(getRandomInterpolator());
-        animator.addListener(new Animator.AnimatorListener() {
-            @Override
-            public void onAnimationStart(Animator animation) {
-
-            }
-
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                mIsFinishLoading = true;
-                invalidateLoadingState();
-            }
-
-            @Override
-            public void onAnimationCancel(Animator animation) {
-
-            }
-
-            @Override
-            public void onAnimationRepeat(Animator animation) {
-
-            }
-
-        });
+        animator.addListener(this);
         animator.start();
-
-//        // Run post delayed activity start
-//        new Handler().postDelayed(new Runnable() {
-//
-//            /*
-//             * Showing splash screen with a timer. This will be useful when you
-//             */
-//            @Override
-//            public void run() {
-//
-//                // We are starting the Main activity
-//                Intent i = new Intent(SplashActivity.this, HomeActivity.class);
-//                startActivity(i);
-//
-//                // close this activity
-//                finish();
-//            }
-//        }, /*BuildConfig.DEBUG ? 0 :*/ SPLASH_DELAY);
     }
 
     @Override
@@ -93,11 +51,8 @@ public class SplashActivity extends BaseActivity {
 
     private void invalidateLoadingState() {
         if (!mIsPaused && mIsFinishLoading) {
-            // We are starting the Main activity
             Intent i = new Intent(SplashActivity.this, HomeActivity.class);
             startActivity(i);
-
-            // close this activity
             finish();
         }
     }
@@ -124,4 +79,19 @@ public class SplashActivity extends BaseActivity {
                 return new LinearOutSlowInInterpolator();
         }
     }
+
+    @Override
+    public void onAnimationStart(Animator animation) { }
+
+    @Override
+    public void onAnimationEnd(Animator animation) {
+        mIsFinishLoading = true;
+        invalidateLoadingState();
+    }
+
+    @Override
+    public void onAnimationCancel(Animator animation) { }
+
+    @Override
+    public void onAnimationRepeat(Animator animation) { }
 }

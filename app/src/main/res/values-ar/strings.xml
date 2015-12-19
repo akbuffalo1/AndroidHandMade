@@ -407,4 +407,5 @@
     <string name="fragment_edit_user_profile_security_answer_hint">الجواب السري</string>
     <string name="status">الحالة:</string>
     <string name="error_server_connection">غير قادر على الاتصال بالخادم.</string>
+    <string name="error_password_rules">Password has to meet: Min 8 chars, One uppercase and One number</string>
 </resources>
