@@ -75,7 +75,7 @@ public class ServicesRecyclerViewAdapter extends Adapter<ServicesRecyclerViewAda
     public void onBindViewHolder(final ViewHolder _viewHolder, final int _position) {
         final int viewType = getItemViewType(_position);
         if(_position == 4){
-            _viewHolder.setEmptyData(_position); // TODO: LIFE HACK - REMOVE THIS CONDITION WITH BODY, used to skip one empty service in layoutmanager
+            _viewHolder.setEmptyData(_position); // TODO: LIFE HACK - REMOVE THIS CONDITION WITH BODY, used to skip one empty service in layout manager
         } else if (viewType == STATIC_SERVICE_TYPE) {
             ((StaticServiceViewHolder) _viewHolder).setData(_position, mDataSet.get(_position));
         } else if (_position < mDataSet.size() + FAKE_ITEMS_COUNT) {

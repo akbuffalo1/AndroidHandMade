@@ -133,7 +133,7 @@ public class TransactionDetailsFragment extends BaseFragment implements OnClickL
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.btnEdit_FTD && mOnServiceSelectListener != null) {
-            mOnServiceSelectListener.onServiceSelect(service, mTransaction);
+            mOnServiceSelectListener.onServiceSelect(service, mTransaction, getTargetFragment());
         }
     }
 

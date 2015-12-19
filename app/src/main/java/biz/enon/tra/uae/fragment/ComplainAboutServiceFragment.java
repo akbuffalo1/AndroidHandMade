@@ -1,5 +1,7 @@
 package biz.enon.tra.uae.fragment;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -131,9 +133,7 @@ public final class ComplainAboutServiceFragment extends BaseComplainFragment
                 getFragmentManager().popBackStack();
                 if (_currentState == LoaderView.State.FAILURE || _currentState == LoaderView.State.SUCCESS) {
                     getFragmentManager().popBackStack();
-                    if(isIsInEditMode()){
-                        getFragmentManager().popBackStack();
-                    }
+                    reloadTransactionListIfNeed(_currentState);
                 }
             }
         });

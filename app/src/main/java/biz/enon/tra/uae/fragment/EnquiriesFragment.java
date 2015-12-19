@@ -58,9 +58,7 @@ public class EnquiriesFragment extends ComplainAboutTraFragment {
                 getFragmentManager().popBackStack();
                 if (_currentState == LoaderView.State.FAILURE || _currentState == LoaderView.State.SUCCESS) {
                     getFragmentManager().popBackStack();
-                    if(isIsInEditMode()){
-                        getFragmentManager().popBackStack();
-                    }
+                    reloadTransactionListIfNeed(_currentState);
                 }
             }
         });

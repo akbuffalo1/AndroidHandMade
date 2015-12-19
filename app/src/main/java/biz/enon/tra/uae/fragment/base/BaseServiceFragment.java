@@ -1,6 +1,7 @@
 package biz.enon.tra.uae.fragment.base;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.CallSuper;
 import android.support.annotation.NonNull;
@@ -77,6 +78,16 @@ public abstract class BaseServiceFragment extends BaseFragment
             mTransactionModel = savedInstanceState.getParcelable(KEY_TARNS_MODEL);
         }
         return mTransactionModel;
+    }
+
+    protected void reloadTransactionListIfNeed(LoaderView.State _state){
+        if(mIsInEditMode){
+            getTargetFragment().onActivityResult(
+                    getTargetRequestCode(),
+                    _state == LoaderView.State.SUCCESS ? Activity.RESULT_OK : Activity.RESULT_CANCELED,
+                    new Intent());
+            getFragmentManager().popBackStack();
+        }
     }
 
     @Override

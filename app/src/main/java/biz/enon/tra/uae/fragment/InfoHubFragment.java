@@ -1,6 +1,7 @@
 package biz.enon.tra.uae.fragment;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
@@ -53,6 +54,8 @@ public final class InfoHubFragment extends BaseFragment
     private static final String KEY_TRANSACTIONS_MODEL = "TRANSACTIONS_MODEL";
     private static final String KEY_ANNOUNCEMENTS_MODEL = "ANNOUNCEMENTS_MODEL";
 
+    public static final int KEY_TRANSACTION_EDIT_REQUEST = 10000;
+
     private int mTransactionPageNum;
     private boolean mIsSearching;
     private boolean mIsAllTransactionDownloaded;
@@ -71,13 +74,14 @@ public final class InfoHubFragment extends BaseFragment
     private TransactionsResponseListener mTransactionsListener;
     private AnnouncementsResponseListener mAnnouncementsResponseListener;
     private EndlessScrollListener mEndlessScrollListener;
-    private OnTransactionPressedListener mItemPressedListener;
+    private OnTransactionDetail mItemPressedListener;
     private boolean mIsTransactionsInLoading;
     private BooleanHolder mIsAnnouncementsInLoading = new BooleanHolder();
     private HexagonSwipeRefreshLayout mHexagonSwipeRefreshLayout;
     private GetTransactionsRequest transactionsRequest;
     private int loadedCount = 0;
     private String mSearchPhrase = "";
+    private boolean transactionEdited = false;
 
     private ArrayList<TransactionModel> mTransactionsModel = new ArrayList<>();
     private ArrayList<GetAnnouncementsResponseModel.Announcement> mAnnouncementsModel = new ArrayList<>();
@@ -87,7 +91,6 @@ public final class InfoHubFragment extends BaseFragment
     }
 
     private final OperationStateManager mAnnouncementsOperationStateManager = new OperationStateManager() {
-
         @Override
         public final void showProgress() {
             lvAnnouncementsLoader.setVisibility(View.VISIBLE);
@@ -136,7 +139,6 @@ public final class InfoHubFragment extends BaseFragment
     }
 
     private final OperationStateManager mTransactionsOperationStateManager = new OperationStateManager() {
-
         @Override
         public final void showProgress() {
             mHexagonSwipeRefreshLayout.onLoadingStart();
@@ -168,7 +170,7 @@ public final class InfoHubFragment extends BaseFragment
     @Override
     public void onAttach(Activity _activity) {
         super.onAttach(_activity);
-        mItemPressedListener = (OnTransactionPressedListener) _activity;
+        mItemPressedListener = (OnTransactionDetail) _activity;
     }
 
     @Override
@@ -186,7 +188,6 @@ public final class InfoHubFragment extends BaseFragment
     }
 
     private void initAnnouncementsListPreview() {
-//        mAnnouncementsListPreview.setHasFixedSize(true);
         mAnnouncementsLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         mAnnouncementsListPreview.setLayoutManager(mAnnouncementsLayoutManager);
         mAnnouncementsListAdapter = new AnnouncementsAdapter(getActivity(), mAnnouncementsOperationStateManager, true);
@@ -350,8 +351,7 @@ public final class InfoHubFragment extends BaseFragment
         }
         if (mTransactionsModel.size() == 0 && mAnnouncementsModel.size() == 0) {
             startFirstLoad();
-            return;
-        } else if (mTransactionsModel.size() == 0) {
+        } else if (transactionEdited || mTransactionsModel.size() == 0) {
             loadTransactionPage(mTransactionPageNum = 1, true);
             mAnnouncementsListAdapter.addAll(mAnnouncementsModel);
             mAnnouncementsOperationStateManager.showData();
@@ -365,11 +365,15 @@ public final class InfoHubFragment extends BaseFragment
             mTransactionsListAdapter.addAll(mTransactionsModel);
             mTransactionsOperationStateManager.showData();
         }
+        transactionEdited = false;
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == KEY_TRANSACTION_EDIT_REQUEST && resultCode == Activity.RESULT_OK)
+            transactionEdited = true;
+        else
+            transactionEdited = false;
     }
 
     @Override
@@ -388,7 +392,7 @@ public final class InfoHubFragment extends BaseFragment
     public void onTransactionPressed(int[] icon_color, TransactionModel _model) {
         mIsSearching = false;
         if (mItemPressedListener != null) {
-            mItemPressedListener.onTransactionPressed(icon_color, _model);
+            mItemPressedListener.onOpenTransactionDetail(icon_color, _model, this);
         }
     }
 
@@ -432,6 +436,10 @@ public final class InfoHubFragment extends BaseFragment
                 mTransactionsListAdapter.stopLoading();
             }
         }
+    }
+
+    public interface OnTransactionDetail {
+        void onOpenTransactionDetail(int[] icon_color, TransactionModel _model, Fragment _targerFragment);
     }
 
     @Override

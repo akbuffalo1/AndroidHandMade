@@ -2,6 +2,7 @@ package biz.enon.tra.uae.fragment;
 
 import android.animation.ValueAnimator;
 import android.app.Activity;
+import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -447,6 +448,8 @@ public class HexagonHomeFragment extends BaseFragment implements OnServiceSelect
         void onServiceSelect(final Service _service, Parcelable _data);
 
         void onServiceSelect(final DynamicServiceInfoResponseModel _service, Parcelable _data);
+
+        void onServiceSelect(final Service _service, Parcelable _data, Fragment _targetFragment);
     }
 
     public interface OnStaticServiceSelectListener {

@@ -86,7 +86,7 @@ public class HomeActivity extends BaseFragmentActivity implements //region INTER
         HexagonHomeFragment.OnOpenUserProfileClickListener, OnUserProfileClickListener, HexagonHomeFragment.OnHeaderStaticServiceSelectedListener,
         SettingsFragment.OnOpenAboutTraClickListener, ReportSpamFragment.OnReportSpamServiceSelectListener, SpamHistoryFragment.OnAddToSpamClickListener,
         OnActivateTutorialListener, MobileVerificationFragment.OnDeviceVerifiedListener, TutorialContainerFragment.OnTuorialClosedListener,
-        EditUserProfileFragment.OnUserProfileDataChangeListener, ServiceInfoFragment.OnOpenServiceInfoDetailsListener, TransactionsAdapter.OnTransactionPressedListener {
+        EditUserProfileFragment.OnUserProfileDataChangeListener, ServiceInfoFragment.OnOpenServiceInfoDetailsListener, InfoHubFragment.OnTransactionDetail {
     //endregion
 
     private static final String KEY_CHECKED_TAB_ID = "CHECKED_TAB_ID";
@@ -177,10 +177,15 @@ public class HomeActivity extends BaseFragmentActivity implements //region INTER
 
     @Override
     public void onServiceSelect(final Service _service, @Nullable Parcelable _data) {
-        onServiceSelect(_service, _data, true);
+        onServiceSelect(_service, _data, true, null);
     }
 
-    public void onServiceSelect(final Service _service, @Nullable Parcelable _data, final boolean _useBackStack) {
+    @Override
+    public void onServiceSelect(Service _service, Parcelable _data, Fragment _targetFragment) {
+        onServiceSelect(_service, _data, true, _targetFragment);
+    }
+
+    public void onServiceSelect(final Service _service, @Nullable Parcelable _data, final boolean _useBackStack, @Nullable Fragment _targetFragment) {
         switch (_service) {
             case DOMAIN_CHECK:
                 replaceFragment(DomainCheckerFragment.newInstance(), _useBackStack);
@@ -192,20 +197,19 @@ public class HomeActivity extends BaseFragmentActivity implements //region INTER
                 replaceFragment(DomainIsAvailableFragment.newInstance((DomainAvailabilityCheckResponseModel) _data), _useBackStack);
                 break;
             case COMPLAIN_ABOUT_PROVIDER:
-                openFragmentIfAuthorized(_data != null ? ComplainAboutServiceFragment.newInstance(_data) : ComplainAboutServiceFragment.newInstance(), _service, _useBackStack);
+                openFragmentIfAuthorized(_data != null ? ComplainAboutServiceFragment.newInstance(_data) : ComplainAboutServiceFragment.newInstance(), _service, _targetFragment);
                 break;
             case ENQUIRIES:
-                openFragmentIfAuthorized(_data != null ? EnquiriesFragment.newInstance(_data) : EnquiriesFragment.newInstance(), _service, _useBackStack);
+                openFragmentIfAuthorized(_data != null ? EnquiriesFragment.newInstance(_data) : EnquiriesFragment.newInstance(), _service, _targetFragment);
                 break;
             case COMPLAINT_ABOUT_TRA:
-                openFragmentIfAuthorized(_data != null ? ComplainAboutTraFragment.newInstance(_data) : ComplainAboutTraFragment.newInstance(), _service, _useBackStack);
+                openFragmentIfAuthorized(_data != null ? ComplainAboutTraFragment.newInstance(_data) : ComplainAboutTraFragment.newInstance(), _service, _targetFragment);
                 break;
             case SUGGESTION:
-                openFragmentIfAuthorized(_data != null ? SuggestionFragment.newInstance(_data) : SuggestionFragment.newInstance(), _service, _useBackStack);
+                openFragmentIfAuthorized(_data != null ? SuggestionFragment.newInstance(_data) : SuggestionFragment.newInstance(), _service, _targetFragment);
                 break;
             case BLOCK_WEBSITE:
-                openFragmentIfAuthorized(_data != null ? ReportWebSpamFragment.newInstance(_data) : ReportWebSpamFragment.newInstance(), _service, _useBackStack);
-                break;
+                openFragmentIfAuthorized(_data != null ? ReportWebSpamFragment.newInstance(_data) : ReportWebSpamFragment.newInstance(), _service, _targetFragment);
             case MOBILE_BRAND:
                 replaceFragment(MobileBrandFragment.newInstance(), _useBackStack);
                 break;
@@ -218,13 +222,6 @@ public class HomeActivity extends BaseFragmentActivity implements //region INTER
             case POOR_COVERAGE:
                 replaceFragment(PoorCoverageFragment.newInstance(), _useBackStack);
                 break;
-//            case T_SMS_SPAM:
-//                replaceFragment(_data != null ? SmsSpamReportFragment.newInstance(_data) : SmsSpamReportFragment.newInstance(), _useBackStack);
-//                break;
-//
-//            case INTERNET_SPEEDTEST:
-//                replaceFragment(SpeedTestFragment.newInstance(), _useBackStack);
-//                break;
         }
     }
 
@@ -237,15 +234,14 @@ public class HomeActivity extends BaseFragmentActivity implements //region INTER
         openFragmentIfAuthorized(_fragment, _service, null, true);
     }
 
-    private void openFragmentIfAuthorized(final BaseFragment _fragment, final Enum _service, final boolean _useBackStack) {
-        openFragmentIfAuthorized(_fragment, _service, null, _useBackStack);
+    private void openFragmentIfAuthorized(final BaseFragment _fragment, final Enum _service, final Fragment _targetFragment) {
+        if(_targetFragment != null){
+            _fragment.setTargetFragment(_targetFragment, InfoHubFragment.KEY_TRANSACTION_EDIT_REQUEST);
+        }
+        openFragmentIfAuthorized(_fragment, _service, null, true);
     }
 
-    private void openFragmentIfAuthorized(final BaseFragment _fragment, final Enum _service, final Parcelable _data) {
-        openFragmentIfAuthorized(_fragment, _service, _data, true);
-    }
-
-    private void openFragmentIfAuthorized(final BaseFragment _fragment, final Enum _service, final Parcelable _data, final boolean _useBackStack) {
+    private void openFragmentIfAuthorized(final BaseFragment _fragment, final Enum _service, @Nullable final Parcelable _data, final boolean _useBackStack) {
         if (TRAApplication.isLoggedIn()) {
             replaceFragment(_fragment, _useBackStack);
         } else {
@@ -291,7 +287,7 @@ public class HomeActivity extends BaseFragmentActivity implements //region INTER
 
     private void openFragmentAfterLogin(final Enum _fragmentType, @Nullable Parcelable _data, final boolean _useBackStack) {
         if (_fragmentType instanceof Service) {
-            onServiceSelect((Service) _fragmentType, null, _useBackStack);
+            onServiceSelect((Service) _fragmentType, null, _useBackStack, null);
         } else if (_fragmentType instanceof FragmentType) {
             openFragmentAfterLogin((FragmentType) _fragmentType, _data, _useBackStack);
         }
@@ -369,20 +365,6 @@ public class HomeActivity extends BaseFragmentActivity implements //region INTER
         return R.id.rlGlobalContainer_AH;
     }
 
-//    @Override
-//    public void onSmsServiceChildSelect(final SmsService _service) {
-//        switch (_service) {
-//            case REPORT:
-//                // not implement
-//                replaceFragmentWithBackStack(SmsReportFragment.newInstance());
-//                break;
-//            case BLOCK:
-//                // not implement
-//                replaceFragmentWithBackStack(SmsBlockNumberFragment.newInstance());
-//                break;
-//        }
-//    }
-
     @Override
     public final void onReportSpamServiceSelect(@ReportSpamFragment.SpamOption int _service) {
         switch (_service) {
@@ -400,19 +382,13 @@ public class HomeActivity extends BaseFragmentActivity implements //region INTER
 
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
-        Log.d(getClass().getSimpleName() + "log", "onCheckedChanged");
-
         if (mCheckedTabId == checkedId) {
-            Log.d(getClass().getSimpleName() + "log", "onCheckedChanged mCheckedTabId");
             return;
         } else if (mPreviousCheckedTabId == checkedId) {
-            Log.d(getClass().getSimpleName() + "log", "onCheckedChanged mPreviousCheckedTabId");
             mCheckedTabId = checkedId;
             return;
         }
         mPreviousCheckedTabId = 0;
-
-        Log.d(getClass().getSimpleName() + "log", "onCheckedChanged: new check " + getResources().getResourceEntryName(checkedId));
 
         switch (checkedId) {
             case R.id.rbHome_BNRG:
@@ -495,7 +471,6 @@ public class HomeActivity extends BaseFragmentActivity implements //region INTER
     @Override
     public final void onOpenUserProfileClick(final UserProfileResponseModel _userProfile) {
         replaceFragmentWithBackStack(UserProfileFragment.newInstance(_userProfile));
-//        openFragmentIfAuthorized(UserProfileFragment.newInstance(), FragmentType.USER_PROFILE);
     }
 
     @Override
@@ -603,7 +578,9 @@ public class HomeActivity extends BaseFragmentActivity implements //region INTER
     }
 
     @Override
-    public void onTransactionPressed(int[] _icon_color, TransactionModel _model) {
-        replaceFragmentWithBackStack(TransactionDetailsFragment.newInstance(_icon_color, _model));
+    public void onOpenTransactionDetail(int[] _icon_color, TransactionModel _model, Fragment _targetFragment) {
+        BaseFragment transactionDetailsFragment = TransactionDetailsFragment.newInstance(_icon_color, _model);
+        transactionDetailsFragment.setTargetFragment(_targetFragment, InfoHubFragment.KEY_TRANSACTION_EDIT_REQUEST);
+        replaceFragmentWithBackStack(transactionDetailsFragment);
     }
 }
