@@ -1,5 +1,6 @@
 package biz.enon.tra.uae.rest;
 
+import biz.enon.tra.uae.BuildConfig;
 import biz.enon.tra.uae.global.ServerConstants;
 
 /**
@@ -9,7 +10,7 @@ public final class DynamicRestService extends BaseRetrofitSpiceService {
 
     @Override
     protected final String getServerUrl() {
-        return ServerConstants.BASE_URL_1;
+        return BuildConfig.MIDDLEWARE_URL;
     }
 
 }

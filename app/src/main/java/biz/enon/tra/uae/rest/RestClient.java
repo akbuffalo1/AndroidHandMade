@@ -2,10 +2,7 @@ package biz.enon.tra.uae.rest;
 
 import android.content.Context;
 
-import com.squareup.okhttp.CipherSuite;
-import com.squareup.okhttp.ConnectionSpec;
 import com.squareup.okhttp.OkHttpClient;
-import com.squareup.okhttp.TlsVersion;
 
 import java.io.InputStream;
 import java.security.KeyStore;
@@ -17,7 +14,6 @@ import javax.net.ssl.TrustManagerFactory;
 
 import biz.enon.tra.uae.BuildConfig;
 import biz.enon.tra.uae.global.C;
-import biz.enon.tra.uae.global.ServerConstants;
 import retrofit.RestAdapter;
 import retrofit.RestAdapter.Builder;
 import retrofit.client.OkClient;
@@ -59,9 +55,9 @@ public final class RestClient {
         okHttpClient.setSslSocketFactory(getSSLSocketFactory(_context));
 
         final RestAdapter adapter = new Builder()
-                .setEndpoint(ServerConstants.BASE_URL)
+                .setEndpoint(BuildConfig.SERVER_URL)
                 .setClient(new OkClient(okHttpClient))
-                .setLogLevel(BuildConfig.DEBUG ? RestAdapter.LogLevel.FULL : RestAdapter.LogLevel.NONE)
+                .setLogLevel(BuildConfig.LOG_DEBUG ? RestAdapter.LogLevel.FULL : RestAdapter.LogLevel.NONE)
                 .build();
         mTRAServicesAPI = adapter.create(TRAServicesAPI.class);
         mDynamicServicesApi = adapter.create(DynamicServicesApi.class);

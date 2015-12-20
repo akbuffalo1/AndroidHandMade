@@ -69,7 +69,7 @@ public final class NetworkErrorHandler {
                     return _activity.getString(R.string.error_server);
                 }
             case CONVERSION:
-                if (BuildConfig.DEBUG)
+                if (BuildConfig.LOG_DEBUG)
                     return _activity.getString(R.string.error_conversion_error);
             case UNEXPECTED:
             default:

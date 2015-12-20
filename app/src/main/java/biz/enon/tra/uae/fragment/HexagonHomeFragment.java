@@ -23,6 +23,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
+import biz.enon.tra.uae.BuildConfig;
 import biz.enon.tra.uae.R;
 import biz.enon.tra.uae.TRAApplication;
 import biz.enon.tra.uae.activity.AuthorizationActivity;
@@ -35,7 +36,6 @@ import biz.enon.tra.uae.entities.FragmentType;
 import biz.enon.tra.uae.fragment.base.BaseFragment;
 import biz.enon.tra.uae.global.C;
 import biz.enon.tra.uae.global.HeaderStaticService;
-import biz.enon.tra.uae.global.ServerConstants;
 import biz.enon.tra.uae.global.Service;
 import biz.enon.tra.uae.interfaces.Loader.BackButton;
 import biz.enon.tra.uae.interfaces.Loader.Cancelled;
@@ -254,7 +254,7 @@ public class HexagonHomeFragment extends BaseFragment implements OnServiceSelect
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         Picasso.with(getActivity())
-                .load(ServerConstants.BASE_URL + "/crm/profileImage")
+                .load(BuildConfig.SERVER_URL + "/crm/profileImage")
                 .memoryPolicy(MemoryPolicy.NO_STORE)
                 .error(R.drawable.ic_user_placeholder)
                 .placeholder(R.drawable.ic_user_placeholder)

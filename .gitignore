@@ -4,7 +4,11 @@
 /.idea/workspace.xml
 /.idea/libraries
 .DS_Store
-/build
+/build/generated
+/build/intermediates
+/build/tmp
+/build/outputs/lint-results-release-fatal_files
+/build/outputs/logs
 /captures
 
 # User-specific configurations

@@ -42,8 +42,6 @@ public class SettingsFragment extends BaseFragment
 
     public static final String CHANGED = "changed";
 
-    private EditText etServer;
-    private Button btnChangeServer;
     private LinearLayout llAboutTRA;
     private SwitchCompat swBlackAndWhiteMode, swActivateTutorial;
     private TextView tvVersionName;
@@ -82,8 +80,6 @@ public class SettingsFragment extends BaseFragment
     @Override
     protected void initViews() {
         super.initViews();
-        etServer = findView(R.id.etServer_FS);
-        btnChangeServer = findView(R.id.btnChangeServer_FS);
         swBlackAndWhiteMode = findView(R.id.swBlackAndWhiteMode_FS);
         swBlackAndWhiteMode.setChecked(mPrefs.getBoolean(C.KEY_BLACK_AND_WHITE_MODE, false));
         llAboutTRA = findView(R.id.llAboutTRA_FS);
@@ -101,7 +97,6 @@ public class SettingsFragment extends BaseFragment
     @Override
     protected void initListeners() {
         super.initListeners();
-        btnChangeServer.setOnClickListener(this);
         swBlackAndWhiteMode.setOnCheckedChangeListener(this);
         swActivateTutorial.setOnCheckedChangeListener(this);
         llAboutTRA.setOnClickListener(this);
@@ -214,25 +209,7 @@ public class SettingsFragment extends BaseFragment
                     mOpenAboutTraClickListener.onOpenAboutTraClick();
                 }
                 break;
-            case R.id.btnChangeServer_FS:
-                changeBaseUrl();
-                break;
         }
-    }
-
-    private void changeBaseUrl() {
-        String baseUrl = etServer.getText().toString();
-        if (filters.check(baseUrl)) {
-            setBaseUrl(baseUrl);
-        } else {
-            showMessage(R.string.str_error, R.string.str_invalid_url);
-        }
-    }
-
-    private void setBaseUrl(String _url) {
-        ServerConstants.BASE_URL = _url;
-        mPrefs.edit().putString(C.KEY_BASE_URL, _url).commit();
-        Toast.makeText(getActivity(), getString(R.string.str_success), C.TOAST_LENGTH).show();
     }
 
     @Override

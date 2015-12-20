@@ -12,8 +12,8 @@ import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 import java.util.Locale;
 
+import biz.enon.tra.uae.BuildConfig;
 import biz.enon.tra.uae.global.C;
-import biz.enon.tra.uae.global.ServerConstants;
 
 /**
  * Created by mobimaks on 20.10.2015.
@@ -48,7 +48,7 @@ public final class DynamicServiceInfoResponseModel implements Parcelable {
 
     public final String getIconUrl(final Context _context) {
         if (iconUrl == null) {
-            String url = ServerConstants.BASE_URL;
+            String url = BuildConfig.SERVER_URL;
             if (TextUtils.isEmpty(icon)) {
                 iconUrl = url;
             } else {

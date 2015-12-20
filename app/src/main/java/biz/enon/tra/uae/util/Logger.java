@@ -9,7 +9,7 @@ import biz.enon.tra.uae.BuildConfig;
  */
 public final class Logger {
 
-    private static final boolean LOGGING_ENABLED = BuildConfig.DEBUG;
+    private static final boolean LOGGING_ENABLED = BuildConfig.LOG_DEBUG;
 
     public static int d(String tag, String msg) {
         return LOGGING_ENABLED ? Log.d(tag, msg) : 0;

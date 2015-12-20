@@ -183,13 +183,10 @@ public class PoorCoverageFragment extends BaseServiceFragment implements //regio
     protected void initListeners() {
         super.initListeners();
         mLocationPermissionManager.setRequestSuccessListener(this);
-//        etLocation.setOnFocusChangeListener(this);
-//        etLocation.setOnClickListener(this);
         sbPoorCoverage.setOnSeekBarChangeListener(this);
     }
 
     private void removeListeners() {
-//        etLocation.setOnFocusChangeListener(null);
         sbPoorCoverage.setOnSeekBarChangeListener(null);
     }
 

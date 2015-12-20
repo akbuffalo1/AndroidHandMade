@@ -5,7 +5,7 @@ import android.os.Parcel;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import biz.enon.tra.uae.global.ServerConstants;
+import biz.enon.tra.uae.BuildConfig;
 import biz.enon.tra.uae.rest.model.base.BaseUserModel;
 
 /**
@@ -21,7 +21,7 @@ public class UserProfileResponseModel extends BaseUserModel {
         if (imageUrl == null) {
             return "";
         }
-        return ServerConstants.BASE_URL + imageUrl;
+        return BuildConfig.SERVER_URL + imageUrl;
     }
 
     @Override

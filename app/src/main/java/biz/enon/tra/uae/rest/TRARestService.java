@@ -4,10 +4,10 @@ import android.support.annotation.NonNull;
 
 import com.google.gson.GsonBuilder;
 
+import biz.enon.tra.uae.BuildConfig;
 import biz.enon.tra.uae.entities.dynamic_service.BaseInputItem;
 import biz.enon.tra.uae.entities.dynamic_service.DynamicService;
 import biz.enon.tra.uae.entities.dynamic_service.InputItemsPage;
-import biz.enon.tra.uae.global.ServerConstants;
 import biz.enon.tra.uae.rest.gson_deserializer.AnnouncementDeserializer;
 import biz.enon.tra.uae.rest.gson_deserializer.DynamicServiceDeserializer;
 import biz.enon.tra.uae.rest.gson_deserializer.InputItemDeserializer;
@@ -23,7 +23,7 @@ public final class TRARestService extends BaseRetrofitSpiceService {
 
     @Override
     protected final String getServerUrl() {
-        return ServerConstants.BASE_URL;
+        return BuildConfig.SERVER_URL;
     }
 
     @NonNull

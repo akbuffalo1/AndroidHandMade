@@ -11,15 +11,7 @@ public final class ServerConstants {
     }
 
     public static final int TIMEOUT = 20;//seconds
-    public static final String HTTP_SCHEME = "http://";
-    public static final String HTTPS_SCHEME = "https://";
     public static final String JSON_TYPE = "Content-Type: application/json";
-
-    public static final String BASE_URL_PRODUCTION_HTTPs = HTTPS_SCHEME + "mobsrv.tra.gov.ae";
-    public static final String BASE_URL_1 = HTTP_SCHEME + "mobws.tra.gov.ae";
-    public static final String BASE_URL2 = HTTP_SCHEME + "185.54.19.249:80";
-    public static final String BASE_URL3 = HTTP_SCHEME + "192.168.120.40:80";
-    public static String BASE_URL = BuildConfig.DEBUG ? BASE_URL_1 : BASE_URL_PRODUCTION_HTTPs;
 
     public static final String APP_KEY_HEADER_NAME = "appkey";
     public static final String APP_KEY_HEADER_VALUE = "testAppKey";
