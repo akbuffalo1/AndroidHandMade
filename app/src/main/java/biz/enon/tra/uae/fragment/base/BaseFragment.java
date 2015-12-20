@@ -57,7 +57,7 @@ public abstract class BaseFragment extends Fragment implements Loader.Dismiss, L
     private int mLoaderFragmentID;
 
     @Override
-    public void onAttach(final Context _activity) {
+    public void onAttach(final Activity _activity) {
         super.onAttach(_activity);
         try {
             toolbarTitleManager = (ToolbarTitleManager) _activity;
