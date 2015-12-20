@@ -21,7 +21,7 @@ public class TRAApplication extends Application {
 
     @Override
     public void onCreate() {
-//        Fabric.with(this, new Crashlytics());
+        Fabric.with(this, new Crashlytics());
         isLoggedIn = PreferenceManager.getDefaultSharedPreferences(this).
                 getBoolean(C.IS_LOGGED_IN, false);
         initPicasso();

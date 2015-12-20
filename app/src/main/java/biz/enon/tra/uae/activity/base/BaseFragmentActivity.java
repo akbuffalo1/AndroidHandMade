@@ -128,11 +128,8 @@ public abstract class BaseFragmentActivity extends BaseActivity implements Spice
         if (mInputMethodManager == null) {
             mInputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         }
-//        if (getCurrentFocus() != null) {
         mInputMethodManager.hideSoftInputFromWindow(findView(getContainerId()).getWindowToken(), 0);
-//        }
     }
-
 
     @Override
     public void onBackPressed() {

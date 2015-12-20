@@ -152,7 +152,6 @@ public final class InfoHubFragment extends BaseFragment
         @Override
         public final void showEmptyView() {
             mHexagonSwipeRefreshLayout.onLoadingFinished(false);
-            tvSeeMoreAnnouncements.setVisibility(View.GONE);
         }
 
         @Override
