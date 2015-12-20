@@ -30,7 +30,7 @@ android {
         versionCode 40002
         versionName "4.0.2"
 
-        generateOutputFile(alias, subdomain, applicationVariants)
+        generateOutputFile(alias, applicationVariants)
     }
 
     buildTypes {
@@ -60,7 +60,7 @@ android {
     }
 }
 
-def generateOutputFile(_alias, _subdomain, _applicationVariants) {
+def generateOutputFile(_alias, _applicationVariants) {
     _applicationVariants.all { variant ->
         variant.outputs.each { output ->
             def formattedDate = new Date().format('dd-MM-yyyy__HH-mm-ss')
