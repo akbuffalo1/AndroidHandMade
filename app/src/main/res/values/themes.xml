@@ -167,6 +167,6 @@
         <item name="progressBarDrawable">@drawable/progress_bar_black</item>
         <item name="rating_button_background_selector">@drawable/hexagon_black_selector</item>
         <item name="themeEnableColor">@color/theme_enable_selector_black</item>
-        <item name="homeHexagonBackground">@color/hex_text_color_white</item>
+        <item name="homeHexagonBackground">@color/hex_color_light_gray</item>
     </style>
 </resources>
