@@ -36,14 +36,16 @@ android {
     buildTypes {
 
         debug {
-            buildConfigField "boolean", "LOG_DEBUG", "true"
+            buildConfigField "boolean", "CRASHLITIC_ENABLED", "true"
+            buildConfigField "boolean", "LOG_ENABLED", "true"
             buildConfigField "String", "SERVER_URL", '"http://mobws.tra.gov.ae"'
             buildConfigField "String", "MIDDLEWARE_URL", '"http://mobws.tra.gov.ae"'
             resValue "string", "google_maps_key", "AIzaSyBRGSG_6g0JgzLajKKAbIwxz18WDklDNEQ"
         }
 
         release {
-            buildConfigField "boolean", "LOG_DEBUG", "true"
+            buildConfigField "boolean", "CRASHLITIC_ENABLED", "true"
+            buildConfigField "boolean", "LOG_ENABLED", "false"
             buildConfigField "String", "SERVER_URL", '"https://mobsrv.tra.gov.ae"'
             buildConfigField "String", "MIDDLEWARE_URL", '"http://mobws.tra.gov.ae"'
             resValue "string", "google_maps_key", "AIzaSyA9f2c4Ll-n5Mw5LaMXiwf81Y-HiD1asRI"

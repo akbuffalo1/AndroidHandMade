@@ -57,7 +57,7 @@ public final class RestClient {
         final RestAdapter adapter = new Builder()
                 .setEndpoint(BuildConfig.SERVER_URL)
                 .setClient(new OkClient(okHttpClient))
-                .setLogLevel(BuildConfig.LOG_DEBUG ? RestAdapter.LogLevel.FULL : RestAdapter.LogLevel.NONE)
+                .setLogLevel(BuildConfig.LOG_ENABLED ? RestAdapter.LogLevel.FULL : RestAdapter.LogLevel.NONE)
                 .build();
         mTRAServicesAPI = adapter.create(TRAServicesAPI.class);
         mDynamicServicesApi = adapter.create(DynamicServicesApi.class);
