@@ -187,6 +187,7 @@ public class PoorCoverageFragment extends BaseServiceFragment implements //regio
     }
 
     private void removeListeners() {
+        mTelephonyManager.listen(mSignalStrengthListener, SignalStrengthListener.LISTEN_NONE);
         sbPoorCoverage.setOnSeekBarChangeListener(null);
     }
 
