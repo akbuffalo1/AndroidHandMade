@@ -32,7 +32,7 @@ public class ServicesRecyclerViewAdapter extends Adapter<ServicesRecyclerViewAda
     private static final int STATIC_SERVICE_TYPE = 0;
     private static final int DYNAMIC_SERVICE_TYPE = 1;
 
-    private static final int FAKE_ITEMS_COUNT = 26;
+    private static final int FAKE_ITEMS_COUNT = 18;
 
     private final LayoutInflater mInflater;
     private final Context mContext;

@@ -7,8 +7,11 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.OnChildAttachStateChangeListener;
 import android.support.v7.widget.RecyclerView.OnScrollListener;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.util.Log;
 import android.view.View;
 
+import biz.enon.tra.uae.customviews.HexagonView;
+import biz.enon.tra.uae.fragment.HexagonHomeFragment;
 import biz.enon.tra.uae.interfaces.SaveStateObject;
 
 /**
@@ -37,6 +40,7 @@ public class FadeScrollListener extends OnScrollListener implements SaveStateObj
     @Override
     public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
         super.onScrolled(recyclerView, dx, dy);
+        Log.e("SCROLL", "dX = " + dx + ", dY = " + dy);
         mScrollPosition += dy;
 
         if (mItemHeight == 0) {
@@ -50,11 +54,17 @@ public class FadeScrollListener extends OnScrollListener implements SaveStateObj
                 items[i] = rowNumber * mSpanCount + i;
             }
 
+            float alpha;
             final float visibility = mScrollPosition % mItemHeight / mItemHeight;
             for (int item : items) {
                 final View view = mLayoutManager.findViewByPosition(item);
                 if (view != null) {
-                    view.setAlpha(1 - visibility * ALPHA_COEFFICIENT);
+                    view.setAlpha(alpha = (1 - visibility * ALPHA_COEFFICIENT));
+                    if(alpha < 0.2){
+                        view.setClickable(false);
+                    } else {
+                        view.setClickable(true);
+                    }
                 }
             }
 
@@ -64,6 +74,7 @@ public class FadeScrollListener extends OnScrollListener implements SaveStateObj
                 View view = mLayoutManager.findViewByPosition(i);
                 if (view != null) {
                     view.setAlpha(1);
+                    view.setClickable(true);
                 }
             }
         }
