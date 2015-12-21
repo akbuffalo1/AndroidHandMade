@@ -642,7 +642,8 @@ public class PoorCoverageFragment extends BaseServiceFragment implements //regio
             processError(spiceException);
             sbProgressBar.setVisibility(View.INVISIBLE);
             mvMap.setVisibility(View.INVISIBLE);
-            Toast.makeText(getActivity(), getString(R.string.error_no_network), Toast.LENGTH_SHORT).show();
+            if(isAdded())
+                Toast.makeText(getActivity(), getString(R.string.error_no_network), Toast.LENGTH_SHORT).show();
         }
 
         @Override
