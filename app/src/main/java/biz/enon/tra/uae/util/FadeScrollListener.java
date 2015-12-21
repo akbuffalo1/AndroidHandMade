@@ -21,13 +21,14 @@ public class FadeScrollListener extends OnScrollListener implements SaveStateObj
 
     private final String KEY_SCROLL_POSITION = getClass().getSimpleName() + "_SCROLL_POSITION";
 
-    public static final float ALPHA_COEFFICIENT = 3f;
+    public static final float ALPHA_COEFFICIENT = 1.0f;
 
     private final StaggeredGridLayoutManager mLayoutManager;
     private final int mSpanCount;
 
     private float mItemHeight;
     private int mScrollPosition;
+    private Integer mPreviousDy;
 
     public FadeScrollListener(@NonNull StaggeredGridLayoutManager _layoutManager, @Nullable Bundle _savedInstanceState) {
         mLayoutManager = _layoutManager;
@@ -40,7 +41,16 @@ public class FadeScrollListener extends OnScrollListener implements SaveStateObj
     @Override
     public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
         super.onScrolled(recyclerView, dx, dy);
-        Log.e("SCROLL", "dX = " + dx + ", dY = " + dy);
+
+        if (dy == 0) return;
+
+        if (mPreviousDy != null && ((mPreviousDy < 0 && dy > 0) || (mPreviousDy > 0 && dy < 0))) {
+            mPreviousDy = dy;
+            return;
+        } else {
+            mPreviousDy = dy;
+        }
+
         mScrollPosition += dy;
 
         if (mItemHeight == 0) {
@@ -117,7 +127,7 @@ public class FadeScrollListener extends OnScrollListener implements SaveStateObj
 
     @Override
     public void onChildViewAttachedToWindow(View view) {
-        view.setAlpha(0);
+        view.setAlpha(1);
     }
 
     @Override

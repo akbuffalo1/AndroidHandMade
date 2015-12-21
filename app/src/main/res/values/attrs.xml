@@ -111,4 +111,6 @@
 
     <attr name="themeEnableColor" format="color"/>
 
+    <attr name="homeHexagonBackground" format="reference"/>
+
 </resources>

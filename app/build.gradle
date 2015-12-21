@@ -31,7 +31,7 @@ android {
         versionName "4.0.2"
 
         // TODO: It has to be commented when you gonna deploy build on to device
-        generateOutputFile(alias, applicationVariants)
+//        generateOutputFile(alias, applicationVariants)
     }
 
     buildTypes {
