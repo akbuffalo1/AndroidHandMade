@@ -115,7 +115,7 @@ public class SmsSpamReportFragment extends BaseServiceFragment implements OnClic
                     getFragmentManager().popBackStack();
                     if (_currentState == LoaderView.State.FAILURE || _currentState == LoaderView.State.SUCCESS) {
                         getFragmentManager().popBackStack();
-                        getFragmentManager().popBackStack();
+                        reloadTransactionListIfNeed(_currentState);
                     }
                 }
             });
