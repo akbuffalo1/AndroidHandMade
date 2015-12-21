@@ -17,7 +17,7 @@ repositories {
     maven { url 'https://maven.fabric.io/public' }
 }
 
-def String alias = "UAE_TRA_PHASE_1"
+def String alias = "UAE_TRA"
 
 android {
     compileSdkVersion 23

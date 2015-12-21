@@ -299,23 +299,6 @@ public enum Service {
         }
     };
 
-//    , INTERNET_SPEEDTEST {
-//        @Override
-//        protected boolean isStaticMainScreenService() {
-//            return true;
-//        }
-//
-//        @Override
-//        public int getTitleRes() {
-//            return R.string.fragment_speed_test_title;
-//        }
-//
-//        @Override
-//        public int getDrawableRes() {
-//            return R.drawable.ic_internet_gray;
-//        }
-//    };
-
     @DrawableRes
     public int getDrawableRes() {
         return R.drawable.ic_global;

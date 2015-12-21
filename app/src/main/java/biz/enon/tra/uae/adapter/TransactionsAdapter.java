@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import java.util.List;
 
+import biz.enon.tra.uae.BuildConfig;
 import biz.enon.tra.uae.R;
 import biz.enon.tra.uae.adapter.TransactionsAdapter.ViewHolder;
 import biz.enon.tra.uae.customviews.HexagonView;
@@ -298,7 +299,9 @@ public class TransactionsAdapter extends Adapter<ViewHolder> implements Filterab
         public void setData(int _position, final TransactionModel _model) {
             if (!isProgress) {
                 sStartOffset.setVisibility(_position % 2 == 0 ? View.GONE : View.VISIBLE);
-                _model.statusCode = _position % 3 == 0 ? "Waiting for Details" : _position % 2 == 0 ? _model.statusCode : "On Hold";
+                if(BuildConfig.DEBUG){
+                    _model.statusCode = _position % 3 == 0 ? "Waiting for Details" : _position % 2 == 0 ? _model.statusCode : "On Hold";
+                }
 
                 final int[] icon_color;
                 if (C.TRANSACTION_STATUS.containsKey(_model.statusCode)) {
