@@ -30,7 +30,7 @@ android {
         versionCode 40002
         versionName "4.0.2"
 
-        // TODO: It has to be commented when you gonna deploy build on to device
+        // TODO: It has to be UNCOMMENTED if you gonna deploy RELEASE OR DEBUG builds.
 //        generateOutputFile(alias, applicationVariants)
     }
 
