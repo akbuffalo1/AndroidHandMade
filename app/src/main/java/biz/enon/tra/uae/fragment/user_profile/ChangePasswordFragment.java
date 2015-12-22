@@ -3,6 +3,8 @@ package biz.enon.tra.uae.fragment.user_profile;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.text.TextUtils;
 import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.CompoundButton;
@@ -14,6 +16,7 @@ import android.widget.ToggleButton;
 import com.octo.android.robospice.persistence.DurationInMillis;
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
+import com.squareup.picasso.Picasso;
 
 import biz.enon.tra.uae.R;
 import biz.enon.tra.uae.customviews.HexagonView;
@@ -21,10 +24,14 @@ import biz.enon.tra.uae.customviews.LoaderView;
 import biz.enon.tra.uae.customviews.ProfileController;
 import biz.enon.tra.uae.customviews.ProfileController.ControllerButton;
 import biz.enon.tra.uae.customviews.ProfileController.OnControllerButtonClickListener;
+import biz.enon.tra.uae.entities.HexagonViewTarget;
+import biz.enon.tra.uae.entities.UserProfile;
 import biz.enon.tra.uae.fragment.base.BaseFragment;
 import biz.enon.tra.uae.global.C;
 import biz.enon.tra.uae.interfaces.Loader.BackButton;
 import biz.enon.tra.uae.interfaces.Loader.Cancelled;
+import biz.enon.tra.uae.manager.AttachmentManager;
+import biz.enon.tra.uae.rest.model.response.UserProfileResponseModel;
 import biz.enon.tra.uae.rest.robo_requests.ChangePasswordRequest;
 import biz.enon.tra.uae.util.TRAPatterns;
 import retrofit.client.Response;
@@ -46,15 +53,36 @@ public class ChangePasswordFragment extends BaseFragment implements OnCheckedCha
 
     private ChangePasswordRequest mChangePasswordRequest;
     private ChangePasswordRequestListener mChangePasswordRequestListener;
+    private UserProfileResponseModel mUserProfile;
 
-    public static ChangePasswordFragment newInstance() {
-        return new ChangePasswordFragment();
+    public static ChangePasswordFragment newInstance(@NonNull final UserProfileResponseModel _userProfile) {
+        ChangePasswordFragment fragment = new ChangePasswordFragment();
+        final Bundle args = new Bundle();
+        args.putParcelable(EditUserProfileFragment.KEY_USER_PROFILE_MODEL, _userProfile);
+        fragment.setArguments(args);
+
+        return fragment;
+    }
+    @Override
+    public void onCreate(final Bundle _savedInstanceState) {
+        super.onCreate(_savedInstanceState);
+
+        final UserProfileResponseModel userProfile = getArguments().getParcelable(EditUserProfileFragment.KEY_USER_PROFILE_MODEL);
+
+        if (_savedInstanceState == null) {
+            mUserProfile = userProfile;
+        } else {
+            mUserProfile = _savedInstanceState.getParcelable(EditUserProfileFragment.KEY_USER_PROFILE_MODEL);
+        }
     }
 
     @Override
     protected void initViews() {
         super.initViews();
         hvUserAvatar = findView(R.id.hvUserAvatar_FCP);
+        if (!TextUtils.isEmpty(mUserProfile.getImageUrl())) {
+            Picasso.with(getActivity()).load(mUserProfile.getImageUrl()).into(new HexagonViewTarget(hvUserAvatar));
+        }
         etOldPassword = findView(R.id.etOldPassword_FCP);
         etNewPassword = findView(R.id.etNewPassword_FCP);
         etNewPasswordRetype = findView(R.id.etNewPasswordRetype_FCP);
@@ -77,6 +105,12 @@ public class ChangePasswordFragment extends BaseFragment implements OnCheckedCha
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mChangePasswordRequestListener = new ChangePasswordRequestListener();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putParcelable(EditUserProfileFragment.KEY_USER_PROFILE_MODEL, mUserProfile);
+        super.onSaveInstanceState(outState);
     }
 
     @Override

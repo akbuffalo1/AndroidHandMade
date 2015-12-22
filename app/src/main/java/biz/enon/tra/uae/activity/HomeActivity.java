@@ -480,7 +480,7 @@ public class HomeActivity extends BaseFragmentActivity implements //region INTER
                 replaceFragmentWithBackStack(EditUserProfileFragment.newInstance(_userProfile));
                 break;
             case UserProfileFragment.USER_PROFILE_CHANGE_PASSWORD:
-                replaceFragmentWithBackStack(_fragment, ChangePasswordFragment.newInstance());
+                replaceFragmentWithBackStack(_fragment, ChangePasswordFragment.newInstance(_userProfile));
                 break;
         }
     }

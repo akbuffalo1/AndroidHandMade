@@ -31,7 +31,7 @@ android {
         versionName "4.0.2"
 
         // TODO: It has to be UNCOMMENTED if you gonna deploy RELEASE OR DEBUG builds.
-//        generateOutputFile(alias, applicationVariants)
+        generateOutputFile(alias, applicationVariants)
     }
 
     buildTypes {
@@ -39,8 +39,8 @@ android {
         debug {
             buildConfigField "boolean", "CRASHLITIC_ENABLED", "true"
             buildConfigField "boolean", "LOG_ENABLED", "true"
-            buildConfigField "String", "SERVER_URL", '"http://mobws.tra.gov.ae"'
-            buildConfigField "String", "MIDDLEWARE_URL", '"http://mobws.tra.gov.ae"'
+            buildConfigField "String", "SERVER_URL", '"http://185.54.19.249"'
+            buildConfigField "String", "MIDDLEWARE_URL", '"http://185.54.19.249"'
             resValue "string", "google_maps_key", "AIzaSyBRGSG_6g0JgzLajKKAbIwxz18WDklDNEQ"
         }
 

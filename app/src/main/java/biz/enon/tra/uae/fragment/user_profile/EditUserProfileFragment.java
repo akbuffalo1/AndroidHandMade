@@ -8,6 +8,7 @@ import android.support.annotation.CallSuper;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.CheckBox;
@@ -58,7 +59,7 @@ public final class EditUserProfileFragment extends BaseFragment
         implements OnClickListener, ProfileController.OnControllerButtonClickListener, AttachmentManager.OnImageGetCallback,
         OnOpenPermissionExplanationDialogListener, OnImageSourceSelectListener, AlertDialogFragment.OnOkListener, OnCheckedChangeListener {
 
-    private static final String KEY_USER_PROFILE_MODEL = "USER_PROFILE_MODEL";
+    public static final String KEY_USER_PROFILE_MODEL = "USER_PROFILE_MODEL";
     private static final String KEY_EDIT_PROFILE_REQUEST = "EDIT_PROFILE_REQUEST";
 
     private HexagonView hvUserAvatar;
@@ -117,6 +118,9 @@ public final class EditUserProfileFragment extends BaseFragment
     protected final void initViews() {
         super.initViews();
         hvUserAvatar = findView(R.id.hvUserAvatar_FEUP);
+        if (!TextUtils.isEmpty(mUserProfile.getImageUrl())) {
+            Picasso.with(getActivity()).load(mUserProfile.getImageUrl()).into(new HexagonViewTarget(hvUserAvatar));
+        }
         tvChangePhoto = findView(R.id.tvChangePhoto_FEUP);
         etFirstName = findView(R.id.etFirstName_FEUP);
         etLastName = findView(R.id.etLastName_FEUP);
@@ -259,63 +263,7 @@ public final class EditUserProfileFragment extends BaseFragment
     @Override
     public void onAttachmentGet(@NonNull final Uri _imageUri) {
         mImageUri = _imageUri;
-        Glide.with(getActivity())
-                .load(mImageUri)
-                .into((Target) new HexagonViewTarget(hvUserAvatar, true));
-//        Target target = new Target() {
-//            @Override
-//            public void onBitmapLoaded(Bitmap _bitmap, Picasso.LoadedFrom from) {
-//                try {
-//                    ExifInterface exifInterface = new ExifInterface(_imageUri.getPath());
-//
-//                    int orientation = exifInterface.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_UNDEFINED);
-//                    Matrix matrix = new Matrix();
-//                    switch (orientation) {
-//                        case ExifInterface.ORIENTATION_FLIP_HORIZONTAL:
-//                            matrix.setScale(-1, 1);
-//                            break;
-//                        case ExifInterface.ORIENTATION_ROTATE_180:
-//                            matrix.setRotate(180);
-//                            break;
-//                        case ExifInterface.ORIENTATION_FLIP_VERTICAL:
-//                            matrix.setRotate(180);
-//                            matrix.postScale(-1, 1);
-//                            break;
-//                        case ExifInterface.ORIENTATION_TRANSPOSE:
-//                            matrix.setRotate(90);
-//                            matrix.postScale(-1, 1);
-//                            break;
-//                        case ExifInterface.ORIENTATION_ROTATE_90:
-//                            matrix.setRotate(90);
-//                            break;
-//                        case ExifInterface.ORIENTATION_TRANSVERSE:
-//                            matrix.setRotate(-90);
-//                            matrix.postScale(-1, 1);
-//                            break;
-//                        case ExifInterface.ORIENTATION_ROTATE_270:
-//                            matrix.setRotate(-90);
-//                            break;
-//                    }
-//                    _bitmap = Bitmap.createBitmap(_bitmap, 0, 0, _bitmap.getWidth(), _bitmap.getHeight(), matrix, false);
-//                } catch (IOException exc) {
-//                    exc.printStackTrace();
-//                }
-//                hvUserAvatar.postScaleType(HexagonView.CENTER_CROP);
-//                hvUserAvatar.setHexagonSrcDrawable(new BitmapDrawable(getResources(), _bitmap));
-//                hvUserAvatar.setTag(null);
-//            }
-//
-//            @Override
-//            public void onBitmapFailed(Drawable errorDrawable) {
-//
-//            }
-//
-//            @Override
-//            public void onPrepareLoad(Drawable placeHolderDrawable) {
-//
-//            }
-//        };
-//        hvUserAvatar.setTag(target);
+        Picasso.with(getActivity()).load(mImageUri).into(new HexagonViewTarget(hvUserAvatar));
     }
 
     @Override
